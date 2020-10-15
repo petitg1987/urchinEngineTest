@@ -1,8 +1,9 @@
-#include <SFML/Window.hpp>
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
 
 #include "WindowController.h"
 
-WindowController::WindowController(sf::Window *window) :
+WindowController::WindowController(GLFWwindow *window) :
  window(window)
 {
 
@@ -10,22 +11,16 @@ WindowController::WindowController(sf::Window *window) :
 
 void WindowController::moveMouse(unsigned int x, unsigned int y) const
 {
-    sf::Mouse::setPosition(sf::Vector2i(x, y), *window);
+    glfwSetCursorPos(window, x, y);
 }
 
 void WindowController::setMouseCursorVisible(bool visible)
 {
-    window->setMouseCursorVisible(visible);
-}
+    glfwSetInputMode(window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
 
-void WindowController::cleanEvents()
-{
-    sf::Event event{};
-    while (window->pollEvent(event))
-        ;
 }
 
 void WindowController::setVerticalSyncEnabled(bool active)
 {
-    window->setVerticalSyncEnabled(active);
+    glfwSwapInterval( active ? 1 : 0);
 }

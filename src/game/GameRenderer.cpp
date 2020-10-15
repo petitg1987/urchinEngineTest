@@ -328,7 +328,8 @@ void GameRenderer::active(bool active)
 {
     if(active)
     {
-        if(!isInitialized){
+        if(!isInitialized)
+        {
             initialize();
         }
 

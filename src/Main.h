@@ -1,9 +1,9 @@
 #ifndef URCHINENGINETEST_MAIN_H
 #define URCHINENGINETEST_MAIN_H
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
 #include <list>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Window.hpp>
 
 #include "MainDisplayer.h"
 
@@ -16,30 +16,37 @@ class Main
         void execute(int, char *[]);
 
     private:
-        MainDisplayer *mainDisplayer;
-        bool propagatePressKeyEvent, propagateReleaseKeyEvent;
-
-        std::map<sf::Keyboard::Key, InputDevice::Key> keyboardMap;
-
+        static void glfwErrorCallback(int, const char*);
         void initializeKeyboardMap();
 
         std::string retrieveResourcesDirectory(char *[]) const;
         std::string retrieveSaveDirectory(char *[]) const;
 
-        std::list<sf::Event> retrieveOrderedEvents(sf::Window *) const;
+        static void charCallback(GLFWwindow *, unsigned int, int);
+        static void keyCallback(GLFWwindow *, int, int, int, int);
+        static void mouseKeyCallback(GLFWwindow *, int, int, int);
+        static void cursorPositionCallback(GLFWwindow *, double, double);
+        static void windowSizeCallback(GLFWwindow *, int, int);
 
-        void onChar(const sf::Event &);
-        void onKeyPressed(const sf::Event &);
-        void onKeyReleased(const sf::Event &);
+//        std::list<sf::Event> retrieveOrderedEvents(sf::Window *) const;
 
-        void onMouseButtonPressed(const sf::Event &);
-        void onMouseButtonReleased(const sf::Event &);
-        void onMouseMove(const sf::Event &);
+        void onChar(unsigned int);
+        void onKeyPressed(int);
+        void onKeyReleased(int);
+
+        void onMouseButtonPressed(int);
+        void onMouseButtonReleased(int);
+        void onMouseMove(int, int);
 
         bool argumentsContains(const std::string &, int, char *[]) const;
 
-        void clearResources(sf::Window *&, WindowController *&);
-        void failureExit(sf::Window *&, WindowController *&);
+        void clearResources(GLFWwindow *&, WindowController *&);
+        void failureExit(GLFWwindow *&, WindowController *&);
+
+        MainDisplayer *mainDisplayer;
+        bool propagatePressKeyEvent, propagateReleaseKeyEvent;
+
+        std::map<int, InputDevice::Key> keyboardMap;
 };
 
 #endif

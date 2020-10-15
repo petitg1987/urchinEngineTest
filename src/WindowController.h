@@ -1,24 +1,20 @@
 #ifndef URCHINENGINETEST_WINDOWCONTROLLER_H
 #define URCHINENGINETEST_WINDOWCONTROLLER_H
 
-namespace sf {
-    class Window;
-}
+class GLFWwindow;
 
 class WindowController
 {
     public:
-        explicit WindowController(sf::Window *);
+        explicit WindowController(GLFWwindow *);
 
         void moveMouse(unsigned int, unsigned int) const;
         void setMouseCursorVisible(bool);
 
-        void cleanEvents();
-
         void setVerticalSyncEnabled(bool);
 
     private:
-        sf::Window *window;
+        GLFWwindow *window;
 
 };
 

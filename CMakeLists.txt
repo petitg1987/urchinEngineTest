@@ -19,7 +19,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_CXX_STANDARD 17)
 
-add_definitions(-DSFML_STATIC -ffast-math -Wall -Wextra -Wpedantic -Werror)
+add_definitions(-ffast-math -Wall -Wextra -Wpedantic -Werror)
 include_directories(src)
 
 #Urchin engine
@@ -40,11 +40,11 @@ else()
     add_custom_target(syncShaders rsync -r ${CMAKE_CURRENT_SOURCE_DIR}/../urchinEngine/3dEngine/resources/shaders/* ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/)
 endif()
 
-#SFML
+#GLFW
 if (WIN32)
-    SET(SFML_LIB sfml-window-s sfml-system-s gdi32 winmm)
+    SET(GLFW_LIB glfw gdi32 winmm)
 else()
-    SET(SFML_LIB sfml-window sfml-system)
+    SET(GLFW_LIB glfw)
 endif()
 
 #Executable
@@ -55,4 +55,4 @@ else()
     add_executable(urchinEngineTest ${SOURCE_FILES})
 endif()
 add_dependencies(urchinEngineTest syncShaders)
-target_link_libraries(urchinEngineTest ${SFML_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinAIEngine urchinMapHandler)
+target_link_libraries(urchinEngineTest ${GLFW_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinAIEngine urchinMapHandler)
