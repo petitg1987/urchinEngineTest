@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<material>
+	<repeatTexture>false</repeatTexture>
+	
+	<diffuse>
+		<texture>materials/cylinderDiffuse.tga</texture>
+	</diffuse>
+	
+	<ambient>
+		<factor>0.4</factor>
+	</ambient>
+</material>

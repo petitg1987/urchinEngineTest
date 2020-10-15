@@ -1,0 +1,25 @@
+#Idea
+.idea/workspace.xml
+
+#Target build
+.build/
+
+#Very large resources
+resources/materials/**/*.xcf
+resources/materials/**/*.tga
+resources/materials/**/*.png
+resources/sound/
+
+#Cached resources
+save/*.frl
+
+#Binary
+urchinEngineTest
+urchinEngineTest.exe
+
+#Recovery files
+resources/models/SOURCES/*.blend1
+resources/models/SOURCES/*.blend2
+resources/models/SOURCES/*.blend3
+resources/models/SOURCES/*.blend4
+resources/models/SOURCES/*.blend5

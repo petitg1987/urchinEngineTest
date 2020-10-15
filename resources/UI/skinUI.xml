@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<gui>
+	<window nameSkin="defaultSkin">
+		<skin>
+			<image>UI/window.tga</image>
+			<part zone="top">23</part>
+			<part zone="bottom">3</part>
+			<part zone="left">3</part>
+			<part zone="right">24</part>
+		</skin>
+		<textFont>UI/font/font.fnt</textFont>
+	</window>
+	
+	<button nameSkin="defaultSkin">
+		<skin type="default">
+			<image>UI/butDefault.tga</image>
+			<part zone="top">2</part>
+			<part zone="bottom">2</part>
+			<part zone="left">1</part>
+			<part zone="right">1</part>
+		</skin>
+		<skin type="focus">
+			<image>UI/butFocus.tga</image>
+			<part zone="top">2</part>
+			<part zone="bottom">2</part>
+			<part zone="left">1</part>
+			<part zone="right">1</part>
+		</skin>
+		<skin type="click">
+			<image>UI/butClick.tga</image>
+			<part zone="top">2</part>
+			<part zone="bottom">2</part>
+			<part zone="left">1</part>
+			<part zone="right">1</part>
+		</skin>
+		<textFont>UI/font/font.fnt</textFont>
+	</button>
+	
+	<textBox nameSkin="defaultSkin">
+		<skin type="default">
+			<image>UI/textBoxDefault.tga</image>
+			<part zone="top">2</part>
+			<part zone="bottom">2</part>
+			<part zone="left">2</part>
+			<part zone="right">2</part>
+		</skin>
+		<skin type="focus">
+			<image>UI/textBoxFocus.tga</image>
+			<part zone="top">2</part>
+			<part zone="bottom">2</part>
+			<part zone="left">2</part>
+			<part zone="right">2</part>
+		</skin>
+		<textFont>UI/font/font.fnt</textFont>
+	</textBox>
+
+	<slider nameSkin="defaultSkin">
+		<buttonTextFont>UI/font/font.fnt</buttonTextFont>
+		<valuesTextFont>UI/font/font.fnt</valuesTextFont>
+		<leftButtonText>&lt;&lt;</leftButtonText>
+		<rightButtonText>&gt;&gt;</rightButtonText>
+	</slider>
+</gui>

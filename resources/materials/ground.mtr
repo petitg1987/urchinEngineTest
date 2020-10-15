@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<material>
+	<repeatTexture>true</repeatTexture>
+	
+	<diffuse>
+		<texture>materials/groundDiffuse.tga</texture>
+	</diffuse>
+	
+	 <normal>
+		<texture>materials/groundNormal.tga</texture>
+	</normal>
+	
+	<ambient>
+		<factor>0.4</factor>
+	</ambient>
+</material>
