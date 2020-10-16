@@ -54,7 +54,7 @@ void Main::execute(int argc, char *argv[]) {
         windowController->cleanEvents(); //ignore events occurred during initialization phase
 
         while (!glfwWindowShouldClose(window)) {
-            if(!glfwError.empty()) {
+            if (!glfwError.empty()) {
                 throw std::runtime_error(glfwError);
             }
 
@@ -64,19 +64,19 @@ void Main::execute(int argc, char *argv[]) {
             glfwSwapBuffers(window);
         }
 
-        if(urchin::Logger::logger().hasFailure()) {
+        if (urchin::Logger::logger().hasFailure()) {
             failureExit(window, windowController);
         } else {
             clearResources(window, windowController);
         }
-    }catch(std::exception &e) {
+    } catch (std::exception &e) {
         urchin::Logger::logger().logError("Error occurred: " + std::string(e.what()));
         failureExit(window, windowController);
     }
 }
 
 void Main::glfwErrorCallback(int error, const char* description) {
-    if(glfwError.empty()) {
+    if (glfwError.empty()) {
         glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
     }
 }
@@ -110,7 +110,7 @@ GLFWwindow *Main::createWindow(int argc, char *argv[]) {
     GLFWwindow *window;
     const char *windowTitle = "Urchin Engine Test";
 
-    if(argumentsContains("--windowed", argc, argv)) {
+    if (argumentsContains("--windowed", argc, argv)) {
         window = glfwCreateWindow(1200, 675, windowTitle, nullptr, nullptr);
     } else {
         GLFWmonitor *monitor = glfwGetPrimaryMonitor();
@@ -118,7 +118,7 @@ GLFWwindow *Main::createWindow(int argc, char *argv[]) {
         window = glfwCreateWindow(mode->width, mode->height, windowTitle, monitor, nullptr);
     }
 
-    if(!window) {
+    if (!window) {
         throw std::runtime_error("Impossible to create the GLFW window");
     }
 
@@ -130,14 +130,14 @@ GLFWwindow *Main::createWindow(int argc, char *argv[]) {
 
 void Main::charCallback(GLFWwindow *window, unsigned int codepoint, int) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive()) {
+    if (main->windowController->isEventCallbackActive()) {
         main->charPressEvents.push_back(codepoint);
     }
 }
 
 void Main::keyCallback(GLFWwindow *window, int key, int, int action, int) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive()) {
+    if (main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -151,7 +151,7 @@ void Main::keyCallback(GLFWwindow *window, int key, int, int action, int) {
 
 void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive()) {
+    if (main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             main->onMouseButtonPressed(button);
         } else if (action == GLFW_RELEASE) {
@@ -162,14 +162,14 @@ void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
 
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive()) {
+    if (main->windowController->isEventCallbackActive()) {
         main->onMouseMove(static_cast<int>(x), static_cast<int>(y));
     }
 }
 
 void Main::windowSizeCallback(GLFWwindow *window, int width, int height) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive()) {
+    if (main->windowController->isEventCallbackActive()) {
         main->mainDisplayer->resize(width, height);
     }
 }
@@ -179,15 +179,15 @@ void Main::handleInputEvents() {
     propagateReleaseKeyEvent = true;
     glfwPollEvents();
 
-    if(!charPressEvents.empty()) {
-        for(unsigned int charUnicode : charPressEvents) {
+    if (!charPressEvents.empty()) {
+        for (unsigned int charUnicode : charPressEvents) {
             onChar(charUnicode);
         }
         charPressEvents.clear();
     }
 
-    if(!keyPressEvents.empty()) {
-        for(int keyPress : keyPressEvents) {
+    if (!keyPressEvents.empty()) {
+        for (int keyPress : keyPressEvents) {
             onKeyPressed(keyPress);
         }
         keyPressEvents.clear();
@@ -196,51 +196,51 @@ void Main::handleInputEvents() {
 
 void Main::onChar(unsigned int unicode) {
     //engine
-    if(propagatePressKeyEvent && unicode < 256) {
+    if (propagatePressKeyEvent && unicode < 256) {
         propagatePressKeyEvent = mainDisplayer->getSceneManager()->onChar(unicode);
     }
 }
 
 void Main::onKeyPressed(int key) {
     //engine
-    if(propagatePressKeyEvent) {
-        if(key == GLFW_KEY_LEFT) {
+    if (propagatePressKeyEvent) {
+        if (key == GLFW_KEY_LEFT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::LEFT_ARROW);
-        } else if(key == GLFW_KEY_RIGHT) {
+        } else if (key == GLFW_KEY_RIGHT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::RIGHT_ARROW);
         }
     }
 
     //game
-    if(propagatePressKeyEvent) {
+    if (propagatePressKeyEvent) {
         mainDisplayer->onKeyPressed(toKeyboardKey(key));
     }
 }
 
 void Main::onKeyReleased(int key) {
     //engine
-    if(propagateReleaseKeyEvent) {
-        if(key == GLFW_KEY_LEFT) {
+    if (propagateReleaseKeyEvent) {
+        if (key == GLFW_KEY_LEFT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::LEFT_ARROW);
-        } else if(key == GLFW_KEY_RIGHT) {
+        } else if (key == GLFW_KEY_RIGHT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::RIGHT_ARROW);
         }
     }
 
     //game
-    if(propagateReleaseKeyEvent) {
+    if (propagateReleaseKeyEvent) {
         mainDisplayer->onKeyReleased(toKeyboardKey(key));
     }
 }
 
 KeyboardKey Main::toKeyboardKey(int key) {
-    if(key >= GLFW_KEY_A && key <= GLFW_KEY_Z) {
+    if (key >= GLFW_KEY_A && key <= GLFW_KEY_Z) {
         int keyShift = glfwGetKeyName(key, 0)[0] - 'a';
         return static_cast<KeyboardKey>(KeyboardKey::A + keyShift);
     }
 
     auto it = keyboardMap.find(key);
-    if(it!=keyboardMap.end()) {
+    if (it!=keyboardMap.end()) {
         return it->second;
     } else {
         return KeyboardKey::UNKNOWN_KEY;
@@ -249,32 +249,32 @@ KeyboardKey Main::toKeyboardKey(int key) {
 
 void Main::onMouseButtonPressed(int button) {
     //engine
-    if(button == GLFW_MOUSE_BUTTON_LEFT) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
         mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_LEFT);
-    } else if(button == GLFW_MOUSE_BUTTON_RIGHT) {
+    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
         mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_RIGHT);
     }
 }
 
 void Main::onMouseButtonReleased(int button) {
     //engine
-    if(button == GLFW_MOUSE_BUTTON_LEFT) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
         mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_LEFT);
-    } else if(button == GLFW_MOUSE_BUTTON_RIGHT) {
+    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
         mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_RIGHT);
     }
 }
 
 void Main::onMouseMove(int x, int y) {
     //engine
-    if(x!=0 || y!=0) {
+    if (x!=0 || y!=0) {
         mainDisplayer->onMouseMove(x, y);
     }
 }
 
 bool Main::argumentsContains(const std::string &argName, int argc, char *argv[]) const {
-    for(int i=1;i<argc;++i) {
-        if(std::string(argv[i]).find(argName)!=std::string::npos) {
+    for (int i=1;i<argc;++i) {
+        if (std::string(argv[i]).find(argName)!=std::string::npos) {
             return true;
         }
     }
@@ -288,7 +288,7 @@ void Main::clearResources(GLFWwindow *&window, WindowController *&windowControll
     delete windowController;
     windowController = nullptr;
 
-    if(window != nullptr) {
+    if (window != nullptr) {
         glfwDestroyWindow(window);
         window = nullptr;
     }

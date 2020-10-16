@@ -35,7 +35,7 @@ void MainDisplayer::initialize(const std::string &resourcesDirectory, const std:
 
 void MainDisplayer::paint() {
     //refresh scene
-    if(gameRenderer->isActive()) {
+    if (gameRenderer->isActive()) {
         gameRenderer->refresh();
     }
 
@@ -44,19 +44,19 @@ void MainDisplayer::paint() {
 }
 
 void MainDisplayer::resize(unsigned int width, unsigned int height) {
-    if(sceneManager) {
+    if (sceneManager) {
         sceneManager->onResize(width, height);
     }
 }
 
 void MainDisplayer::onKeyPressed(KeyboardKey key) {
-    if(gameRenderer->isActive()) {
+    if (gameRenderer->isActive()) {
         gameRenderer->onKeyPressed(key);
     }
 }
 
 void MainDisplayer::onKeyReleased(KeyboardKey key) {
-    if(gameRenderer->isActive()) {
+    if (gameRenderer->isActive()) {
         gameRenderer->onKeyReleased(key);
     }
 }
