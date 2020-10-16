@@ -28,11 +28,10 @@ class Main
         static void cursorPositionCallback(GLFWwindow *, double, double);
         static void windowSizeCallback(GLFWwindow *, int, int);
 
-//        std::list<sf::Event> retrieveOrderedEvents(sf::Window *) const;
-
         void onChar(unsigned int);
         void onKeyPressed(int);
         void onKeyReleased(int);
+        KeyboardKey toKeyboardKey(int);
 
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);
@@ -46,7 +45,9 @@ class Main
         MainDisplayer *mainDisplayer;
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;
 
-        std::map<int, InputDevice::Key> keyboardMap;
+        std::map<int, KeyboardKey> keyboardMap;
+        static std::list<unsigned int> charPressEvents;
+        static std::list<int> keyPressEvents;
 };
 
 #endif

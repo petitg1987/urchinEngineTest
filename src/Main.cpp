@@ -1,5 +1,5 @@
 #include "Main.h"
-#include "InputDevice.h"
+#include "KeyboardKey.h"
 #include "WindowController.h"
 
 int main(int argc, char *argv[])
@@ -9,6 +9,10 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+//static
+std::list<unsigned int> Main::charPressEvents;
+std::list<int> Main::keyPressEvents;
 
 Main::Main() :
         mainDisplayer(nullptr),
@@ -66,11 +70,27 @@ void Main::execute(int argc, char *argv[])
         {
             propagatePressKeyEvent = true;
             propagateReleaseKeyEvent = true;
+            glfwPollEvents();
+            if(!charPressEvents.empty())
+            {
+                for(unsigned int charUnicode : charPressEvents)
+                {
+                    onChar(charUnicode);
+                }
+                charPressEvents.clear();
+            }
+            if(!keyPressEvents.empty())
+            {
+                for(int keyPress : keyPressEvents)
+                {
+                    onKeyPressed(keyPress);
+                }
+                keyPressEvents.clear();
+            }
 
             mainDisplayer->paint();
 
             glfwSwapBuffers(window);
-            glfwPollEvents();
         }
 
         if(urchin::Logger::logger().hasFailure())
@@ -97,20 +117,20 @@ void Main::glfwErrorCallback(int error, const char* description)
 
 void Main::initializeKeyboardMap()
 {
-    keyboardMap[GLFW_KEY_ESCAPE] = InputDevice::Key::ESCAPE;
-    keyboardMap[GLFW_KEY_SPACE] = InputDevice::Key::SPACE;
-    keyboardMap[GLFW_KEY_LEFT_CONTROL] = InputDevice::Key::CTRL_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT_CONTROL] = InputDevice::Key::CTRL_RIGHT;
-    keyboardMap[GLFW_KEY_LEFT_ALT] = InputDevice::Key::ALT_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT_ALT] = InputDevice::Key::ALT_RIGHT;
-    keyboardMap[GLFW_KEY_LEFT_SHIFT] = InputDevice::Key::SHIFT_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT_SHIFT] = InputDevice::Key::SHIFT_RIGHT;
-    keyboardMap[GLFW_KEY_LEFT] = InputDevice::Key::ARROW_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT] = InputDevice::Key::ARROW_RIGHT;
-    keyboardMap[GLFW_KEY_UP] = InputDevice::Key::ARROW_UP;
-    keyboardMap[GLFW_KEY_DOWN] = InputDevice::Key::ARROW_DOWN;
-    keyboardMap[GLFW_KEY_PAGE_UP] = InputDevice::Key::PAGE_UP;
-    keyboardMap[GLFW_KEY_PAGE_DOWN] = InputDevice::Key::PAGE_DOWN;
+    keyboardMap[GLFW_KEY_ESCAPE] = KeyboardKey::ESCAPE;
+    keyboardMap[GLFW_KEY_SPACE] = KeyboardKey::SPACE;
+    keyboardMap[GLFW_KEY_LEFT_CONTROL] = KeyboardKey::CTRL_LEFT;
+    keyboardMap[GLFW_KEY_RIGHT_CONTROL] = KeyboardKey::CTRL_RIGHT;
+    keyboardMap[GLFW_KEY_LEFT_ALT] = KeyboardKey::ALT_LEFT;
+    keyboardMap[GLFW_KEY_RIGHT_ALT] = KeyboardKey::ALT_RIGHT;
+    keyboardMap[GLFW_KEY_LEFT_SHIFT] = KeyboardKey::SHIFT_LEFT;
+    keyboardMap[GLFW_KEY_RIGHT_SHIFT] = KeyboardKey::SHIFT_RIGHT;
+    keyboardMap[GLFW_KEY_LEFT] = KeyboardKey::ARROW_LEFT;
+    keyboardMap[GLFW_KEY_RIGHT] = KeyboardKey::ARROW_RIGHT;
+    keyboardMap[GLFW_KEY_UP] = KeyboardKey::ARROW_UP;
+    keyboardMap[GLFW_KEY_DOWN] = KeyboardKey::ARROW_DOWN;
+    keyboardMap[GLFW_KEY_PAGE_UP] = KeyboardKey::PAGE_UP;
+    keyboardMap[GLFW_KEY_PAGE_DOWN] = KeyboardKey::PAGE_DOWN;
 }
 
 std::string Main::retrieveResourcesDirectory(char *argv[]) const
@@ -123,24 +143,23 @@ std::string Main::retrieveSaveDirectory(char *argv[]) const
     return urchin::FileHandler::getDirectoryFrom(std::string(argv[0])) + "save/";
 }
 
-void Main::charCallback(GLFWwindow* window, unsigned int codepoint, int)
-{ //TODO should be called before keyCallback
-    Main *main = (Main*)glfwGetWindowUserPointer(window);
-    main->onChar(codepoint);
+void Main::charCallback(GLFWwindow *, unsigned int codepoint, int)
+{
+    charPressEvents.push_back(codepoint);
 }
 
 void Main::keyCallback(GLFWwindow *window, int key, int, int action, int)
 {
-    Main *main = (Main*)glfwGetWindowUserPointer(window);
     if(action == GLFW_PRESS)
     {
         if (key == GLFW_KEY_ESCAPE)
         {
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
-        main->onKeyPressed(key);
+        keyPressEvents.push_back(key);
     }else if(action == GLFW_RELEASE)
     {
+        Main *main = (Main*)glfwGetWindowUserPointer(window);
         main->onKeyReleased(key);
     }
 }
@@ -169,25 +188,6 @@ void Main::windowSizeCallback(GLFWwindow *window, int width, int height)
     main->mainDisplayer->resize(width, height);
 }
 
-//std::list<sf::Event> Main::retrieveOrderedEvents(sf::Window *window) const
-//{
-//    std::list<sf::Event> eventsOrderedList;
-//
-//    sf::Event event{};
-//    while (window->pollEvent(event))
-//    {
-//        if(event.type != sf::Event::TextEntered)
-//        { //onChar event must be treated before onKeyPressed event
-//            eventsOrderedList.push_front(event);
-//        }else
-//        {
-//            eventsOrderedList.push_back(event);
-//        }
-//    }
-//
-//    return eventsOrderedList;
-//}
-
 void Main::onChar(unsigned int unicode)
 {
     //engine
@@ -207,7 +207,7 @@ void Main::onKeyPressed(int key)
     {
         if(key == GLFW_KEY_LEFT)
         {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyDown(urchin::InputDevice::Key::LEFT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyDown(urchin::InputDevice::Key::LEFT_ARROW); //TODO rename: keyPressed/Release + accept InputDevice::Key ?
         }else if(key == GLFW_KEY_RIGHT)
         {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyDown(urchin::InputDevice::Key::RIGHT_ARROW);
@@ -217,18 +217,7 @@ void Main::onKeyPressed(int key)
     //game
     if(propagatePressKeyEvent)
     {
-        if(key >= GLFW_KEY_A && key <= GLFW_KEY_Z)
-        {
-            int gameKey = (key - GLFW_KEY_A) + InputDevice::Key::A;
-            mainDisplayer->onKeyPressed(static_cast<InputDevice::Key>(gameKey));
-        }else
-        {
-            auto it = keyboardMap.find(key);
-            if(it!=keyboardMap.end())
-            {
-                mainDisplayer->onKeyPressed(it->second);
-            }
-        }
+        mainDisplayer->onKeyPressed(toKeyboardKey(key));
     }
 }
 
@@ -239,28 +228,35 @@ void Main::onKeyReleased(int key)
     {
         if(key == GLFW_KEY_LEFT)
         {
-            propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::LEFT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::LEFT_ARROW);
         }else if(key == GLFW_KEY_RIGHT)
         {
-            propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::RIGHT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::RIGHT_ARROW);
         }
     }
 
     //game
     if(propagateReleaseKeyEvent)
     {
-        if(key >= GLFW_KEY_A && key <= GLFW_KEY_Z)
-        {
-            int gameKey = (key - GLFW_KEY_A) + InputDevice::Key::A;
-            mainDisplayer->onKeyReleased(static_cast<InputDevice::Key>(gameKey));
-        }else
-        {
-            auto it = keyboardMap.find(key);
-            if(it!=keyboardMap.end())
-            {
-                mainDisplayer->onKeyReleased(it->second);
-            }
-        }
+        mainDisplayer->onKeyReleased(toKeyboardKey(key));
+    }
+}
+
+KeyboardKey Main::toKeyboardKey(int key)
+{
+    if(key >= GLFW_KEY_A && key <= GLFW_KEY_Z)
+    {
+        int keyShift = glfwGetKeyName(key, 0)[0] - 'a';
+        return static_cast<KeyboardKey>(KeyboardKey::A + keyShift);
+    }
+
+    auto it = keyboardMap.find(key);
+    if(it!=keyboardMap.end())
+    {
+        return it->second;
+    } else
+    {
+        return KeyboardKey::UNKNOWN_KEY;
     }
 }
 

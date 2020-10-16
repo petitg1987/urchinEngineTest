@@ -7,12 +7,12 @@ Renderer::Renderer(MainDisplayer *mainDisplayer) :
 
 }
 
-void Renderer::onKeyPressed(InputDevice::Key)
+void Renderer::onKeyPressed(KeyboardKey)
 {
 
 }
 
-void Renderer::onKeyReleased(InputDevice::Key)
+void Renderer::onKeyReleased(KeyboardKey)
 {
 
 }

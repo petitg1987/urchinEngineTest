@@ -10,7 +10,7 @@
 #include "UrchinSoundEngine.h"
 #include "UrchinAIEngine.h"
 
-#include "InputDevice.h"
+#include "KeyboardKey.h"
 #include "Renderer.h"
 #include "game/CharacterCamera.h"
 
@@ -22,8 +22,8 @@ class GameRenderer : public Renderer
         explicit GameRenderer(MainDisplayer *);
         ~GameRenderer() override;
 
-        void onKeyPressed(InputDevice::Key) override;
-        void onKeyReleased(InputDevice::Key) override;
+        void onKeyPressed(KeyboardKey) override;
+        void onKeyReleased(KeyboardKey) override;
 
         void active(bool) override;
         bool isActive() const override;
