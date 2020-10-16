@@ -3,8 +3,7 @@
 
 class GLFWwindow;
 
-class WindowController
-{
+class WindowController {
     public:
         explicit WindowController(GLFWwindow *);
 

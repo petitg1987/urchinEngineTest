@@ -9,8 +9,7 @@
 #include "KeyboardKey.h"
 #include "game/GameRenderer.h"
 
-class MainDisplayer
-{
+class MainDisplayer {
     public:
         explicit MainDisplayer(WindowController *);
         ~MainDisplayer();

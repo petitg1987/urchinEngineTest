@@ -16,8 +16,7 @@
 
 class MainDisplayer;
 
-class GameRenderer : public Renderer
-{
+class GameRenderer : public Renderer {
     public:
         explicit GameRenderer(MainDisplayer *);
         ~GameRenderer() override;

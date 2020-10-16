@@ -34,13 +34,11 @@ GameRenderer::GameRenderer(MainDisplayer *mainDisplayer) :
     myWindow2(nullptr),
     mySlider(nullptr),
     //sound
-    manualTrigger(nullptr)
-{
+    manualTrigger(nullptr) {
 
 }
 
-GameRenderer::~GameRenderer()
-{
+GameRenderer::~GameRenderer() {
     uninitializeCharacter();
 
     deleteGeometryModels(rayModels);
@@ -52,8 +50,7 @@ GameRenderer::~GameRenderer()
     delete camera;
 }
 
-void GameRenderer::initialize()
-{
+void GameRenderer::initialize() {
     //3d
     gameRenderer3d = getMainDisplayer()->getSceneManager()->newRenderer3d(false);
     gameRenderer3d->activateAntiAliasing(true);
@@ -132,8 +129,7 @@ void GameRenderer::initialize()
     isInitialized = true;
 }
 
-void GameRenderer::initializeCharacter()
-{
+void GameRenderer::initializeCharacter() {
     urchin::Point3<float> characterPosition(-5.0, 0.0, 15.0);
     urchin::PhysicsTransform transform(characterPosition, urchin::Quaternion<float>(urchin::Vector3<float>(0.0, 1.0, 0.0), 0.0));
     float characterRadius = 0.25f;
@@ -146,73 +142,61 @@ void GameRenderer::initializeCharacter()
     camera->rotate(transform.getOrientation());
 }
 
-void GameRenderer::uninitializeCharacter()
-{
+void GameRenderer::uninitializeCharacter() {
     physicsCharacterController.reset(nullptr);
     physicsCharacter = std::shared_ptr<urchin::PhysicsCharacter>(nullptr);
 }
 
-void GameRenderer::switchMode()
-{
+void GameRenderer::switchMode() {
     editMode = !editMode;
 
     getMainDisplayer()->getWindowController()->setMouseCursorVisible(editMode);
     camera->useMouseToMoveCamera(!editMode);
 }
 
-void GameRenderer::deleteGeometryModels(std::vector<urchin::GeometryModel *> &models) const
-{
-    for (auto model : models)
-    {
+void GameRenderer::deleteGeometryModels(std::vector<urchin::GeometryModel *> &models) const {
+    for (auto model : models) {
         gameRenderer3d->getGeometryManager()->removeGeometry(model);
         delete model;
     }
     models.clear();
 }
 
-void GameRenderer::onKeyPressed(KeyboardKey key)
-{
-    if(key == KeyboardKey::E)
-    {
+void GameRenderer::onKeyPressed(KeyboardKey key) {
+    if(key == KeyboardKey::E) {
         switchMode();
     }
 
     //3d
     static float angle=0.0f;
-    if(key == KeyboardKey::PAGE_UP)
-    {
+    if(key == KeyboardKey::PAGE_UP) {
         angle+=0.1;
         getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle)*-1600.0-800.0, -400.0, -std::cos(angle)*300.0+100.0));
-    }if(key == KeyboardKey::PAGE_DOWN)
-    {
+    }if(key == KeyboardKey::PAGE_DOWN) {
         angle-=0.1;
         getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle)*-1600.0-800.0, -400.0, -std::cos(angle)*300.0+100.0));
     }
 
     static bool aliasingActive = true;
-    if(key == KeyboardKey::A)
-    {
+    if(key == KeyboardKey::A) {
         aliasingActive = !aliasingActive;
         gameRenderer3d->activateAntiAliasing(aliasingActive);
     }
 
     static bool hbaoActive = true;
-    if(key == KeyboardKey::H)
-    {
+    if(key == KeyboardKey::H) {
         hbaoActive = !hbaoActive;
         gameRenderer3d->activateAmbientOcclusion(hbaoActive);
     }
 
     static bool shadowActive = true;
-    if(key == KeyboardKey::W)
-    {
+    if(key == KeyboardKey::W) {
         shadowActive = !shadowActive;
         gameRenderer3d->activateShadow(shadowActive);
     }
 
     //physics
-    if(key == KeyboardKey::F)
-    {
+    if(key == KeyboardKey::F) {
         auto seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::default_random_engine generator(seed);
         std::uniform_int_distribution<> distribution(0, 10);
@@ -221,21 +205,16 @@ void GameRenderer::onKeyPressed(KeyboardKey key)
         int zAxisForce = distribution(generator) - 5;
         int yAxisForce = distribution(generator) + 5;
         urchin::RigidBody *body = getRandomUnactiveBody();
-        if(body!=nullptr)
-        {
+        if(body!=nullptr) {
             body->applyCentralMomentum(urchin::Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
         }
-    }else if(key == KeyboardKey::C)
-    {
-        if(physicsWorld->isPaused())
-        {
+    } else if(key == KeyboardKey::C) {
+        if(physicsWorld->isPaused()) {
             physicsWorld->unpause();
-        }else
-        {
+        } else {
             physicsWorld->pause();
         }
-    }else if(key == KeyboardKey::G)
-    {
+    } else if(key == KeyboardKey::G) {
         float clipSpaceX = (2.0f * (float)getMainDisplayer()->getMouseX()) / ((float)getMainDisplayer()->getSceneManager()->getSceneWidth()) - 1.0f;
         float clipSpaceY = 1.0f - (2.0f * (float)getMainDisplayer()->getMouseY()) / ((float)getMainDisplayer()->getSceneManager()->getSceneHeight());
         urchin::Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
@@ -253,13 +232,11 @@ void GameRenderer::onKeyPressed(KeyboardKey key)
         rayModels.push_back(gunRayModel);
         gameRenderer3d->getGeometryManager()->addGeometry(gunRayModel);
 
-        while(!rayTestResult->isResultReady())
-        {
+        while(!rayTestResult->isResultReady()) {
             std::this_thread::sleep_for(std::chrono::milliseconds(20));
         }
 
-        if(rayTestResult->hasHit())
-        {
+        if(rayTestResult->hasHit()) {
             const auto &nearestResult = rayTestResult->getNearestResult();
             urchin::GeometryModel *hitPointModel = new urchin::PointsModel(nearestResult->getHitPointOnObject2(), 25.0);
             hitPointModel->setColor(1.0, 0.0, 0.0);
@@ -269,67 +246,50 @@ void GameRenderer::onKeyPressed(KeyboardKey key)
         }
     }
 
-    if(key == KeyboardKey::Q)
-    {
+    if(key == KeyboardKey::Q) {
         leftKeyPressed = true;
-    }else if(key == KeyboardKey::D)
-    {
+    } else if(key == KeyboardKey::D) {
         rightKeyPressed = true;
-    }else if(key == KeyboardKey::Z)
-    {
+    } else if(key == KeyboardKey::Z) {
         upKeyPressed = true;
-    }else if(key == KeyboardKey::S)
-    {
+    } else if(key == KeyboardKey::S) {
         downKeyPressed = true;
-    }else if(key == KeyboardKey::SPACE)
-    {
+    } else if(key == KeyboardKey::SPACE) {
         physicsCharacterController->jump();
     }
 
     //AI
-    if(key == KeyboardKey::K)
-    {
+    if(key == KeyboardKey::K) {
         deleteGeometryModels(pathModels);
         displayPath = !displayPath;
     }
 
     //sound
-    if(key == KeyboardKey::P)
-    {
+    if(key == KeyboardKey::P) {
         manualTrigger->pause();
-    }else if(key == KeyboardKey::O)
-    {
+    } else if(key == KeyboardKey::O) {
         manualTrigger->stop();
-    }else if(key == KeyboardKey::M)
-    {
+    } else if(key == KeyboardKey::M) {
         manualTrigger->play();
     }
 }
 
-void GameRenderer::onKeyReleased(KeyboardKey key)
-{
+void GameRenderer::onKeyReleased(KeyboardKey key) {
     //3d
-    if(key == KeyboardKey::Q)
-    {
+    if(key == KeyboardKey::Q) {
         leftKeyPressed = false;
-    }else if(key == KeyboardKey::D)
-    {
+    } else if(key == KeyboardKey::D) {
         rightKeyPressed = false;
-    }else if(key == KeyboardKey::Z)
-    {
+    } else if(key == KeyboardKey::Z) {
         upKeyPressed = false;
-    }else if(key == KeyboardKey::S)
-    {
+    } else if(key == KeyboardKey::S) {
         downKeyPressed = false;
     }
 }
 
-void GameRenderer::active(bool active)
-{
-    if(active)
-    {
-        if(!isInitialized)
-        {
+void GameRenderer::active(bool active) {
+    if(active) {
+        if(!isInitialized) {
             initialize();
         }
 
@@ -338,24 +298,20 @@ void GameRenderer::active(bool active)
 
         getMainDisplayer()->getSceneManager()->enableRenderer3d(gameRenderer3d);
         getMainDisplayer()->getSceneManager()->enableGUIRenderer(gameGUIRenderer);
-    }else
-    {
+    } else {
         getMainDisplayer()->getSceneManager()->enableRenderer3d(nullptr);
         getMainDisplayer()->getSceneManager()->enableGUIRenderer(nullptr);
     }
 }
 
-bool GameRenderer::isActive() const
-{
+bool GameRenderer::isActive() const {
     return gameRenderer3d!=nullptr && getMainDisplayer()->getSceneManager()->getActiveRenderer3d()==gameRenderer3d;
 }
 
-void GameRenderer::refresh()
-{
+void GameRenderer::refresh() {
     //fps
     float dt = getMainDisplayer()->getSceneManager()->getDeltaTime();
-    if(fpsText!=nullptr)
-    {
+    if(fpsText!=nullptr) {
         fpsText->setText(std::to_string(getMainDisplayer()->getSceneManager()->getFpsForDisplay()) + " fps");
     }
 
@@ -368,17 +324,14 @@ void GameRenderer::refresh()
     camera->moveTo(physicsCharacter->getTransform().getPosition() + urchin::Point3<float>(0.0, 0.75f, 0.0));
 
     //path
-    if(displayPath)
-    {
+    if(displayPath) {
         deleteGeometryModels(pathModels);
         std::vector<urchin::PathPoint> pathPoints = pathRequest->getPath();
 
-        if (pathPoints.size() >= 2 && displayPath)
-        {
+        if (pathPoints.size() >= 2 && displayPath) {
             std::vector<urchin::Point3<float>> adjustedPathPoints;
             adjustedPathPoints.reserve(pathPoints.size());
-            for (auto &pathPoint : pathPoints)
-            {
+            for (auto &pathPoint : pathPoints) {
                 adjustedPathPoints.emplace_back(urchin::Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
             }
             auto *linesModel = new urchin::LinesModel(adjustedPathPoints, 5.0);
@@ -388,30 +341,25 @@ void GameRenderer::refresh()
         }
     }
 
-    if(memCheckMode)
-    {
+    if(memCheckMode) {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 
-    if(DEBUG_DISPLAY_NAV_MESH && navMeshDisplayer)
-    {
+    if(DEBUG_DISPLAY_NAV_MESH && navMeshDisplayer) {
         navMeshDisplayer->display();
     }
 
-    if(DEBUG_DISPLAY_COLLISION_POINTS && navMeshDisplayer)
-    {
+    if(DEBUG_DISPLAY_COLLISION_POINTS && navMeshDisplayer) {
         navMeshDisplayer->display();
     }
 }
 
-urchin::SunLight *GameRenderer::getSunLight()
-{
+urchin::SunLight *GameRenderer::getSunLight() {
     urchin::SceneLight *sunLight = mapHandler->getMap()->getSceneLight("sunLight");
     return dynamic_cast<urchin::SunLight *>(sunLight->getLight());
 }
 
-urchin::Vector3<float> GameRenderer::getWalkMomentum() const
-{
+urchin::Vector3<float> GameRenderer::getWalkMomentum() const {
     urchin::Vector3<float> viewVector = camera->getView();
     viewVector.Y = 0.0f; //don't move on Y axis
     urchin::Vector3<float> forwardDirection(0.0, 0.0, 0.0);
@@ -419,19 +367,15 @@ urchin::Vector3<float> GameRenderer::getWalkMomentum() const
     urchin::Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
     urchin::Vector3<float> lateralDirection(0.0, 0.0, 0.0);
 
-    if(upKeyPressed && !downKeyPressed)
-    {
+    if(upKeyPressed && !downKeyPressed) {
         forwardDirection = viewVector.normalize();
-    }else if(downKeyPressed && !upKeyPressed)
-    {
+    } else if(downKeyPressed && !upKeyPressed) {
         forwardDirection = -viewVector.normalize();
     }
 
-    if(leftKeyPressed && !rightKeyPressed)
-    {
+    if(leftKeyPressed && !rightKeyPressed) {
         lateralDirection = -lateralVector.normalize();
-    }else if(rightKeyPressed && !leftKeyPressed)
-    {
+    } else if(rightKeyPressed && !leftKeyPressed) {
         lateralDirection = lateralVector.normalize();
     }
 
@@ -439,21 +383,17 @@ urchin::Vector3<float> GameRenderer::getWalkMomentum() const
     return (forwardDirection + lateralDirection).normalize() * speed;
 }
 
-urchin::RigidBody *GameRenderer::getRandomUnactiveBody()
-{
+urchin::RigidBody *GameRenderer::getRandomUnactiveBody() {
     std::vector<urchin::RigidBody *> bodies;
 
     const std::list<urchin::SceneObject *> &sceneObjects = mapHandler->getMap()->getSceneObjects();
-    for (auto sceneObject : sceneObjects)
-    {
-        if(!sceneObject->getRigidBody()->isStatic() && !sceneObject->getRigidBody()->isActive())
-        {
+    for (auto sceneObject : sceneObjects) {
+        if(!sceneObject->getRigidBody()->isStatic() && !sceneObject->getRigidBody()->isActive()) {
             bodies.push_back(sceneObject->getRigidBody());
         }
     }
 
-    if(!bodies.empty())
-    {
+    if(!bodies.empty()) {
         auto seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::default_random_engine generator(seed);
         std::uniform_int_distribution<> distribution(0, bodies.size()-1);

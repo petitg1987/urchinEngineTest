@@ -2,8 +2,7 @@
 #include "KeyboardKey.h"
 #include "WindowController.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     Main main;
     main.execute(argc, argv);
 
@@ -17,36 +16,24 @@ Main::Main() :
         mainDisplayer(nullptr),
         windowController(nullptr),
         propagatePressKeyEvent(true),
-        propagateReleaseKeyEvent(true)
-{
+        propagateReleaseKeyEvent(true) {
 
 }
 
-void Main::execute(int argc, char *argv[])
-{
+void Main::execute(int argc, char *argv[]) {
     initializeKeyboardMap();
 
     urchin::Logger::defineLogger(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
 
     GLFWwindow *window = nullptr;
 
-    try
-    {
-        if (!glfwInit())
-        {
+    try {
+        if (!glfwInit()) {
             throw std::runtime_error("Impossible to initialize GLFW library");
         }
         glfwSetErrorCallback(glfwErrorCallback);
-        
-        GLFWmonitor *monitor = argumentsContains("--windowed", argc, argv) ? nullptr : glfwGetPrimaryMonitor();
-        window = glfwCreateWindow(1200, 675, "Urchin Engine Test", monitor, nullptr);
-        if(!window)
-        {
-            throw std::runtime_error("Impossible to create the GLFW window");
-        }
-        glfwMakeContextCurrent(window);
-        glfwSwapInterval(1);
 
+        window = createWindow(argc, argv);
         windowController = new WindowController(window);
         std::string resourcesDirectory = retrieveResourcesDirectory(argv);
         std::string saveDirectory = retrieveSaveDirectory(argv);
@@ -66,10 +53,8 @@ void Main::execute(int argc, char *argv[])
 
         windowController->cleanEvents(); //ignore events occurred during initialization phase
 
-        while (!glfwWindowShouldClose(window))
-        {
-            if(!glfwError.empty())
-            {
+        while (!glfwWindowShouldClose(window)) {
+            if(!glfwError.empty()) {
                 throw std::runtime_error(glfwError);
             }
 
@@ -79,30 +64,24 @@ void Main::execute(int argc, char *argv[])
             glfwSwapBuffers(window);
         }
 
-        if(urchin::Logger::logger().hasFailure())
-        {
+        if(urchin::Logger::logger().hasFailure()) {
             failureExit(window, windowController);
-        }else
-        {
+        } else {
             clearResources(window, windowController);
         }
-    }catch(std::exception &e)
-    {
+    }catch(std::exception &e) {
         urchin::Logger::logger().logError("Error occurred: " + std::string(e.what()));
         failureExit(window, windowController);
     }
 }
 
-void Main::glfwErrorCallback(int error, const char* description)
-{
-    if(glfwError.empty())
-    {
+void Main::glfwErrorCallback(int error, const char* description) {
+    if(glfwError.empty()) {
         glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
     }
 }
 
-void Main::initializeKeyboardMap()
-{
+void Main::initializeKeyboardMap() {
     keyboardMap[GLFW_KEY_ESCAPE] = KeyboardKey::ESCAPE;
     keyboardMap[GLFW_KEY_SPACE] = KeyboardKey::SPACE;
     keyboardMap[GLFW_KEY_LEFT_CONTROL] = KeyboardKey::CTRL_LEFT;
@@ -119,234 +98,204 @@ void Main::initializeKeyboardMap()
     keyboardMap[GLFW_KEY_PAGE_DOWN] = KeyboardKey::PAGE_DOWN;
 }
 
-std::string Main::retrieveResourcesDirectory(char *argv[]) const
-{
+std::string Main::retrieveResourcesDirectory(char *argv[]) const {
     return urchin::FileHandler::getDirectoryFrom(std::string(argv[0])) + "resources/";
 }
 
-std::string Main::retrieveSaveDirectory(char *argv[]) const
-{
+std::string Main::retrieveSaveDirectory(char *argv[]) const {
     return urchin::FileHandler::getDirectoryFrom(std::string(argv[0])) + "save/";
 }
 
-void Main::charCallback(GLFWwindow *window, unsigned int codepoint, int)
-{
+GLFWwindow *Main::createWindow(int argc, char *argv[]) {
+    GLFWwindow *window;
+    const char *windowTitle = "Urchin Engine Test";
+
+    if(argumentsContains("--windowed", argc, argv)) {
+        window = glfwCreateWindow(1200, 675, windowTitle, nullptr, nullptr);
+    } else {
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+        window = glfwCreateWindow(mode->width, mode->height, windowTitle, monitor, nullptr);
+    }
+
+    if(!window) {
+        throw std::runtime_error("Impossible to create the GLFW window");
+    }
+
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
+    return window;
+}
+
+void Main::charCallback(GLFWwindow *window, unsigned int codepoint, int) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive())
-    {
+    if(main->windowController->isEventCallbackActive()) {
         main->charPressEvents.push_back(codepoint);
     }
 }
 
-void Main::keyCallback(GLFWwindow *window, int key, int, int action, int)
-{
+void Main::keyCallback(GLFWwindow *window, int key, int, int action, int) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive())
-    {
-        if (action == GLFW_PRESS)
-        {
-            if (key == GLFW_KEY_ESCAPE)
-            {
+    if(main->windowController->isEventCallbackActive()) {
+        if (action == GLFW_PRESS) {
+            if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
             }
             main->keyPressEvents.push_back(key);
-        } else if (action == GLFW_RELEASE)
-        {
+        } else if (action == GLFW_RELEASE) {
             main->onKeyReleased(key);
         }
     }
 }
 
-void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int)
-{
+void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive())
-    {
-        if (action == GLFW_PRESS)
-        {
+    if(main->windowController->isEventCallbackActive()) {
+        if (action == GLFW_PRESS) {
             main->onMouseButtonPressed(button);
-        } else if (action == GLFW_RELEASE)
-        {
+        } else if (action == GLFW_RELEASE) {
             main->onMouseButtonReleased(button);
         }
     }
 }
 
-void Main::cursorPositionCallback(GLFWwindow* window, double x, double y)
-{
+void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive())
-    {
+    if(main->windowController->isEventCallbackActive()) {
         main->onMouseMove(static_cast<int>(x), static_cast<int>(y));
     }
 }
 
-void Main::windowSizeCallback(GLFWwindow *window, int width, int height)
-{
+void Main::windowSizeCallback(GLFWwindow *window, int width, int height) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(main->windowController->isEventCallbackActive())
-    {
+    if(main->windowController->isEventCallbackActive()) {
         main->mainDisplayer->resize(width, height);
     }
 }
 
-void Main::handleInputEvents()
-{
+void Main::handleInputEvents() {
     propagatePressKeyEvent = true;
     propagateReleaseKeyEvent = true;
     glfwPollEvents();
 
-    if(!charPressEvents.empty())
-    {
-        for(unsigned int charUnicode : charPressEvents)
-        {
+    if(!charPressEvents.empty()) {
+        for(unsigned int charUnicode : charPressEvents) {
             onChar(charUnicode);
         }
         charPressEvents.clear();
     }
 
-    if(!keyPressEvents.empty())
-    {
-        for(int keyPress : keyPressEvents)
-        {
+    if(!keyPressEvents.empty()) {
+        for(int keyPress : keyPressEvents) {
             onKeyPressed(keyPress);
         }
         keyPressEvents.clear();
     }
 }
 
-void Main::onChar(unsigned int unicode)
-{
+void Main::onChar(unsigned int unicode) {
     //engine
-    if(propagatePressKeyEvent && unicode < 256)
-    {
+    if(propagatePressKeyEvent && unicode < 256) {
         propagatePressKeyEvent = mainDisplayer->getSceneManager()->onChar(unicode);
     }
 }
 
-void Main::onKeyPressed(int key)
-{
+void Main::onKeyPressed(int key) {
     //engine
-    if(propagatePressKeyEvent)
-    {
-        if(key == GLFW_KEY_LEFT)
-        {
+    if(propagatePressKeyEvent) {
+        if(key == GLFW_KEY_LEFT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::LEFT_ARROW);
-        }else if(key == GLFW_KEY_RIGHT)
-        {
+        } else if(key == GLFW_KEY_RIGHT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::RIGHT_ARROW);
         }
     }
 
     //game
-    if(propagatePressKeyEvent)
-    {
+    if(propagatePressKeyEvent) {
         mainDisplayer->onKeyPressed(toKeyboardKey(key));
     }
 }
 
-void Main::onKeyReleased(int key)
-{
+void Main::onKeyReleased(int key) {
     //engine
-    if(propagateReleaseKeyEvent)
-    {
-        if(key == GLFW_KEY_LEFT)
-        {
+    if(propagateReleaseKeyEvent) {
+        if(key == GLFW_KEY_LEFT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::LEFT_ARROW);
-        }else if(key == GLFW_KEY_RIGHT)
-        {
+        } else if(key == GLFW_KEY_RIGHT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::RIGHT_ARROW);
         }
     }
 
     //game
-    if(propagateReleaseKeyEvent)
-    {
+    if(propagateReleaseKeyEvent) {
         mainDisplayer->onKeyReleased(toKeyboardKey(key));
     }
 }
 
-KeyboardKey Main::toKeyboardKey(int key)
-{
-    if(key >= GLFW_KEY_A && key <= GLFW_KEY_Z)
-    {
+KeyboardKey Main::toKeyboardKey(int key) {
+    if(key >= GLFW_KEY_A && key <= GLFW_KEY_Z) {
         int keyShift = glfwGetKeyName(key, 0)[0] - 'a';
         return static_cast<KeyboardKey>(KeyboardKey::A + keyShift);
     }
 
     auto it = keyboardMap.find(key);
-    if(it!=keyboardMap.end())
-    {
+    if(it!=keyboardMap.end()) {
         return it->second;
-    } else
-    {
+    } else {
         return KeyboardKey::UNKNOWN_KEY;
     }
 }
 
-void Main::onMouseButtonPressed(int button)
-{
+void Main::onMouseButtonPressed(int button) {
     //engine
-    if(button == GLFW_MOUSE_BUTTON_LEFT)
-    {
+    if(button == GLFW_MOUSE_BUTTON_LEFT) {
         mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_LEFT);
-    }else if(button == GLFW_MOUSE_BUTTON_RIGHT)
-    {
+    } else if(button == GLFW_MOUSE_BUTTON_RIGHT) {
         mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_RIGHT);
     }
 }
 
-void Main::onMouseButtonReleased(int button)
-{
+void Main::onMouseButtonReleased(int button) {
     //engine
-    if(button == GLFW_MOUSE_BUTTON_LEFT)
-    {
+    if(button == GLFW_MOUSE_BUTTON_LEFT) {
         mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_LEFT);
-    }else if(button == GLFW_MOUSE_BUTTON_RIGHT)
-    {
+    } else if(button == GLFW_MOUSE_BUTTON_RIGHT) {
         mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_RIGHT);
     }
 }
 
-void Main::onMouseMove(int x, int y)
-{
+void Main::onMouseMove(int x, int y) {
     //engine
-    if(x!=0 || y!=0)
-    {
+    if(x!=0 || y!=0) {
         mainDisplayer->onMouseMove(x, y);
     }
 }
 
-bool Main::argumentsContains(const std::string &argName, int argc, char *argv[]) const
-{
-    for(int i=1;i<argc;++i)
-    {
-        if(std::string(argv[i]).find(argName)!=std::string::npos)
-        {
+bool Main::argumentsContains(const std::string &argName, int argc, char *argv[]) const {
+    for(int i=1;i<argc;++i) {
+        if(std::string(argv[i]).find(argName)!=std::string::npos) {
             return true;
         }
     }
     return false;
 }
 
-void Main::clearResources(GLFWwindow *&window, WindowController *&windowController)
-{
+void Main::clearResources(GLFWwindow *&window, WindowController *&windowController) {
     delete mainDisplayer;
     mainDisplayer = nullptr;
 
     delete windowController;
     windowController = nullptr;
 
-    if(window != nullptr)
-    {
+    if(window != nullptr) {
         glfwDestroyWindow(window);
         window = nullptr;
     }
     glfwTerminate();
 }
 
-void Main::failureExit(GLFWwindow *&window, WindowController *&windowController)
-{
+void Main::failureExit(GLFWwindow *&window, WindowController *&windowController) {
     std::string logFilename = dynamic_cast<urchin::FileLogger&>(urchin::Logger::logger()).getFilename();
     std::cerr<<"Application stopped with issue (log: "<<logFilename<<")"<<std::endl;
 

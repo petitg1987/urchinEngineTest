@@ -5,8 +5,7 @@
 
 class MainDisplayer;
 
-class Renderer
-{
+class Renderer {
     public:
         explicit Renderer(MainDisplayer *);
         virtual ~Renderer() = default;

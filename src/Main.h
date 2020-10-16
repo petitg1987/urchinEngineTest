@@ -10,8 +10,7 @@
 
 int main(int, char *[]);
 
-class Main
-{
+class Main {
     public:
         Main();
         void execute(int, char *[]);
@@ -22,6 +21,8 @@ class Main
 
         std::string retrieveResourcesDirectory(char *[]) const;
         std::string retrieveSaveDirectory(char *[]) const;
+
+        GLFWwindow *createWindow(int, char *[]);
 
         static void charCallback(GLFWwindow *, unsigned int, int);
         static void keyCallback(GLFWwindow *, int, int, int, int);

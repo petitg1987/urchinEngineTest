@@ -8,13 +8,11 @@ MainDisplayer::MainDisplayer(WindowController *windowController) :
     mouseY(0),
     sceneManager(nullptr),
     soundManager(nullptr),
-    gameRenderer(nullptr)
-{
+    gameRenderer(nullptr) {
 
 }
 
-MainDisplayer::~MainDisplayer()
-{
+MainDisplayer::~MainDisplayer() {
     delete gameRenderer;
 
     delete sceneManager;
@@ -23,8 +21,7 @@ MainDisplayer::~MainDisplayer()
     urchin::SingletonManager::destroyAllSingletons();
 }
 
-void MainDisplayer::initialize(const std::string &resourcesDirectory, const std::string &saveDirectory)
-{
+void MainDisplayer::initialize(const std::string &resourcesDirectory, const std::string &saveDirectory) {
     urchin::FileSystem::instance()->setupResourcesDirectory(resourcesDirectory);
     urchin::FileSystem::instance()->setupSaveDirectory(saveDirectory);
 
@@ -36,11 +33,9 @@ void MainDisplayer::initialize(const std::string &resourcesDirectory, const std:
     gameRenderer->active(true);
 }
 
-void MainDisplayer::paint()
-{
+void MainDisplayer::paint() {
     //refresh scene
-    if(gameRenderer->isActive())
-    {
+    if(gameRenderer->isActive()) {
         gameRenderer->refresh();
     }
 
@@ -48,59 +43,47 @@ void MainDisplayer::paint()
     sceneManager->display();
 }
 
-void MainDisplayer::resize(unsigned int width, unsigned int height)
-{
-    if(sceneManager)
-    {
+void MainDisplayer::resize(unsigned int width, unsigned int height) {
+    if(sceneManager) {
         sceneManager->onResize(width, height);
     }
 }
 
-void MainDisplayer::onKeyPressed(KeyboardKey key)
-{
-    if(gameRenderer->isActive())
-    {
+void MainDisplayer::onKeyPressed(KeyboardKey key) {
+    if(gameRenderer->isActive()) {
         gameRenderer->onKeyPressed(key);
     }
 }
 
-void MainDisplayer::onKeyReleased(KeyboardKey key)
-{
-    if(gameRenderer->isActive())
-    {
+void MainDisplayer::onKeyReleased(KeyboardKey key) {
+    if(gameRenderer->isActive()) {
         gameRenderer->onKeyReleased(key);
     }
 }
 
-void MainDisplayer::onMouseMove(int mouseX, int mouseY)
-{
+void MainDisplayer::onMouseMove(int mouseX, int mouseY) {
     this->mouseX = mouseX;
     this->mouseY = mouseY;
 
     sceneManager->onMouseMove(mouseX, mouseY);
 }
 
-int MainDisplayer::getMouseX() const
-{
+int MainDisplayer::getMouseX() const {
     return mouseX;
 }
 
-int MainDisplayer::getMouseY() const
-{
+int MainDisplayer::getMouseY() const {
     return mouseY;
 }
 
-WindowController *MainDisplayer::getWindowController() const
-{
+WindowController *MainDisplayer::getWindowController() const {
     return windowController;
 }
 
-urchin::SceneManager *MainDisplayer::getSceneManager() const
-{
+urchin::SceneManager *MainDisplayer::getSceneManager() const {
     return sceneManager;
 }
 
-urchin::SoundManager *MainDisplayer::getSoundManager() const
-{
+urchin::SoundManager *MainDisplayer::getSoundManager() const {
     return soundManager;
 }
