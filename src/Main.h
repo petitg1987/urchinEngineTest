@@ -4,6 +4,7 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <list>
+#include <map>
 
 #include "MainDisplayer.h"
 
@@ -28,11 +29,12 @@ class Main
         static void cursorPositionCallback(GLFWwindow *, double, double);
         static void windowSizeCallback(GLFWwindow *, int, int);
 
+        void handleInputEvents();
+
         void onChar(unsigned int);
         void onKeyPressed(int);
         void onKeyReleased(int);
         KeyboardKey toKeyboardKey(int);
-        void handleInputEvents();
 
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);

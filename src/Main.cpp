@@ -186,6 +186,31 @@ void Main::windowSizeCallback(GLFWwindow *window, int width, int height)
     }
 }
 
+void Main::handleInputEvents()
+{
+    propagatePressKeyEvent = true;
+    propagateReleaseKeyEvent = true;
+    glfwPollEvents();
+
+    if(!charPressEvents.empty())
+    {
+        for(unsigned int charUnicode : charPressEvents)
+        {
+            onChar(charUnicode);
+        }
+        charPressEvents.clear();
+    }
+
+    if(!keyPressEvents.empty())
+    {
+        for(int keyPress : keyPressEvents)
+        {
+            onKeyPressed(keyPress);
+        }
+        keyPressEvents.clear();
+    }
+}
+
 void Main::onChar(unsigned int unicode)
 {
     //engine
@@ -255,31 +280,6 @@ KeyboardKey Main::toKeyboardKey(int key)
     } else
     {
         return KeyboardKey::UNKNOWN_KEY;
-    }
-}
-
-void Main::handleInputEvents()
-{
-    propagatePressKeyEvent = true;
-    propagateReleaseKeyEvent = true;
-    glfwPollEvents();
-
-    if(!charPressEvents.empty())
-    {
-        for(unsigned int charUnicode : charPressEvents)
-        {
-            onChar(charUnicode);
-        }
-        charPressEvents.clear();
-    }
-
-    if(!keyPressEvents.empty())
-    {
-        for(int keyPress : keyPressEvents)
-        {
-            onKeyPressed(keyPress);
-        }
-        keyPressEvents.clear();
     }
 }
 
