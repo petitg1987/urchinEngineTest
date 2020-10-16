@@ -46,6 +46,7 @@ class Main
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;
 
         std::map<int, KeyboardKey> keyboardMap;
+        static std::string glfwError;
         static std::list<unsigned int> charPressEvents;
         static std::list<int> keyPressEvents;
 };

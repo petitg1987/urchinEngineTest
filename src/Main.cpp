@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 }
 
 //static
+std::string Main::glfwError; //TODO check config...
 std::list<unsigned int> Main::charPressEvents;
 std::list<int> Main::keyPressEvents;
 
@@ -35,7 +36,7 @@ void Main::execute(int argc, char *argv[])
     {
         if (!glfwInit())
         {
-            //TODO Initialization failed
+            throw std::runtime_error("Impossible to initialize GLFW library");
         }
         glfwSetErrorCallback(glfwErrorCallback);
         
@@ -43,8 +44,7 @@ void Main::execute(int argc, char *argv[])
         window = glfwCreateWindow(1200, 675, "Urchin Engine Test", monitor, nullptr);
         if(!window)
         {
-            glfwTerminate();
-            //TODO Window or context creation failed
+            throw std::runtime_error("Impossible to create the GLFW window");
         }
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
@@ -70,7 +70,13 @@ void Main::execute(int argc, char *argv[])
         {
             propagatePressKeyEvent = true;
             propagateReleaseKeyEvent = true;
+
             glfwPollEvents();
+
+            if(!glfwError.empty())
+            {
+                throw std::runtime_error(glfwError);
+            }
             if(!charPressEvents.empty())
             {
                 for(unsigned int charUnicode : charPressEvents)
@@ -105,14 +111,11 @@ void Main::execute(int argc, char *argv[])
         urchin::Logger::logger().logError("Error occurred: " + std::string(e.what()));
         failureExit(window, windowController);
     }
-
-    glfwTerminate();
 }
 
 void Main::glfwErrorCallback(int error, const char* description)
-{ //TODO review
-    if(error) {}
-    fprintf(stderr, "Error: %s\n", description);
+{
+    glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
 }
 
 void Main::initializeKeyboardMap()
@@ -313,9 +316,12 @@ void Main::clearResources(GLFWwindow *&window, WindowController *&windowControll
     delete windowController;
     windowController = nullptr;
 
-    glfwDestroyWindow(window);
+    if(window != nullptr)
+    {
+        glfwDestroyWindow(window);
+        window = nullptr;
+    }
     glfwTerminate();
-    window = nullptr;
 }
 
 void Main::failureExit(GLFWwindow *&window, WindowController *&windowController)
