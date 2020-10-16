@@ -43,13 +43,15 @@ class Main
         void clearResources(GLFWwindow *&, WindowController *&);
         void failureExit(GLFWwindow *&, WindowController *&);
 
-        MainDisplayer *mainDisplayer;
-        bool propagatePressKeyEvent, propagateReleaseKeyEvent;
-
-        std::map<int, KeyboardKey> keyboardMap;
         static std::string glfwError;
-        static std::list<unsigned int> charPressEvents;
-        static std::list<int> keyPressEvents;
+
+        MainDisplayer *mainDisplayer;
+        WindowController *windowController;
+
+        bool propagatePressKeyEvent, propagateReleaseKeyEvent;
+        std::map<int, KeyboardKey> keyboardMap;
+        std::list<unsigned int> charPressEvents;
+        std::list<int> keyPressEvents;
 };
 
 #endif

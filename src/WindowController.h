@@ -11,10 +11,14 @@ class WindowController
         void moveMouse(unsigned int, unsigned int) const;
         void setMouseCursorVisible(bool);
 
+        void cleanEvents();
+        bool isEventCallbackActive() const;
+
         void setVerticalSyncEnabled(bool);
 
     private:
         GLFWwindow *window;
+        bool eventsCallbackActive;
 
 };
 

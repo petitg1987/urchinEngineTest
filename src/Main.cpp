@@ -12,11 +12,10 @@ int main(int argc, char *argv[])
 
 //static
 std::string Main::glfwError;
-std::list<unsigned int> Main::charPressEvents;
-std::list<int> Main::keyPressEvents;
 
 Main::Main() :
         mainDisplayer(nullptr),
+        windowController(nullptr),
         propagatePressKeyEvent(true),
         propagateReleaseKeyEvent(true)
 {
@@ -26,11 +25,9 @@ Main::Main() :
 void Main::execute(int argc, char *argv[])
 {
     initializeKeyboardMap();
-
     urchin::Logger::defineLogger(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
 
     GLFWwindow *window = nullptr;
-    WindowController *windowController = nullptr;
 
     try
     {
@@ -65,6 +62,8 @@ void Main::execute(int argc, char *argv[])
         glfwSetMouseButtonCallback(window, mouseKeyCallback);
         glfwSetCursorPosCallback(window, cursorPositionCallback);
         glfwSetWindowSizeCallback(window, windowSizeCallback);
+
+        windowController->cleanEvents(); //ignore events occurred during initialization phase
 
         while (!glfwWindowShouldClose(window))
         {
@@ -129,49 +128,65 @@ std::string Main::retrieveSaveDirectory(char *argv[]) const
     return urchin::FileHandler::getDirectoryFrom(std::string(argv[0])) + "save/";
 }
 
-void Main::charCallback(GLFWwindow *, unsigned int codepoint, int)
+void Main::charCallback(GLFWwindow *window, unsigned int codepoint, int)
 {
-    charPressEvents.push_back(codepoint);
+    Main *main = (Main*)glfwGetWindowUserPointer(window);
+    if(main->windowController->isEventCallbackActive())
+    {
+        main->charPressEvents.push_back(codepoint);
+    }
 }
 
 void Main::keyCallback(GLFWwindow *window, int key, int, int action, int)
 {
-    if(action == GLFW_PRESS)
+    Main *main = (Main*)glfwGetWindowUserPointer(window);
+    if(main->windowController->isEventCallbackActive())
     {
-        if (key == GLFW_KEY_ESCAPE)
+        if (action == GLFW_PRESS)
         {
-            glfwSetWindowShouldClose(window, GLFW_TRUE);
+            if (key == GLFW_KEY_ESCAPE)
+            {
+                glfwSetWindowShouldClose(window, GLFW_TRUE);
+            }
+            main->keyPressEvents.push_back(key);
+        } else if (action == GLFW_RELEASE)
+        {
+            main->onKeyReleased(key);
         }
-        keyPressEvents.push_back(key);
-    }else if(action == GLFW_RELEASE)
-    {
-        Main *main = (Main*)glfwGetWindowUserPointer(window);
-        main->onKeyReleased(key);
     }
 }
 
 void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int)
 {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    if(action == GLFW_PRESS)
+    if(main->windowController->isEventCallbackActive())
     {
-        main->onMouseButtonPressed(button);
-    }else if(action == GLFW_RELEASE)
-    {
-        main->onMouseButtonReleased(button);
+        if (action == GLFW_PRESS)
+        {
+            main->onMouseButtonPressed(button);
+        } else if (action == GLFW_RELEASE)
+        {
+            main->onMouseButtonReleased(button);
+        }
     }
 }
 
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y)
 {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    main->onMouseMove(static_cast<int>(x), static_cast<int>(y));
+    if(main->windowController->isEventCallbackActive())
+    {
+        main->onMouseMove(static_cast<int>(x), static_cast<int>(y));
+    }
 }
 
 void Main::windowSizeCallback(GLFWwindow *window, int width, int height)
 {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
-    main->mainDisplayer->resize(width, height);
+    if(main->windowController->isEventCallbackActive())
+    {
+        main->mainDisplayer->resize(width, height);
+    }
 }
 
 void Main::onChar(unsigned int unicode)

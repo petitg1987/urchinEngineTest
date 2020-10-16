@@ -4,7 +4,8 @@
 #include "WindowController.h"
 
 WindowController::WindowController(GLFWwindow *window) :
- window(window)
+    window(window),
+    eventsCallbackActive(true)
 {
 
 }
@@ -18,6 +19,18 @@ void WindowController::setMouseCursorVisible(bool visible)
 {
     glfwSetInputMode(window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
 
+}
+
+void WindowController::cleanEvents()
+{
+    eventsCallbackActive = false;
+    glfwPollEvents();
+    eventsCallbackActive = true;
+}
+
+bool WindowController::isEventCallbackActive() const
+{
+    return eventsCallbackActive;
 }
 
 void WindowController::setVerticalSyncEnabled(bool active)
