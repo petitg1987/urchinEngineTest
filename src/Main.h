@@ -32,6 +32,7 @@ class Main
         void onKeyPressed(int);
         void onKeyReleased(int);
         KeyboardKey toKeyboardKey(int);
+        void handleInputEvents();
 
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);

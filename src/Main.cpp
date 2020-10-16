@@ -68,31 +68,14 @@ void Main::execute(int argc, char *argv[])
 
         while (!glfwWindowShouldClose(window))
         {
-            propagatePressKeyEvent = true;
-            propagateReleaseKeyEvent = true;
-
-            glfwPollEvents();
-
             if(!glfwError.empty())
             {
                 throw std::runtime_error(glfwError);
             }
-            if(!charPressEvents.empty())
-            {
-                for(unsigned int charUnicode : charPressEvents)
-                {
-                    onChar(charUnicode);
-                }
-                charPressEvents.clear();
-            }
-            if(!keyPressEvents.empty())
-            {
-                for(int keyPress : keyPressEvents)
-                {
-                    onKeyPressed(keyPress);
-                }
-                keyPressEvents.clear();
-            }
+
+            propagatePressKeyEvent = true;
+            propagateReleaseKeyEvent = true;
+            handleInputEvents();
 
             mainDisplayer->paint();
 
@@ -260,6 +243,29 @@ KeyboardKey Main::toKeyboardKey(int key)
     } else
     {
         return KeyboardKey::UNKNOWN_KEY;
+    }
+}
+
+void Main::handleInputEvents()
+{
+    glfwPollEvents();
+
+    if(!charPressEvents.empty())
+    {
+        for(unsigned int charUnicode : charPressEvents)
+        {
+            onChar(charUnicode);
+        }
+        charPressEvents.clear();
+    }
+
+    if(!keyPressEvents.empty())
+    {
+        for(int keyPress : keyPressEvents)
+        {
+            onKeyPressed(keyPress);
+        }
+        keyPressEvents.clear();
     }
 }
 
