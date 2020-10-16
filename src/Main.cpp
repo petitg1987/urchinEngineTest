@@ -25,6 +25,7 @@ Main::Main() :
 void Main::execute(int argc, char *argv[])
 {
     initializeKeyboardMap();
+
     urchin::Logger::defineLogger(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
 
     GLFWwindow *window = nullptr;
@@ -94,7 +95,10 @@ void Main::execute(int argc, char *argv[])
 
 void Main::glfwErrorCallback(int error, const char* description)
 {
-    glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
+    if(glfwError.empty())
+    {
+        glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
+    }
 }
 
 void Main::initializeKeyboardMap()
@@ -214,12 +218,9 @@ void Main::handleInputEvents()
 void Main::onChar(unsigned int unicode)
 {
     //engine
-    if(propagatePressKeyEvent)
+    if(propagatePressKeyEvent && unicode < 256)
     {
-        if(unicode < 256)
-        {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onChar(unicode);
-        }
+        propagatePressKeyEvent = mainDisplayer->getSceneManager()->onChar(unicode);
     }
 }
 

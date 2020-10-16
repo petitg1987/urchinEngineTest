@@ -18,7 +18,6 @@ void WindowController::moveMouse(unsigned int x, unsigned int y) const
 void WindowController::setMouseCursorVisible(bool visible)
 {
     glfwSetInputMode(window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
-
 }
 
 void WindowController::cleanEvents()
