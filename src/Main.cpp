@@ -193,10 +193,10 @@ void Main::onKeyPressed(int key)
     {
         if(key == GLFW_KEY_LEFT)
         {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyDown(urchin::InputDevice::Key::LEFT_ARROW); //TODO rename: keyPressed/Release + accept InputDevice::Key ?
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::LEFT_ARROW);
         }else if(key == GLFW_KEY_RIGHT)
         {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyDown(urchin::InputDevice::Key::RIGHT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::RIGHT_ARROW);
         }
     }
 
@@ -214,10 +214,10 @@ void Main::onKeyReleased(int key)
     {
         if(key == GLFW_KEY_LEFT)
         {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::LEFT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::LEFT_ARROW);
         }else if(key == GLFW_KEY_RIGHT)
         {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::RIGHT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::RIGHT_ARROW);
         }
     }
 
@@ -274,10 +274,10 @@ void Main::onMouseButtonPressed(int button)
     //engine
     if(button == GLFW_MOUSE_BUTTON_LEFT)
     {
-        mainDisplayer->getSceneManager()->onKeyDown(urchin::InputDevice::Key::MOUSE_LEFT);
+        mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_LEFT);
     }else if(button == GLFW_MOUSE_BUTTON_RIGHT)
     {
-        mainDisplayer->getSceneManager()->onKeyDown(urchin::InputDevice::Key::MOUSE_RIGHT);
+        mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_RIGHT);
     }
 }
 
@@ -286,10 +286,10 @@ void Main::onMouseButtonReleased(int button)
     //engine
     if(button == GLFW_MOUSE_BUTTON_LEFT)
     {
-        mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::MOUSE_LEFT);
+        mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_LEFT);
     }else if(button == GLFW_MOUSE_BUTTON_RIGHT)
     {
-        mainDisplayer->getSceneManager()->onKeyUp(urchin::InputDevice::Key::MOUSE_RIGHT);
+        mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_RIGHT);
     }
 }
 
