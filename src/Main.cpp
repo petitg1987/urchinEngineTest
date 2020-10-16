@@ -72,12 +72,9 @@ void Main::execute(int argc, char *argv[])
                 throw std::runtime_error(glfwError);
             }
 
-            propagatePressKeyEvent = true;
-            propagateReleaseKeyEvent = true;
             handleInputEvents();
 
             mainDisplayer->paint();
-
             glfwSwapBuffers(window);
         }
 
@@ -263,6 +260,8 @@ KeyboardKey Main::toKeyboardKey(int key)
 
 void Main::handleInputEvents()
 {
+    propagatePressKeyEvent = true;
+    propagateReleaseKeyEvent = true;
     glfwPollEvents();
 
     if(!charPressEvents.empty())
