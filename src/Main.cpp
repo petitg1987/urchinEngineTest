@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 }
 
 //static
-std::string Main::glfwError; //TODO check config...
+std::string Main::glfwError;
 std::list<unsigned int> Main::charPressEvents;
 std::list<int> Main::keyPressEvents;
 
