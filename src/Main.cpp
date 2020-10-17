@@ -123,7 +123,7 @@ GLFWwindow *Main::createWindow(int argc, char *argv[]) {
     }
 
     glfwMakeContextCurrent(window);
-    glfwSwapInterval(1);
+    glfwSwapInterval(1); //vertical synchronization active
 
     return window;
 }

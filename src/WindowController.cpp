@@ -30,3 +30,7 @@ bool WindowController::isEventCallbackActive() const {
 void WindowController::setVerticalSyncEnabled(bool active) {
     glfwSwapInterval( active ? 1 : 0);
 }
+
+void WindowController::swapBuffers() {
+    glfwSwapBuffers(window);
+}

@@ -15,6 +15,8 @@ class WindowController {
 
         void setVerticalSyncEnabled(bool);
 
+        void swapBuffers();
+
     private:
         GLFWwindow *window;
         bool eventsCallbackActive;
