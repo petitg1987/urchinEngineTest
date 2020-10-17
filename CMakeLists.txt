@@ -41,8 +41,8 @@ else()
 endif()
 
 #GLFW
-if (WIN32) #TODO review
-    SET(GLFW_LIB glfw gdi32 winmm)
+if (WIN32)
+    SET(GLFW_LIB glfw3 gdi32 winmm)
 else()
     SET(GLFW_LIB glfw)
 endif()
