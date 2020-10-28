@@ -1,0 +1,3 @@
+In Gimp:
+  - Colour > Invert
+  - Colour > Brightness-Contrast...: increase contrast

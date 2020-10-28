@@ -13,6 +13,7 @@
 #include "KeyboardKey.h"
 #include "Renderer.h"
 #include "game/CharacterCamera.h"
+#include "game/UnderWaterEvent.h"
 
 class MainDisplayer;
 
@@ -35,6 +36,9 @@ class GameRenderer : public Renderer {
         void initializeCharacter();
         void uninitializeCharacter();
 
+        void initializeWaterEvent();
+        void uninitializeWaterEvent();
+
         void switchMode();
         void deleteGeometryModels(std::vector<urchin::GeometryModel *> &) const;
 
@@ -51,6 +55,7 @@ class GameRenderer : public Renderer {
         urchin::Renderer3d *gameRenderer3d;
         urchin::MapHandler *mapHandler;
         CharacterCamera *camera;
+        UnderWaterEvent *underWaterEvent;
 
         //physics
         urchin::PhysicsWorld *physicsWorld;

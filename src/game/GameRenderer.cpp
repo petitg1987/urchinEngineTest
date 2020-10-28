@@ -17,6 +17,7 @@ GameRenderer::GameRenderer(MainDisplayer *mainDisplayer) :
     gameRenderer3d(nullptr),
     mapHandler(nullptr),
     camera(nullptr),
+    underWaterEvent(nullptr),
     //physics
     physicsWorld(nullptr),
     physicsCharacterController(nullptr),
@@ -40,6 +41,7 @@ GameRenderer::GameRenderer(MainDisplayer *mainDisplayer) :
 
 GameRenderer::~GameRenderer() {
     uninitializeCharacter();
+    uninitializeWaterEvent();
 
     deleteGeometryModels(rayModels);
     deleteGeometryModels(pathModels);
@@ -62,7 +64,6 @@ void GameRenderer::initialize() {
 
     //physics
     physicsWorld = new urchin::PhysicsWorld();
-    initializeCharacter();
     collisionPointsDisplayer = std::make_unique<urchin::CollisionPointDisplayer>(physicsWorld, gameRenderer3d);
 
     //AI
@@ -121,7 +122,9 @@ void GameRenderer::initialize() {
     manualTrigger = dynamic_cast<urchin::ManualTrigger *>(mapHandler->getMap()->getSceneSound("ambientSound")->getSoundTrigger());
     manualTrigger->play();
 
-    //start process
+    //initialize and start process
+    initializeCharacter();
+    initializeWaterEvent();
     physicsWorld->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 60.0f));
     aiManager->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 4.0f));
     mapHandler->unpause();
@@ -145,6 +148,25 @@ void GameRenderer::initializeCharacter() {
 void GameRenderer::uninitializeCharacter() {
     physicsCharacterController.reset(nullptr);
     physicsCharacter = std::shared_ptr<urchin::PhysicsCharacter>(nullptr);
+}
+
+void GameRenderer::initializeWaterEvent() {
+    underWaterEvent = new UnderWaterEvent(getMainDisplayer()->getSoundManager());
+
+    urchin::Water *water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
+    water->addObserver(underWaterEvent, urchin::Water::MOVE_UNDER_WATER);
+    water->addObserver(underWaterEvent, urchin::Water::MOVE_ABOVE_WATER);
+}
+
+void GameRenderer::uninitializeWaterEvent() {
+    if (mapHandler) {
+        urchin::Water *water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
+        water->removeObserver(underWaterEvent, urchin::Water::MOVE_UNDER_WATER);
+        water->removeObserver(underWaterEvent, urchin::Water::MOVE_ABOVE_WATER);
+
+        delete underWaterEvent;
+        underWaterEvent = nullptr;
+    }
 }
 
 void GameRenderer::switchMode() {
@@ -379,7 +401,11 @@ urchin::Vector3<float> GameRenderer::getWalkMomentum() const {
         lateralDirection = lateralVector.normalize();
     }
 
-    const float speed = 1500.0f;
+    float speed = 1500.0f;
+    if (underWaterEvent->isUnderWater()) {
+        speed *= 0.75f;
+    }
+
     return (forwardDirection + lateralDirection).normalize() * speed;
 }
 

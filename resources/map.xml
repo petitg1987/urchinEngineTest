@@ -7,7 +7,7 @@
                     <filename>models/ground.urchinMesh</filename>
                 </mesh>
                 <transform>
-                    <position>1.400000 -10.250000 150.000000</position>
+                    <position>1.400000 -4.250000 100.000000</position>
                     <orientation>
                         <axis>1.000000 0.000000 -0.000000</axis>
                         <angle>4.712389</angle>
@@ -490,7 +490,22 @@
             </grass>
         </terrain>
     </terrains>
-    <waters />
+    <waters>
+        <water name="ocean">
+            <centerPosition>0.000000 -7.400000 0.000000</centerPosition>
+            <xSize>2500.000000</xSize>
+            <zSize>2500.000000</zSize>
+            <waterColor>0.080000 0.220000 0.290000</waterColor>
+            <normalFilename>water/waterNormal.png</normalFilename>
+            <dudvMapFilename>water/waterDudvMap.png</dudvMapFilename>
+            <waveSpeed>0.070000</waveSpeed>
+            <waveStrength>0.030000</waveStrength>
+            <sRepeat>150.000000</sRepeat>
+            <tRepeat>150.000000</tRepeat>
+            <density>0.350000</density>
+            <gradient>1.000000</gradient>
+        </water>
+    </waters>
     <sky>
         <skybox>
             <textures>
@@ -507,7 +522,7 @@
     <soundElements>
         <soundElement name="ambientSound">
             <sound type="AMBIENT">
-                <filename>sound/sound2.wav</filename>
+                <filename>sound/ambient.wav</filename>
                 <volume>1.000000</volume>
             </sound>
             <soundTrigger type="MANUAL">
@@ -520,7 +535,7 @@
         </soundElement>
         <soundElement name="pointSound">
             <sound type="POINT">
-                <filename>sound/sound1.wav</filename>
+                <filename>sound/positionTrigger.wav</filename>
                 <position>0.000000 3.400000 3.400000</position>
                 <inaudibleDistance>5.000000</inaudibleDistance>
                 <volume>1.000000</volume>
