@@ -42,6 +42,7 @@ GameRenderer::GameRenderer(MainDisplayer *mainDisplayer) :
 GameRenderer::~GameRenderer() {
     uninitializeCharacter();
     uninitializeWaterEvent();
+    uninitializeNPC();
 
     deleteGeometryModels(rayModels);
     deleteGeometryModels(pathModels);
@@ -68,8 +69,6 @@ void GameRenderer::initialize() {
 
     //AI
     aiManager = new urchin::AIManager();
-    pathRequest = std::make_shared<urchin::PathRequest>(urchin::Point3<float>(-55.0, -2.0, -70.0), urchin::Point3<float>(55.0, -2.0, 0.0));
-    aiManager->addPathRequest(pathRequest);
     navMeshDisplayer = std::make_unique<urchin::NavMeshDisplayer>(aiManager, gameRenderer3d);
 
     //load map
@@ -125,6 +124,7 @@ void GameRenderer::initialize() {
     //initialize and start process
     initializeCharacter();
     initializeWaterEvent();
+    initializeNPC();
     physicsWorld->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 60.0f));
     aiManager->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 4.0f));
     mapHandler->unpause();
@@ -167,6 +167,14 @@ void GameRenderer::uninitializeWaterEvent() {
         delete underWaterEvent;
         underWaterEvent = nullptr;
     }
+}
+
+void GameRenderer::initializeNPC() {
+    npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, mapHandler, aiManager, physicsWorld);
+}
+
+void GameRenderer::uninitializeNPC() {
+    npcNavigation.reset(nullptr);
 }
 
 void GameRenderer::switchMode() {
@@ -340,6 +348,9 @@ void GameRenderer::refresh() {
     //map
     mapHandler->refreshMap();
 
+    //NPC navigation
+    npcNavigation->display(getMainDisplayer());
+
     //character
     physicsCharacterController->setMomentum(getWalkMomentum());
     physicsCharacterController->update(dt);
@@ -348,9 +359,12 @@ void GameRenderer::refresh() {
     //path
     if (displayPath) {
         deleteGeometryModels(pathModels);
-        std::vector<urchin::PathPoint> pathPoints = pathRequest->getPath();
+        std::vector<urchin::PathPoint> pathPoints;
+        if(npcNavigation->getPathRequest()) {
+            pathPoints = npcNavigation->getPathRequest()->getPath();
+        }
 
-        if (pathPoints.size() >= 2 && displayPath) {
+        if (pathPoints.size() >= 2) {
             std::vector<urchin::Point3<float>> adjustedPathPoints;
             adjustedPathPoints.reserve(pathPoints.size());
             for (auto &pathPoint : pathPoints) {
@@ -414,7 +428,7 @@ urchin::RigidBody *GameRenderer::getRandomUnactiveBody() {
 
     const std::list<urchin::SceneObject *> &sceneObjects = mapHandler->getMap()->getSceneObjects();
     for (auto sceneObject : sceneObjects) {
-        if (!sceneObject->getRigidBody()->isStatic() && !sceneObject->getRigidBody()->isActive()) {
+        if (sceneObject->getRigidBody() && !sceneObject->getRigidBody()->isStatic() && !sceneObject->getRigidBody()->isActive()) {
             bodies.push_back(sceneObject->getRigidBody());
         }
     }

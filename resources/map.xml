@@ -447,6 +447,21 @@
                 <angularFactor>1.000000 1.000000 1.000000</angularFactor>
             </physics>
         </object>
+        <object name="character">
+            <model>
+                <mesh>
+                    <filename>models/character.urchinMesh</filename>
+                </mesh>
+                <transform>
+                    <position>8.500000 9.600000 -7.300000</position>
+                    <orientation>
+                        <axis>1.000000 0.000000 -0.000000</axis>
+                        <angle>4.712389</angle>
+                    </orientation>
+                    <scale>1.000000</scale>
+                </transform>
+            </model>
+        </object>
     </objects>
     <lights>
         <light name="omniLight" type="OMNIDIRECTIONAL">

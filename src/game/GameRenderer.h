@@ -14,6 +14,7 @@
 #include "Renderer.h"
 #include "game/CharacterCamera.h"
 #include "game/UnderWaterEvent.h"
+#include "game/npc/NPCNavigation.h"
 
 class MainDisplayer;
 
@@ -38,6 +39,9 @@ class GameRenderer : public Renderer {
 
         void initializeWaterEvent();
         void uninitializeWaterEvent();
+
+        void initializeNPC();
+        void uninitializeNPC();
 
         void switchMode();
         void deleteGeometryModels(std::vector<urchin::GeometryModel *> &) const;
@@ -67,7 +71,6 @@ class GameRenderer : public Renderer {
 
         //AI
         urchin::AIManager *aiManager;
-        std::shared_ptr<urchin::PathRequest> pathRequest;
         bool displayPath;
         std::vector<urchin::GeometryModel *> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
@@ -84,6 +87,9 @@ class GameRenderer : public Renderer {
 
         //sound
         urchin::ManualTrigger *manualTrigger;
+
+        //NPC navigation
+        std::unique_ptr<NPCNavigation> npcNavigation;
 };
 
 #endif
