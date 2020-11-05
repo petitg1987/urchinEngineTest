@@ -45,7 +45,7 @@ void Main::execute(int argc, char *argv[]) {
         mainDisplayer->resize(width, height);
 
         glfwSetWindowUserPointer(window, (void *)this);
-        glfwSetCharModsCallback(window, charCallback);
+        glfwSetCharCallback(window, charCallback);
         glfwSetKeyCallback(window, keyCallback);
         glfwSetMouseButtonCallback(window, mouseKeyCallback);
         glfwSetCursorPosCallback(window, cursorPositionCallback);
@@ -128,7 +128,7 @@ GLFWwindow *Main::createWindow(int argc, char *argv[]) {
     return window;
 }
 
-void Main::charCallback(GLFWwindow *window, unsigned int codepoint, int) {
+void Main::charCallback(GLFWwindow *window, unsigned int codepoint) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         main->charPressEvents.push_back(codepoint);
@@ -208,6 +208,10 @@ void Main::onKeyPressed(int key) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::RIGHT_ARROW);
+        } else if (key == GLFW_KEY_BACKSPACE) {
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::BACKSPACE);
+        } else if (key == GLFW_KEY_DELETE) {
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::DELETE);
         }
     }
 
@@ -224,6 +228,10 @@ void Main::onKeyReleased(int key) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::RIGHT_ARROW);
+        } else if (key == GLFW_KEY_BACKSPACE) {
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::BACKSPACE);
+        } else if (key == GLFW_KEY_DELETE) {
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::DELETE);
         }
     }
 

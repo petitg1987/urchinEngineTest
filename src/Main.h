@@ -24,7 +24,7 @@ class Main {
 
         GLFWwindow *createWindow(int, char *[]);
 
-        static void charCallback(GLFWwindow *, unsigned int, int);
+        static void charCallback(GLFWwindow *, unsigned int);
         static void keyCallback(GLFWwindow *, int, int, int, int);
         static void mouseKeyCallback(GLFWwindow *, int, int, int);
         static void cursorPositionCallback(GLFWwindow *, double, double);
