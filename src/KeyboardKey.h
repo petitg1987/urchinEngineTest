@@ -1,8 +1,7 @@
 #ifndef URCHINENGINETEST_KEYBOARDKEY_H
 #define URCHINENGINETEST_KEYBOARDKEY_H
 
-enum KeyboardKey
-{
+enum KeyboardKey {
     A=0,
     B,
     C,
