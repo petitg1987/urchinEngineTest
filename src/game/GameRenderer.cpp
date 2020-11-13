@@ -257,7 +257,8 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         std::shared_ptr<const urchin::RayTestResult> rayTestResult = physicsWorld->rayTest(urchin::Ray<float>(rayStart, rayEnd));
 
         urchin::LineSegment3D<float> gunRay(rayStart, rayEnd);
-        urchin::GeometryModel *gunRayModel = new urchin::LinesModel(gunRay, 3.0f);
+        urchin::GeometryModel *gunRayModel = new urchin::LinesModel(gunRay);
+        gunRayModel->setOutlineSize(3.0f);
         deleteGeometryModels(rayModels);
         rayModels.push_back(gunRayModel);
         gameRenderer3d->getGeometryManager()->addGeometry(gunRayModel);
@@ -268,7 +269,8 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
 
         if (rayTestResult->hasHit()) {
             const auto &nearestResult = rayTestResult->getNearestResult();
-            urchin::GeometryModel *hitPointModel = new urchin::PointsModel(nearestResult->getHitPointOnObject2(), 25.0);
+            urchin::GeometryModel *hitPointModel = new urchin::PointsModel(nearestResult->getHitPointOnObject2());
+            hitPointModel->setOutlineSize(25.0f);
             hitPointModel->setColor(1.0, 0.0, 0.0);
 
             rayModels.push_back(hitPointModel);
@@ -370,7 +372,8 @@ void GameRenderer::refresh() {
             for (auto &pathPoint : pathPoints) {
                 adjustedPathPoints.emplace_back(urchin::Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
             }
-            auto *linesModel = new urchin::LinesModel(adjustedPathPoints, 5.0);
+            auto *linesModel = new urchin::LinesModel(adjustedPathPoints);
+            linesModel->setOutlineSize(5.0f);
             linesModel->setColor(0.0, 1.0, 1.0, 1.0);
             pathModels.push_back(linesModel);
             gameRenderer3d->getGeometryManager()->addGeometry(linesModel);
