@@ -242,8 +242,9 @@ void Main::onKeyReleased(int key) {
 }
 
 KeyboardKey Main::toKeyboardKey(int key) {
-    if (key >= GLFW_KEY_A && key <= GLFW_KEY_Z) {
-        int keyShift = glfwGetKeyName(key, 0)[0] - 'a';
+    const char *charKey = glfwGetKeyName(key, 0);
+    if(charKey && charKey[0] >= 'a' && charKey[0] <= 'z') {
+        int keyShift = charKey[0] - 'a';
         return static_cast<KeyboardKey>(KeyboardKey::A + keyShift);
     }
 
