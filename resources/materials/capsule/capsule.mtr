@@ -3,7 +3,7 @@
 	<repeatTexture>false</repeatTexture>
 	
 	<diffuse>
-		<texture>materials/characterDiffuse.png</texture>
+		<texture>materials/capsule/diffuse.tga</texture>
 	</diffuse>
 	
 	<ambient>

@@ -6,7 +6,7 @@ joints {
 }
 
 mesh {
-	material "materials/ground.mtr"
+	material "materials/ground/ground.mtr"
 
 	numVerts 4
 	vert 0 0 ( 0.000000 50.000000 ) ( 0 1 )

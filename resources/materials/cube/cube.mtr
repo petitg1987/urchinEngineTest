@@ -3,7 +3,7 @@
 	<repeatTexture>false</repeatTexture>
 	
 	<diffuse>
-		<texture>materials/cylinderDiffuse.tga</texture>
+		<texture>materials/cube/diffuse.tga</texture>
 	</diffuse>
 	
 	<ambient>

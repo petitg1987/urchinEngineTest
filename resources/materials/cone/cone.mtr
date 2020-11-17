@@ -3,10 +3,10 @@
 	<repeatTexture>false</repeatTexture>
 	
 	<diffuse>
-		<texture>materials/cubeDiffuse.tga</texture>
+		<texture>materials/cone/diffuse.tga</texture>
 	</diffuse>
 	
 	<ambient>
-		<factor>0.4</factor>
+		<factor>0.5</factor>
 	</ambient>
 </material>

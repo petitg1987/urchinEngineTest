@@ -6,7 +6,7 @@ joints {
 }
 
 mesh {
-	material "materials/cylinder.mtr"
+	material "materials/cylinder/cylinder.mtr"
 
 	numVerts 246
 	vert 0 0 ( 0.156342 0.561319 ) ( 0 1 )

@@ -6,7 +6,7 @@ joints {
 }
 
 mesh {
-	material "materials/cube.mtr"
+	material "materials/cube/cube.mtr"
 
 	numVerts 24
 	vert 0 0 ( 0.999914 0.749957 ) ( 0 1 )

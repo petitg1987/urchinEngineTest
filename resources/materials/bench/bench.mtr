@@ -3,7 +3,7 @@
 	<repeatTexture>false</repeatTexture>
 	
 	<diffuse>
-		<texture>materials/tableDiffuse.tga</texture>
+		<texture>materials/bench/diffuse.tga</texture>
 	</diffuse>
 	
 	<ambient>

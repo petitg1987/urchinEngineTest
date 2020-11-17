@@ -3,7 +3,7 @@
 	<repeatTexture>false</repeatTexture>
 	
 	<diffuse>
-		<texture>materials/capsuleDiffuse.tga</texture>
+		<texture>materials/wineBottle/diffuse.tga</texture>
 	</diffuse>
 	
 	<ambient>

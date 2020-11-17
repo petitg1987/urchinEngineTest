@@ -3,8 +3,12 @@
 	<repeatTexture>true</repeatTexture>
 	
 	<diffuse>
-		<texture>materials/grassGroundDiffuse.tga</texture>
+		<texture>materials/ground/diffuse.tga</texture>
 	</diffuse>
+	
+	 <normal>
+		<texture>materials/ground/normal.tga</texture>
+	</normal>
 	
 	<ambient>
 		<factor>0.4</factor>

@@ -3,7 +3,7 @@
 	<repeatTexture>false</repeatTexture>
 	
 	<diffuse>
-		<texture>materials/bookDiffuse.tga</texture>
+		<texture>materials/sphere/diffuse.tga</texture>
 	</diffuse>
 	
 	<ambient>
