@@ -75,6 +75,8 @@ void GameRenderer::initialize() {
     mapHandler = new urchin::MapHandler(gameRenderer3d, physicsWorld, getMainDisplayer()->getSoundManager(), aiManager);
     urchin::NullLoadCallback nullLoadCallback;
     mapHandler->loadMapFromFile("map.xml", nullLoadCallback);
+    mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
+    mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->animate("move");
 
     //GUI
     gameGUIRenderer = getMainDisplayer()->getSceneManager()->newGUIRenderer(false);

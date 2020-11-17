@@ -462,6 +462,34 @@
                 </transform>
             </model>
         </object>
+        <object name="characterAnimate">
+            <model>
+                <mesh>
+                    <filename>models/characterAnimate.urchinMesh</filename>
+                </mesh>
+                <transform>
+                    <position>-10.800000 -1.900000 1.100000</position>
+                    <orientation>
+                        <axis>-1.000000 0.000000 0.000000</axis>
+                        <angle>1.570796</angle>
+                    </orientation>
+                    <scale>1.000000</scale>
+                </transform>
+            </model>
+            <physics>
+                <shape type="BOX">
+                    <halfSize>0.299826 0.145000 0.862647</halfSize>
+                </shape>
+                <mass>0.000000</mass>
+                <restitution>0.200000</restitution>
+                <friction>0.500000</friction>
+                <rollingFriction>0.000000</rollingFriction>
+                <linearDamping>0.000000</linearDamping>
+                <angularDamping>0.000000</angularDamping>
+                <linearFactor>1.000000 1.000000 1.000000</linearFactor>
+                <angularFactor>1.000000 1.000000 1.000000</angularFactor>
+            </physics>
+        </object>
     </objects>
     <lights>
         <light name="omniLight" type="OMNIDIRECTIONAL">
