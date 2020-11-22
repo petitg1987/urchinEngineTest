@@ -5,7 +5,8 @@
 #include "MainDisplayer.h"
 
 //Debug parameters
-bool DEBUG_DISPLAY_NAV_MESH = true;
+bool DEBUG_DISPLAY_NAV_MESH = false;
+bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
 
 GameRenderer::GameRenderer(MainDisplayer *mainDisplayer) :
@@ -24,7 +25,6 @@ GameRenderer::GameRenderer(MainDisplayer *mainDisplayer) :
     leftKeyPressed(false), rightKeyPressed(false), upKeyPressed(false), downKeyPressed(false),
     //AI
     aiManager(nullptr),
-    displayPath(true),
     //GUI
     gameGUIRenderer(nullptr),
     fpsText(nullptr),
@@ -101,7 +101,6 @@ void GameRenderer::initialize() {
             "> H: HBAO (on/off)\n"
             "> W: Shadow (on/off)\n"
             "> P/M/O: Pause, play, stop sound\n"
-            "> K: Display path (on/off)\n"
             "> Esc: Quit\n", 235);
     myWindow->addChild(myText);
 
@@ -292,12 +291,6 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         physicsCharacterController->jump();
     }
 
-    //AI
-    if (key == KeyboardKey::K) {
-        deleteGeometryModels(pathModels);
-        displayPath = !displayPath;
-    }
-
     //sound
     if (key == KeyboardKey::P) {
         manualTrigger->pause();
@@ -361,7 +354,7 @@ void GameRenderer::refresh() {
     camera->moveTo(physicsCharacter->getTransform().getPosition() + urchin::Point3<float>(0.0, 0.75f, 0.0));
 
     //path
-    if (displayPath) {
+    if (DEBUG_DISPLAY_PATH) {
         deleteGeometryModels(pathModels);
         std::vector<urchin::PathPoint> pathPoints;
         if(npcNavigation->getPathRequest()) {
@@ -390,8 +383,8 @@ void GameRenderer::refresh() {
         navMeshDisplayer->display();
     }
 
-    if (DEBUG_DISPLAY_COLLISION_POINTS && navMeshDisplayer) {
-        navMeshDisplayer->display();
+    if (DEBUG_DISPLAY_COLLISION_POINTS && collisionPointsDisplayer) {
+        collisionPointsDisplayer->display();
     }
 }
 

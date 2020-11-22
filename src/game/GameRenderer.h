@@ -71,7 +71,6 @@ class GameRenderer : public Renderer {
 
         //AI
         urchin::AIManager *aiManager;
-        bool displayPath;
         std::vector<urchin::GeometryModel *> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
 
