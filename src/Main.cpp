@@ -25,7 +25,7 @@ void Main::execute(int argc, char *argv[]) {
 
     urchin::Logger::defineLogger(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
 
-    GLFWwindow *window = nullptr;
+    GLFWwindow* window = nullptr;
 
     try {
         if (!glfwInit()) {
@@ -108,12 +108,12 @@ std::string Main::retrieveSaveDirectory(char *argv[]) const {
 
 GLFWwindow *Main::createWindow(int argc, char *argv[]) {
     GLFWwindow *window;
-    const char *windowTitle = "Urchin Engine Test";
+    const char* windowTitle = "Urchin Engine Test";
 
     if (argumentsContains("--windowed", argc, argv)) {
         window = glfwCreateWindow(1200, 675, windowTitle, nullptr, nullptr);
     } else {
-        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
         window = glfwCreateWindow(mode->width, mode->height, windowTitle, monitor, nullptr);
     }
@@ -129,14 +129,14 @@ GLFWwindow *Main::createWindow(int argc, char *argv[]) {
 }
 
 void Main::charCallback(GLFWwindow* window, unsigned int codepoint) {
-    Main *main = (Main*)glfwGetWindowUserPointer(window);
+    Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         main->charPressEvents.push_back(codepoint);
     }
 }
 
 void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
-    Main *main = (Main*)glfwGetWindowUserPointer(window);
+    Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             if (key == GLFW_KEY_ESCAPE) {
@@ -150,7 +150,7 @@ void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
 }
 
 void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
-    Main *main = (Main*)glfwGetWindowUserPointer(window);
+    Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             main->onMouseButtonPressed(button);
@@ -161,14 +161,14 @@ void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
 }
 
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
-    Main *main = (Main*)glfwGetWindowUserPointer(window);
+    Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         main->onMouseMove(static_cast<int>(x), static_cast<int>(y));
     }
 }
 
 void Main::windowSizeCallback(GLFWwindow* window, int width, int height) {
-    Main *main = (Main*)glfwGetWindowUserPointer(window);
+    Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         main->mainDisplayer->resize(width, height);
     }
@@ -242,7 +242,7 @@ void Main::onKeyReleased(int key) {
 }
 
 KeyboardKey Main::toKeyboardKey(int key) {
-    const char *charKey = glfwGetKeyName(key, 0);
+    const char* charKey = glfwGetKeyName(key, 0);
     if(charKey && charKey[0] >= 'a' && charKey[0] <= 'z') {
         int keyShift = charKey[0] - 'a';
         return static_cast<KeyboardKey>(KeyboardKey::A + keyShift);

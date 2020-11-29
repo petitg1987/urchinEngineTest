@@ -4,7 +4,7 @@
 
 UnderWaterEvent::UnderWaterEvent(urchin::SoundManager* soundManager) :
         bIsUnderWater(false) {
-    auto *underWaterSound = new urchin::AmbientSound("sound/underWater.wav");
+    auto* underWaterSound = new urchin::AmbientSound("sound/underWater.wav");
     underWaterSoundTrigger = new urchin::ManualTrigger(urchin::SoundBehavior(urchin::SoundBehavior::PLAY_LOOP, urchin::SoundBehavior::SMOOTH_STOP, 1.0));
     soundManager->addSound(underWaterSound, underWaterSoundTrigger);
 }

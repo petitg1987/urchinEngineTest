@@ -154,14 +154,14 @@ void GameRenderer::uninitializeCharacter() {
 void GameRenderer::initializeWaterEvent() {
     underWaterEvent = new UnderWaterEvent(getMainDisplayer()->getSoundManager());
 
-    urchin::Water *water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
+    urchin::Water* water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
     water->addObserver(underWaterEvent, urchin::Water::MOVE_UNDER_WATER);
     water->addObserver(underWaterEvent, urchin::Water::MOVE_ABOVE_WATER);
 }
 
 void GameRenderer::uninitializeWaterEvent() {
     if (mapHandler) {
-        urchin::Water *water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
+        urchin::Water* water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
         water->removeObserver(underWaterEvent, urchin::Water::MOVE_UNDER_WATER);
         water->removeObserver(underWaterEvent, urchin::Water::MOVE_ABOVE_WATER);
 
@@ -235,7 +235,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         int xAxisForce = distribution(generator) - 5;
         int zAxisForce = distribution(generator) - 5;
         int yAxisForce = distribution(generator) + 5;
-        urchin::RigidBody *body = getRandomUnactiveBody();
+        urchin::RigidBody* body = getRandomUnactiveBody();
         if (body!=nullptr) {
             body->applyCentralMomentum(urchin::Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
         }
@@ -258,7 +258,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         std::shared_ptr<const urchin::RayTestResult> rayTestResult = physicsWorld->rayTest(urchin::Ray<float>(rayStart, rayEnd));
 
         urchin::LineSegment3D<float> gunRay(rayStart, rayEnd);
-        urchin::GeometryModel *gunRayModel = new urchin::LinesModel(gunRay);
+        urchin::GeometryModel* gunRayModel = new urchin::LinesModel(gunRay);
         gunRayModel->setOutlineSize(3.0f);
         deleteGeometryModels(rayModels);
         rayModels.push_back(gunRayModel);
@@ -269,8 +269,8 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         }
 
         if (rayTestResult->hasHit()) {
-            const auto &nearestResult = rayTestResult->getNearestResult();
-            urchin::GeometryModel *hitPointModel = new urchin::PointsModel(nearestResult->getHitPointOnObject2());
+            const auto& nearestResult = rayTestResult->getNearestResult();
+            urchin::GeometryModel* hitPointModel = new urchin::PointsModel(nearestResult->getHitPointOnObject2());
             hitPointModel->setOutlineSize(25.0f);
             hitPointModel->setColor(1.0, 0.0, 0.0);
 
@@ -364,10 +364,10 @@ void GameRenderer::refresh() {
         if (pathPoints.size() >= 2) {
             std::vector<urchin::Point3<float>> adjustedPathPoints;
             adjustedPathPoints.reserve(pathPoints.size());
-            for (auto &pathPoint : pathPoints) {
+            for (auto& pathPoint : pathPoints) {
                 adjustedPathPoints.emplace_back(urchin::Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
             }
-            auto *linesModel = new urchin::LinesModel(adjustedPathPoints);
+            auto* linesModel = new urchin::LinesModel(adjustedPathPoints);
             linesModel->setOutlineSize(5.0f);
             linesModel->setColor(0.0, 1.0, 1.0, 1.0);
             pathModels.push_back(linesModel);
@@ -389,7 +389,7 @@ void GameRenderer::refresh() {
 }
 
 urchin::SunLight *GameRenderer::getSunLight() {
-    urchin::SceneLight *sunLight = mapHandler->getMap()->getSceneLight("sunLight");
+    urchin::SceneLight* sunLight = mapHandler->getMap()->getSceneLight("sunLight");
     return dynamic_cast<urchin::SunLight *>(sunLight->getLight());
 }
 
