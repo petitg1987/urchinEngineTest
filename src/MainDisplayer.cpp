@@ -76,14 +76,14 @@ int MainDisplayer::getMouseY() const {
     return mouseY;
 }
 
-WindowController *MainDisplayer::getWindowController() const {
+WindowController* MainDisplayer::getWindowController() const {
     return windowController;
 }
 
-urchin::SceneManager *MainDisplayer::getSceneManager() const {
+urchin::SceneManager* MainDisplayer::getSceneManager() const {
     return sceneManager;
 }
 
-urchin::SoundManager *MainDisplayer::getSoundManager() const {
+urchin::SoundManager* MainDisplayer::getSoundManager() const {
     return soundManager;
 }

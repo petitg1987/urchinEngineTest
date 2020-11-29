@@ -18,6 +18,6 @@ void Renderer::refresh() {
 
 }
 
-MainDisplayer *Renderer::getMainDisplayer() const {
+MainDisplayer* Renderer::getMainDisplayer() const {
     return mainDisplayer;
 }

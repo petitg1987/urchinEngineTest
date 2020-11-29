@@ -388,7 +388,7 @@ void GameRenderer::refresh() {
     }
 }
 
-urchin::SunLight *GameRenderer::getSunLight() {
+urchin::SunLight* GameRenderer::getSunLight() {
     urchin::SceneLight* sunLight = mapHandler->getMap()->getSceneLight("sunLight");
     return dynamic_cast<urchin::SunLight *>(sunLight->getLight());
 }
@@ -421,7 +421,7 @@ urchin::Vector3<float> GameRenderer::getWalkMomentum() const {
     return (forwardDirection + lateralDirection).normalize() * speed;
 }
 
-urchin::RigidBody *GameRenderer::getRandomUnactiveBody() {
+urchin::RigidBody* GameRenderer::getRandomUnactiveBody() {
     std::vector<urchin::RigidBody *> bodies;
 
     const std::list<urchin::SceneObject *> &sceneObjects = mapHandler->getMap()->getSceneObjects();

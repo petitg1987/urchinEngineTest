@@ -106,7 +106,7 @@ std::string Main::retrieveSaveDirectory(char *argv[]) const {
     return urchin::FileHandler::getDirectoryFrom(std::string(argv[0])) + "save/";
 }
 
-GLFWwindow *Main::createWindow(int argc, char *argv[]) {
+GLFWwindow* Main::createWindow(int argc, char *argv[]) {
     GLFWwindow *window;
     const char* windowTitle = "Urchin Engine Test";
 
