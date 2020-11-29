@@ -185,7 +185,7 @@ void GameRenderer::switchMode() {
     camera->useMouseToMoveCamera(!editMode);
 }
 
-void GameRenderer::deleteGeometryModels(std::vector<urchin::GeometryModel *> &models) const {
+void GameRenderer::deleteGeometryModels(std::vector<urchin::GeometryModel *>& models) const {
     for (auto model : models) {
         gameRenderer3d->getGeometryManager()->removeGeometry(model);
         delete model;
@@ -424,7 +424,7 @@ urchin::Vector3<float> GameRenderer::getWalkMomentum() const {
 urchin::RigidBody* GameRenderer::getRandomUnactiveBody() {
     std::vector<urchin::RigidBody *> bodies;
 
-    const std::list<urchin::SceneObject *> &sceneObjects = mapHandler->getMap()->getSceneObjects();
+    const std::list<urchin::SceneObject *>& sceneObjects = mapHandler->getMap()->getSceneObjects();
     for (auto sceneObject : sceneObjects) {
         if (sceneObject->getRigidBody() && !sceneObject->getRigidBody()->isStatic() && !sceneObject->getRigidBody()->isActive()) {
             bodies.push_back(sceneObject->getRigidBody());
