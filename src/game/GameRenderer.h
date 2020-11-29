@@ -44,7 +44,7 @@ class GameRenderer : public Renderer {
         void uninitializeNPC();
 
         void switchMode();
-        void deleteGeometryModels(std::vector<urchin::GeometryModel *> &) const;
+        void deleteGeometryModels(std::vector<urchin::GeometryModel *>&) const;
 
         urchin::SunLight *getSunLight();
 
@@ -81,7 +81,7 @@ class GameRenderer : public Renderer {
         urchin::Text *myText;
         urchin::Button *myButton;
         urchin::TextBox *textBox;
-        urchin::Window *myWindow, *myWindow2;
+        urchin::Window*myWindow, *myWindow2;
         urchin::Slider *mySlider;
 
         //sound

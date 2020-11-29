@@ -41,7 +41,7 @@ class Main {
         void onMouseButtonReleased(int);
         void onMouseMove(int, int);
 
-        bool argumentsContains(const std::string &, int, char *[]) const;
+        bool argumentsContains(const std::string&, int, char *[]) const;
 
         void clearResources(GLFWwindow *&, WindowController *&);
         void failureExit(GLFWwindow *&, WindowController *&);
