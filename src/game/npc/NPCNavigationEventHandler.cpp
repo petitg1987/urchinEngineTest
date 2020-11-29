@@ -1,7 +1,7 @@
 #include "NPCNavigationEventHandler.h"
 using namespace urchin;
 
-NPCNavigationEventHandler::NPCNavigationEventHandler(Model *model) :
+NPCNavigationEventHandler::NPCNavigationEventHandler(Model* model) :
         model(model) {
 
 }

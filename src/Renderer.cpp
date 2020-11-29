@@ -1,7 +1,7 @@
 #include "Renderer.h"
 #include "MainDisplayer.h"
 
-Renderer::Renderer(MainDisplayer *mainDisplayer) :
+Renderer::Renderer(MainDisplayer* mainDisplayer) :
     mainDisplayer(mainDisplayer) {
 
 }

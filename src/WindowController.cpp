@@ -3,7 +3,7 @@
 
 #include "WindowController.h"
 
-WindowController::WindowController(GLFWwindow *window) :
+WindowController::WindowController(GLFWwindow* window) :
     window(window),
     eventsCallbackActive(true) {
 

@@ -2,7 +2,7 @@
 
 #include "MainDisplayer.h"
 
-MainDisplayer::MainDisplayer(WindowController *windowController) :
+MainDisplayer::MainDisplayer(WindowController* windowController) :
     windowController(windowController),
     mouseX(0),
     mouseY(0),

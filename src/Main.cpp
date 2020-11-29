@@ -128,14 +128,14 @@ GLFWwindow *Main::createWindow(int argc, char *argv[]) {
     return window;
 }
 
-void Main::charCallback(GLFWwindow *window, unsigned int codepoint) {
+void Main::charCallback(GLFWwindow* window, unsigned int codepoint) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         main->charPressEvents.push_back(codepoint);
     }
 }
 
-void Main::keyCallback(GLFWwindow *window, int key, int, int action, int) {
+void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
@@ -167,7 +167,7 @@ void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     }
 }
 
-void Main::windowSizeCallback(GLFWwindow *window, int width, int height) {
+void Main::windowSizeCallback(GLFWwindow* window, int width, int height) {
     Main *main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
         main->mainDisplayer->resize(width, height);

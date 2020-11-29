@@ -1,6 +1,6 @@
 #include "CharacterCamera.h"
 
-CharacterCamera::CharacterCamera(float angle, float nearPlane, float farPlane, const WindowController *windowController) :
+CharacterCamera::CharacterCamera(float angle, float nearPlane, float farPlane, const WindowController* windowController) :
     urchin::Camera(angle, nearPlane, farPlane),
     windowController(windowController) {
     useMouseToMoveCamera(true);

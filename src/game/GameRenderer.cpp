@@ -9,7 +9,7 @@ bool DEBUG_DISPLAY_NAV_MESH = false;
 bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
 
-GameRenderer::GameRenderer(MainDisplayer *mainDisplayer) :
+GameRenderer::GameRenderer(MainDisplayer* mainDisplayer) :
     Renderer(mainDisplayer),
     isInitialized(false),
     editMode(false),
