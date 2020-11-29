@@ -44,7 +44,7 @@ void Main::execute(int argc, char *argv[]) {
         mainDisplayer->initialize(resourcesDirectory, saveDirectory);
         mainDisplayer->resize(width, height);
 
-        glfwSetWindowUserPointer(window, (void *)this);
+        glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
         glfwSetKeyCallback(window, keyCallback);
         glfwSetMouseButtonCallback(window, mouseKeyCallback);
