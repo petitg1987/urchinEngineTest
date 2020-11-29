@@ -21,7 +21,7 @@ MainDisplayer::~MainDisplayer() {
     urchin::SingletonManager::destroyAllSingletons();
 }
 
-void MainDisplayer::initialize(const std::string &resourcesDirectory, const std::string &saveDirectory) {
+void MainDisplayer::initialize(const std::string& resourcesDirectory, const std::string& saveDirectory) {
     urchin::FileSystem::instance()->setupResourcesDirectory(resourcesDirectory);
     urchin::FileSystem::instance()->setupSaveDirectory(saveDirectory);
 

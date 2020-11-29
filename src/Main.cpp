@@ -69,7 +69,7 @@ void Main::execute(int argc, char *argv[]) {
         } else {
             clearResources(window, windowController);
         }
-    } catch (std::exception &e) {
+    } catch (std::exception& e) {
         urchin::Logger::logger().logError("Error occurred: " + std::string(e.what()));
         failureExit(window, windowController);
     }
@@ -281,7 +281,7 @@ void Main::onMouseMove(int x, int y) {
     }
 }
 
-bool Main::argumentsContains(const std::string &argName, int argc, char *argv[]) const {
+bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) const {
     for (int i=1;i<argc;++i) {
         if (std::string(argv[i]).find(argName)!=std::string::npos) {
             return true;
