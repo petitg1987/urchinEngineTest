@@ -525,11 +525,11 @@
                 <grassTextureFilename>terrain/grass.png</grassTextureFilename>
                 <grassMaskFilename></grassMaskFilename>
                 <numGrassInTex>1</numGrassInTex>
-                <grassHeight>1.000000</grassHeight>
+                <grassHeight>0.550000</grassHeight>
                 <grassLength>1.000000</grassLength>
-                <grassQuantity>0.300000</grassQuantity>
+                <grassQuantity>1.300000</grassQuantity>
                 <windDirection>1.000000 0.000000 0.000000</windDirection>
-                <windStrength>1.000000</windStrength>
+                <windStrength>0.500000</windStrength>
             </grass>
         </terrain>
     </terrains>
