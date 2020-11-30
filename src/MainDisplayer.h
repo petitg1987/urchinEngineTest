@@ -29,13 +29,13 @@ class MainDisplayer {
         urchin::SoundManager *getSoundManager() const;
 
     private:
-        WindowController *windowController;
+        WindowController* windowController;
         int mouseX, mouseY;
 
         urchin::SceneManager *sceneManager;
         urchin::SoundManager *soundManager;
 
-        Renderer *gameRenderer;
+        Renderer* gameRenderer;
 };
 
 #endif

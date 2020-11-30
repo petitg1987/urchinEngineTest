@@ -48,8 +48,8 @@ class Main {
 
         static std::string glfwError;
 
-        MainDisplayer *mainDisplayer;
-        WindowController *windowController;
+        MainDisplayer* mainDisplayer;
+        WindowController* windowController;
 
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;
         std::map<int, KeyboardKey> keyboardMap;

@@ -58,8 +58,8 @@ class GameRenderer : public Renderer {
         //3d
         urchin::Renderer3d *gameRenderer3d;
         urchin::MapHandler *mapHandler;
-        CharacterCamera *camera;
-        UnderWaterEvent *underWaterEvent;
+        CharacterCamera* camera;
+        UnderWaterEvent* underWaterEvent;
 
         //physics
         urchin::PhysicsWorld *physicsWorld;

@@ -16,7 +16,7 @@ class CharacterCamera : public urchin::Camera {
         void updateCameraView(float) override;
 
     private:
-        const WindowController *windowController;
+        const WindowController* windowController;
 };
 
 #endif

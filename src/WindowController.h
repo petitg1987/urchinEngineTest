@@ -18,7 +18,7 @@ class WindowController {
         void swapBuffers();
 
     private:
-        GLFWwindow *window;
+        GLFWwindow* window;
         bool eventsCallbackActive;
 
 };

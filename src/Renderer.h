@@ -22,7 +22,7 @@ class Renderer {
         MainDisplayer *getMainDisplayer() const;
 
     private:
-        MainDisplayer *mainDisplayer;
+        MainDisplayer* mainDisplayer;
 };
 
 #endif
