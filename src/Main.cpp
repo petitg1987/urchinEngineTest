@@ -23,7 +23,7 @@ Main::Main() :
 void Main::execute(int argc, char *argv[]) {
     initializeKeyboardMap();
 
-    urchin::Logger::defineLogger(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
+    urchin::Logger::setupCustomInstance(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
 
     GLFWwindow* window = nullptr;
 
@@ -64,13 +64,13 @@ void Main::execute(int argc, char *argv[]) {
             glfwSwapBuffers(window);
         }
 
-        if (urchin::Logger::logger().hasFailure()) {
+        if (urchin::Logger::instance()->hasFailure()) {
             failureExit(window, windowController);
         } else {
             clearResources(window, windowController);
         }
     } catch (std::exception& e) {
-        urchin::Logger::logger().logError("Error occurred: " + std::string(e.what()));
+        urchin::Logger::instance()->logError("Error occurred: " + std::string(e.what()));
         failureExit(window, windowController);
     }
 }
@@ -305,7 +305,7 @@ void Main::clearResources(GLFWwindow *&window, WindowController *&windowControll
 }
 
 void Main::failureExit(GLFWwindow *&window, WindowController *&windowController) {
-    std::string logFilename = dynamic_cast<urchin::FileLogger&>(urchin::Logger::logger()).getFilename();
+    std::string logFilename = dynamic_cast<urchin::FileLogger*>(urchin::Logger::instance().get())->getFilename();
     std::cerr<<"Application stopped with issue (log: "<<logFilename<<")"<<std::endl;
 
     clearResources(window, windowController);
