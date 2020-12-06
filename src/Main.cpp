@@ -211,7 +211,7 @@ void Main::onKeyPressed(int key) {
         } else if (key == GLFW_KEY_BACKSPACE) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::DELETE);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::DELETE_KEY);
         }
     }
 
@@ -231,7 +231,7 @@ void Main::onKeyReleased(int key) {
         } else if (key == GLFW_KEY_BACKSPACE) {
             propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::DELETE);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::DELETE_KEY);
         }
     }
 
