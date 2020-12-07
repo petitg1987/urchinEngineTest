@@ -19,7 +19,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_CXX_STANDARD 17)
 
-add_definitions(-ffast-math -Wall -Wextra -Wpedantic -Werror)
+add_definitions(-ffast-math -Wall -Wextra -Wpedantic -Wconversion -Werror)
 include_directories(src)
 
 #Urchin engine

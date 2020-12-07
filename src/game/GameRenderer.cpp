@@ -59,7 +59,7 @@ void GameRenderer::initialize() {
     gameRenderer3d->activateAntiAliasing(true);
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
-    gameRenderer3d->getLightManager()->setGlobalAmbientColor(urchin::Point4<float>(0.05, 0.05, 0.05, 0.0));
+    gameRenderer3d->getLightManager()->setGlobalAmbientColor(urchin::Point4<float>(0.05f, 0.05f, 0.05f, 0.0f));
     camera = new CharacterCamera(45.0f, 0.1f, 300.0f, getMainDisplayer()->getWindowController());
     gameRenderer3d->setCamera(camera);
 
@@ -201,11 +201,11 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
     //3d
     static float angle=0.0f;
     if (key == KeyboardKey::PAGE_UP) {
-        angle+=0.1;
-        getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle)*-1600.0-800.0, -400.0, -std::cos(angle)*300.0+100.0));
+        angle += 0.1f;
+        getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     }if (key == KeyboardKey::PAGE_DOWN) {
-        angle-=0.1;
-        getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle)*-1600.0-800.0, -400.0, -std::cos(angle)*300.0+100.0));
+        angle -= 0.1f;
+        getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     }
 
     static bool aliasingActive = true;
@@ -434,7 +434,7 @@ urchin::RigidBody* GameRenderer::getRandomUnactiveBody() {
     if (!bodies.empty()) {
         auto seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::default_random_engine generator(seed);
-        std::uniform_int_distribution<> distribution(0, bodies.size()-1);
+        std::uniform_int_distribution<> distribution(0, (int)bodies.size() - 1);
         return bodies[distribution(generator)];
     }
 
