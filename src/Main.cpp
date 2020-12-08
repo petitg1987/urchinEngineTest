@@ -42,7 +42,7 @@ void Main::execute(int argc, char *argv[]) {
         glfwGetWindowSize(window, &width, &height);
         mainDisplayer = new MainDisplayer(windowController);
         mainDisplayer->initialize(resourcesDirectory, saveDirectory);
-        mainDisplayer->resize(width, height);
+        mainDisplayer->resize((unsigned int)width, (unsigned int)height);
 
         glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
@@ -163,14 +163,14 @@ void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
-        main->onMouseMove(static_cast<int>(x), static_cast<int>(y));
+        main->onMouseMove((int)x, (int)y);
     }
 }
 
 void Main::windowSizeCallback(GLFWwindow* window, int width, int height) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main->windowController->isEventCallbackActive()) {
-        main->mainDisplayer->resize(width, height);
+        main->mainDisplayer->resize((unsigned int)width, (unsigned int)height);
     }
 }
 
