@@ -282,7 +282,7 @@ void Main::onMouseMove(int x, int y) {
 }
 
 bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) const {
-    for (int i=1;i<argc;++i) {
+    for (int i = 1; i < argc;++i) {
         if (std::string(argv[i]).find(argName)!=std::string::npos) {
             return true;
         }
