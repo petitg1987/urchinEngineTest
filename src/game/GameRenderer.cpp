@@ -199,7 +199,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
     }
 
     //3d
-    static float angle=0.0f;
+    static float angle = 0.0f;
     if (key == KeyboardKey::PAGE_UP) {
         angle += 0.1f;
         getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
@@ -236,7 +236,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         int zAxisForce = distribution(generator) - 5;
         int yAxisForce = distribution(generator) + 5;
         urchin::RigidBody* body = getRandomUnactiveBody();
-        if (body!=nullptr) {
+        if (body != nullptr) {
             body->applyCentralMomentum(urchin::Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
         }
     } else if (key == KeyboardKey::C) {
@@ -332,13 +332,13 @@ void GameRenderer::active(bool active) {
 }
 
 bool GameRenderer::isActive() const {
-    return gameRenderer3d!=nullptr && getMainDisplayer()->getSceneManager()->getActiveRenderer3d()==gameRenderer3d;
+    return gameRenderer3d != nullptr && getMainDisplayer()->getSceneManager()->getActiveRenderer3d() == gameRenderer3d;
 }
 
 void GameRenderer::refresh() {
     //fps
     float dt = getMainDisplayer()->getSceneManager()->getDeltaTime();
-    if (fpsText!=nullptr) {
+    if (fpsText != nullptr) {
         fpsText->setText(std::to_string(getMainDisplayer()->getSceneManager()->getFpsForDisplay()) + " fps");
     }
 

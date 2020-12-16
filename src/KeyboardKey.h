@@ -2,7 +2,7 @@
 #define URCHINENGINETEST_KEYBOARDKEY_H
 
 enum KeyboardKey {
-    A=0,
+    A = 0,
     B,
     C,
     D,

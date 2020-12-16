@@ -249,7 +249,7 @@ KeyboardKey Main::toKeyboardKey(int key) {
     }
 
     auto it = keyboardMap.find(key);
-    if (it!=keyboardMap.end()) {
+    if (it != keyboardMap.end()) {
         return it->second;
     } else {
         return KeyboardKey::UNKNOWN_KEY;
@@ -276,14 +276,14 @@ void Main::onMouseButtonReleased(int button) {
 
 void Main::onMouseMove(int x, int y) {
     //engine
-    if (x!=0 || y!=0) {
+    if (x != 0 || y != 0) {
         mainDisplayer->onMouseMove(x, y);
     }
 }
 
 bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) const {
     for (int i = 1; i < argc;++i) {
-        if (std::string(argv[i]).find(argName)!=std::string::npos) {
+        if (std::string(argv[i]).find(argName) != std::string::npos) {
             return true;
         }
     }
@@ -306,7 +306,7 @@ void Main::clearResources(GLFWwindow *&window, WindowController *&windowControll
 
 void Main::failureExit(GLFWwindow *&window, WindowController *&windowController) {
     std::string logFilename = dynamic_cast<urchin::FileLogger*>(urchin::Logger::instance().get())->getFilename();
-    std::cerr<<"Application stopped with issue (log: "<<logFilename<<")"<<std::endl;
+    std::cerr << "Application stopped with issue (log: " << logFilename << ")" << std::endl;
 
     clearResources(window, windowController);
 
