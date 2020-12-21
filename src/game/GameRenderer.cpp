@@ -104,7 +104,7 @@ void GameRenderer::initialize() {
             "> Esc: Quit\n", 235);
     myWindow->addChild(myText);
 
-    myButton = new urchin::Button(urchin::Position(0, 195, urchin::Position::PIXEL), urchin::Size(264, 27, urchin::Size::PIXEL), "defaultSkin", "Fermer");
+    myButton = new urchin::Button(urchin::Position(0, 195, urchin::Position::PIXEL), urchin::Size(264, 27, urchin::Size::PIXEL), "defaultSkin", "Close");
     myButton->addEventListener(std::make_shared<CloseWindowCmd>(myWindow));
     myWindow->addChild(myButton);
 
