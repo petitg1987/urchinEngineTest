@@ -9,7 +9,7 @@ void CrashHandler::onException(const std::exception& e) {
     std::cerr << "Application has been stopped in an unexpected way (exception). See logs for more details." << std::endl;
 }
 
-void CrashHandler::onSignalReceived(int signalId) {
+void CrashHandler::onSignalReceived(unsigned long signalId) {
     urchin::Logger::instance()->logError("Signal occurred: " + std::to_string(signalId));
     std::cerr << "Application has been stopped in an unexpected way (signal). See logs for more details." << std::endl;
 }

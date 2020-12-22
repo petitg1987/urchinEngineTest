@@ -7,7 +7,7 @@
 #include <map>
 
 #include "MainDisplayer.h"
-#include "utils/CrashHandler.h"
+#include "util/CrashHandler.h"
 
 int main(int, char *[]);
 
