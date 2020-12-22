@@ -7,6 +7,7 @@
 #include <map>
 
 #include "MainDisplayer.h"
+#include "utils/CrashHandler.h"
 
 int main(int, char *[]);
 
@@ -44,8 +45,8 @@ class Main {
         bool argumentsContains(const std::string&, int, char *[]) const;
 
         void clearResources(GLFWwindow *&, WindowController *&);
-        void failureExit(GLFWwindow *&, WindowController *&);
 
+        std::shared_ptr<CrashHandler> crashHandler;
         static std::string glfwError;
 
         MainDisplayer* mainDisplayer;

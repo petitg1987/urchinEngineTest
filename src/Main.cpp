@@ -17,7 +17,7 @@ Main::Main() :
         windowController(nullptr),
         propagatePressKeyEvent(true),
         propagateReleaseKeyEvent(true) {
-
+    crashHandler = std::make_shared<CrashHandler>();
 }
 
 void Main::execute(int argc, char *argv[]) {
@@ -65,13 +65,16 @@ void Main::execute(int argc, char *argv[]) {
         }
 
         if (urchin::Logger::instance()->hasFailure()) {
-            failureExit(window, windowController);
+            crashHandler->onLogContainFailure();
+            clearResources(window, windowController);
+            std::exit(1);
         } else {
             clearResources(window, windowController);
         }
     } catch (std::exception& e) {
-        urchin::Logger::instance()->logError("Error occurred: " + std::string(e.what()));
-        failureExit(window, windowController);
+        crashHandler->onException(e);
+        clearResources(window, windowController);
+        std::exit(1);
     }
 }
 
@@ -302,13 +305,4 @@ void Main::clearResources(GLFWwindow *&window, WindowController *&windowControll
         window = nullptr;
     }
     glfwTerminate();
-}
-
-void Main::failureExit(GLFWwindow *&window, WindowController *&windowController) {
-    std::string logFilename = dynamic_cast<urchin::FileLogger*>(urchin::Logger::instance().get())->getFilename();
-    std::cerr << "Application stopped with issue (log: " << logFilename << ")" << std::endl;
-
-    clearResources(window, windowController);
-
-    std::exit(1);
 }
