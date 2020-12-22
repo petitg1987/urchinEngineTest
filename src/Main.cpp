@@ -102,11 +102,11 @@ void Main::initializeKeyboardMap() {
 }
 
 std::string Main::retrieveResourcesDirectory(char *argv[]) const {
-    return urchin::FileHandler::getDirectoryFrom(std::string(argv[0])) + "resources/";
+    return urchin::FileUtil::getDirectoryFrom(std::string(argv[0])) + "resources/";
 }
 
 std::string Main::retrieveSaveDirectory(char *argv[]) const {
-    return urchin::FileHandler::getDirectoryFrom(std::string(argv[0])) + "save/";
+    return urchin::FileUtil::getDirectoryFrom(std::string(argv[0])) + "save/";
 }
 
 GLFWwindow* Main::createWindow(int argc, char *argv[]) {
