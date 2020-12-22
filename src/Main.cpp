@@ -15,13 +15,14 @@ Main::Main() :
         windowController(nullptr),
         propagatePressKeyEvent(true),
         propagateReleaseKeyEvent(true) {
-    crashHandler = std::make_shared<CrashHandler>();
+    crashReporter = std::make_shared<CrashReporter>();
 }
 
 void Main::execute(int argc, char *argv[]) {
     initializeKeyboardMap();
 
     urchin::Logger::setupCustomInstance(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
+    urchin::SignalHandler::instance()->registerSignalReceptor(crashReporter);
 
     GLFWwindow* window = nullptr;
 
@@ -63,14 +64,14 @@ void Main::execute(int argc, char *argv[]) {
         }
 
         if (urchin::Logger::instance()->hasFailure()) {
-            crashHandler->onLogContainFailure();
+            crashReporter->onLogContainFailure();
             clearResources(window, windowController);
             std::exit(1);
         } else {
             clearResources(window, windowController);
         }
     } catch (std::exception& e) {
-        crashHandler->onException(e);
+        crashReporter->onException(e);
         clearResources(window, windowController);
         std::exit(1);
     }

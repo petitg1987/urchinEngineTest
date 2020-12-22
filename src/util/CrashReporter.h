@@ -1,11 +1,11 @@
-#ifndef URCHINENGINETEST_CRASHHANDLER_H
-#define URCHINENGINETEST_CRASHHANDLER_H
+#ifndef URCHINENGINETEST_CRASHREPORTER_H
+#define URCHINENGINETEST_CRASHREPORTER_H
 
 #include <stdexcept>
 
 #include "UrchinCommon.h"
 
-class CrashHandler : public urchin::SignalReceptor {
+class CrashReporter : public urchin::SignalReceptor {
     public:
         void onLogContainFailure();
         void onException(const std::exception& e);

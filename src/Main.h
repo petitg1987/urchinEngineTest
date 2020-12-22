@@ -9,7 +9,7 @@
 #include "MainDisplayer.h"
 #include "WindowController.h"
 #include "KeyboardKey.h"
-#include "util/CrashHandler.h"
+#include "util/CrashReporter.h"
 
 int main(int, char *[]);
 
@@ -48,7 +48,7 @@ class Main {
 
         void clearResources(GLFWwindow *&, WindowController *&);
 
-        std::shared_ptr<CrashHandler> crashHandler;
+        std::shared_ptr<CrashReporter> crashReporter;
         static std::string glfwError;
 
         MainDisplayer* mainDisplayer;
