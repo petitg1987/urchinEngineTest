@@ -7,6 +7,8 @@
 #include <map>
 
 #include "MainDisplayer.h"
+#include "WindowController.h"
+#include "KeyboardKey.h"
 #include "util/CrashHandler.h"
 
 int main(int, char *[]);

@@ -1,6 +1,4 @@
 #include "Main.h"
-#include "KeyboardKey.h"
-#include "WindowController.h"
 
 int main(int argc, char *argv[]) {
     Main main;
