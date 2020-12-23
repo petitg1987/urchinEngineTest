@@ -4,8 +4,8 @@
 #include "WindowController.h"
 
 WindowController::WindowController(GLFWwindow* window) :
-    window(window),
-    eventsCallbackActive(true) {
+        window(window),
+        eventsCallbackActive(true) {
 
 }
 

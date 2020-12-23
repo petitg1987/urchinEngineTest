@@ -2,7 +2,7 @@
 #include "MainDisplayer.h"
 
 RenderScreen::RenderScreen(MainDisplayer* mainDisplayer) :
-    mainDisplayer(mainDisplayer) {
+        mainDisplayer(mainDisplayer) {
 
 }
 

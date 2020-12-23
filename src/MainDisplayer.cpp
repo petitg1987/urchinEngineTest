@@ -4,12 +4,12 @@
 using namespace urchin;
 
 MainDisplayer::MainDisplayer(WindowController* windowController) :
-    windowController(windowController),
-    mouseX(0),
-    mouseY(0),
-    sceneManager(nullptr),
-    soundManager(nullptr),
-    gameRenderer(nullptr) {
+        windowController(windowController),
+        mouseX(0),
+        mouseY(0),
+        sceneManager(nullptr),
+        soundManager(nullptr),
+        gameRenderer(nullptr) {
 
 }
 

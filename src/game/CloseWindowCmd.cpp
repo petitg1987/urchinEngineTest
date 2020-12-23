@@ -2,7 +2,7 @@
 using namespace urchin;
 
 CloseWindowCmd::CloseWindowCmd(Window* window):
-    window(window) {
+        window(window) {
 
 }
 
