@@ -7,8 +7,8 @@
 
 class CrashReporter : public urchin::SignalReceptor {
     public:
-        void onLogContainFailure();
-        void onException(const std::exception& e);
+        void onLogContainFailure() const;
+        void onException(const std::exception& e) const;
         void onSignalReceived(unsigned long) override;
 };
 
