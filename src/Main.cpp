@@ -1,4 +1,5 @@
 #include "Main.h"
+using namespace urchin;
 
 int main(int argc, char *argv[]) {
     Main main;
@@ -21,8 +22,8 @@ Main::Main() :
 void Main::execute(int argc, char *argv[]) {
     initializeKeyboardMap();
 
-    urchin::Logger::setupCustomInstance(std::make_unique<urchin::FileLogger>("urchinEngineTest.log"));
-    urchin::SignalHandler::instance()->registerSignalReceptor(crashReporter);
+    Logger::setupCustomInstance(std::make_unique<FileLogger>("urchinEngineTest.log"));
+    SignalHandler::instance()->registerSignalReceptor(crashReporter);
 
     GLFWwindow* window = nullptr;
 
@@ -63,7 +64,7 @@ void Main::execute(int argc, char *argv[]) {
             glfwSwapBuffers(window);
         }
 
-        if (urchin::Logger::instance()->hasFailure()) {
+        if (Logger::instance()->hasFailure()) {
             crashReporter->onLogContainFailure();
             clearResources(window, windowController);
             std::exit(1);
@@ -101,11 +102,11 @@ void Main::initializeKeyboardMap() {
 }
 
 std::string Main::retrieveResourcesDirectory(char *argv[]) const {
-    return urchin::FileUtil::getDirectoryFrom(std::string(argv[0])) + "resources/";
+    return FileUtil::getDirectoryFrom(std::string(argv[0])) + "resources/";
 }
 
 std::string Main::retrieveSaveDirectory(char *argv[]) const {
-    return urchin::FileUtil::getDirectoryFrom(std::string(argv[0])) + "save/";
+    return FileUtil::getDirectoryFrom(std::string(argv[0])) + "save/";
 }
 
 GLFWwindow* Main::createWindow(int argc, char *argv[]) {
@@ -207,13 +208,13 @@ void Main::onKeyPressed(int key) {
     //engine
     if (propagatePressKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::DELETE_KEY);
         }
     }
 
@@ -227,13 +228,13 @@ void Main::onKeyReleased(int key) {
     //engine
     if (propagateReleaseKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::DELETE_KEY);
         }
     }
 
@@ -261,18 +262,18 @@ KeyboardKey Main::toKeyboardKey(int key) {
 void Main::onMouseButtonPressed(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_LEFT);
+        mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        mainDisplayer->getSceneManager()->onKeyPress(urchin::InputDeviceKey::MOUSE_RIGHT);
+        mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_RIGHT);
     }
 }
 
 void Main::onMouseButtonReleased(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_LEFT);
+        mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        mainDisplayer->getSceneManager()->onKeyRelease(urchin::InputDeviceKey::MOUSE_RIGHT);
+        mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
     }
 }
 

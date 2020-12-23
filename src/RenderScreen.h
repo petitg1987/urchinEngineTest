@@ -1,14 +1,14 @@
-#ifndef URCHINENGINETEST_RENDERER_H
-#define URCHINENGINETEST_RENDERER_H
+#ifndef URCHINENGINETEST_RENDERSCREEN_H
+#define URCHINENGINETEST_RENDERSCREEN_H
 
 #include "KeyboardKey.h"
 
 class MainDisplayer;
 
-class Renderer {
+class RenderScreen {
     public:
-        explicit Renderer(MainDisplayer *);
-        virtual ~Renderer() = default;
+        explicit RenderScreen(MainDisplayer *);
+        virtual ~RenderScreen() = default;
 
         virtual void onKeyPressed(KeyboardKey);
         virtual void onKeyReleased(KeyboardKey);

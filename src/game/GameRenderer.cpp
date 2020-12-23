@@ -3,6 +3,7 @@
 #include "game/GameRenderer.h"
 #include "game/CloseWindowCmd.h"
 #include "MainDisplayer.h"
+using namespace urchin;
 
 //Debug parameters
 bool DEBUG_DISPLAY_NAV_MESH = false;
@@ -10,30 +11,30 @@ bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
 
 GameRenderer::GameRenderer(MainDisplayer* mainDisplayer) :
-    Renderer(mainDisplayer),
-    isInitialized(false),
-    editMode(false),
-    memCheckMode(false),
+        RenderScreen(mainDisplayer),
+        isInitialized(false),
+        editMode(false),
+        memCheckMode(false),
     //3d
     gameRenderer3d(nullptr),
-    mapHandler(nullptr),
-    camera(nullptr),
-    underWaterEvent(nullptr),
+        mapHandler(nullptr),
+        camera(nullptr),
+        underWaterEvent(nullptr),
     //physics
     physicsWorld(nullptr),
-    physicsCharacterController(nullptr),
-    leftKeyPressed(false), rightKeyPressed(false), upKeyPressed(false), downKeyPressed(false),
+        physicsCharacterController(nullptr),
+        leftKeyPressed(false), rightKeyPressed(false), upKeyPressed(false), downKeyPressed(false),
     //AI
     aiManager(nullptr),
     //GUI
     gameGUIRenderer(nullptr),
-    fpsText(nullptr),
-    myText(nullptr),
-    myButton(nullptr),
-    textBox(nullptr),
-    myWindow(nullptr),
-    myWindow2(nullptr),
-    mySlider(nullptr),
+        fpsText(nullptr),
+        myText(nullptr),
+        myButton(nullptr),
+        textBox(nullptr),
+        myWindow(nullptr),
+        myWindow2(nullptr),
+        mySlider(nullptr),
     //sound
     manualTrigger(nullptr) {
 
@@ -59,21 +60,21 @@ void GameRenderer::initialize() {
     gameRenderer3d->activateAntiAliasing(true);
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
-    gameRenderer3d->getLightManager()->setGlobalAmbientColor(urchin::Point4<float>(0.05f, 0.05f, 0.05f, 0.0f));
+    gameRenderer3d->getLightManager()->setGlobalAmbientColor(Point4<float>(0.05f, 0.05f, 0.05f, 0.0f));
     camera = new CharacterCamera(45.0f, 0.1f, 300.0f, getMainDisplayer()->getWindowController());
     gameRenderer3d->setCamera(camera);
 
     //physics
-    physicsWorld = new urchin::PhysicsWorld();
-    collisionPointsDisplayer = std::make_unique<urchin::CollisionPointDisplayer>(physicsWorld, gameRenderer3d);
+    physicsWorld = new PhysicsWorld();
+    collisionPointsDisplayer = std::make_unique<CollisionPointDisplayer>(physicsWorld, gameRenderer3d);
 
     //AI
-    aiManager = new urchin::AIManager();
-    navMeshDisplayer = std::make_unique<urchin::NavMeshDisplayer>(aiManager, gameRenderer3d);
+    aiManager = new AIManager();
+    navMeshDisplayer = std::make_unique<NavMeshDisplayer>(aiManager, gameRenderer3d);
 
     //load map
-    mapHandler = new urchin::MapHandler(gameRenderer3d, physicsWorld, getMainDisplayer()->getSoundManager(), aiManager);
-    urchin::NullLoadCallback nullLoadCallback;
+    mapHandler = new MapHandler(gameRenderer3d, physicsWorld, getMainDisplayer()->getSoundManager(), aiManager);
+    NullLoadCallback nullLoadCallback;
     mapHandler->loadMapFromFile("map.xml", nullLoadCallback);
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->animate("move");
@@ -82,13 +83,13 @@ void GameRenderer::initialize() {
     gameGUIRenderer = getMainDisplayer()->getSceneManager()->newGUIRenderer(false);
     gameGUIRenderer->setupSkin("UI/skinUI.xml");
 
-    fpsText = new urchin::Text(urchin::Position(15, 4, urchin::Position::PIXEL), "UI/font/font.fnt");
+    fpsText = new Text(Position(15, 4, Position::PIXEL), "UI/font/font.fnt");
     gameGUIRenderer->addWidget(fpsText);
 
-    myWindow = new urchin::Window(urchin::Position(30, 30, urchin::Position::PIXEL), urchin::Size(270, 250, urchin::Size::PIXEL), "defaultSkin", "Commands");
+    myWindow = new Window(Position(30, 30, Position::PIXEL), Size(270, 250, Size::PIXEL), "defaultSkin", "Commands");
     gameGUIRenderer->addWidget(myWindow);
 
-    myText = new urchin::Text(urchin::Position(0, 4, urchin::Position::PIXEL), "UI/font/font.fnt");
+    myText = new Text(Position(0, 4, Position::PIXEL), "UI/font/font.fnt");
     myText->setText(
             "> Z/Q/S/D: Move character\n"
             "> Space: Jump\n"
@@ -104,22 +105,22 @@ void GameRenderer::initialize() {
             "> Esc: Quit\n", 235);
     myWindow->addChild(myText);
 
-    myButton = new urchin::Button(urchin::Position(0, 195, urchin::Position::PIXEL), urchin::Size(264, 27, urchin::Size::PIXEL), "defaultSkin", "Close");
+    myButton = new Button(Position(0, 195, Position::PIXEL), Size(264, 27, Size::PIXEL), "defaultSkin", "Close");
     myButton->addEventListener(std::make_shared<CloseWindowCmd>(myWindow));
     myWindow->addChild(myButton);
 
-    textBox = new urchin::TextBox(urchin::Position(0, 172, urchin::Position::PIXEL), urchin::Size(264, 20, urchin::Size::PIXEL), "defaultSkin");
+    textBox = new TextBox(Position(0, 172, Position::PIXEL), Size(264, 20, Size::PIXEL), "defaultSkin");
     myWindow->addChild(textBox);
 
-    /*myWindow2 = new urchin::Window(urchin::Position(320, 30, urchin::Position::PIXEL), urchin::Size(200, 160, urchin::Size::PIXEL), "defaultSkin", "Second Windows");
+    /*myWindow2 = new Window(Position(320, 30, Position::PIXEL), Size(200, 160, Size::PIXEL), "defaultSkin", "Second Windows");
     gameGUIRenderer->addWidget(myWindow2);
 
     std::vector<std::string> values = {"One", "Two", "Three", "Four"};
-    mySlider = new urchin::Slider(urchin::Position(10, 4, urchin::Position::PIXEL), urchin::Size(70, 16, urchin::Size::PIXEL), values, "defaultSkin");
+    mySlider = new Slider(Position(10, 4, Position::PIXEL), Size(70, 16, Size::PIXEL), values, "defaultSkin");
     myWindow2->addChild(mySlider); */
 
     //sound
-    manualTrigger = dynamic_cast<urchin::ManualTrigger *>(mapHandler->getMap()->getSceneSound("ambientSound")->getSoundTrigger());
+    manualTrigger = dynamic_cast<ManualTrigger *>(mapHandler->getMap()->getSceneSound("ambientSound")->getSoundTrigger());
     manualTrigger->play();
 
     //initialize and start process
@@ -134,36 +135,36 @@ void GameRenderer::initialize() {
 }
 
 void GameRenderer::initializeCharacter() {
-    urchin::Point3<float> characterPosition(-5.0, 0.0, 15.0);
-    urchin::PhysicsTransform transform(characterPosition, urchin::Quaternion<float>(urchin::Vector3<float>(0.0, 1.0, 0.0), 0.0));
+    Point3<float> characterPosition(-5.0, 0.0, 15.0);
+    PhysicsTransform transform(characterPosition, Quaternion<float>(Vector3<float>(0.0, 1.0, 0.0), 0.0));
     float characterRadius = 0.25f;
     float characterSize = 1.80f;
-    auto characterShape = std::make_shared<const urchin::CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), urchin::CapsuleShape<float>::CAPSULE_Y);
+    auto characterShape = std::make_shared<const CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), CapsuleShape<float>::CAPSULE_Y);
 
-    physicsCharacter = std::make_shared<urchin::PhysicsCharacter>("playerCharacter", 80.0f, characterShape, transform);
-    physicsCharacterController = std::make_unique<urchin::PhysicsCharacterController>(physicsCharacter, physicsWorld);
+    physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, characterShape, transform);
+    physicsCharacterController = std::make_unique<PhysicsCharacterController>(physicsCharacter, physicsWorld);
 
     camera->rotate(transform.getOrientation());
 }
 
 void GameRenderer::uninitializeCharacter() {
     physicsCharacterController.reset(nullptr);
-    physicsCharacter = std::shared_ptr<urchin::PhysicsCharacter>(nullptr);
+    physicsCharacter = std::shared_ptr<PhysicsCharacter>(nullptr);
 }
 
 void GameRenderer::initializeWaterEvent() {
     underWaterEvent = new UnderWaterEvent(getMainDisplayer()->getSoundManager());
 
-    urchin::Water* water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
-    water->addObserver(underWaterEvent, urchin::Water::MOVE_UNDER_WATER);
-    water->addObserver(underWaterEvent, urchin::Water::MOVE_ABOVE_WATER);
+    Water* water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
+    water->addObserver(underWaterEvent, Water::MOVE_UNDER_WATER);
+    water->addObserver(underWaterEvent, Water::MOVE_ABOVE_WATER);
 }
 
 void GameRenderer::uninitializeWaterEvent() {
     if (mapHandler) {
-        urchin::Water* water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
-        water->removeObserver(underWaterEvent, urchin::Water::MOVE_UNDER_WATER);
-        water->removeObserver(underWaterEvent, urchin::Water::MOVE_ABOVE_WATER);
+        Water* water = mapHandler->getMap()->getSceneWater("ocean")->getWater();
+        water->removeObserver(underWaterEvent, Water::MOVE_UNDER_WATER);
+        water->removeObserver(underWaterEvent, Water::MOVE_ABOVE_WATER);
 
         delete underWaterEvent;
         underWaterEvent = nullptr;
@@ -185,7 +186,7 @@ void GameRenderer::switchMode() {
     camera->useMouseToMoveCamera(!editMode);
 }
 
-void GameRenderer::deleteGeometryModels(std::vector<urchin::GeometryModel *>& models) const {
+void GameRenderer::deleteGeometryModels(std::vector<GeometryModel *>& models) const {
     for (auto model : models) {
         gameRenderer3d->getGeometryManager()->removeGeometry(model);
         delete model;
@@ -202,10 +203,10 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
     static float angle = 0.0f;
     if (key == KeyboardKey::PAGE_UP) {
         angle += 0.1f;
-        getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
+        getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     }if (key == KeyboardKey::PAGE_DOWN) {
         angle -= 0.1f;
-        getSunLight()->setDirection(urchin::Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
+        getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     }
 
     static bool aliasingActive = true;
@@ -235,9 +236,9 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         int xAxisForce = distribution(generator) - 5;
         int zAxisForce = distribution(generator) - 5;
         int yAxisForce = distribution(generator) + 5;
-        urchin::RigidBody* body = getRandomUnactiveBody();
+        RigidBody* body = getRandomUnactiveBody();
         if (body != nullptr) {
-            body->applyCentralMomentum(urchin::Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
+            body->applyCentralMomentum(Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
         }
     } else if (key == KeyboardKey::C) {
         if (physicsWorld->isPaused()) {
@@ -248,17 +249,17 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
     } else if (key == KeyboardKey::G) {
         float clipSpaceX = (2.0f * (float)getMainDisplayer()->getMouseX()) / ((float)getMainDisplayer()->getSceneManager()->getSceneWidth()) - 1.0f;
         float clipSpaceY = 1.0f - (2.0f * (float)getMainDisplayer()->getMouseY()) / ((float)getMainDisplayer()->getSceneManager()->getSceneHeight());
-        urchin::Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
-        urchin::Vector4<float> rayDirectionEyeSpace = camera->getProjectionMatrix().inverse() * rayDirectionClipSpace;
+        Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
+        Vector4<float> rayDirectionEyeSpace = camera->getProjectionMatrix().inverse() * rayDirectionClipSpace;
         rayDirectionEyeSpace.setValues(rayDirectionEyeSpace.X, rayDirectionEyeSpace.Y, -1.0f, 0.0f);
-        urchin::Vector3<float> rayDirectionWorldSpace = (camera->getViewMatrix().inverse() * rayDirectionEyeSpace).xyz().normalize();
+        Vector3<float> rayDirectionWorldSpace = (camera->getViewMatrix().inverse() * rayDirectionEyeSpace).xyz().normalize();
 
-        urchin::Point3<float> rayStart = camera->getPosition().translate(rayDirectionWorldSpace*1.00f);
-        urchin::Point3<float> rayEnd = rayStart.translate(rayDirectionWorldSpace*100.0f);
-        std::shared_ptr<const urchin::RayTestResult> rayTestResult = physicsWorld->rayTest(urchin::Ray<float>(rayStart, rayEnd));
+        Point3<float> rayStart = camera->getPosition().translate(rayDirectionWorldSpace*1.00f);
+        Point3<float> rayEnd = rayStart.translate(rayDirectionWorldSpace*100.0f);
+        std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(Ray<float>(rayStart, rayEnd));
 
-        urchin::LineSegment3D<float> gunRay(rayStart, rayEnd);
-        urchin::GeometryModel* gunRayModel = new urchin::LinesModel(gunRay);
+        LineSegment3D<float> gunRay(rayStart, rayEnd);
+        GeometryModel* gunRayModel = new LinesModel(gunRay);
         gunRayModel->setOutlineSize(3.0f);
         deleteGeometryModels(rayModels);
         rayModels.push_back(gunRayModel);
@@ -270,7 +271,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
 
         if (rayTestResult->hasHit()) {
             const auto& nearestResult = rayTestResult->getNearestResult();
-            urchin::GeometryModel* hitPointModel = new urchin::PointsModel(nearestResult->getHitPointOnObject2());
+            GeometryModel* hitPointModel = new PointsModel(nearestResult->getHitPointOnObject2());
             hitPointModel->setOutlineSize(25.0f);
             hitPointModel->setColor(1.0, 0.0, 0.0);
 
@@ -351,23 +352,23 @@ void GameRenderer::refresh() {
     //character
     physicsCharacterController->setMomentum(getWalkMomentum());
     physicsCharacterController->update(dt);
-    camera->moveTo(physicsCharacter->getTransform().getPosition() + urchin::Point3<float>(0.0, 0.75f, 0.0));
+    camera->moveTo(physicsCharacter->getTransform().getPosition() + Point3<float>(0.0, 0.75f, 0.0));
 
     //path
     if (DEBUG_DISPLAY_PATH) {
         deleteGeometryModels(pathModels);
-        std::vector<urchin::PathPoint> pathPoints;
+        std::vector<PathPoint> pathPoints;
         if(npcNavigation->getPathRequest()) {
             pathPoints = npcNavigation->getPathRequest()->getPath();
         }
 
         if (pathPoints.size() >= 2) {
-            std::vector<urchin::Point3<float>> adjustedPathPoints;
+            std::vector<Point3<float>> adjustedPathPoints;
             adjustedPathPoints.reserve(pathPoints.size());
             for (auto& pathPoint : pathPoints) {
-                adjustedPathPoints.emplace_back(urchin::Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
+                adjustedPathPoints.emplace_back(Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
             }
-            auto* linesModel = new urchin::LinesModel(adjustedPathPoints);
+            auto* linesModel = new LinesModel(adjustedPathPoints);
             linesModel->setOutlineSize(5.0f);
             linesModel->setColor(0.0, 1.0, 1.0, 1.0);
             pathModels.push_back(linesModel);
@@ -388,18 +389,18 @@ void GameRenderer::refresh() {
     }
 }
 
-urchin::SunLight* GameRenderer::getSunLight() {
-    urchin::SceneLight* sunLight = mapHandler->getMap()->getSceneLight("sunLight");
-    return dynamic_cast<urchin::SunLight *>(sunLight->getLight());
+SunLight* GameRenderer::getSunLight() {
+    SceneLight* sunLight = mapHandler->getMap()->getSceneLight("sunLight");
+    return dynamic_cast<SunLight *>(sunLight->getLight());
 }
 
-urchin::Vector3<float> GameRenderer::getWalkMomentum() const {
-    urchin::Vector3<float> viewVector = camera->getView();
+Vector3<float> GameRenderer::getWalkMomentum() const {
+    Vector3<float> viewVector = camera->getView();
     viewVector.Y = 0.0f; //don't move on Y axis
-    urchin::Vector3<float> forwardDirection(0.0, 0.0, 0.0);
+    Vector3<float> forwardDirection(0.0, 0.0, 0.0);
 
-    urchin::Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
-    urchin::Vector3<float> lateralDirection(0.0, 0.0, 0.0);
+    Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
+    Vector3<float> lateralDirection(0.0, 0.0, 0.0);
 
     if (upKeyPressed && !downKeyPressed) {
         forwardDirection = viewVector.normalize();
@@ -421,10 +422,10 @@ urchin::Vector3<float> GameRenderer::getWalkMomentum() const {
     return (forwardDirection + lateralDirection).normalize() * speed;
 }
 
-urchin::RigidBody* GameRenderer::getRandomUnactiveBody() {
-    std::vector<urchin::RigidBody *> bodies;
+RigidBody* GameRenderer::getRandomUnactiveBody() {
+    std::vector<RigidBody *> bodies;
 
-    const std::list<urchin::SceneObject *>& sceneObjects = mapHandler->getMap()->getSceneObjects();
+    const std::list<SceneObject *>& sceneObjects = mapHandler->getMap()->getSceneObjects();
     for (auto sceneObject : sceneObjects) {
         if (sceneObject->getRigidBody() && !sceneObject->getRigidBody()->isStatic() && !sceneObject->getRigidBody()->isActive()) {
             bodies.push_back(sceneObject->getRigidBody());

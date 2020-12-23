@@ -1,6 +1,7 @@
 #include <memory>
 
 #include "MainDisplayer.h"
+using namespace urchin;
 
 MainDisplayer::MainDisplayer(WindowController* windowController) :
     windowController(windowController),
@@ -18,16 +19,16 @@ MainDisplayer::~MainDisplayer() {
     delete sceneManager;
     delete soundManager;
 
-    urchin::SingletonManager::destroyAllSingletons();
+    SingletonManager::destroyAllSingletons();
 }
 
 void MainDisplayer::initialize(const std::string& resourcesDirectory, const std::string& saveDirectory) {
-    urchin::FileSystem::instance()->setupResourcesDirectory(resourcesDirectory);
-    urchin::FileSystem::instance()->setupSaveDirectory(saveDirectory);
+    FileSystem::instance()->setupResourcesDirectory(resourcesDirectory);
+    FileSystem::instance()->setupSaveDirectory(saveDirectory);
 
-    urchin::ConfigService::instance()->loadProperties("engine.properties");
-    sceneManager = new urchin::SceneManager();
-    soundManager = new urchin::SoundManager();
+    ConfigService::instance()->loadProperties("engine.properties");
+    sceneManager = new SceneManager();
+    soundManager = new SoundManager();
 
     gameRenderer = new GameRenderer(this);
     gameRenderer->active(true);
@@ -80,10 +81,10 @@ WindowController* MainDisplayer::getWindowController() const {
     return windowController;
 }
 
-urchin::SceneManager* MainDisplayer::getSceneManager() const {
+SceneManager* MainDisplayer::getSceneManager() const {
     return sceneManager;
 }
 
-urchin::SoundManager* MainDisplayer::getSoundManager() const {
+SoundManager* MainDisplayer::getSoundManager() const {
     return soundManager;
 }

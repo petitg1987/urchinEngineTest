@@ -1,10 +1,11 @@
 #include "CloseWindowCmd.h"
+using namespace urchin;
 
-CloseWindowCmd::CloseWindowCmd(urchin::Window* window):
+CloseWindowCmd::CloseWindowCmd(Window* window):
     window(window) {
 
 }
 
-void CloseWindowCmd::onClickRelease(urchin::Widget*) {
+void CloseWindowCmd::onClickRelease(Widget*) {
     window->setIsVisible(false);
 }

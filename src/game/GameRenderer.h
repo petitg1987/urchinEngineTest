@@ -11,14 +11,14 @@
 #include "UrchinAIEngine.h"
 
 #include "KeyboardKey.h"
-#include "Renderer.h"
+#include "RenderScreen.h"
 #include "game/CharacterCamera.h"
 #include "game/UnderWaterEvent.h"
 #include "game/npc/NPCNavigation.h"
 
 class MainDisplayer;
 
-class GameRenderer : public Renderer {
+class GameRenderer : public RenderScreen {
     public:
         explicit GameRenderer(MainDisplayer *);
         ~GameRenderer() override;

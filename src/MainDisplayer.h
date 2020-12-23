@@ -35,7 +35,7 @@ class MainDisplayer {
         urchin::SceneManager *sceneManager;
         urchin::SoundManager *soundManager;
 
-        Renderer* gameRenderer;
+        RenderScreen* gameRenderer;
 };
 
 #endif
