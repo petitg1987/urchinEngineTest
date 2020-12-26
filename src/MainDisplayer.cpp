@@ -22,9 +22,8 @@ MainDisplayer::~MainDisplayer() {
     SingletonManager::destroyAllSingletons();
 }
 
-void MainDisplayer::initialize(const std::string& resourcesDirectory, const std::string& saveDirectory) {
+void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     FileSystem::instance()->setupResourcesDirectory(resourcesDirectory);
-    FileSystem::instance()->setupSaveDirectory(saveDirectory);
 
     ConfigService::instance()->loadProperties("engine.properties");
     sceneManager = new SceneManager();

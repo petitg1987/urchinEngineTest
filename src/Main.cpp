@@ -41,7 +41,7 @@ void Main::execute(int argc, char *argv[]) {
         int width, height;
         glfwGetWindowSize(window, &width, &height);
         mainDisplayer = new MainDisplayer(windowController);
-        mainDisplayer->initialize(resourcesDirectory, saveDirectory);
+        mainDisplayer->initialize(resourcesDirectory);
         mainDisplayer->resize((unsigned int)width, (unsigned int)height);
 
         glfwSetWindowUserPointer(window, (void*)this);

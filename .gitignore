@@ -10,9 +10,6 @@ resources/materials/**/*.tga
 resources/materials/**/*.png
 resources/sound/
 
-#Cached resources
-save/*.frl
-
 #Binary
 urchinEngineTest
 urchinEngineTest.exe

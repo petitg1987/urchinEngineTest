@@ -14,7 +14,7 @@ class MainDisplayer {
         explicit MainDisplayer(WindowController *);
         ~MainDisplayer();
 
-        void initialize(const std::string&, const std::string&);
+        void initialize(const std::string&);
         void paint();
         void resize(unsigned int width, unsigned int height);
         void onKeyPressed(KeyboardKey);
