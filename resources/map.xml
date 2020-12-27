@@ -565,7 +565,7 @@
     <soundElements>
         <soundElement name="ambientSound">
             <sound type="AMBIENT">
-                <filename>sound/ambient.wav</filename>
+                <filename>sound/ambient.flac</filename>
                 <volume>1.000000</volume>
             </sound>
             <soundTrigger type="MANUAL">
@@ -578,7 +578,7 @@
         </soundElement>
         <soundElement name="pointSound">
             <sound type="POINT">
-                <filename>sound/positionTrigger.wav</filename>
+                <filename>sound/positionTrigger.flac</filename>
                 <position>0.000000 3.400000 3.400000</position>
                 <inaudibleDistance>5.000000</inaudibleDistance>
                 <volume>1.000000</volume>
