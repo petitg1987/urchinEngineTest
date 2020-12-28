@@ -1,5 +1,10 @@
 # UrchinEngineTest
+## Description
 Test application using Urchin engine
 
-# Execute
-* Environment setup: [here](./DEV.md)
+## Build
+## Linux:
+* See environment setup: [here](./DEV.md)
+* Launch urchin engine test: `./urchinEngineTest`
+## Windows:
+* N/A

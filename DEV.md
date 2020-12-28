@@ -2,7 +2,7 @@
 ## Linux
 * See [DEV.md](https://github.com/petitg1987/urchinEngine/blob/master/DEV.md) of UrchinEngine
 * Install libraries: `sudo apt install libglfw3-dev`
-    
+
 ## Windows
 * N/A
 
