@@ -11,6 +11,7 @@ resources/materials/**/*.png
 resources/sound/
 
 #Binary
+core
 urchinEngineTest
 urchinEngineTest.exe
 

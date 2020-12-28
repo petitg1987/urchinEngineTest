@@ -16,5 +16,5 @@ void CrashReporter::onSignalReceived(unsigned long signalId) {
 }
 
 void CrashReporter::onError() const {
-    std::cerr << "Error detected during application execution. See logs (" << Logger::instance()->retrieveTarget() << ") for more details." << std::endl;
+    std::cerr << "Error detected during application execution. See logs for more details." << std::endl;
 }
