@@ -133,14 +133,14 @@ GLFWwindow* Main::createWindow(int argc, char *argv[]) {
 
 void Main::charCallback(GLFWwindow* window, unsigned int codepoint) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
-    if (main->windowController->isEventCallbackActive()) {
+    if (main && main->windowController->isEventCallbackActive()) {
         main->charPressEvents.push_back(codepoint);
     }
 }
 
 void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
-    if (main->windowController->isEventCallbackActive()) {
+    if (main && main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -154,7 +154,7 @@ void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
 
 void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
-    if (main->windowController->isEventCallbackActive()) {
+    if (main && main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             main->onMouseButtonPressed(button);
         } else if (action == GLFW_RELEASE) {
@@ -165,14 +165,14 @@ void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
 
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
-    if (main->windowController->isEventCallbackActive()) {
+    if (main && main->windowController->isEventCallbackActive()) {
         main->onMouseMove((int)x, (int)y);
     }
 }
 
 void Main::windowSizeCallback(GLFWwindow* window, int width, int height) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
-    if (main->windowController->isEventCallbackActive()) {
+    if (main) {
         main->mainDisplayer->resize((unsigned int)width, (unsigned int)height);
     }
 }
