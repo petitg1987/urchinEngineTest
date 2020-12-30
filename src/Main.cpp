@@ -28,10 +28,10 @@ void Main::execute(int argc, char *argv[]) {
     GLFWwindow* window = nullptr;
 
     try {
+        glfwSetErrorCallback(glfwErrorCallback);
         if (!glfwInit()) {
             throw std::runtime_error("Impossible to initialize GLFW library");
         }
-        glfwSetErrorCallback(glfwErrorCallback);
 
         window = createWindow(argc, argv);
         windowController = new WindowController(window);
