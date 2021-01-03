@@ -59,7 +59,7 @@
 	</textBox>
 
 	<slider nameSkin="defaultSkin">
-		<buttonTextSkin>defaultSkin</buttonTextSkin>
+		<buttonsTextSkin>defaultSkin</buttonsTextSkin>
 		<valuesTextSkin>defaultSkin</valuesTextSkin>
 		<leftButtonText>&lt;&lt;</leftButtonText>
 		<rightButtonText>&gt;&gt;</rightButtonText>
