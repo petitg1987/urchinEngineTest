@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <font>
 	<ttf>UI/font/font.ttf</ttf>
-    <size>15</size>
 	<color>1.0 1.0 1.0</color>
 </font>

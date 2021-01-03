@@ -79,16 +79,16 @@ void GameRenderer::initialize() {
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->animate("move");
 
-    //GUI
+    //UI
     gameGUIRenderer = getMainDisplayer()->getSceneManager()->newGUIRenderer(false);
 
-    fpsText = new Text(Position(15, 4, Position::PIXEL), "defaultSkin", "? fps");
+    fpsText = new Text(Position(15, 4, Position::PIXEL), "defaultSkin", Length(0.02f, Length::PERCENTAGE), "? fps");
     gameGUIRenderer->addWidget(fpsText);
 
     myWindow = new Window(Position(30, 30, Position::PIXEL), Size(270, 250, Size::PIXEL), "defaultSkin", "Commands");
     gameGUIRenderer->addWidget(myWindow);
 
-    myText = new Text(Position(0, 4, Position::PIXEL), "defaultSkin",
+    myText = new Text(Position(0, 4, Position::PIXEL), "defaultSkin", Length(15, Length::PIXEL),
                       "> Z/Q/S/D: Move character\n"
                       "> Space: Jump\n"
                       "> E: Edit mode (on/off)\n"
@@ -100,7 +100,7 @@ void GameRenderer::initialize() {
                       "> H: HBAO (on/off)\n"
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
-                      "> Esc: Quit\n");
+                      "> Esc: Quit");
     myWindow->addChild(myText);
 
     myButton = new Button(Position(0, 195, Position::PIXEL), Size(264, 27, Size::PIXEL), "defaultSkin", "Close");
