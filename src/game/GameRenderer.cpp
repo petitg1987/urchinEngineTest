@@ -82,26 +82,25 @@ void GameRenderer::initialize() {
     //GUI
     gameGUIRenderer = getMainDisplayer()->getSceneManager()->newGUIRenderer(false);
 
-    fpsText = new Text(Position(15, 4, Position::PIXEL), "UI/font/font.fnt");
+    fpsText = new Text(Position(15, 4, Position::PIXEL), "defaultSkin", "? fps");
     gameGUIRenderer->addWidget(fpsText);
 
     myWindow = new Window(Position(30, 30, Position::PIXEL), Size(270, 250, Size::PIXEL), "defaultSkin", "Commands");
     gameGUIRenderer->addWidget(myWindow);
 
-    myText = new Text(Position(0, 4, Position::PIXEL), "UI/font/font.fnt");
-    myText->setText(
-            "> Z/Q/S/D: Move character\n"
-            "> Space: Jump\n"
-            "> E: Edit mode (on/off)\n"
-            "> F: Apply force on dynamic bodies\n"
-            "> G: Launch ray test\n"
-            "> C: Pause, play physics\n"
-            "> PgUp/PgDn: Move light\n"
-            "> A: Anti aliasing (on/off)\n"
-            "> H: HBAO (on/off)\n"
-            "> W: Shadow (on/off)\n"
-            "> P/M/O: Pause, play, stop sound\n"
-            "> Esc: Quit\n", 235);
+    myText = new Text(Position(0, 4, Position::PIXEL), "defaultSkin",
+                      "> Z/Q/S/D: Move character\n"
+                      "> Space: Jump\n"
+                      "> E: Edit mode (on/off)\n"
+                      "> F: Apply force on dynamic bodies\n"
+                      "> G: Launch ray test\n"
+                      "> C: Pause, play physics\n"
+                      "> PgUp/PgDn: Move light\n"
+                      "> A: Anti aliasing (on/off)\n"
+                      "> H: HBAO (on/off)\n"
+                      "> W: Shadow (on/off)\n"
+                      "> P/M/O: Pause, play, stop sound\n"
+                      "> Esc: Quit\n");
     myWindow->addChild(myText);
 
     myButton = new Button(Position(0, 195, Position::PIXEL), Size(264, 27, Size::PIXEL), "defaultSkin", "Close");
@@ -339,7 +338,7 @@ void GameRenderer::refresh() {
     //fps
     float dt = getMainDisplayer()->getSceneManager()->getDeltaTime();
     if (fpsText != nullptr) {
-        fpsText->setText(std::to_string(getMainDisplayer()->getSceneManager()->getFpsForDisplay()) + " fps");
+        fpsText->updateText(std::to_string(getMainDisplayer()->getSceneManager()->getFpsForDisplay()) + " fps");
     }
 
     //map

@@ -1,5 +1,9 @@
 <?xml version="1.0" ?>
 <gui>
+	<text nameSkin="defaultSkin">
+		<font>UI/font/font.fnt</font>
+	</text>
+
 	<window nameSkin="defaultSkin">
 		<skin>
 			<image>UI/window.tga</image>
@@ -8,7 +12,7 @@
 			<part zone="left">3</part>
 			<part zone="right">24</part>
 		</skin>
-		<textFont>UI/font/font.fnt</textFont>
+		<textSkin>defaultSkin</textSkin>
 	</window>
 	
 	<button nameSkin="defaultSkin">
@@ -33,7 +37,7 @@
 			<part zone="left">1</part>
 			<part zone="right">1</part>
 		</skin>
-		<textFont>UI/font/font.fnt</textFont>
+		<textSkin>defaultSkin</textSkin>
 	</button>
 	
 	<textBox nameSkin="defaultSkin">
@@ -51,12 +55,12 @@
 			<part zone="left">2</part>
 			<part zone="right">2</part>
 		</skin>
-		<textFont>UI/font/font.fnt</textFont>
+		<textSkin>defaultSkin</textSkin>
 	</textBox>
 
 	<slider nameSkin="defaultSkin">
-		<buttonTextFont>UI/font/font.fnt</buttonTextFont>
-		<valuesTextFont>UI/font/font.fnt</valuesTextFont>
+		<buttonTextSkin>defaultSkin</buttonTextSkin>
+		<valuesTextSkin>defaultSkin</valuesTextSkin>
 		<leftButtonText>&lt;&lt;</leftButtonText>
 		<rightButtonText>&gt;&gt;</rightButtonText>
 	</slider>
