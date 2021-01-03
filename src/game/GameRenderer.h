@@ -74,8 +74,8 @@ class GameRenderer : public RenderScreen {
         std::vector<urchin::GeometryModel *> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
 
-        //GUI
-        urchin::GUIRenderer *gameGUIRenderer;
+        //UI
+        urchin::UIRenderer *gameUIRenderer;
         urchin::Text *fpsText;
 
         urchin::Text *myText;

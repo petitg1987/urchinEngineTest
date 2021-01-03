@@ -26,8 +26,8 @@ GameRenderer::GameRenderer(MainDisplayer* mainDisplayer) :
         leftKeyPressed(false), rightKeyPressed(false), upKeyPressed(false), downKeyPressed(false),
         //AI
         aiManager(nullptr),
-        //GUI
-        gameGUIRenderer(nullptr),
+        //UI
+        gameUIRenderer(nullptr),
         fpsText(nullptr),
         myText(nullptr),
         myButton(nullptr),
@@ -80,13 +80,13 @@ void GameRenderer::initialize() {
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->animate("move");
 
     //UI
-    gameGUIRenderer = getMainDisplayer()->getSceneManager()->newGUIRenderer(false);
+    gameUIRenderer = getMainDisplayer()->getSceneManager()->newUIRenderer(false);
 
     fpsText = new Text(Position(15, 4, Position::PIXEL), "defaultSkin", Length(0.02f, Length::PERCENTAGE), "? fps");
-    gameGUIRenderer->addWidget(fpsText);
+    gameUIRenderer->addWidget(fpsText);
 
     myWindow = new Window(Position(30, 30, Position::PIXEL), Size(270, 250, Size::PIXEL), "defaultSkin", "Commands");
-    gameGUIRenderer->addWidget(myWindow);
+    gameUIRenderer->addWidget(myWindow);
 
     myText = new Text(Position(0, 4, Position::PIXEL), "defaultSkin", Length(15, Length::PIXEL),
                       "> Z/Q/S/D: Move character\n"
@@ -111,7 +111,7 @@ void GameRenderer::initialize() {
     myWindow->addChild(textBox);
 
     /*myWindow2 = new Window(Position(320, 30, Position::PIXEL), Size(200, 160, Size::PIXEL), "defaultSkin", "Second Windows");
-    gameGUIRenderer->addWidget(myWindow2);
+    gameUIRenderer->addWidget(myWindow2);
 
     std::vector<std::string> values = {"One", "Two", "Three", "Four"};
     mySlider = new Slider(Position(10, 4, Position::PIXEL), Size(70, 16, Size::PIXEL), values, "defaultSkin");
@@ -323,10 +323,10 @@ void GameRenderer::active(bool active) {
         getMainDisplayer()->getWindowController()->setVerticalSyncEnabled(false);
 
         getMainDisplayer()->getSceneManager()->enableRenderer3d(gameRenderer3d);
-        getMainDisplayer()->getSceneManager()->enableGUIRenderer(gameGUIRenderer);
+        getMainDisplayer()->getSceneManager()->enableUIRenderer(gameUIRenderer);
     } else {
         getMainDisplayer()->getSceneManager()->enableRenderer3d(nullptr);
-        getMainDisplayer()->getSceneManager()->enableGUIRenderer(nullptr);
+        getMainDisplayer()->getSceneManager()->enableUIRenderer(nullptr);
     }
 }
 

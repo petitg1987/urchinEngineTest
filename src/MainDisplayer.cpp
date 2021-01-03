@@ -25,7 +25,7 @@ MainDisplayer::~MainDisplayer() {
 void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     FileSystem::instance()->setupResourcesDirectory(resourcesDirectory);
     ConfigService::instance()->loadProperties("engine.properties");
-    GUISkinService::instance()->setSkin("UI/skinUI.xml");
+    UISkinService::instance()->setSkin("UI/skinUI.xml");
 
     sceneManager = new SceneManager();
     soundManager = new SoundManager();
