@@ -15,19 +15,19 @@ GameRenderer::GameRenderer(MainDisplayer* mainDisplayer) :
         isInitialized(false),
         editMode(false),
         memCheckMode(false),
-    //3d
-    gameRenderer3d(nullptr),
+        //3d
+        gameRenderer3d(nullptr),
         mapHandler(nullptr),
         camera(nullptr),
         underWaterEvent(nullptr),
-    //physics
-    physicsWorld(nullptr),
+        //physics
+        physicsWorld(nullptr),
         physicsCharacterController(nullptr),
         leftKeyPressed(false), rightKeyPressed(false), upKeyPressed(false), downKeyPressed(false),
-    //AI
-    aiManager(nullptr),
-    //GUI
-    gameGUIRenderer(nullptr),
+        //AI
+        aiManager(nullptr),
+        //GUI
+        gameGUIRenderer(nullptr),
         fpsText(nullptr),
         myText(nullptr),
         myButton(nullptr),
@@ -35,8 +35,8 @@ GameRenderer::GameRenderer(MainDisplayer* mainDisplayer) :
         myWindow(nullptr),
         myWindow2(nullptr),
         mySlider(nullptr),
-    //sound
-    manualTrigger(nullptr) {
+        //sound
+        manualTrigger(nullptr) {
 
 }
 
@@ -229,7 +229,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
 
     //physics
     if (key == KeyboardKey::F) {
-        auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+        auto seed = static_cast<std::default_random_engine::result_type>(std::chrono::system_clock::now().time_since_epoch().count());
         std::default_random_engine generator(seed);
         std::uniform_int_distribution<> distribution(0, 10);
 
@@ -433,10 +433,10 @@ RigidBody* GameRenderer::getRandomUnactiveBody() {
     }
 
     if (!bodies.empty()) {
-        auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+        auto seed = static_cast<std::default_random_engine::result_type>(std::chrono::system_clock::now().time_since_epoch().count());
         std::default_random_engine generator(seed);
         std::uniform_int_distribution<> distribution(0, (int)bodies.size() - 1);
-        return bodies[distribution(generator)];
+        return bodies[static_cast<std::size_t>(distribution(generator))];
     }
 
     return nullptr;
