@@ -81,7 +81,6 @@ void GameRenderer::initialize() {
 
     //GUI
     gameGUIRenderer = getMainDisplayer()->getSceneManager()->newGUIRenderer(false);
-    gameGUIRenderer->setupSkin("UI/skinUI.xml");
 
     fpsText = new Text(Position(15, 4, Position::PIXEL), "UI/font/font.fnt");
     gameGUIRenderer->addWidget(fpsText);
