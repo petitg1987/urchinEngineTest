@@ -82,13 +82,13 @@ void GameRenderer::initialize() {
     //UI
     gameUIRenderer = getMainDisplayer()->getSceneManager()->newUIRenderer(false);
 
-    fpsText = new Text(Position(15, 4, Position::PIXEL), "defaultSkin", Length(0.02f, Length::PERCENTAGE), "? fps");
+    fpsText = new Text(Position(15, 4, Position::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    myWindow = new Window(Position(30, 30, Position::PIXEL), Size(270, 250, Size::PIXEL), "defaultSkin", "Commands");
+    myWindow = new Window(Position(30, 30, Position::PIXEL), Size(270, 270, Size::PIXEL), "defaultSkin", "Commands");
     gameUIRenderer->addWidget(myWindow);
 
-    myText = new Text(Position(0, 4, Position::PIXEL), "defaultSkin", Length(15, Length::PIXEL),
+    myText = new Text(Position(0, 4, Position::PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
                       "> Space: Jump\n"
                       "> E: Edit mode (on/off)\n"
@@ -103,19 +103,19 @@ void GameRenderer::initialize() {
                       "> Esc: Quit");
     myWindow->addChild(myText);
 
-    myButton = new Button(Position(0, 195, Position::PIXEL), Size(264, 27, Size::PIXEL), "defaultSkin", "Close");
+    textBox = new TextBox(Position(0, 192, Position::PIXEL), Size(264, 20, Size::PIXEL), "defaultSkin");
+    myWindow->addChild(textBox);
+
+    myButton = new Button(Position(0, 215, Position::PIXEL), Size(264, 27, Size::PIXEL), "defaultSkin", "Close");
     myButton->addEventListener(std::make_shared<CloseWindowCmd>(myWindow));
     myWindow->addChild(myButton);
 
-    textBox = new TextBox(Position(0, 172, Position::PIXEL), Size(264, 20, Size::PIXEL), "defaultSkin");
-    myWindow->addChild(textBox);
-
-    /*myWindow2 = new Window(Position(320, 30, Position::PIXEL), Size(200, 160, Size::PIXEL), "defaultSkin", "Second Windows");
+    myWindow2 = new Window(Position(320, 30, Position::PIXEL), Size(200, 160, Size::PIXEL), "defaultSkin", "Second Windows");
     gameUIRenderer->addWidget(myWindow2);
 
     std::vector<std::string> values = {"One", "Two", "Three", "Four"};
     mySlider = new Slider(Position(10, 4, Position::PIXEL), Size(70, 16, Size::PIXEL), values, "defaultSkin");
-    myWindow2->addChild(mySlider); */
+    myWindow2->addChild(mySlider);
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger *>(mapHandler->getMap()->getSceneSound("ambientSound")->getSoundTrigger());

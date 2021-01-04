@@ -2,6 +2,11 @@
 <ui>
 	<text nameSkin="defaultSkin">
 		<font>UI/font/font.fnt</font>
+		<height>
+			<value>16.0</value>
+			<type>pixel</type>
+		</height>
+		<color>1.0 1.0 1.0</color>
 	</text>
 
 	<window nameSkin="defaultSkin">
