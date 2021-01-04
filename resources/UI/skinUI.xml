@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <ui>
 	<text nameSkin="defaultSkin">
-		<font>UI/font/font.ttf</font>
+		<font>UI/font.ttf</font>
 		<color>1.0 1.0 1.0</color>
 		<height>
 			<value>16.0</value>
@@ -14,7 +14,7 @@
 			<image>UI/window.tga</image>
 			<part zone="top">23</part>
 			<part zone="bottom">3</part>
-			<part zone="left">3</part>
+			<part zone="left">4</part>
 			<part zone="right">24</part>
 		</skin>
 		<textSkin>defaultSkin</textSkin>
@@ -50,14 +50,14 @@
 			<image>UI/textBoxDefault.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
-			<part zone="left">2</part>
+			<part zone="left">3</part>
 			<part zone="right">2</part>
 		</skin>
 		<skin type="focus">
 			<image>UI/textBoxFocus.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
-			<part zone="left">2</part>
+			<part zone="left">3</part>
 			<part zone="right">2</part>
 		</skin>
 		<textSkin>defaultSkin</textSkin>
