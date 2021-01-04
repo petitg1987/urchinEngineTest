@@ -16,7 +16,7 @@ class MainDisplayer {
 
         void initialize(const std::string&);
         void paint();
-        void resize(unsigned int width, unsigned int height);
+        void resize(unsigned int, unsigned int);
         void onKeyPressed(KeyboardKey);
         void onKeyReleased(KeyboardKey);
         void onMouseMove(int, int);
