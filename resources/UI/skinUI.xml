@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 <ui>
 	<text nameSkin="defaultSkin">
-		<font>UI/font/font.fnt</font>
+		<font>UI/font/font.ttf</font>
+		<color>1.0 1.0 1.0</color>
 		<height>
 			<value>16.0</value>
 			<type>pixel</type>
 		</height>
-		<color>1.0 1.0 1.0</color>
 	</text>
 
 	<window nameSkin="defaultSkin">

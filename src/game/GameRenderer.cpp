@@ -110,12 +110,12 @@ void GameRenderer::initialize() {
     myButton->addEventListener(std::make_shared<CloseWindowCmd>(myWindow));
     myWindow->addChild(myButton);
 
-    myWindow2 = new Window(Position(320, 30, Position::PIXEL), Size(200, 160, Size::PIXEL), "defaultSkin", "Second Windows");
+    /*myWindow2 = new Window(Position(320, 30, Position::PIXEL), Size(200, 160, Size::PIXEL), "defaultSkin", "Second Windows");
     gameUIRenderer->addWidget(myWindow2);
 
     std::vector<std::string> values = {"One", "Two", "Three", "Four"};
     mySlider = new Slider(Position(10, 4, Position::PIXEL), Size(70, 16, Size::PIXEL), values, "defaultSkin");
-    myWindow2->addChild(mySlider);
+    myWindow2->addChild(mySlider);*/
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger *>(mapHandler->getMap()->getSceneSound("ambientSound")->getSoundTrigger());
