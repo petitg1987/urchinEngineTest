@@ -22,16 +22,16 @@ class Main {
         static void glfwErrorCallback(int, const char*);
         void initializeKeyboardMap();
 
-        std::string retrieveResourcesDirectory(char *[]) const;
-        std::string retrieveSaveDirectory(char *[]) const;
+        static std::string retrieveResourcesDirectory(char *[]);
+        static std::string retrieveSaveDirectory(char *[]);
 
-        GLFWwindow *createWindow(int, char *[]);
+        static GLFWwindow *createWindow(int, char *[]);
 
         static void charCallback(GLFWwindow*, unsigned int);
         static void keyCallback(GLFWwindow*, int, int, int, int);
         static void mouseKeyCallback(GLFWwindow*, int, int, int);
         static void cursorPositionCallback(GLFWwindow*, double, double);
-        static void windowSizeCallback(GLFWwindow*, int, int);
+        static void framebufferSizeCallback(GLFWwindow*, int, int);
 
         void handleInputEvents();
 
@@ -44,7 +44,7 @@ class Main {
         void onMouseButtonReleased(int);
         void onMouseMove(int, int);
 
-        bool argumentsContains(const std::string&, int, char *[]) const;
+        static bool argumentsContains(const std::string&, int, char *[]);
 
         void clearResources(GLFWwindow *&, WindowController *&);
 

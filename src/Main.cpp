@@ -49,7 +49,7 @@ void Main::execute(int argc, char *argv[]) {
         glfwSetKeyCallback(window, keyCallback);
         glfwSetMouseButtonCallback(window, mouseKeyCallback);
         glfwSetCursorPosCallback(window, cursorPositionCallback);
-        glfwSetWindowSizeCallback(window, windowSizeCallback);
+        glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
         windowController->cleanEvents(); //ignore events occurred during initialization phase
 
@@ -101,11 +101,11 @@ void Main::initializeKeyboardMap() {
     keyboardMap[GLFW_KEY_PAGE_DOWN] = KeyboardKey::PAGE_DOWN;
 }
 
-std::string Main::retrieveResourcesDirectory(char *argv[]) const {
+std::string Main::retrieveResourcesDirectory(char *argv[]) {
     return FileUtil::getDirectory(std::string(argv[0])) + "resources/";
 }
 
-std::string Main::retrieveSaveDirectory(char *argv[]) const {
+std::string Main::retrieveSaveDirectory(char *argv[]) {
     return FileUtil::getDirectory(std::string(argv[0])) + "save/";
 }
 
@@ -170,7 +170,7 @@ void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     }
 }
 
-void Main::windowSizeCallback(GLFWwindow* window, int width, int height) {
+void Main::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main) {
         main->mainDisplayer->resize((unsigned int)width, (unsigned int)height);
@@ -284,7 +284,7 @@ void Main::onMouseMove(int x, int y) {
     }
 }
 
-bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) const {
+bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) {
     for (int i = 1; i < argc;++i) {
         if (std::string(argv[i]).find(argName) != std::string::npos) {
             return true;
