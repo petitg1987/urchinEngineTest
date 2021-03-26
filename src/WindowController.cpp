@@ -1,7 +1,29 @@
-#define GLFW_INCLUDE_NONE
+#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+#include <stdexcept>
 
 #include "WindowController.h"
+
+GlfwSurfaceCreator::GlfwSurfaceCreator(GLFWwindow* window) :
+        window(window) {
+}
+
+VkSurfaceKHR GlfwSurfaceCreator::createSurface(VkInstance instance) const {
+    VkSurfaceKHR surface = nullptr;
+    VkResult result = glfwCreateWindowSurface(instance, window, nullptr, &surface);
+    if (result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create window surface with error code: " + std::to_string(result));
+    }
+    return surface;
+}
+
+GlfwFramebufferSizeRetriever::GlfwFramebufferSizeRetriever(GLFWwindow* window) :
+        window(window) {
+}
+
+void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(int& widthInPixel, int& heightInPixel) const {
+    glfwGetFramebufferSize(window, &widthInPixel, &heightInPixel); //don't use glfwGetWindowSize which doesn't return size in pixel
+}
 
 WindowController::WindowController(GLFWwindow* window) :
         window(window),
@@ -27,10 +49,17 @@ bool WindowController::isEventCallbackActive() const {
     return eventsCallbackActive;
 }
 
-void WindowController::setVerticalSyncEnabled(bool active) {
-    glfwSwapInterval( active ? 1 : 0);
+std::vector<const char*> WindowController::windowRequiredExtensions() {
+    ExtensionList extensionList;
+    extensionList.extensions = glfwGetRequiredInstanceExtensions(&extensionList.extensionCount);
+    return std::vector<const char*>(extensionList.extensions, extensionList.extensions + extensionList.extensionCount);
 }
 
-void WindowController::swapBuffers() {
-    glfwSwapBuffers(window);
+std::unique_ptr<GlfwSurfaceCreator> WindowController::getSurfaceCreator() const {
+    return std::make_unique<GlfwSurfaceCreator>(window);
 }
+
+std::unique_ptr<GlfwFramebufferSizeRetriever> WindowController::getFramebufferSizeRetriever() const {
+    return std::make_unique<GlfwFramebufferSizeRetriever>(window);
+}
+

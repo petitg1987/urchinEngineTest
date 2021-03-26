@@ -312,7 +312,7 @@ void GameRenderer::active(bool active) {
         }
 
         getMainDisplayer()->getWindowController()->setMouseCursorVisible(false);
-        getMainDisplayer()->getWindowController()->setVerticalSyncEnabled(false);
+        //TODO getMainDisplayer()->getWindowController()->setVerticalSyncEnabled(false);
 
         getMainDisplayer()->getSceneManager()->enableRenderer3d(gameRenderer3d);
         getMainDisplayer()->getSceneManager()->enableUIRenderer(gameUIRenderer);

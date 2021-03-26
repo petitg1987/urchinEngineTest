@@ -32,6 +32,7 @@ void Main::execute(int argc, char *argv[]) {
         if (!glfwInit()) {
             throw std::runtime_error("Impossible to initialize GLFW library");
         }
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
         window = createWindow(argc, argv);
         windowController = new WindowController(window);
@@ -61,7 +62,6 @@ void Main::execute(int argc, char *argv[]) {
             handleInputEvents();
 
             mainDisplayer->paint();
-            glfwSwapBuffers(window);
         }
 
         if (Logger::instance()->hasFailure()) {
@@ -124,9 +124,6 @@ GLFWwindow* Main::createWindow(int argc, char *argv[]) {
     if (!window) {
         throw std::runtime_error("Impossible to create the GLFW window");
     }
-
-    glfwMakeContextCurrent(window);
-    glfwSwapInterval(1); //vertical synchronization active
 
     return window;
 }

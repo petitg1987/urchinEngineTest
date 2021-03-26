@@ -27,7 +27,9 @@ void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     ConfigService::instance()->loadProperties("engine.properties");
     UISkinService::instance()->setSkin("UI/skinUI.xml");
 
-    sceneManager = new SceneManager();
+    auto surfaceCreator = getWindowController()->getSurfaceCreator();
+    auto framebufferSizeRetriever = getWindowController()->getFramebufferSizeRetriever();
+    sceneManager = new SceneManager(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
     soundManager = new SoundManager();
 
     gameRenderer = new GameRenderer(this);

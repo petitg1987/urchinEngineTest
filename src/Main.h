@@ -1,7 +1,7 @@
 #ifndef URCHINENGINETEST_MAIN_H
 #define URCHINENGINETEST_MAIN_H
 
-#define GLFW_INCLUDE_NONE
+#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <list>
 #include <map>
