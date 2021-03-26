@@ -39,7 +39,7 @@ endif()
 if (WIN32)
     SET(GLFW_LIB glfw3 gdi32 winmm)
 else()
-    SET(GLFW_LIB glfw3.a X11.a xcb.a Xau.a Xdmcp.a)
+    SET(GLFW_LIB glfw3.a X11.a xcb) #Don't static link xcb (xcb.a Xau.a Xdmcp.a) because causing error in Vulkan
 endif()
 
 if (NOT WIN32)
