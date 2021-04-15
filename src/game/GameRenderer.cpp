@@ -5,7 +5,7 @@
 #include "MainDisplayer.h"
 using namespace urchin;
 
-//Debug parameters
+//debug parameters
 bool DEBUG_DISPLAY_NAV_MESH = false;
 bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
