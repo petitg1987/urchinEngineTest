@@ -250,7 +250,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
 
         LineSegment3D<float> gunRay(rayStart, rayEnd);
         GeometryModel* gunRayModel = new LinesModel(gunRay);
-        gunRayModel->setOutlineSize(3.0f);
+        gunRayModel->setLineWidth(3.0f);
         deleteGeometryModels(rayModels);
         rayModels.push_back(gunRayModel);
         gameRenderer3d->getGeometryManager()->addGeometry(gunRayModel);
@@ -262,7 +262,7 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         if (rayTestResult->hasHit()) {
             const auto& nearestResult = rayTestResult->getNearestResult();
             GeometryModel* hitPointModel = new PointsModel(nearestResult->getHitPointOnObject2());
-            hitPointModel->setOutlineSize(25.0f);
+            hitPointModel->setPointSize(25.0f);
             hitPointModel->setColor(1.0, 0.0, 0.0);
 
             rayModels.push_back(hitPointModel);
@@ -359,7 +359,7 @@ void GameRenderer::refresh() {
                 adjustedPathPoints.emplace_back(Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
             }
             auto* linesModel = new LinesModel(adjustedPathPoints);
-            linesModel->setOutlineSize(5.0f);
+            linesModel->setLineWidth(5.0f);
             linesModel->setColor(0.0, 1.0, 1.0, 1.0);
             pathModels.push_back(linesModel);
             gameRenderer3d->getGeometryManager()->addGeometry(linesModel);
