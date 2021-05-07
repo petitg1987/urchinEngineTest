@@ -8,7 +8,7 @@ GlfwSurfaceCreator::GlfwSurfaceCreator(GLFWwindow* window) :
         window(window) {
 }
 
-VkSurfaceKHR GlfwSurfaceCreator::createSurface(VkInstance instance) const {
+VkSurfaceKHR GlfwSurfaceCreator::createSurface(VkInstance instance) {
     VkSurfaceKHR surface = nullptr;
     VkResult result = glfwCreateWindowSurface(instance, window, nullptr, &surface);
     if (result != VK_SUCCESS) {
@@ -49,10 +49,10 @@ bool WindowController::isEventCallbackActive() const {
     return eventsCallbackActive;
 }
 
-std::vector<const char*> WindowController::windowRequiredExtensions() {
+std::vector<std::string> WindowController::windowRequiredExtensions() {
     ExtensionList extensionList;
     extensionList.extensions = glfwGetRequiredInstanceExtensions(&extensionList.extensionCount);
-    return std::vector<const char*>(extensionList.extensions, extensionList.extensions + extensionList.extensionCount);
+    return std::vector<std::string>(extensionList.extensions, extensionList.extensions + extensionList.extensionCount);
 }
 
 std::unique_ptr<GlfwSurfaceCreator> WindowController::getSurfaceCreator() const {

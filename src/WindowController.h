@@ -16,7 +16,7 @@ struct ExtensionList {
 
 struct GlfwSurfaceCreator : public urchin::SurfaceCreator {
     explicit GlfwSurfaceCreator(GLFWwindow*);
-    VkSurfaceKHR createSurface(VkInstance instance) const override;
+    VkSurfaceKHR createSurface(VkInstance instance) override;
 
     GLFWwindow *window;
 };
@@ -38,7 +38,7 @@ class WindowController {
         void cleanEvents();
         bool isEventCallbackActive() const;
 
-        static std::vector<const char*> windowRequiredExtensions();
+        static std::vector<std::string> windowRequiredExtensions();
         std::unique_ptr<GlfwSurfaceCreator> getSurfaceCreator() const;
         std::unique_ptr<GlfwFramebufferSizeRetriever> getFramebufferSizeRetriever() const;
 
