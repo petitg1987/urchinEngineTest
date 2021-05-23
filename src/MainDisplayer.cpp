@@ -30,6 +30,7 @@ void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     auto surfaceCreator = getWindowController()->getSurfaceCreator();
     auto framebufferSizeRetriever = getWindowController()->getFramebufferSizeRetriever();
     sceneManager = new SceneManager(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
+    sceneManager->updateVerticalSync(false);
     soundManager = new SoundManager();
 
     gameRenderer = new GameRenderer(this);
