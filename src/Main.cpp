@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include "Main.h"
 using namespace urchin;
 
@@ -67,14 +69,14 @@ void Main::execute(int argc, char *argv[]) {
         if (Logger::instance()->hasFailure()) {
             crashReporter->onLogContainFailure();
             clearResources(window, windowController);
-            std::exit(1);
+            _exit(1);
         } else {
             clearResources(window, windowController);
         }
     } catch (std::exception& e) {
         crashReporter->onException(e);
         clearResources(window, windowController);
-        std::exit(1);
+        _exit(1);
     }
 }
 
