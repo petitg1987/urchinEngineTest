@@ -1,6 +1,6 @@
 #include <memory>
 
-#include "MainDisplayer.h"
+#include <MainDisplayer.h>
 using namespace urchin;
 
 MainDisplayer::MainDisplayer(WindowController* windowController) :

@@ -6,10 +6,10 @@
 #include <list>
 #include <map>
 
-#include "MainDisplayer.h"
-#include "WindowController.h"
-#include "KeyboardKey.h"
-#include "util/CrashReporter.h"
+#include <MainDisplayer.h>
+#include <WindowController.h>
+#include <KeyboardKey.h>
+#include <util/CrashReporter.h>
 
 int main(int, char *[]);
 

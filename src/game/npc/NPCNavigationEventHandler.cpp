@@ -1,4 +1,4 @@
-#include "NPCNavigationEventHandler.h"
+#include <game/npc/NPCNavigationEventHandler.h>
 using namespace urchin;
 
 NPCNavigationEventHandler::NPCNavigationEventHandler(Model* model) :

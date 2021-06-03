@@ -1,11 +1,11 @@
 #ifndef URCHINENGINETEST_NPCNAVIGATION_H
 #define URCHINENGINETEST_NPCNAVIGATION_H
 
-#include "UrchinCommon.h"
-#include "Urchin3dEngine.h"
-#include "UrchinMapHandler.h"
-#include "UrchinPhysicsEngine.h"
-#include "UrchinAIEngine.h"
+#include <UrchinCommon.h>
+#include <Urchin3dEngine.h>
+#include <UrchinMapHandler.h>
+#include <UrchinPhysicsEngine.h>
+#include <UrchinAIEngine.h>
 
 class MainDisplayer;
 

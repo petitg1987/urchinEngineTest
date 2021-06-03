@@ -1,8 +1,8 @@
 #include <random>
 
-#include "game/GameRenderer.h"
-#include "game/CloseWindowCmd.h"
-#include "MainDisplayer.h"
+#include <game/GameRenderer.h>
+#include <game/CloseWindowCmd.h>
+#include <MainDisplayer.h>
 using namespace urchin;
 
 //debug parameters

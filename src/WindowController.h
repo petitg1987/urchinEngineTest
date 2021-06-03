@@ -4,8 +4,8 @@
 #include <vector>
 #include <memory>
 
-#include "graphic/setup/spi/SurfaceCreator.h"
-#include "graphic/setup/spi/FramebufferSizeRetriever.h"
+#include <graphic/setup/spi/SurfaceCreator.h>
+#include <graphic/setup/spi/FramebufferSizeRetriever.h>
 
 class GLFWwindow;
 

@@ -3,18 +3,18 @@
 
 #include <vector>
 #include <memory>
-#include "UrchinCommon.h"
-#include "Urchin3dEngine.h"
-#include "UrchinMapHandler.h"
-#include "UrchinPhysicsEngine.h"
-#include "UrchinSoundEngine.h"
-#include "UrchinAIEngine.h"
+#include <UrchinCommon.h>
+#include <Urchin3dEngine.h>
+#include <UrchinMapHandler.h>
+#include <UrchinPhysicsEngine.h>
+#include <UrchinSoundEngine.h>
+#include <UrchinAIEngine.h>
 
-#include "KeyboardKey.h"
-#include "RenderScreen.h"
-#include "game/CharacterCamera.h"
-#include "game/UnderWaterEvent.h"
-#include "game/npc/NPCNavigation.h"
+#include <KeyboardKey.h>
+#include <RenderScreen.h>
+#include <game/CharacterCamera.h>
+#include <game/UnderWaterEvent.h>
+#include <game/npc/NPCNavigation.h>
 
 class MainDisplayer;
 

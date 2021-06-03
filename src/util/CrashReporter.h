@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-#include "UrchinCommon.h"
+#include <UrchinCommon.h>
 
 class CrashReporter : public urchin::SignalReceptor {
     public:

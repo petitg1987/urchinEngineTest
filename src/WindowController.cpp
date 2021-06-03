@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <stdexcept>
 
-#include "WindowController.h"
+#include <WindowController.h>
 
 GlfwSurfaceCreator::GlfwSurfaceCreator(GLFWwindow* window) :
         window(window) {

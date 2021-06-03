@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-#include "Main.h"
+#include <Main.h>
 using namespace urchin;
 
 int main(int argc, char *argv[]) {

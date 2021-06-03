@@ -1,5 +1,5 @@
-#include "RenderScreen.h"
-#include "MainDisplayer.h"
+#include <RenderScreen.h>
+#include <MainDisplayer.h>
 
 RenderScreen::RenderScreen(MainDisplayer* mainDisplayer) :
         mainDisplayer(mainDisplayer) {

@@ -1,13 +1,13 @@
 #ifndef URCHINENGINETEST_MAINDISPLAYER_H
 #define URCHINENGINETEST_MAINDISPLAYER_H
 
-#include "UrchinCommon.h"
-#include "Urchin3dEngine.h"
-#include "UrchinSoundEngine.h"
+#include <UrchinCommon.h>
+#include <Urchin3dEngine.h>
+#include <UrchinSoundEngine.h>
 
-#include "WindowController.h"
-#include "KeyboardKey.h"
-#include "game/GameRenderer.h"
+#include <WindowController.h>
+#include <KeyboardKey.h>
+#include <game/GameRenderer.h>
 
 class MainDisplayer {
     public:

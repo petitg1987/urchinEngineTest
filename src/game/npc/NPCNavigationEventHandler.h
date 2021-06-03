@@ -1,8 +1,8 @@
 #ifndef URCHINENGINETEST_NPCNAVIGATIONEVENTHANDLER_H
 #define URCHINENGINETEST_NPCNAVIGATIONEVENTHANDLER_H
 
-#include "Urchin3dEngine.h"
-#include "UrchinAIEngine.h"
+#include <Urchin3dEngine.h>
+#include <UrchinAIEngine.h>
 
 class NPCNavigationEventHandler : public urchin::AICharacterEventHandler {
     public:
