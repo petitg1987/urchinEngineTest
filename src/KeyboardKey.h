@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_KEYBOARDKEY_H
-#define URCHINENGINETEST_KEYBOARDKEY_H
+#pragma once
 
 enum KeyboardKey {
     A = 0,
@@ -46,5 +45,3 @@ enum KeyboardKey {
 
     UNKNOWN_KEY
 };
-
-#endif

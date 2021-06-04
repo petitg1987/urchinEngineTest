@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_NPCNAVIGATION_H
-#define URCHINENGINETEST_NPCNAVIGATION_H
+#pragma once
 
 #include <UrchinCommon.h>
 #include <Urchin3dEngine.h>
@@ -25,5 +24,3 @@ class NPCNavigation {
         std::shared_ptr<urchin::AICharacter> aiCharacter;
         std::unique_ptr<urchin::AICharacterController> aiCharacterController;
 };
-
-#endif

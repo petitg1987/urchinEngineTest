@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_CLOSEWINDOWSCMD_H
-#define URCHINENGINETEST_CLOSEWINDOWSCMD_H
+#pragma once
 
 #include <Urchin3dEngine.h>
 
@@ -12,5 +11,3 @@ class CloseWindowCmd : public urchin::EventListener {
     private:
         urchin::Window *window;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_MAIN_H
-#define URCHINENGINETEST_MAIN_H
+#pragma once
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -59,5 +58,3 @@ class Main {
         std::list<unsigned int> charPressEvents;
         std::list<int> keyPressEvents;
 };
-
-#endif

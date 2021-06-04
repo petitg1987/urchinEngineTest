@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_UNDERWATEREVENT_H
-#define URCHINENGINETEST_UNDERWATEREVENT_H
+#pragma once
 
 #include <UrchinCommon.h>
 #include <UrchinSoundEngine.h>
@@ -16,5 +15,3 @@ class UnderWaterEvent : public urchin::Observer {
         bool bIsUnderWater;
         urchin::ManualTrigger *underWaterSoundTrigger;
 };
-
-#endif

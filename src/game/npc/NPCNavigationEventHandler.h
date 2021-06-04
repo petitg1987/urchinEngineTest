@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_NPCNAVIGATIONEVENTHANDLER_H
-#define URCHINENGINETEST_NPCNAVIGATIONEVENTHANDLER_H
+#pragma once
 
 #include <Urchin3dEngine.h>
 #include <UrchinAIEngine.h>
@@ -14,5 +13,3 @@ class NPCNavigationEventHandler : public urchin::AICharacterEventHandler {
     private:
         urchin::Model *model;
 };
-
-#endif

@@ -82,12 +82,12 @@ void GameRenderer::initialize() {
     //UI
     gameUIRenderer = getMainDisplayer()->getSceneManager()->newUIRenderer(false);
 
-    fpsText = new Text(Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
+    fpsText = Text::newText(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    myWindow = new Window(Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "Commands");
+    myWindow = new Window(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "Commands");
     gameUIRenderer->addWidget(myWindow);
-    myText = new Text(myWindow, Position(0, 4, LengthType::PIXEL), "defaultSkin",
+    myText = Text::newText(myWindow, Position(0, 4, LengthType::PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
                       "> Space: Jump\n"
                       "> E: Edit mode (on/off)\n"

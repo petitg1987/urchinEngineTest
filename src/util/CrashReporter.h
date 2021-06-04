@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_CRASHREPORTER_H
-#define URCHINENGINETEST_CRASHREPORTER_H
+#pragma once
 
 #include <stdexcept>
 
@@ -16,5 +15,3 @@ class CrashReporter : public urchin::SignalReceptor {
     private:
         void onError() const;
 };
-
-#endif

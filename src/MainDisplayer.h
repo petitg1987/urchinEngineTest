@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_MAINDISPLAYER_H
-#define URCHINENGINETEST_MAINDISPLAYER_H
+#pragma once
 
 #include <UrchinCommon.h>
 #include <Urchin3dEngine.h>
@@ -37,5 +36,3 @@ class MainDisplayer {
 
         RenderScreen* gameRenderer;
 };
-
-#endif

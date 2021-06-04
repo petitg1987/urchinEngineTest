@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_GAMERENDERER_H
-#define URCHINENGINETEST_GAMERENDERER_H
+#pragma once
 
 #include <vector>
 #include <memory>
@@ -90,5 +89,3 @@ class GameRenderer : public RenderScreen {
         //NPC navigation
         std::unique_ptr<NPCNavigation> npcNavigation;
 };
-
-#endif

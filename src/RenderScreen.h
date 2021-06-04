@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_RENDERSCREEN_H
-#define URCHINENGINETEST_RENDERSCREEN_H
+#pragma once
 
 #include <KeyboardKey.h>
 
@@ -24,5 +23,3 @@ class RenderScreen {
     private:
         MainDisplayer* mainDisplayer;
 };
-
-#endif

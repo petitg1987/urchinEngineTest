@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_WINDOWCONTROLLER_H
-#define URCHINENGINETEST_WINDOWCONTROLLER_H
+#pragma once
 
 #include <vector>
 #include <memory>
@@ -47,5 +46,3 @@ class WindowController {
         bool eventsCallbackActive;
 
 };
-
-#endif

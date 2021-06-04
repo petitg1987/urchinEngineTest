@@ -1,5 +1,4 @@
-#ifndef URCHINENGINETEST_CHARACTERCAMERA_H
-#define URCHINENGINETEST_CHARACTERCAMERA_H
+#pragma once
 
 #include <UrchinCommon.h>
 #include <Urchin3dEngine.h>
@@ -18,5 +17,3 @@ class CharacterCamera : public urchin::Camera {
     private:
         const WindowController* windowController;
 };
-
-#endif
