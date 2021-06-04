@@ -15,6 +15,9 @@ core
 urchinEngineTest
 urchinEngineTest.exe
 
+#Debug files
+profiler.log
+
 #Recovery files
 resources/models/SOURCES/*.blend1
 resources/models/SOURCES/*.blend2
