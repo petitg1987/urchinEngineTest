@@ -85,7 +85,7 @@ void GameRenderer::initialize() {
     fpsText = Text::newText(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    myWindow = new Window(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "Commands");
+    myWindow = new Window(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
     gameUIRenderer->addWidget(myWindow);
     myText = Text::newText(myWindow, Position(0, 4, LengthType::PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
@@ -101,13 +101,13 @@ void GameRenderer::initialize() {
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
     textBox = new TextBox(myWindow, Position(0, 192, LengthType::PIXEL), Size(264, 20, LengthType::PIXEL), "defaultSkin");
-    myButton = new Button(myWindow, Position(0, 215, LengthType::PIXEL), Size(264, 27, LengthType::PIXEL), "defaultSkin", "Close");
+    myButton = new Button(myWindow, Position(0, 215, LengthType::PIXEL), Size(264, 27, LengthType::PIXEL), "defaultSkin", "button.close");
     myButton->addEventListener(std::make_shared<CloseWindowCmd>(myWindow));
 
-    /*myWindow2 = new Window(Position(320, 30, LengthType::PIXEL), Size(200, 160, LengthType::PIXEL), "defaultSkin", "Second Windows");
+    /*myWindow2 = new Window(nullptr, Position(320, 30, LengthType::PIXEL), Size(200, 160, LengthType::PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(myWindow2);
-    std::vector<std::string> values = {"One", "Two", "Three", "Four"};
-    mySlider = new Slider(myWindow2, Position(10, 4, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", values);*/
+    std::vector<std::string> values = {"slider.one", "slider.two", "slider.three"};
+    mySlider = Slider::newTranslatableSlider(myWindow2, Position(10, 4, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", values);*/
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger *>(mapHandler->getMap()->getSceneSound("ambientSound")->getSoundTrigger());
