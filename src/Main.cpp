@@ -243,6 +243,41 @@ void Main::onKeyReleased(int key) {
     }
 }
 
+void Main::onMouseButtonPressed(int button) {
+    //engine
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_LEFT);
+    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_RIGHT);
+    }
+
+    //game
+    if (propagatePressKeyEvent) {
+        mainDisplayer->onKeyPressed(toKeyboardKey(button));
+    }
+}
+
+void Main::onMouseButtonReleased(int button) {
+    //engine
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_LEFT);
+    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
+    }
+
+    //game
+    if (propagateReleaseKeyEvent) {
+        mainDisplayer->onKeyReleased(toKeyboardKey(button));
+    }
+}
+
+void Main::onMouseMove(int x, int y) {
+    //engine
+    if (x != 0 || y != 0) {
+        mainDisplayer->onMouseMove(x, y);
+    }
+}
+
 KeyboardKey Main::toKeyboardKey(int key) {
     const char* charKey = glfwGetKeyName(key, 0);
     if(charKey && charKey[0] >= 'a' && charKey[0] <= 'z') {
@@ -255,31 +290,6 @@ KeyboardKey Main::toKeyboardKey(int key) {
         return it->second;
     } else {
         return KeyboardKey::UNKNOWN_KEY;
-    }
-}
-
-void Main::onMouseButtonPressed(int button) {
-    //engine
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_LEFT);
-    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_RIGHT);
-    }
-}
-
-void Main::onMouseButtonReleased(int button) {
-    //engine
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_LEFT);
-    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
-    }
-}
-
-void Main::onMouseMove(int x, int y) {
-    //engine
-    if (x != 0 || y != 0) {
-        mainDisplayer->onMouseMove(x, y);
     }
 }
 

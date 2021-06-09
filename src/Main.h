@@ -37,11 +37,10 @@ class Main {
         void onChar(unsigned int);
         void onKeyPressed(int);
         void onKeyReleased(int);
-        KeyboardKey toKeyboardKey(int);
-
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);
         void onMouseMove(int, int);
+        KeyboardKey toKeyboardKey(int);
 
         static bool argumentsContains(const std::string&, int, char *[]);
 
