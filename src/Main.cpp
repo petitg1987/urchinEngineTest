@@ -353,6 +353,8 @@ Control::Key Main::toInputKey(int key) {
             return Control::Key::RIGHT_BRACKET;
         } else if (charKey[0] == '.') { //for QWERTY keyboards
             return Control::Key::PERIOD;
+        } else if (charKey[0] == '`') { //for QWERTY keyboards
+            return Control::Key::GRAVE_ACCENT;
         }
     }
 
