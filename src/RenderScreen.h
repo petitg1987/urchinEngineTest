@@ -1,6 +1,6 @@
 #pragma once
 
-#include <KeyboardKey.h>
+#include "UrchinCommon.h"
 
 class MainDisplayer;
 
@@ -9,8 +9,8 @@ class RenderScreen {
         explicit RenderScreen(MainDisplayer *);
         virtual ~RenderScreen() = default;
 
-        virtual void onKeyPressed(KeyboardKey);
-        virtual void onKeyReleased(KeyboardKey);
+        virtual void onKeyPressed(urchin::Control::Key);
+        virtual void onKeyReleased(urchin::Control::Key);
 
         virtual void active(bool) = 0;
         virtual bool isActive() const = 0;

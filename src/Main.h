@@ -7,7 +7,6 @@
 
 #include <MainDisplayer.h>
 #include <WindowController.h>
-#include <KeyboardKey.h>
 #include <util/CrashReporter.h>
 
 int main(int, char *[]);
@@ -19,7 +18,7 @@ class Main {
 
     private:
         static void glfwErrorCallback(int, const char*);
-        void initializeKeyboardMap();
+        void initializeInputKeyMap();
 
         static std::string retrieveResourcesDirectory(char *[]);
         static std::string retrieveSaveDirectory(char *[]);
@@ -40,7 +39,7 @@ class Main {
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);
         void onMouseMove(int, int);
-        KeyboardKey toKeyboardKey(int);
+        urchin::Control::Key toInputKey(int);
 
         static bool argumentsContains(const std::string&, int, char *[]);
 
@@ -53,7 +52,7 @@ class Main {
         WindowController* windowController;
 
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;
-        std::map<int, KeyboardKey> keyboardMap;
+        std::map<int, urchin::Control::Key> inputKeyMap;
         std::list<unsigned int> charPressEvents;
         std::list<int> keyPressEvents;
 };

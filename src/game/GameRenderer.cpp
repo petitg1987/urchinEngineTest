@@ -184,41 +184,41 @@ void GameRenderer::deleteGeometryModels(std::vector<GeometryModel *>& models) co
     models.clear();
 }
 
-void GameRenderer::onKeyPressed(KeyboardKey key) {
-    if (key == KeyboardKey::E) {
+void GameRenderer::onKeyPressed(Control::Key key) {
+    if (key == Control::Key::E) {
         switchMode();
     }
 
     //3d
     static float angle = 0.0f;
-    if (key == KeyboardKey::PAGE_UP) {
+    if (key == Control::Key::PAGE_UP) {
         angle += 0.1f;
         getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
-    }if (key == KeyboardKey::PAGE_DOWN) {
+    }if (key == Control::Key::PAGE_DOWN) {
         angle -= 0.1f;
         getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     }
 
     static bool aliasingActive = true;
-    if (key == KeyboardKey::A) {
+    if (key == Control::Key::A) {
         aliasingActive = !aliasingActive;
         gameRenderer3d->activateAntiAliasing(aliasingActive);
     }
 
     static bool hbaoActive = true;
-    if (key == KeyboardKey::H) {
+    if (key == Control::Key::H) {
         hbaoActive = !hbaoActive;
         gameRenderer3d->activateAmbientOcclusion(hbaoActive);
     }
 
     static bool shadowActive = true;
-    if (key == KeyboardKey::W) {
+    if (key == Control::Key::W) {
         shadowActive = !shadowActive;
         gameRenderer3d->activateShadow(shadowActive);
     }
 
     //physics
-    if (key == KeyboardKey::F) {
+    if (key == Control::Key::F) {
         auto seed = static_cast<std::default_random_engine::result_type>(std::chrono::system_clock::now().time_since_epoch().count());
         std::default_random_engine generator(seed);
         std::uniform_int_distribution<> distribution(0, 10);
@@ -230,13 +230,13 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         if (body != nullptr) {
             body->applyCentralMomentum(Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
         }
-    } else if (key == KeyboardKey::C) {
+    } else if (key == Control::Key::C) {
         if (physicsWorld->isPaused()) {
             physicsWorld->unpause();
         } else {
             physicsWorld->pause();
         }
-    } else if (key == KeyboardKey::G) {
+    } else if (key == Control::Key::G) {
         float clipSpaceX = (2.0f * (float)getMainDisplayer()->getMouseX()) / ((float)getMainDisplayer()->getSceneManager()->getSceneWidth()) - 1.0f;
         float clipSpaceY = 1.0f - (2.0f * (float)getMainDisplayer()->getMouseY()) / ((float)getMainDisplayer()->getSceneManager()->getSceneHeight());
         Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
@@ -270,37 +270,37 @@ void GameRenderer::onKeyPressed(KeyboardKey key) {
         }
     }
 
-    if (key == KeyboardKey::Q) {
+    if (key == Control::Key::Q) {
         leftKeyPressed = true;
-    } else if (key == KeyboardKey::D) {
+    } else if (key == Control::Key::D) {
         rightKeyPressed = true;
-    } else if (key == KeyboardKey::Z) {
+    } else if (key == Control::Key::Z) {
         upKeyPressed = true;
-    } else if (key == KeyboardKey::S) {
+    } else if (key == Control::Key::S) {
         downKeyPressed = true;
-    } else if (key == KeyboardKey::SPACE) {
+    } else if (key == Control::Key::SPACE) {
         physicsCharacterController->jump();
     }
 
     //sound
-    if (key == KeyboardKey::P) {
+    if (key == Control::Key::P) {
         manualTrigger->pause();
-    } else if (key == KeyboardKey::O) {
+    } else if (key == Control::Key::O) {
         manualTrigger->stop();
-    } else if (key == KeyboardKey::M) {
+    } else if (key == Control::Key::M) {
         manualTrigger->play();
     }
 }
 
-void GameRenderer::onKeyReleased(KeyboardKey key) {
+void GameRenderer::onKeyReleased(Control::Key key) {
     //3d
-    if (key == KeyboardKey::Q) {
+    if (key == Control::Key::Q) {
         leftKeyPressed = false;
-    } else if (key == KeyboardKey::D) {
+    } else if (key == Control::Key::D) {
         rightKeyPressed = false;
-    } else if (key == KeyboardKey::Z) {
+    } else if (key == Control::Key::Z) {
         upKeyPressed = false;
-    } else if (key == KeyboardKey::S) {
+    } else if (key == Control::Key::S) {
         downKeyPressed = false;
     }
 }

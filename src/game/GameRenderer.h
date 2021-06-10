@@ -9,7 +9,6 @@
 #include <UrchinSoundEngine.h>
 #include <UrchinAIEngine.h>
 
-#include <KeyboardKey.h>
 #include <RenderScreen.h>
 #include <game/CharacterCamera.h>
 #include <game/UnderWaterEvent.h>
@@ -22,8 +21,8 @@ class GameRenderer : public RenderScreen {
         explicit GameRenderer(MainDisplayer *);
         ~GameRenderer() override;
 
-        void onKeyPressed(KeyboardKey) override;
-        void onKeyReleased(KeyboardKey) override;
+        void onKeyPressed(urchin::Control::Key) override;
+        void onKeyReleased(urchin::Control::Key) override;
 
         void active(bool) override;
         bool isActive() const override;

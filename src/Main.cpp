@@ -22,7 +22,7 @@ Main::Main() :
 }
 
 void Main::execute(int argc, char *argv[]) {
-    initializeKeyboardMap();
+    initializeInputKeyMap();
 
     Logger::setupCustomInstance(std::make_unique<FileLogger>("urchinEngineTest.log"));
     SignalHandler::instance()->registerSignalReceptor(crashReporter);
@@ -86,21 +86,63 @@ void Main::glfwErrorCallback(int error, const char* description) {
     }
 }
 
-void Main::initializeKeyboardMap() {
-    keyboardMap[GLFW_KEY_ESCAPE] = KeyboardKey::ESCAPE;
-    keyboardMap[GLFW_KEY_SPACE] = KeyboardKey::SPACE;
-    keyboardMap[GLFW_KEY_LEFT_CONTROL] = KeyboardKey::CTRL_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT_CONTROL] = KeyboardKey::CTRL_RIGHT;
-    keyboardMap[GLFW_KEY_LEFT_ALT] = KeyboardKey::ALT_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT_ALT] = KeyboardKey::ALT_RIGHT;
-    keyboardMap[GLFW_KEY_LEFT_SHIFT] = KeyboardKey::SHIFT_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT_SHIFT] = KeyboardKey::SHIFT_RIGHT;
-    keyboardMap[GLFW_KEY_LEFT] = KeyboardKey::ARROW_LEFT;
-    keyboardMap[GLFW_KEY_RIGHT] = KeyboardKey::ARROW_RIGHT;
-    keyboardMap[GLFW_KEY_UP] = KeyboardKey::ARROW_UP;
-    keyboardMap[GLFW_KEY_DOWN] = KeyboardKey::ARROW_DOWN;
-    keyboardMap[GLFW_KEY_PAGE_UP] = KeyboardKey::PAGE_UP;
-    keyboardMap[GLFW_KEY_PAGE_DOWN] = KeyboardKey::PAGE_DOWN;
+void Main::initializeInputKeyMap() {
+    //keyboard
+    for(int i = 0; i < 10; ++i) {
+        inputKeyMap[GLFW_KEY_0 + i] = static_cast<Control::Key>(Control::Key::K0 + i);
+    }
+    for(int i = 0; i < 12; ++i) {
+        inputKeyMap[GLFW_KEY_F1 + i] = static_cast<Control::Key>(Control::Key::F1 + i);
+    }
+    for(int i = 0; i < 10; ++i) {
+        inputKeyMap[GLFW_KEY_KP_0 + i] = static_cast<Control::Key>(Control::Key::NUM_PAD_0 + i);
+    }
+    inputKeyMap[GLFW_KEY_KP_DECIMAL] = Control::Key::NUM_PAD_DECIMAL;
+    inputKeyMap[GLFW_KEY_KP_DIVIDE] = Control::Key::NUM_PAD_DIVIDE;
+    inputKeyMap[GLFW_KEY_KP_MULTIPLY] = Control::Key::NUM_PAD_MULTIPLY;
+    inputKeyMap[GLFW_KEY_KP_SUBTRACT] = Control::Key::NUM_PAD_SUBTRACT;
+    inputKeyMap[GLFW_KEY_KP_ADD] = Control::Key::NUM_PAD_ADD;
+    inputKeyMap[GLFW_KEY_KP_ENTER] = Control::Key::NUM_PAD_ENTER;
+    inputKeyMap[GLFW_KEY_KP_EQUAL] = Control::Key::NUM_PAD_EQUAL;
+    inputKeyMap[GLFW_KEY_ESCAPE] = Control::Key::ESCAPE;
+    inputKeyMap[GLFW_KEY_SPACE] = Control::Key::SPACE;
+    inputKeyMap[GLFW_KEY_LEFT_CONTROL] = Control::Key::CTRL_LEFT;
+    inputKeyMap[GLFW_KEY_RIGHT_CONTROL] = Control::Key::CTRL_RIGHT;
+    inputKeyMap[GLFW_KEY_LEFT_ALT] = Control::Key::ALT_LEFT;
+    inputKeyMap[GLFW_KEY_RIGHT_ALT] = Control::Key::ALT_RIGHT;
+    inputKeyMap[GLFW_KEY_LEFT_SHIFT] = Control::Key::SHIFT_LEFT;
+    inputKeyMap[GLFW_KEY_RIGHT_SHIFT] = Control::Key::SHIFT_RIGHT;
+    inputKeyMap[GLFW_KEY_LEFT_SUPER] = Control::Key::SUPER_LEFT;
+    inputKeyMap[GLFW_KEY_RIGHT_SUPER] = Control::Key::SUPER_RIGHT;
+    inputKeyMap[GLFW_KEY_MENU] = Control::Key::MENU;
+    inputKeyMap[GLFW_KEY_LEFT] = Control::Key::ARROW_LEFT;
+    inputKeyMap[GLFW_KEY_RIGHT] = Control::Key::ARROW_RIGHT;
+    inputKeyMap[GLFW_KEY_UP] = Control::Key::ARROW_UP;
+    inputKeyMap[GLFW_KEY_DOWN] = Control::Key::ARROW_DOWN;
+    inputKeyMap[GLFW_KEY_ENTER] = Control::Key::ENTER;
+    inputKeyMap[GLFW_KEY_TAB] = Control::Key::TAB;
+    inputKeyMap[GLFW_KEY_BACKSPACE] = Control::Key::BACKSPACE;
+    inputKeyMap[GLFW_KEY_INSERT] = Control::Key::INSERT;
+    inputKeyMap[GLFW_KEY_DELETE] = Control::Key::DELETE;
+    inputKeyMap[GLFW_KEY_HOME] = Control::Key::HOME;
+    inputKeyMap[GLFW_KEY_END] = Control::Key::END;
+    inputKeyMap[GLFW_KEY_PAGE_UP] = Control::Key::PAGE_UP;
+    inputKeyMap[GLFW_KEY_PAGE_DOWN] = Control::Key::PAGE_DOWN;
+    inputKeyMap[GLFW_KEY_CAPS_LOCK] = Control::Key::CAPS_LOCK;
+    inputKeyMap[GLFW_KEY_SCROLL_LOCK] = Control::Key::SCROLL_LOCK;
+    inputKeyMap[GLFW_KEY_NUM_LOCK] = Control::Key::NUM_LOCK;
+    inputKeyMap[GLFW_KEY_PRINT_SCREEN] = Control::Key::PRINT_SCREEN;
+    inputKeyMap[GLFW_KEY_PAUSE] = Control::Key::PAUSE;
+
+    //mouse
+    inputKeyMap[GLFW_MOUSE_BUTTON_LEFT] = Control::Key::LMB;
+    inputKeyMap[GLFW_MOUSE_BUTTON_RIGHT] = Control::Key::RMB;
+    inputKeyMap[GLFW_MOUSE_BUTTON_MIDDLE] = Control::Key::MMB;
+    inputKeyMap[GLFW_MOUSE_BUTTON_4] = Control::Key::MOUSE_F1;
+    inputKeyMap[GLFW_MOUSE_BUTTON_5] = Control::Key::MOUSE_F2;
+    inputKeyMap[GLFW_MOUSE_BUTTON_6] = Control::Key::MOUSE_F3;
+    inputKeyMap[GLFW_MOUSE_BUTTON_7] = Control::Key::MOUSE_F4;
+    inputKeyMap[GLFW_MOUSE_BUTTON_8] = Control::Key::MOUSE_F5;
 }
 
 std::string Main::retrieveResourcesDirectory(char *argv[]) {
@@ -219,7 +261,7 @@ void Main::onKeyPressed(int key) {
 
     //game
     if (propagatePressKeyEvent) {
-        mainDisplayer->onKeyPressed(toKeyboardKey(key));
+        mainDisplayer->onKeyPressed(toInputKey(key));
     }
 }
 
@@ -239,7 +281,7 @@ void Main::onKeyReleased(int key) {
 
     //game
     if (propagateReleaseKeyEvent) {
-        mainDisplayer->onKeyReleased(toKeyboardKey(key));
+        mainDisplayer->onKeyReleased(toInputKey(key));
     }
 }
 
@@ -253,7 +295,7 @@ void Main::onMouseButtonPressed(int button) {
 
     //game
     if (propagatePressKeyEvent) {
-        mainDisplayer->onKeyPressed(toKeyboardKey(button));
+        mainDisplayer->onKeyPressed(toInputKey(button));
     }
 }
 
@@ -267,7 +309,7 @@ void Main::onMouseButtonReleased(int button) {
 
     //game
     if (propagateReleaseKeyEvent) {
-        mainDisplayer->onKeyReleased(toKeyboardKey(button));
+        mainDisplayer->onKeyReleased(toInputKey(button));
     }
 }
 
@@ -278,19 +320,43 @@ void Main::onMouseMove(int x, int y) {
     }
 }
 
-KeyboardKey Main::toKeyboardKey(int key) {
-    const char* charKey = glfwGetKeyName(key, 0);
-    if(charKey && charKey[0] >= 'a' && charKey[0] <= 'z') {
-        int keyShift = charKey[0] - 'a';
-        return static_cast<KeyboardKey>(KeyboardKey::A + keyShift);
+Control::Key Main::toInputKey(int key) {
+    auto itFind = inputKeyMap.find(key);
+    if (itFind != inputKeyMap.end()) {
+        return itFind->second;
     }
 
-    auto it = keyboardMap.find(key);
-    if (it != keyboardMap.end()) {
-        return it->second;
-    } else {
-        return KeyboardKey::UNKNOWN_KEY;
+    const char* charKey = glfwGetKeyName(key, 0);
+    if(charKey) {
+        if (charKey[0] >= 'a' && charKey[0] <= 'z') {
+            int keyShift = charKey[0] - 'a';
+            return static_cast<Control::Key>(Control::Key::A + keyShift);
+        } else if (charKey[0] == '=') {
+            return Control::Key::EQUAL;
+        } else if (charKey[0] == ':') {
+            return Control::Key::COLON;
+        } else if (charKey[0] == ';') {
+            return Control::Key::SEMICOLON;
+        } else if (charKey[0] == ',') {
+            return Control::Key::COMMA;
+        } else if (charKey[0] == '-') {
+            return Control::Key::MINUS;
+        } else if (charKey[0] == '/') { //for QWERTY keyboards
+            return Control::Key::SLASH;
+        } else if (charKey[0] == '\\') { //for QWERTY keyboards
+            return Control::Key::BACKSLASH;
+        } else if (charKey[0] == '\'') { //for QWERTY keyboards
+            return Control::Key::APOSTROPHE;
+        } else if (charKey[0] == '[') { //for QWERTY keyboards
+            return Control::Key::LEFT_BRACKET;
+        } else if (charKey[0] == ']') { //for QWERTY keyboards
+            return Control::Key::RIGHT_BRACKET;
+        } else if (charKey[0] == '.') { //for QWERTY keyboards
+            return Control::Key::PERIOD;
+        }
     }
+
+    return Control::Key::UNKNOWN_KEY;
 }
 
 bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) {

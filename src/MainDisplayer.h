@@ -5,7 +5,6 @@
 #include <UrchinSoundEngine.h>
 
 #include <WindowController.h>
-#include <KeyboardKey.h>
 #include <game/GameRenderer.h>
 
 class MainDisplayer {
@@ -16,8 +15,8 @@ class MainDisplayer {
         void initialize(const std::string&);
         void paint();
         void resize(unsigned int, unsigned int);
-        void onKeyPressed(KeyboardKey);
-        void onKeyReleased(KeyboardKey);
+        void onKeyPressed(urchin::Control::Key);
+        void onKeyReleased(urchin::Control::Key);
         void onMouseMove(int, int);
 
         int getMouseX() const;

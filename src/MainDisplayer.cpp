@@ -53,13 +53,13 @@ void MainDisplayer::resize(unsigned int width, unsigned int height) {
     }
 }
 
-void MainDisplayer::onKeyPressed(KeyboardKey key) {
+void MainDisplayer::onKeyPressed(Control::Key key) {
     if (gameRenderer->isActive()) {
         gameRenderer->onKeyPressed(key);
     }
 }
 
-void MainDisplayer::onKeyReleased(KeyboardKey key) {
+void MainDisplayer::onKeyReleased(Control::Key key) {
     if (gameRenderer->isActive()) {
         gameRenderer->onKeyReleased(key);
     }
