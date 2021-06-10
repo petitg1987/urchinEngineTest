@@ -123,7 +123,7 @@ void Main::initializeInputKeyMap() {
     inputKeyMap[GLFW_KEY_TAB] = Control::Key::TAB;
     inputKeyMap[GLFW_KEY_BACKSPACE] = Control::Key::BACKSPACE;
     inputKeyMap[GLFW_KEY_INSERT] = Control::Key::INSERT;
-    inputKeyMap[GLFW_KEY_DELETE] = Control::Key::DELETE;
+    inputKeyMap[GLFW_KEY_DELETE] = Control::Key::DEL;
     inputKeyMap[GLFW_KEY_HOME] = Control::Key::HOME;
     inputKeyMap[GLFW_KEY_END] = Control::Key::END;
     inputKeyMap[GLFW_KEY_PAGE_UP] = Control::Key::PAGE_UP;
