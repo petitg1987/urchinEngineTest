@@ -6,6 +6,6 @@ CloseWindowCmd::CloseWindowCmd(Window* window):
 
 }
 
-void CloseWindowCmd::onClickRelease(Widget*) {
+void CloseWindowCmd::onMouseLeftClickRelease(Widget*) {
     window->setIsVisible(false);
 }
