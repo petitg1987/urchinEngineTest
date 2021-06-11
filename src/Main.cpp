@@ -172,10 +172,10 @@ GLFWwindow* Main::createWindow(int argc, char *argv[]) {
     return window;
 }
 
-void Main::charCallback(GLFWwindow* window, unsigned int codepoint) {
+void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main && main->windowController->isEventCallbackActive()) {
-        main->charPressEvents.push_back(codepoint);
+        main->charPressEvents.push_back(unicodeCharacter);
     }
 }
 
@@ -224,8 +224,8 @@ void Main::handleInputEvents() {
     glfwPollEvents();
 
     if (!charPressEvents.empty()) {
-        for (unsigned int charUnicode : charPressEvents) {
-            onChar(charUnicode);
+        for (char32_t unicodeCharacter : charPressEvents) {
+            onChar(unicodeCharacter);
         }
         charPressEvents.clear();
     }
@@ -238,10 +238,10 @@ void Main::handleInputEvents() {
     }
 }
 
-void Main::onChar(unsigned int unicode) {
+void Main::onChar(char32_t unicodeCharacter) {
     //engine
-    if (propagatePressKeyEvent && unicode < 256) {
-        propagatePressKeyEvent = mainDisplayer->getSceneManager()->onChar(unicode);
+    if (propagatePressKeyEvent) {
+        propagatePressKeyEvent = mainDisplayer->getSceneManager()->onChar(unicodeCharacter);
     }
 }
 

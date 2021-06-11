@@ -33,7 +33,7 @@ class Main {
 
         void handleInputEvents();
 
-        void onChar(unsigned int);
+        void onChar(char32_t);
         void onKeyPressed(int);
         void onKeyReleased(int);
         void onMouseButtonPressed(int);
@@ -53,6 +53,6 @@ class Main {
 
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;
         std::map<int, urchin::Control::Key> inputKeyMap;
-        std::list<unsigned int> charPressEvents;
+        std::list<char32_t> charPressEvents;
         std::list<int> keyPressEvents;
 };
