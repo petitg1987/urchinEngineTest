@@ -110,7 +110,7 @@ void GameRenderer::initialize() {
     mySlider = Slider::newTranslatableSlider(myWindow2, Position(10, 4, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", values);*/
 
     //sound
-    manualTrigger = dynamic_cast<ManualTrigger *>(mapHandler->getMap()->getSceneSound("ambientSound")->getSoundTrigger());
+    manualTrigger = dynamic_cast<ManualTrigger *>(mapHandler->getMap()->getSceneSound("globalSound")->getSoundTrigger());
     manualTrigger->play();
 
     //initialize and start process

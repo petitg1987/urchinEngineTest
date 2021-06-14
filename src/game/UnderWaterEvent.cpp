@@ -5,8 +5,8 @@ using namespace urchin;
 
 UnderWaterEvent::UnderWaterEvent(SoundManager* soundManager) :
         bIsUnderWater(false) {
-    auto* underWaterSound = new AmbientSound("sound/underWater.flac");
-    underWaterSoundTrigger = new ManualTrigger(SoundBehavior(SoundBehavior::PLAY_LOOP, SoundBehavior::SMOOTH_STOP, 1.0));
+    auto* underWaterSound = new GlobalSound("sound/underWater.flac");
+    underWaterSoundTrigger = new ManualTrigger(SoundTrigger::PLAY_LOOP);
     soundManager->addSound(underWaterSound, underWaterSoundTrigger);
 }
 
@@ -15,12 +15,10 @@ void UnderWaterEvent::notify(Observable* observable, int notificationType) {
         switch (notificationType) {
             case Water::MOVE_UNDER_WATER:
                 bIsUnderWater = true;
-
                 underWaterSoundTrigger->play();
                 break;
             case Water::MOVE_ABOVE_WATER:
                 bIsUnderWater = false;
-
                 underWaterSoundTrigger->stop();
                 break;
             default:

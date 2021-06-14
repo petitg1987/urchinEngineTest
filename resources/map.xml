@@ -563,37 +563,29 @@
         </skybox>
     </sky>
     <soundElements>
-        <soundElement name="ambientSound">
-            <sound type="AMBIENT">
+        <soundElement name="globalSound">
+            <sound type="GLOBAL">
                 <filename>sound/ambient.flac</filename>
-                <volume>1.000000</volume>
+                <initialVolume>1.000000</initialVolume>
             </sound>
             <soundTrigger type="MANUAL">
-                <soundBehavior>
-                    <playBehavior>PLAY_LOOP</playBehavior>
-                    <stopBehavior>SMOOTH_STOP</stopBehavior>
-                    <volumeDecreasePercentageOnStop>0.500000</volumeDecreasePercentageOnStop>
-                </soundBehavior>
+                <playBehavior>PLAY_LOOP</playBehavior>
             </soundTrigger>
         </soundElement>
-        <soundElement name="pointSound">
-            <sound type="POINT">
+        <soundElement name="spatialSound">
+            <sound type="SPATIAL">
                 <filename>sound/positionTrigger.flac</filename>
-                <position>0.000000 3.400000 3.400000</position>
+                <position>-6.800000 -0.500000 -0.500000</position>
                 <inaudibleDistance>5.000000</inaudibleDistance>
-                <volume>1.000000</volume>
+                <initialVolume>1.000000</initialVolume>
             </sound>
             <soundTrigger type="SHAPE">
                 <soundShape type="SPHERE">
                     <radius>5.000000</radius>
-                    <position>0.000000 3.400000 0.000000</position>
+                    <position>-6.800000 -0.500000 0.000000</position>
                     <margin>0.000000</margin>
                 </soundShape>
-                <soundBehavior>
-                    <playBehavior>PLAY_LOOP</playBehavior>
-                    <stopBehavior>SMOOTH_STOP</stopBehavior>
-                    <volumeDecreasePercentageOnStop>0.500000</volumeDecreasePercentageOnStop>
-                </soundBehavior>
+                <playBehavior>PLAY_LOOP</playBehavior>
             </soundTrigger>
         </soundElement>
     </soundElements>
