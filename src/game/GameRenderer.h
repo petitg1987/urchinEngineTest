@@ -76,12 +76,6 @@ class GameRenderer : public RenderScreen {
         urchin::UIRenderer *gameUIRenderer;
         urchin::Text *fpsText;
 
-        urchin::Text *myText;
-        urchin::Button *myButton;
-        urchin::TextBox *textBox;
-        urchin::Window*myWindow, *myWindow2;
-        urchin::Slider *mySlider;
-
         //sound
         urchin::ManualTrigger *manualTrigger;
 

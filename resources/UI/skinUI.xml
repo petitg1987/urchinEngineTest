@@ -22,21 +22,21 @@
 	
 	<button nameSkin="defaultSkin">
 		<skin type="default">
-			<image>UI/butDefault.tga</image>
+			<image>UI/buttonDefault.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">1</part>
 			<part zone="right">1</part>
 		</skin>
 		<skin type="focus">
-			<image>UI/butFocus.tga</image>
+			<image>UI/buttonFocus.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">1</part>
 			<part zone="right">1</part>
 		</skin>
 		<skin type="click">
-			<image>UI/butClick.tga</image>
+			<image>UI/buttonClick.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">1</part>
@@ -69,4 +69,9 @@
 		<leftButtonText>&lt;&lt;</leftButtonText>
 		<rightButtonText>&gt;&gt;</rightButtonText>
 	</slider>
+
+	<checkBox nameSkin="defaultSkin">
+		<imageChecked>UI/checkBoxChecked.tga</imageChecked>
+		<imageUnchecked>UI/checkBoxUnchecked.tga</imageUnchecked>
+	</checkBox>
 </ui>
