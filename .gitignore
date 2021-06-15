@@ -8,7 +8,6 @@
 resources/materials/**/*.xcf
 resources/materials/**/*.tga
 resources/materials/**/*.png
-resources/sound/
 
 #Binary
 core

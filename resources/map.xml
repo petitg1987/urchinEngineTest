@@ -565,7 +565,7 @@
     <soundElements>
         <soundElement name="globalSound">
             <sound type="GLOBAL" category="MUSIC">
-                <filename>sound/ambient.flac</filename>
+                <filename>sound/ambient.ogg</filename>
                 <initialVolume>1.000000</initialVolume>
             </sound>
             <soundTrigger type="MANUAL">
@@ -574,7 +574,7 @@
         </soundElement>
         <soundElement name="spatialSound">
             <sound type="SPATIAL" category="MUSIC">
-                <filename>sound/positionTrigger.flac</filename>
+                <filename>sound/positionTrigger.ogg</filename>
                 <position>-6.800000 -0.500000 -0.500000</position>
                 <inaudibleDistance>5.000000</inaudibleDistance>
                 <initialVolume>1.000000</initialVolume>
