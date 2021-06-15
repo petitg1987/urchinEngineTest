@@ -5,7 +5,7 @@ using namespace urchin;
 
 UnderWaterEvent::UnderWaterEvent(SoundManager* soundManager) :
         bIsUnderWater(false) {
-    auto* underWaterSound = new GlobalSound("sound/underWater.flac");
+    auto* underWaterSound = new GlobalSound("sound/underWater.flac", Sound::SoundCategory::EFFECTS);
     underWaterSoundTrigger = new ManualTrigger(SoundTrigger::PLAY_LOOP);
     soundManager->addSound(underWaterSound, underWaterSoundTrigger);
 }

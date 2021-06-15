@@ -564,7 +564,7 @@
     </sky>
     <soundElements>
         <soundElement name="globalSound">
-            <sound type="GLOBAL">
+            <sound type="GLOBAL" category="MUSIC">
                 <filename>sound/ambient.flac</filename>
                 <initialVolume>1.000000</initialVolume>
             </sound>
@@ -573,7 +573,7 @@
             </soundTrigger>
         </soundElement>
         <soundElement name="spatialSound">
-            <sound type="SPATIAL">
+            <sound type="SPATIAL" category="MUSIC">
                 <filename>sound/positionTrigger.flac</filename>
                 <position>-6.800000 -0.500000 -0.500000</position>
                 <inaudibleDistance>5.000000</inaudibleDistance>
