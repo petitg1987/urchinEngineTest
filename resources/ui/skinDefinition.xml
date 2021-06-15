@@ -22,21 +22,21 @@
 	
 	<button nameSkin="defaultSkin">
 		<skin type="default">
-			<image>ui/widget/button/buttonDefault.tga</image>
+			<image>ui/widget/button/default.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">1</part>
 			<part zone="right">1</part>
 		</skin>
 		<skin type="focus">
-			<image>ui/widget/button/buttonFocus.tga</image>
+			<image>ui/widget/button/focus.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">1</part>
 			<part zone="right">1</part>
 		</skin>
 		<skin type="click">
-			<image>ui/widget/button/buttonClick.tga</image>
+			<image>ui/widget/button/click.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">1</part>
@@ -47,14 +47,14 @@
 	
 	<textBox nameSkin="defaultSkin">
 		<skin type="default">
-			<image>ui/widget/textbox/textBoxDefault.tga</image>
+			<image>ui/widget/textbox/default.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">3</part>
 			<part zone="right">2</part>
 		</skin>
 		<skin type="focus">
-			<image>ui/widget/textbox/textBoxFocus.tga</image>
+			<image>ui/widget/textbox/focus.tga</image>
 			<part zone="top">2</part>
 			<part zone="bottom">2</part>
 			<part zone="left">3</part>
@@ -71,7 +71,7 @@
 	</slider>
 
 	<checkBox nameSkin="defaultSkin">
-		<imageChecked>ui/widget/checkbox/checkBoxChecked.tga</imageChecked>
-		<imageUnchecked>ui/widget/checkbox/checkBoxUnchecked.tga</imageUnchecked>
+		<imageChecked>ui/widget/checkbox/checked.tga</imageChecked>
+		<imageUnchecked>ui/widget/checkbox/unchecked.tga</imageUnchecked>
 	</checkBox>
 </ui>
