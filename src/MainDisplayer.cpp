@@ -25,7 +25,7 @@ MainDisplayer::~MainDisplayer() {
 void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     FileSystem::instance()->setupResourcesDirectory(resourcesDirectory);
     ConfigService::instance()->loadProperties("engine.properties");
-    UISkinService::instance()->setSkin("UI/skinUI.xml");
+    UISkinService::instance()->setSkin("ui/skinDefinition.xml");
 
     auto surfaceCreator = getWindowController()->getSurfaceCreator();
     auto framebufferSizeRetriever = getWindowController()->getFramebufferSizeRetriever();
