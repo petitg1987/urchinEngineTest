@@ -63,12 +63,12 @@
 		<textSkin>defaultSkin</textSkin>
 	</textBox>
 
-	<slider nameSkin="defaultSkin">
+	<sequence nameSkin="defaultSkin">
 		<buttonsTextSkin>defaultSkin</buttonsTextSkin>
 		<valuesTextSkin>defaultSkin</valuesTextSkin>
 		<leftButtonText>&lt;&lt;</leftButtonText>
 		<rightButtonText>&gt;&gt;</rightButtonText>
-	</slider>
+	</sequence>
 
 	<checkBox nameSkin="defaultSkin">
 		<imageChecked>ui/widget/checkbox/checked.tga</imageChecked>
