@@ -100,9 +100,11 @@ void GameRenderer::initialize() {
 
     auto* myWindow2 = new Window(nullptr, Position(320, 30, LengthType::PIXEL), Size(200, 160, LengthType::PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(myWindow2);
-    std::vector<std::string> values = {"sequence.one", "sequence.two", "sequence.three"};
-    Sequence::newTranslatableSequence(myWindow2, Position(10, 4, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", values);
+    std::vector<std::string> sequenceValues = {"sequence.one", "sequence.two", "sequence.three"};
+    Sequence::newTranslatableSequence(myWindow2, Position(10, 4, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", sequenceValues);
     new CheckBox(myWindow2, Position(10, 20, LengthType::PIXEL), Size(16, 16, LengthType::PIXEL), "defaultSkin");
+    std::vector<std::string> sliderValues {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    Slider::newSlider(myWindow2, Position(10, 44, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger *>(mapHandler->getMap()->getSceneSound("globalSound")->getSoundTrigger());
