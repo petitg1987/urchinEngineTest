@@ -74,4 +74,14 @@
 		<imageChecked>ui/widget/checkbox/checked.tga</imageChecked>
 		<imageUnchecked>ui/widget/checkbox/unchecked.tga</imageUnchecked>
 	</checkBox>
+
+	<slider nameSkin="defaultSkin">
+		<imageLine>ui/widget/slider/line.tga</imageLine>
+		<imageCursor>ui/widget/slider/cursor.tga</imageCursor>
+		<lineHeight>
+			<value>1.0</value>
+			<type>pixel</type>
+		</lineHeight>
+		<valuesTextSkin>defaultSkin</valuesTextSkin>
+	</slider>
 </ui>
