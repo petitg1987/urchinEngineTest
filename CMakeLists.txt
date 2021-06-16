@@ -44,11 +44,12 @@ endif()
 if (WIN32)
     SET(GLFW_LIB glfw3 gdi32 winmm)
 else()
-    SET(GLFW_LIB glfw3.a X11.a xcb) #Don't static link xcb (xcb.a Xau.a Xdmcp.a) because causing error in Vulkan
+    SET(X11_LIB X11) #not static because X11 can use libraries not mentioned in its dependencies
+    SET(GLFW_LIB glfw3.a ${X11_LIB})
 endif()
 
 if (NOT WIN32)
-    set(LINK_OPT -rdynamic) #necessary for SignalHandler to work correctly
+    set(LINK_OPT -rdynamic) #rdynamic: necessary for SignalHandler to work correctly
 endif()
 
 add_definitions(-ffast-math -Wall -Wextra -Wpedantic -Wconversion -Werror)
