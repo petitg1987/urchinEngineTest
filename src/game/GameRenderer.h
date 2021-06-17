@@ -47,7 +47,7 @@ class GameRenderer : public RenderScreen {
         urchin::SunLight *getSunLight();
 
         urchin::Vector3<float> getWalkMomentum() const;
-        urchin::RigidBody *getRandomUnactiveBody();
+        urchin::RigidBody *getRandomInactiveBody();
 
         bool isInitialized;
         bool editMode;

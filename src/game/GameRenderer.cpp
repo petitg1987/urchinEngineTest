@@ -223,7 +223,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         int xAxisForce = distribution(generator) - 5;
         int zAxisForce = distribution(generator) - 5;
         int yAxisForce = distribution(generator) + 5;
-        RigidBody* body = getRandomUnactiveBody();
+        RigidBody* body = getRandomInactiveBody();
         if (body != nullptr) {
             body->applyCentralMomentum(Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
         }
@@ -408,7 +408,7 @@ Vector3<float> GameRenderer::getWalkMomentum() const {
     return (forwardDirection + lateralDirection).normalize() * speed;
 }
 
-RigidBody* GameRenderer::getRandomUnactiveBody() {
+RigidBody* GameRenderer::getRandomInactiveBody() {
     std::vector<RigidBody *> bodies;
 
     const std::list<SceneObject *>& sceneObjects = mapHandler->getMap()->getSceneObjects();
