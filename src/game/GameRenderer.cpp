@@ -103,7 +103,7 @@ void GameRenderer::initialize() {
     std::vector<std::string> sequenceValues = {"sequence.one", "sequence.two", "sequence.three"};
     Sequence::newTranslatableSequence(myWindow2, Position(10, 4, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", sequenceValues);
     new CheckBox(myWindow2, Position(10, 20, LengthType::PIXEL), Size(16, 16, LengthType::PIXEL), "defaultSkin");
-    std::vector<std::string> sliderValues {"1", "2", "3"}; //TODO center slider cursor not working
+    std::vector<std::string> sliderValues {"1", "2", "3"};
     Slider::newSlider(myWindow2, Position(10, 44, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //sound
