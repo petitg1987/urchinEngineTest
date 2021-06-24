@@ -1,0 +1,32 @@
+[2021-06-24 14:11:27] (EE) Signal caught 11 (code: 1):
+	[bt] /lib/x86_64-linux-gnu/libpthread.so.0(+0x14bb0) [0x7fbb123dabb0]
+	[bt] [libpthread.so.0] /lib/x86_64-linux-gnu/libpthread.so.0(pthread_mutex_lock+0x4) [0x7fbb123d1824] (0xb823)
+	[bt]	> ./nptl/../nptl/pthread_mutex_lock.c:64
+	[bt] /home/greg/project/urchin/urchinEngineTest/urchinEngineTest(+0x608c7e) [0x5644e2971c7e]
+	[bt] [urchinEngineTest] std::mutex::lock() (0x608cd1)
+	[bt]	> /usr/include/c++/10/bits/std_mutex.h:100
+	[bt] [urchinEngineTest] std::lock_guard<std::mutex>::lock_guard(std::mutex&) (0x609387)
+	[bt]	> /usr/include/c++/10/bits/std_mutex.h:159
+	[bt] [urchinEngineTest] urchin::PhysicsCharacter::getTransform() const (0x7159f6)
+	[bt]	> /home/greg/project/urchin/urchinEngine/physicsEngine/src/character/PhysicsCharacter.cpp:33
+	[bt] [urchinEngineTest] urchin::PhysicsCharacterController::PhysicsCharacterController(std::shared_ptr<urchin::PhysicsCharacter>, urchin::PhysicsCharacterControllerConfig, urchin::PhysicsWorld*) (0x715bc9)
+	[bt]	> /home/greg/project/urchin/urchinEngine/physicsEngine/src/character/PhysicsCharacterController.cpp:20 (discriminator 4)
+	[bt] [urchinEngineTest] std::_MakeUniq<urchin::PhysicsCharacterController>::__single_object std::make_unique<urchin::PhysicsCharacterController, std::shared_ptr<urchin::PhysicsCharacter>&, urchin::PhysicsCharacterControllerConfig, urchin::PhysicsWorld*&>(std::shared_ptr<urchin::PhysicsCharacter>&, urchin::PhysicsCharacterControllerConfig&&, urchin::PhysicsWorld*&) (0x55028d)
+	[bt]	> /usr/include/c++/10/bits/unique_ptr.h:962
+	[bt] [urchinEngineTest] GameRenderer::initializeCharacter() (0x54cf74)
+	[bt]	> /home/greg/project/urchin/urchinEngineTest/src/game/GameRenderer.cpp:132 (discriminator 1)
+	[bt] [urchinEngineTest] GameRenderer::initialize() (0x54c67e)
+	[bt]	> /home/greg/project/urchin/urchinEngineTest/src/game/GameRenderer.cpp:114
+	[bt] [urchinEngineTest] GameRenderer::active(bool) (0x54e1b3)
+	[bt]	> /home/greg/project/urchin/urchinEngineTest/src/game/GameRenderer.cpp:308
+	[bt] [urchinEngineTest] MainDisplayer::initialize(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (0x547e96)
+	[bt]	> /home/greg/project/urchin/urchinEngineTest/src/MainDisplayer.cpp:37 (discriminator 3)
+	[bt] [urchinEngineTest] Main::execute(int, char**) (0x54105a)
+	[bt]	> /home/greg/project/urchin/urchinEngineTest/src/Main.cpp:47 (discriminator 3)
+	[bt] [urchinEngineTest] /home/greg/project/urchin/urchinEngineTest/urchinEngineTest(main+0x59) [0x5644e28a9ce2] (0x540ce1)
+	[bt]	> /home/greg/project/urchin/urchinEngineTest/src/Main.cpp:8
+	[bt] [libc.so.6] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf2) [0x7fbb11faacb2] (0x28cb1)
+	[bt]	> addr2line -p -e libc.so.6 0x28cb1
+	[bt] [urchinEngineTest] /home/greg/project/urchin/urchinEngineTest/urchinEngineTest(_start+0x2e) [0x5644e28a9bae] (0x540bad)
+	[bt]	> addr2line -p -e urchinEngineTest 0x540bad
+[2021-06-24 14:11:27] (EE) Signal caught: 11

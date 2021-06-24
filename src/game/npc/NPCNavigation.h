@@ -20,7 +20,7 @@ class NPCNavigation {
         urchin::Model *model;
 
         std::shared_ptr<urchin::PhysicsCharacter> physicsCharacter;
-        std::unique_ptr<urchin::PhysicsCharacterController> physicsCharacterController;
+        std::unique_ptr<urchin::CharacterController> characterController;
         std::shared_ptr<urchin::AICharacter> aiCharacter;
         std::unique_ptr<urchin::AICharacterController> aiCharacterController;
 };

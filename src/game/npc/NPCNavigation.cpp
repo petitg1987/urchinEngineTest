@@ -16,7 +16,7 @@ NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler* mapHandle
     auto characterShape = std::make_shared<const CollisionCapsuleShape>(characterRadius, characterHeight - (2.0f * characterRadius), CapsuleShape<float>::CAPSULE_Z);
     PhysicsTransform characterTransform(model->getTransform().getPosition(), model->getTransform().getOrientation());
     physicsCharacter = std::make_shared<PhysicsCharacter>("npcCharacter", mass, characterShape, characterTransform);
-    physicsCharacterController = std::make_unique<PhysicsCharacterController>(physicsCharacter, physicsWorld);
+    characterController = std::make_unique<CharacterController>(physicsCharacter, CharacterControllerConfig(), physicsWorld);
 }
 
 std::shared_ptr<const PathRequest> NPCNavigation::getPathRequest() const {
@@ -28,8 +28,8 @@ void NPCNavigation::display(MainDisplayer* mainDisplayer) {
 
     //update values
     aiCharacterController->update();
-    physicsCharacterController->setMomentum(aiCharacter->getMomentum());
-    physicsCharacterController->update(dt);
+    characterController->setMomentum(aiCharacter->getMomentum());
+    characterController->update(dt);
 
     //apply updated values
     aiCharacter->updatePosition(physicsCharacter->getTransform().getPosition());

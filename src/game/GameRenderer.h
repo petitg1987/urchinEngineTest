@@ -62,7 +62,7 @@ class GameRenderer : public RenderScreen {
         //physics
         urchin::PhysicsWorld *physicsWorld;
         std::shared_ptr<urchin::PhysicsCharacter> physicsCharacter;
-        std::unique_ptr<urchin::PhysicsCharacterController> physicsCharacterController;
+        std::unique_ptr<urchin::CharacterController> characterController;
         bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
         std::vector<urchin::GeometryModel *> rayModels;
         std::unique_ptr<urchin::CollisionPointDisplayer> collisionPointsDisplayer;

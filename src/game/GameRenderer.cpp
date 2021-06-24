@@ -22,7 +22,7 @@ GameRenderer::GameRenderer(MainDisplayer* mainDisplayer) :
         underWaterEvent(nullptr),
         //physics
         physicsWorld(nullptr),
-        physicsCharacterController(nullptr),
+        characterController(nullptr),
         leftKeyPressed(false), rightKeyPressed(false), upKeyPressed(false), downKeyPressed(false),
         //AI
         aiManager(nullptr),
@@ -129,13 +129,13 @@ void GameRenderer::initializeCharacter() {
     auto characterShape = std::make_shared<const CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), CapsuleShape<float>::CAPSULE_Y);
 
     physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, characterShape, transform);
-    physicsCharacterController = std::make_unique<PhysicsCharacterController>(physicsCharacter, physicsWorld);
+    characterController = std::make_unique<CharacterController>(physicsCharacter, CharacterControllerConfig(), physicsWorld);
 
     camera->rotate(transform.getOrientation());
 }
 
 void GameRenderer::uninitializeCharacter() {
-    physicsCharacterController.reset(nullptr);
+    characterController.reset(nullptr);
     physicsCharacter = std::shared_ptr<PhysicsCharacter>(nullptr);
 }
 
@@ -276,7 +276,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
     } else if (key == Control::Key::S) {
         downKeyPressed = true;
     } else if (key == Control::Key::SPACE) {
-        physicsCharacterController->jump();
+        characterController->jump();
     }
 
     //sound
@@ -336,8 +336,8 @@ void GameRenderer::refresh() {
     npcNavigation->display(getMainDisplayer());
 
     //character
-    physicsCharacterController->setMomentum(getWalkMomentum());
-    physicsCharacterController->update(dt);
+    characterController->setMomentum(getWalkMomentum());
+    characterController->update(dt);
     camera->moveTo(physicsCharacter->getTransform().getPosition() + Point3<float>(0.0, 0.75f, 0.0));
 
     //path
