@@ -28,7 +28,7 @@ void NPCNavigation::display(MainDisplayer* mainDisplayer) {
 
     //update values
     aiCharacterController->update();
-    characterController->setMomentum(aiCharacter->getMomentum());
+    characterController->setVelocity(aiCharacter->getVelocity());
     characterController->update(dt);
 
     //apply updated values

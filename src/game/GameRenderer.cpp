@@ -129,7 +129,8 @@ void GameRenderer::initializeCharacter() {
     auto characterShape = std::make_shared<const CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), CapsuleShape<float>::CAPSULE_Y);
 
     physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, characterShape, transform);
-    characterController = std::make_unique<CharacterController>(physicsCharacter, CharacterControllerConfig(), physicsWorld);
+    characterControllerConfig = CharacterControllerConfig();
+    characterController = std::make_unique<CharacterController>(physicsCharacter, characterControllerConfig, physicsWorld);
 
     camera->rotate(transform.getOrientation());
 }
@@ -336,7 +337,7 @@ void GameRenderer::refresh() {
     npcNavigation->display(getMainDisplayer());
 
     //character
-    characterController->setMomentum(getWalkMomentum());
+    characterController->setVelocity(getWalkVelocity());
     characterController->update(dt);
     camera->moveTo(physicsCharacter->getTransform().getPosition() + Point3<float>(0.0, 0.75f, 0.0));
 
@@ -380,7 +381,7 @@ SunLight* GameRenderer::getSunLight() {
     return dynamic_cast<SunLight *>(sunLight->getLight());
 }
 
-Vector3<float> GameRenderer::getWalkMomentum() const {
+Vector3<float> GameRenderer::getWalkVelocity() const {
     Vector3<float> viewVector = camera->getView();
     viewVector.Y = 0.0f; //don't move on Y axis
     Vector3<float> forwardDirection(0.0, 0.0, 0.0);
@@ -400,7 +401,7 @@ Vector3<float> GameRenderer::getWalkMomentum() const {
         lateralDirection = lateralVector.normalize();
     }
 
-    float speed = 1500.0f;
+    float speed = characterControllerConfig.getMaxHorizontalSpeed();
     if (underWaterEvent->isUnderWater()) {
         speed *= 0.75f;
     }

@@ -46,7 +46,7 @@ class GameRenderer : public RenderScreen {
 
         urchin::SunLight *getSunLight();
 
-        urchin::Vector3<float> getWalkMomentum() const;
+        urchin::Vector3<float> getWalkVelocity() const;
         urchin::RigidBody *getRandomInactiveBody();
 
         bool isInitialized;
@@ -62,6 +62,7 @@ class GameRenderer : public RenderScreen {
         //physics
         urchin::PhysicsWorld *physicsWorld;
         std::shared_ptr<urchin::PhysicsCharacter> physicsCharacter;
+        urchin::CharacterControllerConfig characterControllerConfig;
         std::unique_ptr<urchin::CharacterController> characterController;
         bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
         std::vector<urchin::GeometryModel *> rayModels;
