@@ -82,6 +82,9 @@ void Main::execute(int argc, char *argv[]) {
 
 void Main::glfwErrorCallback(int error, const char* description) {
     if (glfwError.empty()) {
+        if (error == GLFW_INVALID_VALUE && strcmp(description, "Invalid scancode") == 0) {
+            return; //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
+        }
         glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
     }
 }
