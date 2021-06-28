@@ -22,7 +22,7 @@ struct GlfwSurfaceCreator : public urchin::SurfaceCreator {
 
 struct GlfwFramebufferSizeRetriever : public urchin::FramebufferSizeRetriever {
     explicit GlfwFramebufferSizeRetriever(GLFWwindow*);
-    void getFramebufferSizeInPixel(int&, int&) const override;
+    void getFramebufferSizeInPixel(unsigned int&, unsigned int&) const override;
 
     GLFWwindow *window;
 };
@@ -38,8 +38,8 @@ class WindowController {
         bool isEventCallbackActive() const;
 
         static std::vector<std::string> windowRequiredExtensions();
-        std::unique_ptr<GlfwSurfaceCreator> getSurfaceCreator() const;
-        std::unique_ptr<GlfwFramebufferSizeRetriever> getFramebufferSizeRetriever() const;
+        std::unique_ptr<GlfwSurfaceCreator> newSurfaceCreator() const;
+        std::unique_ptr<GlfwFramebufferSizeRetriever> newFramebufferSizeRetriever() const;
 
     private:
         GLFWwindow* window;

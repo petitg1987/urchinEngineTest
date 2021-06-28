@@ -21,8 +21,18 @@ GlfwFramebufferSizeRetriever::GlfwFramebufferSizeRetriever(GLFWwindow* window) :
         window(window) {
 }
 
-void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(int& widthInPixel, int& heightInPixel) const {
-    glfwGetFramebufferSize(window, &widthInPixel, &heightInPixel); //don't use glfwGetWindowSize which doesn't return size in pixel
+void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& widthInPixel, unsigned int& heightInPixel) const {
+    int intWidthInPixel, intHeightInPixel;
+    glfwGetFramebufferSize(window, &intWidthInPixel, &intHeightInPixel); //don't use glfwGetWindowSize which doesn't return size in pixel
+
+    //window is probably minimized: wait for a valid width/height size
+    while (intWidthInPixel == 0 || intHeightInPixel == 0) {
+        glfwGetFramebufferSize(window, &intWidthInPixel, &intHeightInPixel);
+        glfwWaitEvents();
+    }
+
+    widthInPixel = (unsigned int)intWidthInPixel;
+    heightInPixel = (unsigned int)intHeightInPixel;
 }
 
 WindowController::WindowController(GLFWwindow* window) :
@@ -55,11 +65,11 @@ std::vector<std::string> WindowController::windowRequiredExtensions() {
     return std::vector<std::string>(extensionList.extensions, extensionList.extensions + extensionList.extensionCount);
 }
 
-std::unique_ptr<GlfwSurfaceCreator> WindowController::getSurfaceCreator() const {
+std::unique_ptr<GlfwSurfaceCreator> WindowController::newSurfaceCreator() const {
     return std::make_unique<GlfwSurfaceCreator>(window);
 }
 
-std::unique_ptr<GlfwFramebufferSizeRetriever> WindowController::getFramebufferSizeRetriever() const {
+std::unique_ptr<GlfwFramebufferSizeRetriever> WindowController::newFramebufferSizeRetriever() const {
     return std::make_unique<GlfwFramebufferSizeRetriever>(window);
 }
 

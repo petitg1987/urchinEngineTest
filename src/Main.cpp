@@ -41,11 +41,8 @@ void Main::execute(int argc, char *argv[]) {
         std::string resourcesDirectory = retrieveResourcesDirectory(argv);
         std::string saveDirectory = retrieveSaveDirectory(argv);
 
-        int width, height;
-        glfwGetWindowSize(window, &width, &height);
         mainDisplayer = new MainDisplayer(windowController);
         mainDisplayer->initialize(resourcesDirectory);
-        mainDisplayer->resize((unsigned int)width, (unsigned int)height);
 
         glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
@@ -214,10 +211,10 @@ void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     }
 }
 
-void Main::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
+void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main) {
-        main->mainDisplayer->resize((unsigned int)width, (unsigned int)height);
+        main->mainDisplayer->resize();
     }
 }
 

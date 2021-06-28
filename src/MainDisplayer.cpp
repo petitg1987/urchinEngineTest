@@ -27,8 +27,8 @@ void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     ConfigService::instance()->loadProperties("engine.properties");
     UISkinService::instance()->setSkin("ui/skinDefinition.xml");
 
-    auto surfaceCreator = getWindowController()->getSurfaceCreator();
-    auto framebufferSizeRetriever = getWindowController()->getFramebufferSizeRetriever();
+    auto surfaceCreator = getWindowController()->newSurfaceCreator();
+    auto framebufferSizeRetriever = getWindowController()->newFramebufferSizeRetriever();
     sceneManager = new SceneManager(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
     sceneManager->updateVerticalSync(false);
     soundManager = new SoundManager();
@@ -47,9 +47,9 @@ void MainDisplayer::paint() {
     sceneManager->display();
 }
 
-void MainDisplayer::resize(unsigned int width, unsigned int height) {
+void MainDisplayer::resize() {
     if (sceneManager) {
-        sceneManager->onResize(width, height);
+        sceneManager->onResize();
     }
 }
 

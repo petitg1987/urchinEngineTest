@@ -14,7 +14,7 @@ class MainDisplayer {
 
         void initialize(const std::string&);
         void paint();
-        void resize(unsigned int, unsigned int);
+        void resize();
         void onKeyPressed(urchin::Control::Key);
         void onKeyReleased(urchin::Control::Key);
         void onMouseMove(int, int);
