@@ -69,6 +69,7 @@ void Main::execute(int argc, char *argv[]) {
             _exit(1);
         } else {
             clearResources(window, windowController);
+            Logger::instance()->purge();
         }
     } catch (std::exception& e) {
         crashReporter->onException(e);
