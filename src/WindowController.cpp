@@ -41,12 +41,11 @@ WindowController::WindowController(GLFWwindow* window) :
 
 }
 
-void WindowController::moveMouse(unsigned int x, unsigned int y) const {
-    glfwSetCursorPos(window, x, y);
-}
-
 void WindowController::setMouseCursorVisible(bool visible) {
-    glfwSetInputMode(window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
+    glfwSetInputMode(window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+    if (!visible && glfwRawMouseMotionSupported()) {
+        glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+    }
 }
 
 void WindowController::cleanEvents() {

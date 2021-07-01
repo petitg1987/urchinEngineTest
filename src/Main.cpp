@@ -82,6 +82,9 @@ void Main::glfwErrorCallback(int error, const char* description) {
     if (glfwError.empty()) {
         if (error == GLFW_INVALID_VALUE && strcmp(description, "Invalid scancode") == 0) {
             return; //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
+        } else if (error == GLFW_PLATFORM_ERROR && std::string(description).find("Iconification") != std::string::npos) {
+            //full message: "X11: Iconification of full screen windows requires a WM that supports EWMH full screen"
+            return; //ignore iconification error message
         }
         glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
     }
@@ -314,7 +317,7 @@ void Main::onMouseButtonReleased(int button) {
     }
 }
 
-void Main::onMouseMove(int x, int y) {
+void Main::onMouseMove(double x, double y) {
     //engine
     if (x != 0 || y != 0) {
         mainDisplayer->onMouseMove(x, y);

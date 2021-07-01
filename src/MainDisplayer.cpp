@@ -65,18 +65,18 @@ void MainDisplayer::onKeyReleased(Control::Key key) {
     }
 }
 
-void MainDisplayer::onMouseMove(int mouseX, int mouseY) {
+void MainDisplayer::onMouseMove(double mouseX, double mouseY) {
     this->mouseX = mouseX;
     this->mouseY = mouseY;
 
     sceneManager->onMouseMove(mouseX, mouseY);
 }
 
-int MainDisplayer::getMouseX() const {
+double MainDisplayer::getMouseX() const {
     return mouseX;
 }
 
-int MainDisplayer::getMouseY() const {
+double MainDisplayer::getMouseY() const {
     return mouseY;
 }
 

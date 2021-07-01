@@ -17,10 +17,10 @@ class MainDisplayer {
         void resize();
         void onKeyPressed(urchin::Control::Key);
         void onKeyReleased(urchin::Control::Key);
-        void onMouseMove(int, int);
+        void onMouseMove(double, double);
 
-        int getMouseX() const;
-        int getMouseY() const;
+        double getMouseX() const;
+        double getMouseY() const;
 
         WindowController *getWindowController() const;
         urchin::SceneManager *getSceneManager() const;
@@ -28,7 +28,7 @@ class MainDisplayer {
 
     private:
         WindowController* windowController;
-        int mouseX, mouseY;
+        double mouseX, mouseY;
 
         urchin::SceneManager *sceneManager;
         urchin::SoundManager *soundManager;

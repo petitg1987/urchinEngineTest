@@ -38,7 +38,7 @@ class Main {
         void onKeyReleased(int);
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);
-        void onMouseMove(int, int);
+        void onMouseMove(double, double);
         urchin::Control::Key toInputKey(int);
 
         static bool argumentsContains(const std::string&, int, char *[]);

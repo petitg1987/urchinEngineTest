@@ -31,7 +31,6 @@ class WindowController {
     public:
         explicit WindowController(GLFWwindow *);
 
-        void moveMouse(unsigned int, unsigned int) const;
         void setMouseCursorVisible(bool);
 
         void cleanEvents();
