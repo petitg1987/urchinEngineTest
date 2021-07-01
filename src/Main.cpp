@@ -10,9 +10,6 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-//static
-std::string Main::glfwError;
-
 Main::Main() :
         mainDisplayer(nullptr),
         windowController(nullptr),
@@ -54,10 +51,6 @@ void Main::execute(int argc, char *argv[]) {
         windowController->cleanEvents(); //ignore events occurred during initialization phase
 
         while (!glfwWindowShouldClose(window)) {
-            if (!glfwError.empty()) {
-                throw std::runtime_error(glfwError);
-            }
-
             handleInputEvents();
 
             mainDisplayer->paint();
@@ -79,15 +72,13 @@ void Main::execute(int argc, char *argv[]) {
 }
 
 void Main::glfwErrorCallback(int error, const char* description) {
-    if (glfwError.empty()) {
-        if (error == GLFW_INVALID_VALUE && strcmp(description, "Invalid scancode") == 0) {
-            return; //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
-        } else if (error == GLFW_PLATFORM_ERROR && std::string(description).find("Iconification") != std::string::npos) {
-            //full message: "X11: Iconification of full screen windows requires a WM that supports EWMH full screen"
-            return; //ignore iconification error message
-        }
-        glfwError = "GLFW error (code: " + std::to_string(error) + "): " + description;
+    if (error == GLFW_INVALID_VALUE && strcmp(description, "Invalid scancode") == 0) {
+        return; //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
+    } else if (error == GLFW_PLATFORM_ERROR && std::string(description).find("Iconification") != std::string::npos) {
+        Logger::instance()->logInfo("Window iconification GLFW error ignored: " + std::string(description));
+        return; //full message: "X11: Iconification of full screen windows requires a WM that supports EWMH full screen"
     }
+    Logger::instance()->logWarning("GLFW error (code: " + std::to_string(error) + "): " + description);
 }
 
 void Main::initializeInputKeyMap() {

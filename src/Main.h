@@ -46,7 +46,6 @@ class Main {
         void clearResources(GLFWwindow *&, WindowController *&);
 
         std::shared_ptr<CrashReporter> crashReporter;
-        static std::string glfwError;
 
         MainDisplayer* mainDisplayer;
         WindowController* windowController;
