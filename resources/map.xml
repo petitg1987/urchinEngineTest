@@ -51,15 +51,15 @@
                 <transform>
                     <position>-3.500000 -1.850000 0.000000</position>
                     <orientation>
-                        <axis>-1.000000 -0.000000 0.000000</axis>
-                        <angle>1.570796</angle>
+                        <axis>0.000000 1.000000 0.000000</axis>
+                        <angle>0.000000</angle>
                     </orientation>
                     <scale>1.000000</scale>
                 </transform>
             </model>
             <physics>
                 <shape type="BOX">
-                    <halfSize>2.316180 1.419570 0.860094</halfSize>
+                    <halfSize>2.316176 0.860093 1.419574</halfSize>
                 </shape>
                 <mass>0.000000</mass>
                 <restitution>0.200000</restitution>
@@ -470,15 +470,15 @@
                 <transform>
                     <position>-10.800000 -1.900000 1.100000</position>
                     <orientation>
-                        <axis>-1.000000 0.000000 0.000000</axis>
-                        <angle>1.570796</angle>
+                        <axis>0.000000 1.000000 0.000000</axis>
+                        <angle>0.000000</angle>
                     </orientation>
                     <scale>1.000000</scale>
                 </transform>
             </model>
             <physics>
                 <shape type="BOX">
-                    <halfSize>0.299826 0.145000 0.862647</halfSize>
+                    <halfSize>0.299826 0.862726 0.145000</halfSize>
                 </shape>
                 <mass>0.000000</mass>
                 <restitution>0.200000</restitution>
