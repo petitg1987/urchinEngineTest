@@ -77,17 +77,17 @@
                     <filename>models/bench.urchinMesh</filename>
                 </mesh>
                 <transform>
-                    <position>-3.900000 -2.280000 2.400000</position>
+                    <position>-3.900000 -2.280000 2.300000</position>
                     <orientation>
-                        <axis>1.000000 0.000000 -0.000000</axis>
-                        <angle>4.712389</angle>
+                        <axis>0.000000 1.000000 0.000000</axis>
+                        <angle>0.000000</angle>
                     </orientation>
                     <scale>1.000000</scale>
                 </transform>
             </model>
             <physics>
                 <shape type="BOX">
-                    <halfSize>2.316180 0.567316 0.460533</halfSize>
+                    <halfSize>2.316176 0.460533 0.567316</halfSize>
                 </shape>
                 <mass>0.000000</mass>
                 <restitution>0.200000</restitution>
