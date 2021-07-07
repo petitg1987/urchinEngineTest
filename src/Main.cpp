@@ -28,7 +28,7 @@ void Main::execute(int argc, char *argv[]) {
     GLFWwindow* window = nullptr;
 
     bool isWindowed = argumentsContains("--windowed", argc, argv);
-    bool isDebugAttached = argumentsContains("--debug", argc, argv);
+    bool isDebugModeOn = argumentsContains("--debug", argc, argv);
 
     try {
         glfwSetErrorCallback(glfwErrorCallback);
@@ -38,7 +38,7 @@ void Main::execute(int argc, char *argv[]) {
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
         window = createWindow(isWindowed);
-        windowController = new WindowController(window, isDebugAttached);
+        windowController = new WindowController(window, isDebugModeOn);
         std::string resourcesDirectory = retrieveResourcesDirectory(argv);
         std::string saveDirectory = retrieveSaveDirectory(argv);
 

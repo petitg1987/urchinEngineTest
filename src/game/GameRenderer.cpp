@@ -55,7 +55,7 @@ void GameRenderer::initialize() {
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
     gameRenderer3d->getLightManager()->setGlobalAmbientColor(Point4<float>(0.05f, 0.05f, 0.05f, 0.0f));
-    camera = new CharacterCamera(45.0f, 0.1f, 300.0f);
+    camera = new CharacterCamera(getMainDisplayer()->getWindowController(), 45.0f, 0.1f, 300.0f);
     gameRenderer3d->setCamera(camera);
 
     //physics

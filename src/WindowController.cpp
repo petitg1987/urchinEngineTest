@@ -1,6 +1,7 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <stdexcept>
+#include <cassert>
 
 #include <WindowController.h>
 
@@ -35,23 +36,44 @@ void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& width
     heightInPixel = (unsigned int)intHeightInPixel;
 }
 
-WindowController::WindowController(GLFWwindow* window, bool isDebugAttached) :
+WindowController::WindowController(GLFWwindow* window, bool isDebugModeOn) :
         window(window),
-        isDebugAttached(isDebugAttached),
+        debugModeOn(isDebugModeOn),
         eventsCallbackActive(true) {
 
 }
 
 void WindowController::setMouseCursorVisible(bool visible) {
-    int cursorMode = visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED;
-    if (isDebugAttached) {
-        cursorMode = GLFW_CURSOR_NORMAL;
+    int cursorMode = GLFW_CURSOR_NORMAL;
+    if (!visible) {
+        if(isDebugModeOn()) {
+            cursorMode = GLFW_CURSOR_HIDDEN;
+        } else {
+            cursorMode = GLFW_CURSOR_DISABLED;
+        }
     }
-
     glfwSetInputMode(window, GLFW_CURSOR, cursorMode);
-    if (!visible && glfwRawMouseMotionSupported()) {
-        glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+
+    if(glfwRawMouseMotionSupported()) {
+        if (!visible) {
+            glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+        } else {
+            glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_FALSE);
+        }
     }
+}
+
+bool WindowController::isDebugModeOn() const {
+    //Manual mouse adjustment (ensure mouse is not going outside the window) is required in debug mode.
+    //Indeed, the GLFW native mode to control camera (GLFW_CURSOR_DISABLED) does not display the cursor when a breakpoint is caught.
+    //Therefore, in debug mode, we hide the cursor (GLFW_CURSOR_HIDDEN) which automatically reappears when a breakpoint is caught.
+    //However, this debug method can not be used in production because it is not behaves the same way on different computers.
+    return debugModeOn;
+}
+
+void WindowController::moveMouse(double mouseX, double mouseY) const {
+    assert(isDebugModeOn());
+    glfwSetCursorPos(window, mouseX, mouseY);
 }
 
 void WindowController::cleanEvents() {

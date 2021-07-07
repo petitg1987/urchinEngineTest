@@ -32,6 +32,8 @@ class WindowController {
         WindowController(GLFWwindow *, bool);
 
         void setMouseCursorVisible(bool);
+        bool isDebugModeOn() const;
+        void moveMouse(double, double) const;
 
         void cleanEvents();
         bool isEventCallbackActive() const;
@@ -42,7 +44,7 @@ class WindowController {
 
     private:
         GLFWwindow* window;
-        bool isDebugAttached;
+        bool debugModeOn;
         bool eventsCallbackActive;
 
 };
