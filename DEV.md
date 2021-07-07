@@ -37,7 +37,7 @@
     * Build options: `-j 12`
 * Add CMake applications
   * Application **urchinEngineTest**:
-    * Target/executable: `urchinEngineTest`
-    * Program arguments: `--windowed`
-  * Application **urchinEngineTest (fullscreen)**:
+    * Target/executable: `urchinEngineTest (win, dbg)`
+    * Program arguments: `--windowed --debug`
+  * Application **urchinEngineTest**:
     * Target/executable: `urchinEngineTest`

@@ -24,7 +24,11 @@ void Main::execute(int argc, char *argv[]) {
     Logger::setupCustomInstance(std::make_unique<FileLogger>("urchinEngineTest.log"));
     SignalHandler::instance()->registerSignalReceptor(crashReporter);
 
+    Logger::instance()->logInfo("Application started");
     GLFWwindow* window = nullptr;
+
+    bool isWindowed = argumentsContains("--windowed", argc, argv);
+    bool isDebugAttached = argumentsContains("--debug", argc, argv);
 
     try {
         glfwSetErrorCallback(glfwErrorCallback);
@@ -33,8 +37,8 @@ void Main::execute(int argc, char *argv[]) {
         }
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-        window = createWindow(argc, argv);
-        windowController = new WindowController(window);
+        window = createWindow(isWindowed);
+        windowController = new WindowController(window, isDebugAttached);
         std::string resourcesDirectory = retrieveResourcesDirectory(argv);
         std::string saveDirectory = retrieveSaveDirectory(argv);
 
@@ -148,11 +152,11 @@ std::string Main::retrieveSaveDirectory(char *argv[]) {
     return FileUtil::getDirectory(std::string(argv[0])) + "save/";
 }
 
-GLFWwindow* Main::createWindow(int argc, char *argv[]) {
+GLFWwindow* Main::createWindow(bool isWindowed) {
     GLFWwindow *window;
     const char* windowTitle = "Urchin Engine Test";
 
-    if (argumentsContains("--windowed", argc, argv)) {
+    if (isWindowed) {
         window = glfwCreateWindow(1200, 675, windowTitle, nullptr, nullptr);
     } else {
         GLFWmonitor* monitor = glfwGetPrimaryMonitor();

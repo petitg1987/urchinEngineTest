@@ -23,7 +23,7 @@ class Main {
         static std::string retrieveResourcesDirectory(char *[]);
         static std::string retrieveSaveDirectory(char *[]);
 
-        static GLFWwindow *createWindow(int, char *[]);
+        static GLFWwindow *createWindow(bool);
 
         static void charCallback(GLFWwindow*, unsigned int);
         static void keyCallback(GLFWwindow*, int, int, int, int);

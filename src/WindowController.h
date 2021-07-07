@@ -29,7 +29,7 @@ struct GlfwFramebufferSizeRetriever : public urchin::FramebufferSizeRetriever {
 
 class WindowController {
     public:
-        explicit WindowController(GLFWwindow *);
+        WindowController(GLFWwindow *, bool);
 
         void setMouseCursorVisible(bool);
 
@@ -42,6 +42,7 @@ class WindowController {
 
     private:
         GLFWwindow* window;
+        bool isDebugAttached;
         bool eventsCallbackActive;
 
 };

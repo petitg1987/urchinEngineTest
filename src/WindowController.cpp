@@ -35,14 +35,20 @@ void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& width
     heightInPixel = (unsigned int)intHeightInPixel;
 }
 
-WindowController::WindowController(GLFWwindow* window) :
+WindowController::WindowController(GLFWwindow* window, bool isDebugAttached) :
         window(window),
+        isDebugAttached(isDebugAttached),
         eventsCallbackActive(true) {
 
 }
 
 void WindowController::setMouseCursorVisible(bool visible) {
-    glfwSetInputMode(window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+    int cursorMode = visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED;
+    if (isDebugAttached) {
+        cursorMode = GLFW_CURSOR_NORMAL;
+    }
+
+    glfwSetInputMode(window, GLFW_CURSOR, cursorMode);
     if (!visible && glfwRawMouseMotionSupported()) {
         glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
     }
