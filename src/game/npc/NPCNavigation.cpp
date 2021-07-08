@@ -13,9 +13,9 @@ NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler* mapHandle
 
     float characterRadius = std::max(model->getAABBox().getHalfSizes().X, model->getAABBox().getHalfSizes().Z);
     float characterHeight = model->getAABBox().getHalfSizes().Y * 2.0f;
-    auto characterShape = std::make_shared<const CollisionCapsuleShape>(characterRadius, characterHeight - (2.0f * characterRadius), CapsuleShape<float>::CAPSULE_Z);
+    auto characterShape = std::make_unique<const CollisionCapsuleShape>(characterRadius, characterHeight - (2.0f * characterRadius), CapsuleShape<float>::CAPSULE_Z);
     PhysicsTransform characterTransform(model->getTransform().getPosition(), model->getTransform().getOrientation());
-    physicsCharacter = std::make_shared<PhysicsCharacter>("npcCharacter", mass, characterShape, characterTransform);
+    physicsCharacter = std::make_shared<PhysicsCharacter>("npcCharacter", mass, std::move(characterShape), characterTransform);
     characterController = std::make_unique<CharacterController>(physicsCharacter, CharacterControllerConfig(), physicsWorld);
 }
 

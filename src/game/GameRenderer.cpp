@@ -126,9 +126,9 @@ void GameRenderer::initializeCharacter() {
     PhysicsTransform transform(characterPosition, Quaternion<float>(Vector3<float>(0.0, 1.0, 0.0), 0.0));
     float characterRadius = 0.25f;
     float characterSize = 1.80f;
-    auto characterShape = std::make_shared<const CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), CapsuleShape<float>::CAPSULE_Y);
+    auto characterShape = std::make_unique<const CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), CapsuleShape<float>::CAPSULE_Y);
 
-    physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, characterShape, transform);
+    physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, std::move(characterShape), transform);
     characterControllerConfig = CharacterControllerConfig();
     characterController = std::make_unique<CharacterController>(physicsCharacter, characterControllerConfig, physicsWorld);
 
