@@ -69,7 +69,7 @@ void GameRenderer::initialize() {
     //load map
     mapHandler = new MapHandler(gameRenderer3d, physicsWorld, getMainDisplayer()->getSoundManager(), aiManager);
     NullLoadCallback nullLoadCallback;
-    mapHandler->loadMapFromFile("map.xml", nullLoadCallback);
+    mapHandler->loadMapFromFile("map.uda", nullLoadCallback);
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->animate("move");
 

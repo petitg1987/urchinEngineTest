@@ -6,7 +6,7 @@ joints {
 }
 
 mesh {
-	material "materials/book/book.mtr"
+	material "materials/book/book.uda"
 
 	numVerts 100
 	vert 0 0 ( 0.740568 0.647132 ) ( 0 1 )

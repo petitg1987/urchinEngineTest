@@ -15,7 +15,7 @@ joints {
 }
 
 mesh {
-	material "materials/characterAnimate/armLeft.mtr"
+	material "materials/characterAnimate/armLeft.uda"
 
 	numVerts 24
 	vert 0 0 ( 0.624254 0.000000 ) ( 0 1 )
@@ -85,7 +85,7 @@ mesh {
 }
 
 mesh {
-	material "materials/characterAnimate/armRight.mtr"
+	material "materials/characterAnimate/armRight.uda"
 
 	numVerts 24
 	vert 0 0 ( 0.624254 0.000000 ) ( 0 1 )
@@ -155,7 +155,7 @@ mesh {
 }
 
 mesh {
-	material "materials/characterAnimate/head.mtr"
+	material "materials/characterAnimate/head.uda"
 
 	numVerts 24
 	vert 0 0 ( 0.666667 0.569475 ) ( 0 1 )
@@ -225,7 +225,7 @@ mesh {
 }
 
 mesh {
-	material "materials/characterAnimate/body.mtr"
+	material "materials/characterAnimate/body.uda"
 
 	numVerts 24
 	vert 0 0 ( 0.000000 0.363636 ) ( 0 1 )
@@ -295,7 +295,7 @@ mesh {
 }
 
 mesh {
-	material "materials/characterAnimate/legRight.mtr"
+	material "materials/characterAnimate/legRight.uda"
 
 	numVerts 24
 	vert 0 0 ( 0.624254 0.000000 ) ( 0 1 )
@@ -365,7 +365,7 @@ mesh {
 }
 
 mesh {
-	material "materials/characterAnimate/legLeft.mtr"
+	material "materials/characterAnimate/legLeft.uda"
 
 	numVerts 24
 	vert 0 0 ( 0.812127 1.000000 ) ( 0 1 )

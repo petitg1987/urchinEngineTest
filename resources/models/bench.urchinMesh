@@ -6,7 +6,7 @@ joints {
 }
 
 mesh {
-	material "materials/bench/bench.mtr"
+	material "materials/bench/bench.uda"
 
 	numVerts 168
 	vert 0 0 ( 0.009073 0.995644 ) ( 0 1 )

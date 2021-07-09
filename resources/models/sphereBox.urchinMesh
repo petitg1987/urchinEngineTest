@@ -6,7 +6,7 @@ joints {
 }
 
 mesh {
-	material "materials/sphereBox/sphereBox.mtr"
+	material "materials/sphereBox/sphereBox.uda"
 
 	numVerts 1004
 	vert 0 0 ( 0.203167 0.279732 ) ( 0 1 )

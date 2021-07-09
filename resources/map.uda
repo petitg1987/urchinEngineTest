@@ -516,7 +516,7 @@
                 <sRepeat>60.000000</sRepeat>
                 <tRepeat>60.000000</tRepeat>
                 <materialFilenames>
-                    <materialFilename index="0">materials/terrain/grassGround.mtr</materialFilename>
+                    <materialFilename index="0">materials/terrain/grassGround.uda</materialFilename>
                 </materialFilenames>
             </material>
             <position>0.000000 -10.330000 -8.400000</position>
