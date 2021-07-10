@@ -50,7 +50,7 @@ GameRenderer::~GameRenderer() {
 
 void GameRenderer::initialize() {
     //3d
-    gameRenderer3d = getMainDisplayer()->getSceneManager()->newRenderer3d(false);
+    gameRenderer3d = &getMainDisplayer()->getSceneManager()->newRenderer3d(false);
     gameRenderer3d->activateAntiAliasing(true);
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
@@ -74,7 +74,7 @@ void GameRenderer::initialize() {
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->animate("move");
 
     //UI
-    gameUIRenderer = getMainDisplayer()->getSceneManager()->newUIRenderer(false);
+    gameUIRenderer = &getMainDisplayer()->getSceneManager()->newUIRenderer(false);
 
     fpsText = Text::newText(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
