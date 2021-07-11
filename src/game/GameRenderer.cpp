@@ -96,7 +96,7 @@ void GameRenderer::initialize() {
                       "> Esc: Quit");
     new TextBox(myWindow, Position(0, 192, LengthType::PIXEL), Size(264, 20, LengthType::PIXEL), "defaultSkin");
     auto* myButton = new Button(myWindow, Position(0, 215, LengthType::PIXEL), Size(264, 27, LengthType::PIXEL), "defaultSkin", "button.close");
-    myButton->addEventListener(std::make_shared<CloseWindowCmd>(myWindow));
+    myButton->addEventListener(std::make_unique<CloseWindowCmd>(myWindow));
 
     auto* myWindow2 = new Window(nullptr, Position(320, 30, LengthType::PIXEL), Size(200, 160, LengthType::PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(myWindow2);
