@@ -64,23 +64,23 @@ class GameRenderer : public RenderScreen {
         urchin::CharacterControllerConfig characterControllerConfig;
         std::unique_ptr<urchin::CharacterController> characterController;
         bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
-        std::vector<urchin::GeometryModel *> rayModels;
+        std::vector<urchin::GeometryModel*> rayModels;
         std::unique_ptr<urchin::CollisionPointDisplayer> collisionPointsDisplayer;
 
         //AI
         std::unique_ptr<urchin::AIManager> aiManager;
-        std::vector<urchin::GeometryModel *> pathModels;
+        std::vector<urchin::GeometryModel*> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
 
         //map handler
         std::unique_ptr<urchin::MapHandler> mapHandler;
 
         //UI
-        urchin::UIRenderer *gameUIRenderer;
-        urchin::Text *fpsText;
+        urchin::UIRenderer* gameUIRenderer;
+        urchin::Text* fpsText;
 
         //sound
-        urchin::ManualTrigger *manualTrigger;
+        urchin::ManualTrigger* manualTrigger;
 
         //NPC navigation
         std::unique_ptr<NPCNavigation> npcNavigation;
