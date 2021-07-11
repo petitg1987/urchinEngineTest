@@ -54,7 +54,7 @@ void GameRenderer::initialize() {
     gameRenderer3d->activateAntiAliasing(true);
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
-    gameRenderer3d->getLightManager()->setGlobalAmbientColor(Point4<float>(0.05f, 0.05f, 0.05f, 0.0f));
+    gameRenderer3d->getLightManager().setGlobalAmbientColor(Point4<float>(0.05f, 0.05f, 0.05f, 0.0f));
     camera = new CharacterCamera(getMainDisplayer()->getWindowController(), 45.0f, 0.1f, 300.0f);
     gameRenderer3d->setCamera(camera);
 
@@ -176,7 +176,7 @@ void GameRenderer::switchMode() {
 
 void GameRenderer::deleteGeometryModels(std::vector<GeometryModel *>& models) const {
     for (auto model : models) {
-        gameRenderer3d->getGeometryManager()->removeGeometry(model);
+        gameRenderer3d->getGeometryManager().removeGeometry(model);
         delete model;
     }
     models.clear();
@@ -251,7 +251,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         gunRayModel->setLineWidth(3.0f);
         deleteGeometryModels(rayModels);
         rayModels.push_back(gunRayModel);
-        gameRenderer3d->getGeometryManager()->addGeometry(gunRayModel);
+        gameRenderer3d->getGeometryManager().addGeometry(gunRayModel);
 
         while (!rayTestResult->isResultReady()) {
             std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -264,7 +264,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
             hitPointModel->setColor(1.0, 0.0, 0.0);
 
             rayModels.push_back(hitPointModel);
-            gameRenderer3d->getGeometryManager()->addGeometry(hitPointModel);
+            gameRenderer3d->getGeometryManager().addGeometry(hitPointModel);
         }
     }
 
@@ -359,7 +359,7 @@ void GameRenderer::refresh() {
             linesModel->setLineWidth(5.0f);
             linesModel->setColor(0.0, 1.0, 1.0, 1.0);
             pathModels.push_back(linesModel);
-            gameRenderer3d->getGeometryManager()->addGeometry(linesModel);
+            gameRenderer3d->getGeometryManager().addGeometry(linesModel);
         }
     }
 
