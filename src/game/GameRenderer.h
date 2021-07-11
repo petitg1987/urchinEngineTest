@@ -60,7 +60,7 @@ class GameRenderer : public RenderScreen {
         UnderWaterEvent* underWaterEvent;
 
         //physics
-        urchin::PhysicsWorld *physicsWorld;
+        std::unique_ptr<urchin::PhysicsWorld> physicsWorld;
         std::shared_ptr<urchin::PhysicsCharacter> physicsCharacter;
         urchin::CharacterControllerConfig characterControllerConfig;
         std::unique_ptr<urchin::CharacterController> characterController;

@@ -43,7 +43,6 @@ GameRenderer::~GameRenderer() {
     deleteGeometryModels(pathModels);
 
     delete mapHandler;
-    delete physicsWorld;
     delete aiManager;
     delete camera;
 }
@@ -59,15 +58,15 @@ void GameRenderer::initialize() {
     gameRenderer3d->setCamera(camera);
 
     //physics
-    physicsWorld = new PhysicsWorld();
-    collisionPointsDisplayer = std::make_unique<CollisionPointDisplayer>(physicsWorld, gameRenderer3d);
+    physicsWorld = std::make_unique<PhysicsWorld>();
+    collisionPointsDisplayer = std::make_unique<CollisionPointDisplayer>(*physicsWorld, gameRenderer3d);
 
     //AI
     aiManager = new AIManager();
     navMeshDisplayer = std::make_unique<NavMeshDisplayer>(aiManager, gameRenderer3d);
 
     //load map
-    mapHandler = new MapHandler(gameRenderer3d, physicsWorld, getMainDisplayer()->getSoundManager(), aiManager);
+    mapHandler = new MapHandler(gameRenderer3d, physicsWorld.get(), getMainDisplayer()->getSoundManager(), aiManager);
     NullLoadCallback nullLoadCallback;
     mapHandler->loadMapFromFile("map.uda", nullLoadCallback);
     mapHandler->getMap()->getSceneObject("characterAnimate")->getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
@@ -130,7 +129,7 @@ void GameRenderer::initializeCharacter() {
 
     physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, std::move(characterShape), transform);
     characterControllerConfig = CharacterControllerConfig();
-    characterController = std::make_unique<CharacterController>(physicsCharacter, characterControllerConfig, physicsWorld);
+    characterController = std::make_unique<CharacterController>(physicsCharacter, characterControllerConfig, *physicsWorld);
 
     camera->rotate(transform.getOrientation());
 }
@@ -160,7 +159,7 @@ void GameRenderer::uninitializeWaterEvent() {
 }
 
 void GameRenderer::initializeNPC() {
-    npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, mapHandler, aiManager, physicsWorld);
+    npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, mapHandler, aiManager, *physicsWorld);
 }
 
 void GameRenderer::uninitializeNPC() {
