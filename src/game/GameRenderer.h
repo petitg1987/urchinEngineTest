@@ -54,8 +54,7 @@ class GameRenderer : public RenderScreen {
         bool memCheckMode;
 
         //3d
-        urchin::Renderer3d *gameRenderer3d;
-        urchin::MapHandler *mapHandler;
+        urchin::Renderer3d* gameRenderer3d;
         CharacterCamera* camera;
         UnderWaterEvent* underWaterEvent;
 
@@ -69,9 +68,12 @@ class GameRenderer : public RenderScreen {
         std::unique_ptr<urchin::CollisionPointDisplayer> collisionPointsDisplayer;
 
         //AI
-        urchin::AIManager *aiManager;
+        std::unique_ptr<urchin::AIManager> aiManager;
         std::vector<urchin::GeometryModel *> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
+
+        //map handler
+        std::unique_ptr<urchin::MapHandler> mapHandler;
 
         //UI
         urchin::UIRenderer *gameUIRenderer;
