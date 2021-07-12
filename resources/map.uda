@@ -5,11 +5,11 @@ scene (relativeWorkingDirectory=./):
         mesh:
           filename: "models/ground.urchinMesh"
         transform:
-           position: "1.400000 -4.250000 100.000000"
-           orientation:
-             axis: "1.000000 0.000000 -0.000000"
-             angle: "4.712389"
-           scale: "10.000000"
+          position: "1.400000 -4.250000 100.000000"
+          orientation:
+            axis: "1.000000 0.000000 -0.000000"
+            angle: "4.712389"
+          scale: "10.000000"
         produceShadow: "false"
       physics:
         shape (type=COMPOUND_SHAPE):
@@ -33,7 +33,7 @@ scene (relativeWorkingDirectory=./):
     object (name=table):
       model:
         mesh:
-         filename: "models/table.urchinMesh"
+          filename: "models/table.urchinMesh"
         transform:
           position: "-3.500000 -1.850000 0.000000"
           orientation:
@@ -296,10 +296,10 @@ scene (relativeWorkingDirectory=./):
                 halfSize: "0.431170 0.419460 0.416260"
             localizedShape:
               transform:
-              position: "-0.428570 0.000000 -0.257140"
-              orientation:
-                axis: "0.000000 1.000000 0.000000"
-                angle: "0.000000"
+                position: "-0.428570 0.000000 -0.257140"
+                orientation:
+                  axis: "0.000000 1.000000 0.000000"
+                  angle: "0.000000"
               shape (type=SPHERE):
                 radius: "0.602600"
         mass: "25.000000"
@@ -365,111 +365,84 @@ scene (relativeWorkingDirectory=./):
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
   lights:
-   light:
-    -
-    position: "4.400000 1.100000 0.000000"
-     exponentialAttenuation: "0.250000"
-     ambientColor: "0.500000 0.000000 0.000000"
-     produceShadow: false
-     _name: omniLight
-     _type: OMNIDIRECTIONAL
-    -
-    direction: "-8.000000 -4.000000 -2.000000"
-     ambientColor: "0.800000 0.400000 0.400000"
-     produceShadow: true
-     _name: sunLight
-     _type: SUN
+    light (name=omniLight;type=OMNIDIRECTIONAL):
+      position: "4.400000 1.100000 0.000000"
+      exponentialAttenuation: "0.250000"
+      ambientColor: "0.500000 0.000000 0.000000"
+      produceShadow: "false"
+    light (name=sunLight;type=SUN):
+      direction: "-8.000000 -4.000000 -2.000000"
+      ambientColor: "0.800000 0.400000 0.400000"
+      produceShadow: "true"
   terrains:
-   terrain:
-    mesh:
-     heightFilename: "terrain/terrainHeight.tga"
-     xzScale: "0.400000"
-     yScale: "0.050000"
-    material:
-     maskMapFilename: ""
-     sRepeat: "60.000000"
-     tRepeat: "60.000000"
-     materialFilenames:
-      materialFilename:
-       _index: 0
-       __text: "materials/terrain/grassGround.uda"
-       toString:
-    position: "0.000000 -10.330000 -8.400000"
-    ambient: "0.300000"
-    grass:
-     grassTextureFilename: "terrain/grass.png"
-     grassMaskFilename: ""
-     numGrassInTex: 1
-     grassHeight: "0.550000"
-     grassLength: "1.000000"
-     grassQuantity: "1.300000"
-     windDirection: "1.000000 0.000000 0.000000"
-     windStrength: "0.500000"
-    _name: terrain
+    terrain (name=terrain):
+      mesh:
+        heightFilename: "terrain/terrainHeight.tga"
+        xzScale: "0.400000"
+        yScale: "0.050000"
+      material:
+        maskMapFilename: ""
+        sRepeat: "60.000000"
+        tRepeat: "60.000000"
+        materialFilenames:
+          materialFilename (index=0): "materials/terrain/grassGround.uda"
+      position: "0.000000 -10.330000 -8.400000"
+      ambient: "0.300000"
+      grass:
+        grassTextureFilename: "terrain/grass.png"
+        grassMaskFilename: ""
+        numGrassInTex: "1"
+        grassHeight: "0.550000"
+        grassLength: "1.000000"
+        grassQuantity: "1.300000"
+        windDirection: "1.000000 0.000000 0.000000"
+        windStrength: "0.500000"
   waters:
-   water:
-    centerPosition: "0.000000 -7.400000 0.000000"
-    xSize: "2500.000000"
-    zSize: "2500.000000"
-    waterColor: "0.080000 0.220000 0.290000"
-    normalFilename: "water/waterNormal.png"
-    dudvMapFilename: "water/waterDudvMap.png"
-    waveSpeed: "0.070000"
-    waveStrength: "0.030000"
-    sRepeat: "150.000000"
-    tRepeat: "150.000000"
-    density: "0.350000"
-    gradient: "1.000000"
-    _name: ocean
+    water (name=ocean):
+      centerPosition: "0.000000 -7.400000 0.000000"
+      xSize: "2500.000000"
+      zSize: "2500.000000"
+      waterColor: "0.080000 0.220000 0.290000"
+      normalFilename: "water/waterNormal.png"
+      dudvMapFilename: "water/waterDudvMap.png"
+      waveSpeed: "0.070000"
+      waveStrength: "0.030000"
+      sRepeat: "150.000000"
+      tRepeat: "150.000000"
+      density: "0.350000"
+      gradient: "1.000000"
   sky:
-   skybox:
-    textures:
-     filename:
-      -
-    "skybox/XN.tga"
-      -
-    "skybox/XP.tga"
-      -
-    "skybox/YN.tga"
-      -
-    "skybox/YP.tga"
-      -
-    "skybox/ZN.tga"
-      -
-    "skybox/ZP.tga"
-    offsetY: "-1.000000"
+    skybox:
+      textures:
+        filename: "skybox/XN.tga"
+        filename: "skybox/XP.tga"
+        filename: "skybox/YN.tga"
+        filename: "skybox/YP.tga"
+        filename: "skybox/ZN.tga"
+        filename: "skybox/ZP.tga"
+      offsetY: "-1.000000"
   soundElements:
-   soundElement:
-    -
-    sound:
-      filename: "sound/ambient.ogg"
-      initialVolume: "1.000000"
-      _type: GLOBAL
-      _category: MUSIC
-     soundTrigger:
-      playBehavior: PLAY_LOOP
-      _type: MANUAL
-     _name: globalSound
-    -
-    sound:
-      filename: "sound/positionTrigger.ogg"
-      position: "-6.800000 -0.500000 -0.500000"
-      inaudibleDistance: "5.000000"
-      initialVolume: "1.000000"
-      _type: SPATIAL
-      _category: MUSIC
-     soundTrigger:
-      soundShape:
-       radius: "5.000000"
-       position: "-6.800000 -0.500000 0.000000"
-       margin: "0.000000"
-       _type: SPHERE
-      playBehavior: PLAY_LOOP
-      _type: SHAPE
-     _name: spatialSound
+    soundElement (name=globalSound):
+      sound (type=GLOBAL;category=MUSIC):
+        filename: "sound/ambient.ogg"
+        initialVolume: "1.000000"
+      soundTrigger (type=MANUAL):
+        playBehavior: "PLAY_LOOP"
+    soundElement (name=spatialSound):
+      sound (type=SPATIAL;category=MUSIC):
+        filename: "sound/positionTrigger.ogg"
+        position: "-6.800000 -0.500000 -0.500000"
+        inaudibleDistance: "5.000000"
+        initialVolume: "1.000000"
+      soundTrigger (type=SHAPE):
+        soundShape (type=SPHERE):
+          radius: "5.000000"
+          position: "-6.800000 -0.500000 0.000000"
+          margin: "0.000000"
+        playBehavior: "PLAY_LOOP"
   aiElements:
-   navMeshAgent:
-    agentHeight: "1.900000"
-    agentRadius: "0.250000"
-    maxSlopeInRadian: "0.785398"
-    jumpDistance: "1.000000"
+    navMeshAgent:
+      agentHeight: "1.900000"
+      agentRadius: "0.250000"
+      maxSlopeInRadian: "0.785398"
+      jumpDistance: "1.000000"

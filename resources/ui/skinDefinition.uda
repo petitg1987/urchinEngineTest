@@ -49,6 +49,7 @@ ui:
       part (zone=bottom): "2"
       part (zone=left): "3"
       part (zone=right): "2"
+    textSkin: defaultSkin
 
   sequence (nameSkin=defaultSkin):
     buttonsTextSkin: "defaultSkin"
