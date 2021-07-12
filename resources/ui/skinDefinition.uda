@@ -1,83 +1,66 @@
-<?xml version="1.0" ?>
-<ui>
-	<text nameSkin="defaultSkin">
-		<font>ui/fonts/font.ttf</font>
-		<color>1.0 1.0 1.0</color>
-		<height>
-			<value>16.0</value>
-			<type>pixel</type>
-		</height>
-	</text>
+ui:
+  text (nameSkin=defaultSkin):
+    font: "ui/fonts/font.ttf"
+    color: "1.0 1.0 1.0"
+    height:
+      value: "16.0"
+      type: "pixel"
 
-	<window nameSkin="defaultSkin">
-		<skin>
-			<image>ui/widget/window/window.tga</image>
-			<part zone="top">23</part>
-			<part zone="bottom">3</part>
-			<part zone="left">4</part>
-			<part zone="right">24</part>
-		</skin>
-		<textSkin>defaultSkin</textSkin>
-	</window>
-	
-	<button nameSkin="defaultSkin">
-		<skin type="default">
-			<image>ui/widget/button/default.tga</image>
-			<part zone="top">2</part>
-			<part zone="bottom">2</part>
-			<part zone="left">1</part>
-			<part zone="right">1</part>
-		</skin>
-		<skin type="focus">
-			<image>ui/widget/button/focus.tga</image>
-			<part zone="top">2</part>
-			<part zone="bottom">2</part>
-			<part zone="left">1</part>
-			<part zone="right">1</part>
-		</skin>
-		<skin type="click">
-			<image>ui/widget/button/click.tga</image>
-			<part zone="top">2</part>
-			<part zone="bottom">2</part>
-			<part zone="left">1</part>
-			<part zone="right">1</part>
-		</skin>
-		<textSkin>defaultSkin</textSkin>
-	</button>
-	
-	<textBox nameSkin="defaultSkin">
-		<skin type="default">
-			<image>ui/widget/textbox/default.tga</image>
-			<part zone="top">2</part>
-			<part zone="bottom">2</part>
-			<part zone="left">3</part>
-			<part zone="right">2</part>
-		</skin>
-		<skin type="focus">
-			<image>ui/widget/textbox/focus.tga</image>
-			<part zone="top">2</part>
-			<part zone="bottom">2</part>
-			<part zone="left">3</part>
-			<part zone="right">2</part>
-		</skin>
-		<textSkin>defaultSkin</textSkin>
-	</textBox>
+  window (nameSkin=defaultSkin):
+    skin:
+      image: "ui/widget/window/window.tga"
+      part (zone=top): "23"
+      part (zone=bottom): "3"
+      part (zone=left): "4"
+      part (zone=right): "24"
+    textSkin: "defaultSkin"
 
-	<sequence nameSkin="defaultSkin">
-		<buttonsTextSkin>defaultSkin</buttonsTextSkin>
-		<valuesTextSkin>defaultSkin</valuesTextSkin>
-		<leftButtonText>&lt;&lt;</leftButtonText>
-		<rightButtonText>&gt;&gt;</rightButtonText>
-	</sequence>
+  button (nameSkin=defaultSkin):
+    skin (type=default):
+      image: "ui/widget/button/default.tga"
+      part (zone=top): "2"
+      part (zone=bottom): "2"
+      part (zone=left): "1"
+      part (zone=right): "1"
+    skin (type=focus):
+      image: "ui/widget/button/focus.tga"
+      part (zone=top): "2"
+      part (zone=bottom): "2"
+      part (zone=left): "1"
+      part (zone=right): "1"
+    skin (type=click):
+      image: "ui/widget/button/click.tga"
+      part (zone=top): "2"
+      part (zone=bottom): "2"
+      part (zone=left): "1"
+      part (zone=right): "1"
+    textSkin: "defaultSkin"
 
-	<checkBox nameSkin="defaultSkin">
-		<imageChecked>ui/widget/checkbox/checked.tga</imageChecked>
-		<imageUnchecked>ui/widget/checkbox/unchecked.tga</imageUnchecked>
-	</checkBox>
+  textBox (nameSkin=defaultSkin):
+    skin (type=default):
+      image: "ui/widget/textbox/default.tga"
+      part (zone=top): "2"
+      part (zone=bottom): "2"
+      part (zone=left): "3"
+      part (zone=right): "2"
+    skin (type=focus):
+      image: "ui/widget/textbox/focus.tga"
+      part (zone=top): "2"
+      part (zone=bottom): "2"
+      part (zone=left): "3"
+      part (zone=right): "2"
 
-	<slider nameSkin="defaultSkin">
-		<imageLine>ui/widget/slider/line.tga</imageLine>
-		<imageCursor>ui/widget/slider/cursor.tga</imageCursor>
-		<valuesTextSkin>defaultSkin</valuesTextSkin>
-	</slider>
-</ui>
+  sequence (nameSkin=defaultSkin):
+    buttonsTextSkin: "defaultSkin"
+    valuesTextSkin: "defaultSkin"
+    leftButtonText: "<<"
+    rightButtonText: ">>"
+
+  checkBox (nameSkin=defaultSkin):
+    imageChecked: "ui/widget/checkbox/checked.tga"
+    imageUnchecked: "ui/widget/checkbox/unchecked.tga"
+
+  slider (nameSkin=defaultSkin):
+    imageLine: "ui/widget/slider/line.tga"
+    imageCursor: "ui/widget/slider/cursor.tga"
+    valuesTextSkin: "defaultSkin"

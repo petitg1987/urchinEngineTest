@@ -1,16 +1,8 @@
-<?xml version="1.0" ?>
-<material>
-	<repeatTexture>true</repeatTexture>
-	
-	<diffuse>
-		<texture>materials/ground/diffuse.tga</texture>
-	</diffuse>
-	
-	 <normal>
-		<texture>materials/ground/normal.tga</texture>
-	</normal>
-	
-	<ambient>
-		<factor>0.4</factor>
-	</ambient>
-</material>
+material:
+  repeatTexture: "true"
+  diffuse:
+    texture: "materials/ground/diffuse.tga"
+  normal:
+    texture: "materials/ground/normal.tga"
+  ambient:
+    factor: "0.4"

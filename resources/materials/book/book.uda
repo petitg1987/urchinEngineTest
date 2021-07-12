@@ -1,12 +1,6 @@
-<?xml version="1.0" ?>
-<material>
-	<repeatTexture>false</repeatTexture>
-	
-	<diffuse>
-		<texture>materials/book/diffuse.tga</texture>
-	</diffuse>
-	
-	<ambient>
-		<factor>0.4</factor>
-	</ambient>
-</material>
+material:
+  repeatTexture: "false"
+  diffuse:
+    texture: "materials/book/diffuse.tga"
+  ambient:
+    factor: "0.4"
