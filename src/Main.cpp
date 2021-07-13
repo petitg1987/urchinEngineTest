@@ -38,11 +38,11 @@ void Main::execute(int argc, char *argv[]) {
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
         window = createWindow(isWindowed);
-        windowController = new WindowController(window, isDebugModeOn);
+        windowController = std::make_unique<WindowController>(window, isDebugModeOn);
         std::string resourcesDirectory = retrieveResourcesDirectory(argv);
         std::string saveDirectory = retrieveSaveDirectory(argv);
 
-        mainDisplayer = new MainDisplayer(windowController);
+        mainDisplayer = new MainDisplayer(*windowController);
         mainDisplayer->initialize(resourcesDirectory);
 
         glfwSetWindowUserPointer(window, (void*)this);
@@ -62,15 +62,15 @@ void Main::execute(int argc, char *argv[]) {
 
         if (Logger::instance()->hasFailure()) {
             crashReporter->onLogContainFailure();
-            clearResources(window, windowController);
+            clearResources(window);
             _exit(1);
         } else {
-            clearResources(window, windowController);
+            clearResources(window);
             Logger::instance()->purge();
         }
     } catch (std::exception& e) {
         crashReporter->onException(e);
-        clearResources(window, windowController);
+        clearResources(window);
         _exit(1);
     }
 }
@@ -369,12 +369,9 @@ bool Main::argumentsContains(const std::string& argName, int argc, char *argv[])
     return false;
 }
 
-void Main::clearResources(GLFWwindow *&window, WindowController *&windowController) {
+void Main::clearResources(GLFWwindow*& window) {
     delete mainDisplayer;
     mainDisplayer = nullptr;
-
-    delete windowController;
-    windowController = nullptr;
 
     if (window != nullptr) {
         glfwDestroyWindow(window);

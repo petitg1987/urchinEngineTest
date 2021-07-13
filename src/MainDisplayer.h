@@ -9,7 +9,7 @@
 
 class MainDisplayer {
     public:
-        explicit MainDisplayer(WindowController *);
+        explicit MainDisplayer(WindowController&);
         ~MainDisplayer();
 
         void initialize(const std::string&);
@@ -22,16 +22,16 @@ class MainDisplayer {
         double getMouseX() const;
         double getMouseY() const;
 
-        WindowController *getWindowController() const;
-        urchin::SceneManager *getSceneManager() const;
-        urchin::SoundManager *getSoundManager() const;
+        WindowController& getWindowController() const;
+        urchin::SceneManager* getSceneManager() const;
+        urchin::SoundManager* getSoundManager() const;
 
     private:
-        WindowController* windowController;
+        WindowController& windowController;
         double mouseX, mouseY;
 
-        urchin::SceneManager *sceneManager;
-        urchin::SoundManager *soundManager;
+        std::unique_ptr<urchin::SceneManager> sceneManager;
+        std::unique_ptr<urchin::SoundManager> soundManager;
 
-        RenderScreen* gameRenderer;
+        std::unique_ptr<RenderScreen> gameRenderer;
 };

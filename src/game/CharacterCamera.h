@@ -7,7 +7,7 @@
 
 class CharacterCamera : public urchin::Camera {
     public:
-        CharacterCamera(WindowController*, float, float, float);
+        CharacterCamera(const WindowController&, float, float, float);
         ~CharacterCamera() override = default;
 
         void updateCameraView(float) override;
@@ -15,5 +15,5 @@ class CharacterCamera : public urchin::Camera {
         bool onMouseMove(double, double) override;
 
     private:
-        const WindowController* windowController;
+        const WindowController& windowController;
 };

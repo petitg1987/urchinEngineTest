@@ -159,7 +159,7 @@ void GameRenderer::uninitializeNPC() {
 void GameRenderer::switchMode() {
     editMode = !editMode;
 
-    getMainDisplayer()->getWindowController()->setMouseCursorVisible(editMode);
+    getMainDisplayer()->getWindowController().setMouseCursorVisible(editMode);
     camera->useMouseToMoveCamera(!editMode);
 }
 
@@ -298,7 +298,7 @@ void GameRenderer::active(bool active) {
             initialize();
         }
 
-        getMainDisplayer()->getWindowController()->setMouseCursorVisible(false);
+        getMainDisplayer()->getWindowController().setMouseCursorVisible(false);
 
         getMainDisplayer()->getSceneManager()->enableRenderer3d(gameRenderer3d);
         getMainDisplayer()->getSceneManager()->enableUIRenderer(gameUIRenderer);

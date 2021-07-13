@@ -43,12 +43,12 @@ class Main {
 
         static bool argumentsContains(const std::string&, int, char *[]);
 
-        void clearResources(GLFWwindow *&, WindowController *&);
+        void clearResources(GLFWwindow*&);
 
         std::shared_ptr<CrashReporter> crashReporter;
 
         MainDisplayer* mainDisplayer;
-        WindowController* windowController;
+        std::unique_ptr<WindowController> windowController;
 
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;
         std::map<int, urchin::Control::Key> inputKeyMap;

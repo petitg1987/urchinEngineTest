@@ -3,21 +3,17 @@
 #include <MainDisplayer.h>
 using namespace urchin;
 
-MainDisplayer::MainDisplayer(WindowController* windowController) :
+MainDisplayer::MainDisplayer(WindowController& windowController) :
         windowController(windowController),
         mouseX(0),
-        mouseY(0),
-        sceneManager(nullptr),
-        soundManager(nullptr),
-        gameRenderer(nullptr) {
+        mouseY(0) {
 
 }
 
 MainDisplayer::~MainDisplayer() {
-    delete gameRenderer;
-
-    delete sceneManager;
-    delete soundManager;
+    gameRenderer.reset(nullptr);
+    sceneManager.reset(nullptr);
+    soundManager.reset(nullptr);
 
     SingletonManager::destroyAllSingletons();
 }
@@ -27,13 +23,13 @@ void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     ConfigService::instance()->loadProperties("engine.properties");
     UISkinService::instance()->setSkin("ui/skinDefinition.uda");
 
-    auto surfaceCreator = getWindowController()->newSurfaceCreator();
-    auto framebufferSizeRetriever = getWindowController()->newFramebufferSizeRetriever();
-    sceneManager = new SceneManager(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
+    auto surfaceCreator = getWindowController().newSurfaceCreator();
+    auto framebufferSizeRetriever = getWindowController().newFramebufferSizeRetriever();
+    sceneManager = std::make_unique<SceneManager>(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
     sceneManager->updateVerticalSync(false);
-    soundManager = new SoundManager();
+    soundManager = std::make_unique<SoundManager>();
 
-    gameRenderer = new GameRenderer(this);
+    gameRenderer = std::make_unique<GameRenderer>(this);
     gameRenderer->active(true);
 }
 
@@ -80,14 +76,14 @@ double MainDisplayer::getMouseY() const {
     return mouseY;
 }
 
-WindowController* MainDisplayer::getWindowController() const {
+WindowController& MainDisplayer::getWindowController() const {
     return windowController;
 }
 
 SceneManager* MainDisplayer::getSceneManager() const {
-    return sceneManager;
+    return sceneManager.get();
 }
 
 SoundManager* MainDisplayer::getSoundManager() const {
-    return soundManager;
+    return soundManager.get();
 }
