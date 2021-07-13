@@ -343,7 +343,7 @@ void GameRenderer::refresh() {
     if (DEBUG_DISPLAY_PATH) {
         deleteGeometryModels(pathModels);
         std::vector<PathPoint> pathPoints;
-        if(npcNavigation->getPathRequest()) {
+        if (npcNavigation->getPathRequest()) {
             pathPoints = npcNavigation->getPathRequest()->getPath();
         }
 

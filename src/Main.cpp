@@ -87,13 +87,13 @@ void Main::glfwErrorCallback(int error, const char* description) {
 
 void Main::initializeInputKeyMap() {
     //keyboard
-    for(int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i) {
         inputKeyMap[GLFW_KEY_0 + i] = static_cast<Control::Key>(Control::Key::K0 + i);
     }
-    for(int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 12; ++i) {
         inputKeyMap[GLFW_KEY_F1 + i] = static_cast<Control::Key>(Control::Key::F1 + i);
     }
-    for(int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i) {
         inputKeyMap[GLFW_KEY_KP_0 + i] = static_cast<Control::Key>(Control::Key::NUM_PAD_0 + i);
     }
     inputKeyMap[GLFW_KEY_KP_DECIMAL] = Control::Key::NUM_PAD_DECIMAL;
@@ -326,7 +326,7 @@ Control::Key Main::toInputKey(int key) {
     }
 
     const char* charKey = glfwGetKeyName(key, 0);
-    if(charKey) {
+    if (charKey) {
         if (charKey[0] >= 'a' && charKey[0] <= 'z') {
             int keyShift = charKey[0] - 'a';
             return static_cast<Control::Key>(Control::Key::A + keyShift);

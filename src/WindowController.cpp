@@ -46,7 +46,7 @@ WindowController::WindowController(GLFWwindow* window, bool isDebugModeOn) :
 void WindowController::setMouseCursorVisible(bool visible) {
     int cursorMode = GLFW_CURSOR_NORMAL;
     if (!visible) {
-        if(isDebugModeOn()) {
+        if (isDebugModeOn()) {
             cursorMode = GLFW_CURSOR_HIDDEN;
         } else {
             cursorMode = GLFW_CURSOR_DISABLED;
@@ -54,7 +54,7 @@ void WindowController::setMouseCursorVisible(bool visible) {
     }
     glfwSetInputMode(window, GLFW_CURSOR, cursorMode);
 
-    if(glfwRawMouseMotionSupported()) {
+    if (glfwRawMouseMotionSupported()) {
         if (!visible) {
             glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
         } else {
