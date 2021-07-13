@@ -11,8 +11,6 @@ int main(int argc, char *argv[]) {
 }
 
 Main::Main() :
-        mainDisplayer(nullptr),
-        windowController(nullptr),
         propagatePressKeyEvent(true),
         propagateReleaseKeyEvent(true) {
     crashReporter = std::make_shared<CrashReporter>();
@@ -42,7 +40,7 @@ void Main::execute(int argc, char *argv[]) {
         std::string resourcesDirectory = retrieveResourcesDirectory(argv);
         std::string saveDirectory = retrieveSaveDirectory(argv);
 
-        mainDisplayer = new MainDisplayer(*windowController);
+        mainDisplayer = std::make_unique<MainDisplayer>(*windowController);
         mainDisplayer->initialize(resourcesDirectory);
 
         glfwSetWindowUserPointer(window, (void*)this);
@@ -370,8 +368,7 @@ bool Main::argumentsContains(const std::string& argName, int argc, char *argv[])
 }
 
 void Main::clearResources(GLFWwindow*& window) {
-    delete mainDisplayer;
-    mainDisplayer = nullptr;
+    mainDisplayer.reset(nullptr);
 
     if (window != nullptr) {
         glfwDestroyWindow(window);

@@ -42,7 +42,7 @@ class GameRenderer : public RenderScreen {
         void uninitializeNPC();
 
         void switchMode();
-        void deleteGeometryModels(std::vector<urchin::GeometryModel *>&) const;
+        void deleteGeometryModels(std::vector<urchin::GeometryModel*>&) const;
 
         urchin::SunLight *getSunLight();
 
@@ -56,7 +56,7 @@ class GameRenderer : public RenderScreen {
         //3d
         urchin::Renderer3d* gameRenderer3d;
         std::shared_ptr<CharacterCamera> camera;
-        UnderWaterEvent* underWaterEvent;
+        std::unique_ptr<UnderWaterEvent> underWaterEvent;
 
         //physics
         std::unique_ptr<urchin::PhysicsWorld> physicsWorld;

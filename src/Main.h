@@ -47,7 +47,7 @@ class Main {
 
         std::shared_ptr<CrashReporter> crashReporter;
 
-        MainDisplayer* mainDisplayer;
+        std::unique_ptr<MainDisplayer> mainDisplayer;
         std::unique_ptr<WindowController> windowController;
 
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;

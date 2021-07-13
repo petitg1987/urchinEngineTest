@@ -130,21 +130,20 @@ void GameRenderer::uninitializeCharacter() {
 }
 
 void GameRenderer::initializeWaterEvent() {
-    underWaterEvent = new UnderWaterEvent(getMainDisplayer()->getSoundManager());
+    underWaterEvent = std::make_unique<UnderWaterEvent>(getMainDisplayer()->getSoundManager());
 
     Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
-    water->addObserver(underWaterEvent, Water::MOVE_UNDER_WATER);
-    water->addObserver(underWaterEvent, Water::MOVE_ABOVE_WATER);
+    water->addObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
+    water->addObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 }
 
 void GameRenderer::uninitializeWaterEvent() {
     if (mapHandler) {
         Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
-        water->removeObserver(underWaterEvent, Water::MOVE_UNDER_WATER);
-        water->removeObserver(underWaterEvent, Water::MOVE_ABOVE_WATER);
+        water->removeObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
+        water->removeObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 
-        delete underWaterEvent;
-        underWaterEvent = nullptr;
+        underWaterEvent.reset(nullptr);
     }
 }
 
@@ -163,7 +162,7 @@ void GameRenderer::switchMode() {
     camera->useMouseToMoveCamera(!editMode);
 }
 
-void GameRenderer::deleteGeometryModels(std::vector<GeometryModel *>& models) const {
+void GameRenderer::deleteGeometryModels(std::vector<GeometryModel*>& models) const {
     for (auto model : models) {
         gameRenderer3d->getGeometryManager().removeGeometry(model);
         delete model;
