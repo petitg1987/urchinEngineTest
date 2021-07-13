@@ -17,16 +17,9 @@ GameRenderer::GameRenderer(MainDisplayer* mainDisplayer) :
         memCheckMode(false),
         //3d
         gameRenderer3d(nullptr),
-        camera(nullptr),
         underWaterEvent(nullptr),
         //physics
-        physicsWorld(nullptr),
-        characterController(nullptr),
         leftKeyPressed(false), rightKeyPressed(false), upKeyPressed(false), downKeyPressed(false),
-        //AI
-        aiManager(nullptr),
-        //Map handler
-        mapHandler(nullptr),
         //UI
         gameUIRenderer(nullptr),
         fpsText(nullptr),
@@ -42,8 +35,6 @@ GameRenderer::~GameRenderer() {
 
     deleteGeometryModels(rayModels);
     deleteGeometryModels(pathModels);
-
-    delete camera;
 }
 
 void GameRenderer::initialize() {
@@ -53,7 +44,7 @@ void GameRenderer::initialize() {
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
     gameRenderer3d->getLightManager().setGlobalAmbientColor(Point4<float>(0.05f, 0.05f, 0.05f, 0.0f));
-    camera = new CharacterCamera(getMainDisplayer()->getWindowController(), 45.0f, 0.1f, 300.0f);
+    camera = std::make_shared<CharacterCamera>(getMainDisplayer()->getWindowController(), 45.0f, 0.1f, 300.0f);
     gameRenderer3d->setCamera(camera);
 
     //physics

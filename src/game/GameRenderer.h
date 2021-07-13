@@ -55,7 +55,7 @@ class GameRenderer : public RenderScreen {
 
         //3d
         urchin::Renderer3d* gameRenderer3d;
-        CharacterCamera* camera;
+        std::shared_ptr<CharacterCamera> camera;
         UnderWaterEvent* underWaterEvent;
 
         //physics
