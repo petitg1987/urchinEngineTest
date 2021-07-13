@@ -239,7 +239,7 @@ scene (relativeWorkingDirectory=./):
           scale: "1.000000"
       physics:
         shape (type=CYLINDER):
-          orientation: Z
+          orientation: "Z"
           radius: "0.344670"
           height: "0.939320"
         mass: "20.000000"
@@ -262,7 +262,7 @@ scene (relativeWorkingDirectory=./):
           scale: "0.200000"
       physics:
         shape (type=CAPSULE):
-          orientation: Z
+          orientation: "Z"
           radius: "0.200260"
           cylinderHeight: "0.698650"
         mass: "3.000000"
@@ -322,7 +322,7 @@ scene (relativeWorkingDirectory=./):
           scale: "0.800000"
       physics:
         shape (type=CONE):
-          orientation: ZPositive
+          orientation: "ZPositive"
           radius: "0.800000"
           height: "1.600000"
         mass: "10.000000"
@@ -381,7 +381,7 @@ scene (relativeWorkingDirectory=./):
         xzScale: "0.400000"
         yScale: "0.050000"
       material:
-        maskMapFilename: ""
+        maskMapFilename:
         sRepeat: "60.000000"
         tRepeat: "60.000000"
         materialFilenames:
@@ -390,7 +390,7 @@ scene (relativeWorkingDirectory=./):
       ambient: "0.300000"
       grass:
         grassTextureFilename: "terrain/grass.png"
-        grassMaskFilename: ""
+        grassMaskFilename:
         numGrassInTex: "1"
         grassHeight: "0.550000"
         grassLength: "1.000000"
@@ -423,13 +423,13 @@ scene (relativeWorkingDirectory=./):
       offsetY: "-1.000000"
   soundElements:
     soundElement (name=globalSound):
-      sound (type=GLOBAL;category=MUSIC):
+      sound (category=MUSIC;type=GLOBAL):
         filename: "sound/ambient.ogg"
         initialVolume: "1.000000"
       soundTrigger (type=MANUAL):
         playBehavior: "PLAY_LOOP"
     soundElement (name=spatialSound):
-      sound (type=SPATIAL;category=MUSIC):
+      sound (category=MUSIC;type=SPATIAL):
         filename: "sound/positionTrigger.ogg"
         position: "-6.800000 -0.500000 -0.500000"
         inaudibleDistance: "5.000000"
