@@ -42,7 +42,7 @@ class GameRenderer : public RenderScreen {
         void uninitializeNPC();
 
         void switchMode();
-        void deleteGeometryModels(std::vector<urchin::GeometryModel*>&) const;
+        void deleteGeometryModels(std::vector<std::shared_ptr<urchin::GeometryModel>>&) const;
 
         urchin::SunLight *getSunLight();
 
@@ -64,12 +64,12 @@ class GameRenderer : public RenderScreen {
         urchin::CharacterControllerConfig characterControllerConfig;
         std::unique_ptr<urchin::CharacterController> characterController;
         bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
-        std::vector<urchin::GeometryModel*> rayModels;
+        std::vector<std::shared_ptr<urchin::GeometryModel>> rayModels;
         std::unique_ptr<urchin::CollisionPointDisplayer> collisionPointsDisplayer;
 
         //AI
         std::unique_ptr<urchin::AIManager> aiManager;
-        std::vector<urchin::GeometryModel*> pathModels;
+        std::vector<std::shared_ptr<urchin::GeometryModel>> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
 
         //map handler

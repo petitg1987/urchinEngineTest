@@ -162,10 +162,9 @@ void GameRenderer::switchMode() {
     camera->useMouseToMoveCamera(!editMode);
 }
 
-void GameRenderer::deleteGeometryModels(std::vector<GeometryModel*>& models) const {
-    for (auto model : models) {
-        gameRenderer3d->getGeometryManager().removeGeometry(model);
-        delete model;
+void GameRenderer::deleteGeometryModels(std::vector<std::shared_ptr<GeometryModel>>& models) const {
+    for (const auto& model : models) {
+        gameRenderer3d->getGeometryManager().removeGeometry(*model);
     }
     models.clear();
 }
@@ -234,12 +233,13 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         Point3<float> rayEnd = rayStart.translate(rayDirectionWorldSpace*100.0f);
         std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(Ray<float>(rayStart, rayEnd));
 
-        LineSegment3D<float> gunRay(rayStart, rayEnd);
-        GeometryModel* gunRayModel = new LinesModel(gunRay);
-        gunRayModel->setLineWidth(3.0f);
         deleteGeometryModels(rayModels);
+
+        LineSegment3D<float> gunRay(rayStart, rayEnd);
+        auto gunRayModel = std::make_shared<LinesModel>(gunRay);
+        gunRayModel->setLineWidth(3.0f);
         rayModels.push_back(gunRayModel);
-        gameRenderer3d->getGeometryManager().addGeometry(gunRayModel);
+        gameRenderer3d->getGeometryManager().addGeometry(std::move(gunRayModel));
 
         while (!rayTestResult->isResultReady()) {
             std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -247,12 +247,12 @@ void GameRenderer::onKeyPressed(Control::Key key) {
 
         if (rayTestResult->hasHit()) {
             const auto& nearestResult = rayTestResult->getNearestResult();
-            GeometryModel* hitPointModel = new PointsModel(nearestResult->getHitPointOnObject2());
+            auto hitPointModel = std::make_shared<PointsModel>(nearestResult->getHitPointOnObject2());
             hitPointModel->setPointSize(25.0f);
-            hitPointModel->setColor(1.0, 0.0, 0.0);
+            hitPointModel->setColor(1.0f, 0.0f, 0.0f);
 
             rayModels.push_back(hitPointModel);
-            gameRenderer3d->getGeometryManager().addGeometry(hitPointModel);
+            gameRenderer3d->getGeometryManager().addGeometry(std::move(hitPointModel));
         }
     }
 
@@ -343,11 +343,11 @@ void GameRenderer::refresh() {
             for (auto& pathPoint : pathPoints) {
                 adjustedPathPoints.emplace_back(Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
             }
-            auto* linesModel = new LinesModel(adjustedPathPoints);
+            auto linesModel = std::make_shared<LinesModel>(adjustedPathPoints);
             linesModel->setLineWidth(5.0f);
-            linesModel->setColor(0.0, 1.0, 1.0, 1.0);
+            linesModel->setColor(0.0f, 1.0f, 1.0f);
             pathModels.push_back(linesModel);
-            gameRenderer3d->getGeometryManager().addGeometry(linesModel);
+            gameRenderer3d->getGeometryManager().addGeometry(std::move(linesModel));
         }
     }
 
