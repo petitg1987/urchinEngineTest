@@ -77,7 +77,7 @@ class GameRenderer : public RenderScreen {
 
         //UI
         urchin::UIRenderer* gameUIRenderer;
-        urchin::Text* fpsText;
+        std::shared_ptr<urchin::Text> fpsText;
 
         //sound
         urchin::ManualTrigger* manualTrigger;
