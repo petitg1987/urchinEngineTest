@@ -247,7 +247,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
 
         if (rayTestResult->hasHit()) {
             const auto& nearestResult = rayTestResult->getNearestResult();
-            auto hitPointModel = std::make_shared<PointsModel>(nearestResult->getHitPointOnObject2());
+            auto hitPointModel = std::make_shared<PointsModel>(nearestResult.getHitPointOnObject2());
             hitPointModel->setPointSize(25.0f);
             hitPointModel->setColor(1.0f, 0.0f, 0.0f);
 
