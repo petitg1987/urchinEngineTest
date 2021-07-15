@@ -22,7 +22,7 @@ void Main::execute(int argc, char *argv[]) {
     Logger::setupCustomInstance(std::make_unique<FileLogger>("urchinEngineTest.log"));
     SignalHandler::instance()->registerSignalReceptor(crashReporter);
 
-    Logger::instance()->logInfo("Application started");
+    Logger::instance().logInfo("Application started");
     GLFWwindow* window = nullptr;
 
     bool isWindowed = argumentsContains("--windowed", argc, argv);
@@ -58,13 +58,13 @@ void Main::execute(int argc, char *argv[]) {
             mainDisplayer->paint();
         }
 
-        if (Logger::instance()->hasFailure()) {
+        if (Logger::instance().hasFailure()) {
             crashReporter->onLogContainFailure();
             clearResources(window);
             _exit(1);
         } else {
             clearResources(window);
-            Logger::instance()->purge();
+            Logger::instance().purge();
         }
     } catch (std::exception& e) {
         crashReporter->onException(e);
@@ -77,10 +77,10 @@ void Main::glfwErrorCallback(int error, const char* description) {
     if (error == GLFW_INVALID_VALUE && strcmp(description, "Invalid scancode") == 0) {
         return; //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
     } else if (error == GLFW_PLATFORM_ERROR && std::string(description).find("Iconification") != std::string::npos) {
-        Logger::instance()->logInfo("Window iconification GLFW error ignored: " + std::string(description));
+        Logger::instance().logInfo("Window iconification GLFW error ignored: " + std::string(description));
         return; //full message: "X11: Iconification of full screen windows requires a WM that supports EWMH full screen"
     }
-    Logger::instance()->logWarning("GLFW error (code: " + std::to_string(error) + "): " + description);
+    Logger::instance().logWarning("GLFW error (code: " + std::to_string(error) + "): " + description);
 }
 
 void Main::initializeInputKeyMap() {

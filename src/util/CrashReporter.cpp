@@ -6,12 +6,12 @@ void CrashReporter::onLogContainFailure() const {
 }
 
 void CrashReporter::onException(const std::exception& e) const {
-    Logger::instance()->logError("Exception caught: " + std::string(e.what()));
+    Logger::instance().logError("Exception caught: " + std::string(e.what()));
     onError();
 }
 
 void CrashReporter::onSignalReceived(unsigned long signalId) {
-    Logger::instance()->logError("Signal caught: " + std::to_string(signalId));
+    Logger::instance().logError("Signal caught: " + std::to_string(signalId));
     onError();
 }
 
