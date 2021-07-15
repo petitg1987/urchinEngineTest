@@ -20,7 +20,7 @@ void Main::execute(int argc, char *argv[]) {
     initializeInputKeyMap();
 
     Logger::setupCustomInstance(std::make_unique<FileLogger>("urchinEngineTest.log"));
-    SignalHandler::instance()->registerSignalReceptor(crashReporter);
+    SignalHandler::instance().registerSignalReceptor(crashReporter);
 
     Logger::instance().logInfo("Application started");
     GLFWwindow* window = nullptr;
