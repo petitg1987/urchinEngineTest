@@ -22,19 +22,19 @@
     * Build type: `Debug`
     * CMake options: `-DUSE_O0=true`
     * Generation path: `.build/debug`
-    * Build options: `-j 12`
+    * Build options: `-j 10`
   * Profile **DebugO0Asan**:
     * Name: `DebugO0Asan`
     * Build type: `Debug`
     * CMake options: `-DUSE_O0=true -DUSE_ASAN=true`
     * Generation path: `.build/debug-asan`
-    * Build options: `-j 12`    
+    * Build options: `-j 10`    
   * Profile **DebugO3**:
     * Name: `DebugO3`
     * Build type: `Debug`
     * CMake options: `-DUSE_O3=true`
     * Generation path: `.build/debugO3`
-    * Build options: `-j 12`
+    * Build options: `-j 10`
 * Add CMake applications
   * Application **urchinEngineTest**:
     * Target/executable: `urchinEngineTest`
