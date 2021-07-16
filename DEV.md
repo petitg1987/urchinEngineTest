@@ -15,7 +15,8 @@
 ## Windows
 * N/A
 
-## CLion configuration
+# CLion configuration
+## Build configuration
 * Add CMake profiles (File > Settings -> Build,Execution,Deployment > CMake)
   * Profile **DebugO0**:
     * Name: `DebugO0`
@@ -44,5 +45,6 @@
   * Application **urchinEngineTest (win, dbg)**:
     * Target/executable: `urchinEngineTest`
     * Program arguments: `--windowed --debug`
-* In Settings:
-  * Languages & Frameworks > C/C++ > Clangd > Clang Errors and Warnings: `-Wno-unused-variable,-Wno-infinite-recursion,-Werror=implicit-function-declaration,-Wno-shadow-field-in-constructor-modified,-Wno-shadow-ivar,-Wuninitialized,-Wunused-label,-Wunused-lambda-capture,-Wno-shadow`
+
+## Clang analyzer
+* In File > Settings > Languages & Frameworks > C/C++ > Clangd > Clang Errors and Warnings: `-Wno-unused-variable,-Wno-infinite-recursion,-Werror=implicit-function-declaration,-Wno-shadow-field-in-constructor-modified,-Wno-shadow-ivar,-Wuninitialized,-Wunused-label,-Wunused-lambda-capture,-Wno-shadow`
