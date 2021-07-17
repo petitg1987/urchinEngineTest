@@ -164,7 +164,7 @@ void GameRenderer::switchMode() {
 
 void GameRenderer::deleteGeometryModels(std::vector<std::shared_ptr<GeometryModel>>& models) const {
     for (const auto& model : models) {
-        gameRenderer3d->getGeometryManager().removeGeometry(*model);
+        gameRenderer3d->getGeometryContainer().removeGeometry(*model);
     }
     models.clear();
 }
@@ -239,7 +239,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         auto gunRayModel = std::make_shared<LinesModel>(gunRay);
         gunRayModel->setLineWidth(3.0f);
         rayModels.push_back(gunRayModel);
-        gameRenderer3d->getGeometryManager().addGeometry(std::move(gunRayModel));
+        gameRenderer3d->getGeometryContainer().addGeometry(std::move(gunRayModel));
 
         while (!rayTestResult->isResultReady()) {
             std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -252,7 +252,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
             hitPointModel->setColor(1.0f, 0.0f, 0.0f);
 
             rayModels.push_back(hitPointModel);
-            gameRenderer3d->getGeometryManager().addGeometry(std::move(hitPointModel));
+            gameRenderer3d->getGeometryContainer().addGeometry(std::move(hitPointModel));
         }
     }
 
@@ -347,7 +347,7 @@ void GameRenderer::refresh() {
             linesModel->setLineWidth(5.0f);
             linesModel->setColor(0.0f, 1.0f, 1.0f);
             pathModels.push_back(linesModel);
-            gameRenderer3d->getGeometryManager().addGeometry(std::move(linesModel));
+            gameRenderer3d->getGeometryContainer().addGeometry(std::move(linesModel));
         }
     }
 
