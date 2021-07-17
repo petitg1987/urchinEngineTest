@@ -15,7 +15,7 @@ MainDisplayer::~MainDisplayer() {
     scene.reset(nullptr);
     soundEnvironment.reset(nullptr);
 
-    SingletonManager::destroyAllSingletons();
+    SingletonContainer::destroyAllSingletons();
 }
 
 void MainDisplayer::initialize(const std::string& resourcesDirectory) {
