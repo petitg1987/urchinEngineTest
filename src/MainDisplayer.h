@@ -23,14 +23,14 @@ class MainDisplayer {
         double getMouseY() const;
 
         WindowController& getWindowController() const;
-        urchin::SceneManager* getSceneManager() const;
+        urchin::Scene* getScene() const;
         urchin::SoundManager* getSoundManager() const;
 
     private:
         WindowController& windowController;
         double mouseX, mouseY;
 
-        std::unique_ptr<urchin::SceneManager> sceneManager;
+        std::unique_ptr<urchin::Scene> scene;
         std::unique_ptr<urchin::SoundManager> soundManager;
 
         std::unique_ptr<RenderScreen> gameRenderer;

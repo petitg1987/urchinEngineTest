@@ -39,7 +39,7 @@ GameRenderer::~GameRenderer() {
 
 void GameRenderer::initialize() {
     //3d
-    gameRenderer3d = &getMainDisplayer()->getSceneManager()->newRenderer3d(false);
+    gameRenderer3d = &getMainDisplayer()->getScene()->newRenderer3d(false);
     gameRenderer3d->activateAntiAliasing(true);
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
@@ -63,7 +63,7 @@ void GameRenderer::initialize() {
     mapHandler->getMap().getSceneObject("characterAnimate").getModel()->animate("move");
 
     //UI
-    gameUIRenderer = &getMainDisplayer()->getSceneManager()->newUIRenderer(false);
+    gameUIRenderer = &getMainDisplayer()->getScene()->newUIRenderer(false);
 
     fpsText = Text::newText(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
@@ -222,8 +222,8 @@ void GameRenderer::onKeyPressed(Control::Key key) {
             physicsWorld->pause();
         }
     } else if (key == Control::Key::G) {
-        float clipSpaceX = (2.0f * (float)getMainDisplayer()->getMouseX()) / ((float)getMainDisplayer()->getSceneManager()->getSceneWidth()) - 1.0f;
-        float clipSpaceY = 1.0f - (2.0f * (float)getMainDisplayer()->getMouseY()) / ((float)getMainDisplayer()->getSceneManager()->getSceneHeight());
+        float clipSpaceX = (2.0f * (float)getMainDisplayer()->getMouseX()) / ((float)getMainDisplayer()->getScene()->getSceneWidth()) - 1.0f;
+        float clipSpaceY = 1.0f - (2.0f * (float)getMainDisplayer()->getMouseY()) / ((float)getMainDisplayer()->getScene()->getSceneHeight());
         Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
         Vector4<float> rayDirectionEyeSpace = camera->getProjectionMatrix().inverse() * rayDirectionClipSpace;
         rayDirectionEyeSpace.setValues(rayDirectionEyeSpace.X, rayDirectionEyeSpace.Y, -1.0f, 0.0f);
@@ -299,23 +299,23 @@ void GameRenderer::active(bool active) {
 
         getMainDisplayer()->getWindowController().setMouseCursorVisible(false);
 
-        getMainDisplayer()->getSceneManager()->enableRenderer3d(gameRenderer3d);
-        getMainDisplayer()->getSceneManager()->enableUIRenderer(gameUIRenderer);
+        getMainDisplayer()->getScene()->enableRenderer3d(gameRenderer3d);
+        getMainDisplayer()->getScene()->enableUIRenderer(gameUIRenderer);
     } else {
-        getMainDisplayer()->getSceneManager()->enableRenderer3d(nullptr);
-        getMainDisplayer()->getSceneManager()->enableUIRenderer(nullptr);
+        getMainDisplayer()->getScene()->enableRenderer3d(nullptr);
+        getMainDisplayer()->getScene()->enableUIRenderer(nullptr);
     }
 }
 
 bool GameRenderer::isActive() const {
-    return gameRenderer3d != nullptr && getMainDisplayer()->getSceneManager()->getActiveRenderer3d() == gameRenderer3d;
+    return gameRenderer3d != nullptr && getMainDisplayer()->getScene()->getActiveRenderer3d() == gameRenderer3d;
 }
 
 void GameRenderer::refresh() {
     //fps
-    float dt = getMainDisplayer()->getSceneManager()->getDeltaTime();
+    float dt = getMainDisplayer()->getScene()->getDeltaTime();
     if (fpsText != nullptr) {
-        fpsText->updateText(std::to_string(getMainDisplayer()->getSceneManager()->getFpsForDisplay()) + " fps");
+        fpsText->updateText(std::to_string(getMainDisplayer()->getScene()->getFpsForDisplay()) + " fps");
     }
 
     //map

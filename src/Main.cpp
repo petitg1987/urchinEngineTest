@@ -238,7 +238,7 @@ void Main::handleInputEvents() {
 void Main::onChar(char32_t unicodeCharacter) {
     //engine
     if (propagatePressKeyEvent) {
-        propagatePressKeyEvent = mainDisplayer->getSceneManager()->onChar(unicodeCharacter);
+        propagatePressKeyEvent = mainDisplayer->getScene()->onChar(unicodeCharacter);
     }
 }
 
@@ -246,13 +246,13 @@ void Main::onKeyPressed(int key) {
     //engine
     if (propagatePressKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::DELETE_KEY);
         }
     }
 
@@ -266,13 +266,13 @@ void Main::onKeyReleased(int key) {
     //engine
     if (propagateReleaseKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::DELETE_KEY);
         }
     }
 
@@ -285,9 +285,9 @@ void Main::onKeyReleased(int key) {
 void Main::onMouseButtonPressed(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_LEFT);
+        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyPress(InputDeviceKey::MOUSE_RIGHT);
+        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::MOUSE_RIGHT);
     }
 
     //game
@@ -299,9 +299,9 @@ void Main::onMouseButtonPressed(int button) {
 void Main::onMouseButtonReleased(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_LEFT);
+        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = mainDisplayer->getSceneManager()->onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
+        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
     }
 
     //game

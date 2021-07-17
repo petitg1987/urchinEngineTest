@@ -12,7 +12,7 @@ MainDisplayer::MainDisplayer(WindowController& windowController) :
 
 MainDisplayer::~MainDisplayer() {
     gameRenderer.reset(nullptr);
-    sceneManager.reset(nullptr);
+    scene.reset(nullptr);
     soundManager.reset(nullptr);
 
     SingletonManager::destroyAllSingletons();
@@ -25,8 +25,8 @@ void MainDisplayer::initialize(const std::string& resourcesDirectory) {
 
     auto surfaceCreator = getWindowController().newSurfaceCreator();
     auto framebufferSizeRetriever = getWindowController().newFramebufferSizeRetriever();
-    sceneManager = std::make_unique<SceneManager>(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
-    sceneManager->updateVerticalSync(false);
+    scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
+    scene->updateVerticalSync(false);
     soundManager = std::make_unique<SoundManager>();
 
     gameRenderer = std::make_unique<GameRenderer>(this);
@@ -40,12 +40,12 @@ void MainDisplayer::paint() {
     }
 
     //display the scene
-    sceneManager->display();
+    scene->display();
 }
 
 void MainDisplayer::resize() {
-    if (sceneManager) {
-        sceneManager->onResize();
+    if (scene) {
+        scene->onResize();
     }
 }
 
@@ -65,7 +65,7 @@ void MainDisplayer::onMouseMove(double mouseX, double mouseY) {
     this->mouseX = mouseX;
     this->mouseY = mouseY;
 
-    sceneManager->onMouseMove(mouseX, mouseY);
+    scene->onMouseMove(mouseX, mouseY);
 }
 
 double MainDisplayer::getMouseX() const {
@@ -80,8 +80,8 @@ WindowController& MainDisplayer::getWindowController() const {
     return windowController;
 }
 
-SceneManager* MainDisplayer::getSceneManager() const {
-    return sceneManager.get();
+Scene* MainDisplayer::getScene() const {
+    return scene.get();
 }
 
 SoundManager* MainDisplayer::getSoundManager() const {
