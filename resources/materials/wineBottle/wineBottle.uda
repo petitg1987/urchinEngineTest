@@ -1,6 +1,5 @@
-material:
-  repeatTexture: "true"
-  diffuse:
-    texture: "materials/wineBottle/diffuse.tga"
-  ambient:
-    factor: "0.4"
+repeatTexture: "true"
+diffuse:
+  texture: "materials/wineBottle/diffuse.tga"
+ambient:
+  factor: "0.4"

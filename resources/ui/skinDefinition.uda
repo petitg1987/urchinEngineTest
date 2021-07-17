@@ -1,67 +1,66 @@
-ui:
-  text (nameSkin=defaultSkin):
-    font: "ui/fonts/font.ttf"
-    color: "1.0 1.0 1.0"
-    height:
-      value: "16.0"
-      type: "pixel"
+text (skin=defaultSkin):
+  font: "ui/fonts/font.ttf"
+  color: "1.0 1.0 1.0"
+  height:
+    value: "16.0"
+    type: "pixel"
 
-  window (nameSkin=defaultSkin):
-    skin:
-      image: "ui/widget/window/window.tga"
-      part (zone=top): "23"
-      part (zone=bottom): "3"
-      part (zone=left): "4"
-      part (zone=right): "24"
-    textSkin: "defaultSkin"
+window (skin=defaultSkin):
+  skin:
+    image: "ui/widget/window/window.tga"
+    part (zone=top): "23"
+    part (zone=bottom): "3"
+    part (zone=left): "4"
+    part (zone=right): "24"
+  textSkin: "defaultSkin"
 
-  button (nameSkin=defaultSkin):
-    skin (type=default):
-      image: "ui/widget/button/default.tga"
-      part (zone=top): "2"
-      part (zone=bottom): "2"
-      part (zone=left): "1"
-      part (zone=right): "1"
-    skin (type=focus):
-      image: "ui/widget/button/focus.tga"
-      part (zone=top): "2"
-      part (zone=bottom): "2"
-      part (zone=left): "1"
-      part (zone=right): "1"
-    skin (type=click):
-      image: "ui/widget/button/click.tga"
-      part (zone=top): "2"
-      part (zone=bottom): "2"
-      part (zone=left): "1"
-      part (zone=right): "1"
-    textSkin: "defaultSkin"
+button (skin=defaultSkin):
+  skin (type=default):
+    image: "ui/widget/button/default.tga"
+    part (zone=top): "2"
+    part (zone=bottom): "2"
+    part (zone=left): "1"
+    part (zone=right): "1"
+  skin (type=focus):
+    image: "ui/widget/button/focus.tga"
+    part (zone=top): "2"
+    part (zone=bottom): "2"
+    part (zone=left): "1"
+    part (zone=right): "1"
+  skin (type=click):
+    image: "ui/widget/button/click.tga"
+    part (zone=top): "2"
+    part (zone=bottom): "2"
+    part (zone=left): "1"
+    part (zone=right): "1"
+  textSkin: "defaultSkin"
 
-  textBox (nameSkin=defaultSkin):
-    skin (type=default):
-      image: "ui/widget/textbox/default.tga"
-      part (zone=top): "2"
-      part (zone=bottom): "2"
-      part (zone=left): "3"
-      part (zone=right): "2"
-    skin (type=focus):
-      image: "ui/widget/textbox/focus.tga"
-      part (zone=top): "2"
-      part (zone=bottom): "2"
-      part (zone=left): "3"
-      part (zone=right): "2"
-    textSkin: defaultSkin
+textBox (skin=defaultSkin):
+  skin (type=default):
+    image: "ui/widget/textbox/default.tga"
+    part (zone=top): "2"
+    part (zone=bottom): "2"
+    part (zone=left): "3"
+    part (zone=right): "2"
+  skin (type=focus):
+    image: "ui/widget/textbox/focus.tga"
+    part (zone=top): "2"
+    part (zone=bottom): "2"
+    part (zone=left): "3"
+    part (zone=right): "2"
+  textSkin: defaultSkin
 
-  sequence (nameSkin=defaultSkin):
-    buttonsTextSkin: "defaultSkin"
-    valuesTextSkin: "defaultSkin"
-    leftButtonText: "<<"
-    rightButtonText: ">>"
+sequence (skin=defaultSkin):
+  buttonsTextSkin: "defaultSkin"
+  valuesTextSkin: "defaultSkin"
+  leftButtonText: "<<"
+  rightButtonText: ">>"
 
-  checkBox (nameSkin=defaultSkin):
-    imageChecked: "ui/widget/checkbox/checked.tga"
-    imageUnchecked: "ui/widget/checkbox/unchecked.tga"
+checkBox (skin=defaultSkin):
+  imageChecked: "ui/widget/checkbox/checked.tga"
+  imageUnchecked: "ui/widget/checkbox/unchecked.tga"
 
-  slider (nameSkin=defaultSkin):
-    imageLine: "ui/widget/slider/line.tga"
-    imageCursor: "ui/widget/slider/cursor.tga"
-    valuesTextSkin: "defaultSkin"
+slider (skin=defaultSkin):
+  imageLine: "ui/widget/slider/line.tga"
+  imageCursor: "ui/widget/slider/cursor.tga"
+  valuesTextSkin: "defaultSkin"

@@ -1,6 +1,5 @@
-material:
-  repeatTexture: "false"
-  diffuse:
-    texture: "materials/capsule/diffuse.tga"
-  ambient:
-    factor: "0.4"
+repeatTexture: "false"
+diffuse:
+  texture: "materials/capsule/diffuse.tga"
+ambient:
+  factor: "0.4"

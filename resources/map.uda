@@ -1,4 +1,6 @@
-scene (relativeWorkingDirectory=./):
+config:
+  relativeWorkingDirectory: "./"
+scene:
   objects:
     object (name=ground):
       model:

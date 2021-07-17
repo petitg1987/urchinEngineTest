@@ -1,6 +1,5 @@
-material:
-  repeatTexture: "true"
-  diffuse:
-    texture: "materials/terrain/grassGroundDiffuse.tga"
-  ambient:
-    factor: "0.4"
+repeatTexture: "true"
+diffuse:
+  texture: "materials/terrain/grassGroundDiffuse.tga"
+ambient:
+  factor: "0.4"
