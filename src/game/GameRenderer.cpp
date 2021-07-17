@@ -56,7 +56,7 @@ void GameRenderer::initialize() {
     navMeshDisplayer = std::make_unique<NavMeshDisplayer>(*aiEnvironment, *gameRenderer3d);
 
     //load map
-    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), getMainDisplayer()->getSoundManager(), aiEnvironment.get());
+    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), getMainDisplayer()->getSoundEnvironment(), aiEnvironment.get());
     NullLoadCallback nullLoadCallback;
     mapHandler->loadMapFromFile("map.uda", nullLoadCallback);
     mapHandler->getMap().getSceneObject("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
@@ -130,7 +130,7 @@ void GameRenderer::uninitializeCharacter() {
 }
 
 void GameRenderer::initializeWaterEvent() {
-    underWaterEvent = std::make_unique<UnderWaterEvent>(getMainDisplayer()->getSoundManager());
+    underWaterEvent = std::make_unique<UnderWaterEvent>(getMainDisplayer()->getSoundEnvironment());
 
     Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
     water->addObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);

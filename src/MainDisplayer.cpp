@@ -13,7 +13,7 @@ MainDisplayer::MainDisplayer(WindowController& windowController) :
 MainDisplayer::~MainDisplayer() {
     gameRenderer.reset(nullptr);
     scene.reset(nullptr);
-    soundManager.reset(nullptr);
+    soundEnvironment.reset(nullptr);
 
     SingletonManager::destroyAllSingletons();
 }
@@ -27,7 +27,7 @@ void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     auto framebufferSizeRetriever = getWindowController().newFramebufferSizeRetriever();
     scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
     scene->updateVerticalSync(false);
-    soundManager = std::make_unique<SoundManager>();
+    soundEnvironment = std::make_unique<SoundEnvironment>();
 
     gameRenderer = std::make_unique<GameRenderer>(this);
     gameRenderer->active(true);
@@ -84,6 +84,6 @@ Scene* MainDisplayer::getScene() const {
     return scene.get();
 }
 
-SoundManager* MainDisplayer::getSoundManager() const {
-    return soundManager.get();
+SoundEnvironment* MainDisplayer::getSoundEnvironment() const {
+    return soundEnvironment.get();
 }

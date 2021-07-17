@@ -24,14 +24,14 @@ class MainDisplayer {
 
         WindowController& getWindowController() const;
         urchin::Scene* getScene() const;
-        urchin::SoundManager* getSoundManager() const;
+        urchin::SoundEnvironment* getSoundEnvironment() const;
 
     private:
         WindowController& windowController;
         double mouseX, mouseY;
 
         std::unique_ptr<urchin::Scene> scene;
-        std::unique_ptr<urchin::SoundManager> soundManager;
+        std::unique_ptr<urchin::SoundEnvironment> soundEnvironment;
 
         std::unique_ptr<RenderScreen> gameRenderer;
 };

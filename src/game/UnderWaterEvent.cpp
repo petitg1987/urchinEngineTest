@@ -3,11 +3,11 @@
 #include <game/UnderWaterEvent.h>
 using namespace urchin;
 
-UnderWaterEvent::UnderWaterEvent(SoundManager* soundManager) :
+UnderWaterEvent::UnderWaterEvent(SoundEnvironment* soundEnvironment) :
         bIsUnderWater(false) {
     auto underWaterSound = std::make_shared<GlobalSound>("sound/underWater.ogg", Sound::SoundCategory::EFFECTS);
     underWaterSoundTrigger = std::make_shared<ManualTrigger>(SoundTrigger::PLAY_LOOP);
-    soundManager->addSound(underWaterSound, underWaterSoundTrigger);
+    soundEnvironment->addSound(underWaterSound, underWaterSoundTrigger);
 }
 
 void UnderWaterEvent::notify(Observable* observable, int notificationType) {
