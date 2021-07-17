@@ -52,11 +52,11 @@ void GameRenderer::initialize() {
     collisionPointsDisplayer = std::make_unique<CollisionPointDisplayer>(*physicsWorld, gameRenderer3d);
 
     //AI
-    aiManager = std::make_unique<AIManager>();
-    navMeshDisplayer = std::make_unique<NavMeshDisplayer>(*aiManager, *gameRenderer3d);
+    aiEnvironment = std::make_unique<AIEnvironment>();
+    navMeshDisplayer = std::make_unique<NavMeshDisplayer>(*aiEnvironment, *gameRenderer3d);
 
     //load map
-    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), getMainDisplayer()->getSoundManager(), aiManager.get());
+    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), getMainDisplayer()->getSoundManager(), aiEnvironment.get());
     NullLoadCallback nullLoadCallback;
     mapHandler->loadMapFromFile("map.uda", nullLoadCallback);
     mapHandler->getMap().getSceneObject("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
@@ -104,7 +104,7 @@ void GameRenderer::initialize() {
     initializeWaterEvent();
     initializeNPC();
     physicsWorld->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 60.0f));
-    aiManager->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 4.0f));
+    aiEnvironment->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 4.0f));
     mapHandler->unpause();
 
     isInitialized = true;
@@ -148,7 +148,7 @@ void GameRenderer::uninitializeWaterEvent() {
 }
 
 void GameRenderer::initializeNPC() {
-    npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, *mapHandler, *aiManager, *physicsWorld);
+    npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, *mapHandler, *aiEnvironment, *physicsWorld);
 }
 
 void GameRenderer::uninitializeNPC() {

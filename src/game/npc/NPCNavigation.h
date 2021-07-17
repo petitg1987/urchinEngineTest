@@ -10,7 +10,7 @@ class MainDisplayer;
 
 class NPCNavigation {
     public:
-        NPCNavigation(float, float, urchin::MapHandler&, urchin::AIManager&, urchin::PhysicsWorld&);
+        NPCNavigation(float, float, urchin::MapHandler&, urchin::AIEnvironment&, urchin::PhysicsWorld&);
 
         std::shared_ptr<const urchin::PathRequest> getPathRequest() const;
 

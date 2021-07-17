@@ -68,7 +68,7 @@ class GameRenderer : public RenderScreen {
         std::unique_ptr<urchin::CollisionPointDisplayer> collisionPointsDisplayer;
 
         //AI
-        std::unique_ptr<urchin::AIManager> aiManager;
+        std::unique_ptr<urchin::AIEnvironment> aiEnvironment;
         std::vector<std::shared_ptr<urchin::GeometryModel>> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
 

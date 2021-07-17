@@ -3,11 +3,11 @@
 #include <MainDisplayer.h>
 using namespace urchin;
 
-NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler& mapHandler, AIManager& aiManager, PhysicsWorld& physicsWorld) {
+NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler& mapHandler, AIEnvironment& aiEnvironment, PhysicsWorld& physicsWorld) {
     model = mapHandler.getMap().getSceneObject("character").getModel();
 
     aiCharacter = std::make_shared<AICharacter>(mass, speedInKmH, model->getTransform().getPosition());
-    aiCharacterController = std::make_unique<AICharacterController>(aiCharacter, aiManager);
+    aiCharacterController = std::make_unique<AICharacterController>(aiCharacter, aiEnvironment);
     aiCharacterController->setupEventHandler(std::make_shared<NPCNavigationEventHandler>(model));
     aiCharacterController->moveTo(Point3<float>(0.0f, 15.0f, 10.0f));
 
