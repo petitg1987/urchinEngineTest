@@ -33,5 +33,5 @@ class ScreenHandler {
         std::unique_ptr<urchin::Scene> scene;
         std::unique_ptr<urchin::SoundEnvironment> soundEnvironment;
 
-        std::unique_ptr<RenderScreen> gameRenderer;
+        std::unique_ptr<Screen> gameRenderer;
 };

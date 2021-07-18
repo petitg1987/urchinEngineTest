@@ -4,10 +4,10 @@
 
 class ScreenHandler;
 
-class RenderScreen {
+class Screen {
     public:
-        explicit RenderScreen(ScreenHandler *);
-        virtual ~RenderScreen() = default;
+        explicit Screen(ScreenHandler *);
+        virtual ~Screen() = default;
 
         virtual void onKeyPressed(urchin::Control::Key);
         virtual void onKeyReleased(urchin::Control::Key);

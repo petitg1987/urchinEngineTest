@@ -11,7 +11,7 @@ bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
 
 GameRenderer::GameRenderer(ScreenHandler* screenHandler) :
-        RenderScreen(screenHandler),
+        Screen(screenHandler),
         isInitialized(false),
         editMode(false),
         memCheckMode(false),

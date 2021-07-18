@@ -9,14 +9,14 @@
 #include <UrchinSoundEngine.h>
 #include <UrchinAIEngine.h>
 
-#include <RenderScreen.h>
+#include <Screen.h>
 #include <game/CharacterCamera.h>
 #include <game/UnderWaterEvent.h>
 #include <game/npc/NPCNavigation.h>
 
 class ScreenHandler;
 
-class GameRenderer : public RenderScreen {
+class GameRenderer : public Screen {
     public:
         explicit GameRenderer(ScreenHandler *);
         ~GameRenderer() override;
