@@ -14,11 +14,11 @@
 #include <game/UnderWaterEvent.h>
 #include <game/npc/NPCNavigation.h>
 
-class MainDisplayer;
+class ScreenHandler;
 
 class GameRenderer : public RenderScreen {
     public:
-        explicit GameRenderer(MainDisplayer *);
+        explicit GameRenderer(ScreenHandler *);
         ~GameRenderer() override;
 
         void onKeyPressed(urchin::Control::Key) override;

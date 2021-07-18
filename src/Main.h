@@ -5,7 +5,7 @@
 #include <list>
 #include <map>
 
-#include <MainDisplayer.h>
+#include <ScreenHandler.h>
 #include <WindowController.h>
 #include <util/CrashReporter.h>
 
@@ -47,7 +47,7 @@ class Main {
 
         std::shared_ptr<CrashReporter> crashReporter;
 
-        std::unique_ptr<MainDisplayer> mainDisplayer;
+        std::unique_ptr<ScreenHandler> screenHandler;
         std::unique_ptr<WindowController> windowController;
 
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;

@@ -2,11 +2,11 @@
 
 #include "UrchinCommon.h"
 
-class MainDisplayer;
+class ScreenHandler;
 
 class RenderScreen {
     public:
-        explicit RenderScreen(MainDisplayer *);
+        explicit RenderScreen(ScreenHandler *);
         virtual ~RenderScreen() = default;
 
         virtual void onKeyPressed(urchin::Control::Key);
@@ -18,8 +18,8 @@ class RenderScreen {
         virtual void refresh();
 
     protected:
-        MainDisplayer *getMainDisplayer() const;
+        ScreenHandler *getScreenHandler() const;
 
     private:
-        MainDisplayer* mainDisplayer;
+        ScreenHandler* screenHandler;
 };

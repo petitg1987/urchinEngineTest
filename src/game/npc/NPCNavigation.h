@@ -6,7 +6,7 @@
 #include <UrchinPhysicsEngine.h>
 #include <UrchinAIEngine.h>
 
-class MainDisplayer;
+class ScreenHandler;
 
 class NPCNavigation {
     public:
@@ -14,7 +14,7 @@ class NPCNavigation {
 
         std::shared_ptr<const urchin::PathRequest> getPathRequest() const;
 
-        void display(MainDisplayer *);
+        void display(ScreenHandler *);
 
     private:
         urchin::Model *model;

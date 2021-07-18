@@ -1,16 +1,16 @@
 #include <memory>
 
-#include <MainDisplayer.h>
+#include <ScreenHandler.h>
 using namespace urchin;
 
-MainDisplayer::MainDisplayer(WindowController& windowController) :
+ScreenHandler::ScreenHandler(WindowController& windowController) :
         windowController(windowController),
         mouseX(0),
         mouseY(0) {
 
 }
 
-MainDisplayer::~MainDisplayer() {
+ScreenHandler::~ScreenHandler() {
     gameRenderer.reset(nullptr);
     scene.reset(nullptr);
     soundEnvironment.reset(nullptr);
@@ -18,7 +18,7 @@ MainDisplayer::~MainDisplayer() {
     SingletonContainer::destroyAllSingletons();
 }
 
-void MainDisplayer::initialize(const std::string& resourcesDirectory) {
+void ScreenHandler::initialize(const std::string& resourcesDirectory) {
     FileSystem::instance().setupResourcesDirectory(resourcesDirectory);
     ConfigService::instance().loadProperties("engine.properties");
     UISkinService::instance().setSkin("ui/skinDefinition.uda");
@@ -33,7 +33,7 @@ void MainDisplayer::initialize(const std::string& resourcesDirectory) {
     gameRenderer->active(true);
 }
 
-void MainDisplayer::paint() {
+void ScreenHandler::paint() {
     //refresh scene
     if (gameRenderer->isActive()) {
         gameRenderer->refresh();
@@ -43,47 +43,47 @@ void MainDisplayer::paint() {
     scene->display();
 }
 
-void MainDisplayer::resize() {
+void ScreenHandler::resize() {
     if (scene) {
         scene->onResize();
     }
 }
 
-void MainDisplayer::onKeyPressed(Control::Key key) {
+void ScreenHandler::onKeyPressed(Control::Key key) {
     if (gameRenderer->isActive()) {
         gameRenderer->onKeyPressed(key);
     }
 }
 
-void MainDisplayer::onKeyReleased(Control::Key key) {
+void ScreenHandler::onKeyReleased(Control::Key key) {
     if (gameRenderer->isActive()) {
         gameRenderer->onKeyReleased(key);
     }
 }
 
-void MainDisplayer::onMouseMove(double mouseX, double mouseY) {
+void ScreenHandler::onMouseMove(double mouseX, double mouseY) {
     this->mouseX = mouseX;
     this->mouseY = mouseY;
 
     scene->onMouseMove(mouseX, mouseY);
 }
 
-double MainDisplayer::getMouseX() const {
+double ScreenHandler::getMouseX() const {
     return mouseX;
 }
 
-double MainDisplayer::getMouseY() const {
+double ScreenHandler::getMouseY() const {
     return mouseY;
 }
 
-WindowController& MainDisplayer::getWindowController() const {
+WindowController& ScreenHandler::getWindowController() const {
     return windowController;
 }
 
-Scene* MainDisplayer::getScene() const {
+Scene* ScreenHandler::getScene() const {
     return scene.get();
 }
 
-SoundEnvironment* MainDisplayer::getSoundEnvironment() const {
+SoundEnvironment* ScreenHandler::getSoundEnvironment() const {
     return soundEnvironment.get();
 }

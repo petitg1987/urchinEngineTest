@@ -7,10 +7,10 @@
 #include <WindowController.h>
 #include <game/GameRenderer.h>
 
-class MainDisplayer {
+class ScreenHandler {
     public:
-        explicit MainDisplayer(WindowController&);
-        ~MainDisplayer();
+        explicit ScreenHandler(WindowController&);
+        ~ScreenHandler();
 
         void initialize(const std::string&);
         void paint();

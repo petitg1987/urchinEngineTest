@@ -1,6 +1,6 @@
 #include <game/npc/NPCNavigation.h>
 #include <game/npc/NPCNavigationEventHandler.h>
-#include <MainDisplayer.h>
+#include <ScreenHandler.h>
 using namespace urchin;
 
 NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler& mapHandler, AIEnvironment& aiEnvironment, PhysicsWorld& physicsWorld) {
@@ -23,8 +23,8 @@ std::shared_ptr<const PathRequest> NPCNavigation::getPathRequest() const {
     return aiCharacterController->getPathRequest();
 }
 
-void NPCNavigation::display(MainDisplayer* mainDisplayer) {
-    float dt = mainDisplayer->getScene()->getDeltaTime();
+void NPCNavigation::display(ScreenHandler* screenHandler) {
+    float dt = screenHandler->getScene()->getDeltaTime();
 
     //update values
     aiCharacterController->update();

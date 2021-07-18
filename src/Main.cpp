@@ -40,8 +40,8 @@ void Main::execute(int argc, char *argv[]) {
         std::string resourcesDirectory = retrieveResourcesDirectory(argv);
         std::string saveDirectory = retrieveSaveDirectory(argv);
 
-        mainDisplayer = std::make_unique<MainDisplayer>(*windowController);
-        mainDisplayer->initialize(resourcesDirectory);
+        screenHandler = std::make_unique<ScreenHandler>(*windowController);
+        screenHandler->initialize(resourcesDirectory);
 
         glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
@@ -55,7 +55,7 @@ void Main::execute(int argc, char *argv[]) {
         while (!glfwWindowShouldClose(window)) {
             handleInputEvents();
 
-            mainDisplayer->paint();
+            screenHandler->paint();
         }
 
         if (Logger::instance().hasFailure()) {
@@ -211,7 +211,7 @@ void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
 void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main) {
-        main->mainDisplayer->resize();
+        main->screenHandler->resize();
     }
 }
 
@@ -238,7 +238,7 @@ void Main::handleInputEvents() {
 void Main::onChar(char32_t unicodeCharacter) {
     //engine
     if (propagatePressKeyEvent) {
-        propagatePressKeyEvent = mainDisplayer->getScene()->onChar(unicodeCharacter);
+        propagatePressKeyEvent = screenHandler->getScene()->onChar(unicodeCharacter);
     }
 }
 
@@ -246,19 +246,19 @@ void Main::onKeyPressed(int key) {
     //engine
     if (propagatePressKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress(InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress(InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress(InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress(InputDeviceKey::DELETE_KEY);
         }
     }
 
     //game
     if (propagatePressKeyEvent) {
-        mainDisplayer->onKeyPressed(toInputKey(key));
+        screenHandler->onKeyPressed(toInputKey(key));
     }
 }
 
@@ -266,54 +266,54 @@ void Main::onKeyReleased(int key) {
     //engine
     if (propagateReleaseKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease(InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease(InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease(InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease(InputDeviceKey::DELETE_KEY);
         }
     }
 
     //game
     if (propagateReleaseKeyEvent) {
-        mainDisplayer->onKeyReleased(toInputKey(key));
+        screenHandler->onKeyReleased(toInputKey(key));
     }
 }
 
 void Main::onMouseButtonPressed(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::MOUSE_LEFT);
+        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyPress(InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyPress(InputDeviceKey::MOUSE_RIGHT);
+        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyPress(InputDeviceKey::MOUSE_RIGHT);
     }
 
     //game
     if (propagatePressKeyEvent) {
-        mainDisplayer->onKeyPressed(toInputKey(button));
+        screenHandler->onKeyPressed(toInputKey(button));
     }
 }
 
 void Main::onMouseButtonReleased(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::MOUSE_LEFT);
+        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyRelease(InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = mainDisplayer->getScene()->onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
+        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
     }
 
     //game
     if (propagateReleaseKeyEvent) {
-        mainDisplayer->onKeyReleased(toInputKey(button));
+        screenHandler->onKeyReleased(toInputKey(button));
     }
 }
 
 void Main::onMouseMove(double x, double y) {
     //engine
     if (x != 0 || y != 0) {
-        mainDisplayer->onMouseMove(x, y);
+        screenHandler->onMouseMove(x, y);
     }
 }
 
@@ -368,7 +368,7 @@ bool Main::argumentsContains(const std::string& argName, int argc, char *argv[])
 }
 
 void Main::clearResources(GLFWwindow*& window) {
-    mainDisplayer.reset(nullptr);
+    screenHandler.reset(nullptr);
 
     if (window != nullptr) {
         glfwDestroyWindow(window);

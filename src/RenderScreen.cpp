@@ -1,9 +1,9 @@
 #include <RenderScreen.h>
-#include <MainDisplayer.h>
+#include <ScreenHandler.h>
 using namespace urchin;
 
-RenderScreen::RenderScreen(MainDisplayer* mainDisplayer) :
-        mainDisplayer(mainDisplayer) {
+RenderScreen::RenderScreen(ScreenHandler* screenHandler) :
+        screenHandler(screenHandler) {
 
 }
 
@@ -19,6 +19,6 @@ void RenderScreen::refresh() {
 
 }
 
-MainDisplayer* RenderScreen::getMainDisplayer() const {
-    return mainDisplayer;
+ScreenHandler* RenderScreen::getScreenHandler() const {
+    return screenHandler;
 }
