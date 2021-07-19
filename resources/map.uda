@@ -426,13 +426,13 @@ scene:
   soundElements:
     soundElement (name=globalSound):
       sound (category=MUSIC;type=GLOBAL):
-        filename: "sound/ambient.ogg"
+        filename: "sounds/ambient.ogg"
         initialVolume: "1.000000"
       soundTrigger (type=MANUAL):
         playBehavior: "PLAY_LOOP"
     soundElement (name=spatialSound):
       sound (category=MUSIC;type=SPATIAL):
-        filename: "sound/positionTrigger.ogg"
+        filename: "sounds/positionTrigger.ogg"
         position: "-6.800000 -0.500000 -0.500000"
         inaudibleDistance: "5.000000"
         initialVolume: "1.000000"

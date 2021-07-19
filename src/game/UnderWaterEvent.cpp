@@ -5,7 +5,7 @@ using namespace urchin;
 
 UnderWaterEvent::UnderWaterEvent(SoundEnvironment* soundEnvironment) :
         bIsUnderWater(false) {
-    auto underWaterSound = std::make_shared<GlobalSound>("sound/underWater.ogg", Sound::SoundCategory::EFFECTS);
+    auto underWaterSound = std::make_shared<GlobalSound>("sounds/underWater.ogg", Sound::SoundCategory::EFFECTS);
     underWaterSoundTrigger = std::make_shared<ManualTrigger>(SoundTrigger::PLAY_LOOP);
     soundEnvironment->addSound(underWaterSound, underWaterSoundTrigger);
 }
