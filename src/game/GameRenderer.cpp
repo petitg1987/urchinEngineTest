@@ -372,10 +372,10 @@ SunLight* GameRenderer::getSunLight() {
 Vector3<float> GameRenderer::getWalkVelocity() const {
     Vector3<float> viewVector = camera->getView();
     viewVector.Y = 0.0f; //don't move on Y axis
-    Vector3<float> forwardDirection(0.0, 0.0, 0.0);
+    Vector3<float> forwardDirection(0.0f, 0.0f, 0.0f);
 
     Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
-    Vector3<float> lateralDirection(0.0, 0.0, 0.0);
+    Vector3<float> lateralDirection(0.0f, 0.0f, 0.0f);
 
     if (upKeyPressed && !downKeyPressed) {
         forwardDirection = viewVector.normalize();
