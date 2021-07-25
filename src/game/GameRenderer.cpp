@@ -57,8 +57,8 @@ void GameRenderer::initialize() {
 
     //load map
     mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), getScreenHandler()->getSoundEnvironment(), aiEnvironment.get());
-    NullLoadCallback nullLoadCallback;
-    mapHandler->loadMapFromFile("map.uda", nullLoadCallback);
+    LoadMapCallback nullLoadMapCallback;
+    mapHandler->loadMapFromFile("map.uda", nullLoadMapCallback);
     mapHandler->getMap().getSceneObject("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     mapHandler->getMap().getSceneObject("characterAnimate").getModel()->animate("move");
 
