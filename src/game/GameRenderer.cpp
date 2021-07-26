@@ -83,17 +83,17 @@ void GameRenderer::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::newTextBox(myWindow.get(), Position(0, 192, LengthType::PIXEL), Size(264, 20, LengthType::PIXEL), "defaultSkin");
-    auto myButton = Button::newButton(myWindow.get(), Position(0, 215, LengthType::PIXEL), Size(264, 27, LengthType::PIXEL), "defaultSkin", "button.close");
+    TextBox::newTextBox(myWindow.get(), Position(0.0f, 192.0f, LengthType::PIXEL), Size(264.0f, 20.0f, LengthType::PIXEL), "defaultSkin");
+    auto myButton = Button::newButton(myWindow.get(), Position(0.0f, 215.0f, LengthType::PIXEL), Size(264.0f, 27.0f, LengthType::PIXEL), "defaultSkin", "button.close");
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myWindow));
 
-    auto myWindow2 = Window::newWindow(nullptr, Position(320, 30, LengthType::PIXEL), Size(200, 160, LengthType::PIXEL), "defaultSkin", "window.second.title");
+    auto myWindow2 = Window::newWindow(nullptr, Position(320.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(myWindow2);
     std::vector<std::string> sequenceValues = {"sequence.one", "sequence.two", "sequence.three"};
-    Sequence::newTranslatableSequence(myWindow2.get(), Position(10, 4, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", sequenceValues);
-    CheckBox::newCheckBox(myWindow2.get(), Position(10, 20, LengthType::PIXEL), Size(16, 16, LengthType::PIXEL), "defaultSkin");
+    Sequence::newTranslatableSequence(myWindow2.get(), Position(10, 4, LengthType::PIXEL), Size(70.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
+    CheckBox::newCheckBox(myWindow2.get(), Position(10.0f, 20.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
     std::vector<std::string> sliderValues {"1", "2", "3"};
-    Slider::newSlider(myWindow2.get(), Position(10, 44, LengthType::PIXEL), Size(70, 16, LengthType::PIXEL), "defaultSkin", sliderValues);
+    Slider::newSlider(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(80.0f, LengthType::CONTAINER_PERCENT, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger*>(mapHandler->getMap().getSceneSound("globalSound").getSoundTrigger());
