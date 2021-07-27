@@ -48,6 +48,7 @@ void Main::execute(int argc, char *argv[]) {
         glfwSetKeyCallback(window, keyCallback);
         glfwSetMouseButtonCallback(window, mouseKeyCallback);
         glfwSetCursorPosCallback(window, cursorPositionCallback);
+        glfwSetScrollCallback(window, scrollCallback);
         glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
         windowController->cleanEvents(); //ignore events occurred during initialization phase
@@ -208,6 +209,13 @@ void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     }
 }
 
+void Main::scrollCallback(GLFWwindow* window, double, double offsetY) {
+    Main* main = (Main*)glfwGetWindowUserPointer(window);
+    if (main && main->windowController->isEventCallbackActive()) {
+        main->onScroll(offsetY);
+    }
+}
+
 void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main) {
@@ -314,6 +322,13 @@ void Main::onMouseMove(double x, double y) {
     //engine
     if (x != 0 || y != 0) {
         screenHandler->onMouseMove(x, y);
+    }
+}
+
+void Main::onScroll(double offsetY) {
+    //engine
+    if (offsetY != 0) {
+        screenHandler->onScroll(offsetY);
     }
 }
 

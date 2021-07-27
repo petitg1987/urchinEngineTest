@@ -29,6 +29,7 @@ class Main {
         static void keyCallback(GLFWwindow*, int, int, int, int);
         static void mouseKeyCallback(GLFWwindow*, int, int, int);
         static void cursorPositionCallback(GLFWwindow*, double, double);
+        static void scrollCallback(GLFWwindow*, double, double);
         static void framebufferSizeCallback(GLFWwindow*, int, int);
 
         void handleInputEvents();
@@ -39,6 +40,7 @@ class Main {
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);
         void onMouseMove(double, double);
+        void onScroll(double);
         urchin::Control::Key toInputKey(int);
 
         static bool argumentsContains(const std::string&, int, char *[]);

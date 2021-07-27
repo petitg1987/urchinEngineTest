@@ -18,6 +18,7 @@ class ScreenHandler {
         void onKeyPressed(urchin::Control::Key);
         void onKeyReleased(urchin::Control::Key);
         void onMouseMove(double, double);
+        void onScroll(double);
 
         double getMouseX() const;
         double getMouseY() const;

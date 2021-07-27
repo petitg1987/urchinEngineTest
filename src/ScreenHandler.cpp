@@ -68,6 +68,10 @@ void ScreenHandler::onMouseMove(double mouseX, double mouseY) {
     scene->onMouseMove(mouseX, mouseY);
 }
 
+void ScreenHandler::onScroll(double offsetY) {
+    scene->onScroll(offsetY);
+}
+
 double ScreenHandler::getMouseX() const {
     return mouseX;
 }
