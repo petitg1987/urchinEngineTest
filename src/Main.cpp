@@ -180,7 +180,7 @@ void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
 void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main && main->windowController->isEventCallbackActive()) {
-        if (action == GLFW_PRESS) {
+        if (action == GLFW_PRESS || action == GLFW_REPEAT) {
             if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
             }
