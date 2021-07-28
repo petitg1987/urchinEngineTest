@@ -56,6 +56,13 @@ sequence (skin=defaultSkin):
   leftButtonText: "<<"
   rightButtonText: ">>"
 
+scrollbar (skin=defaultSkin):
+  imageLine: "ui/widget/scrollbar/line.tga"
+  imageCursor: "ui/widget/scrollbar/cursor.tga"
+  width:
+    value: "1.75"
+    type: "screenPercent"
+
 checkBox (skin=defaultSkin):
   imageChecked: "ui/widget/checkbox/checked.tga"
   imageUnchecked: "ui/widget/checkbox/unchecked.tga"
