@@ -65,12 +65,12 @@ void GameRenderer::initialize() {
     //UI
     gameUIRenderer = &getScreenHandler()->getScene()->newUIRenderer(false);
 
-    fpsText = Text::newText(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
+    fpsText = Text::create(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    auto myWindow = Window::newWindow(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+    auto myWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
     gameUIRenderer->addWidget(myWindow);
-    Text::newText(myWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin",
+    Text::create(myWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
                       "> Space: Jump\n"
                       "> E: Edit mode (on/off)\n"
@@ -83,17 +83,17 @@ void GameRenderer::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::newTextBox(myWindow.get(), Position(0.0f, 192.0f, LengthType::PIXEL), Size(264.0f, 20.0f, LengthType::PIXEL), "defaultSkin");
-    auto myButton = Button::newButton(myWindow.get(), Position(0.0f, 215.0f, LengthType::PIXEL), Size(264.0f, 27.0f, LengthType::PIXEL), "defaultSkin", "button.close");
+    TextBox::create(myWindow.get(), Position(0.0f, 192.0f, LengthType::PIXEL), Size(264.0f, 20.0f, LengthType::PIXEL), "defaultSkin");
+    auto myButton = Button::create(myWindow.get(), Position(0.0f, 215.0f, LengthType::PIXEL), Size(264.0f, 27.0f, LengthType::PIXEL), "defaultSkin", "button.close");
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myWindow));
 
-    auto myWindow2 = Window::newWindow(nullptr, Position(320.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
+    auto myWindow2 = Window::create(nullptr, Position(320.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(myWindow2);
     std::vector<std::string> sequenceValues = {"sequence.one", "sequence.two", "sequence.three"};
-    Sequence::newTranslatableSequence(myWindow2.get(), Position(10, 4, LengthType::PIXEL), Size(70.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
-    CheckBox::newCheckBox(myWindow2.get(), Position(10.0f, 20.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
+    Sequence::createTranslatable(myWindow2.get(), Position(10, 4, LengthType::PIXEL), Size(70.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
+    CheckBox::create(myWindow2.get(), Position(10.0f, 20.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
     std::vector<std::string> sliderValues {"1", "2", "3"};
-    Slider::newSlider(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(8.0f, LengthType::SCREEN_PERCENT, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
+    Slider::create(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(8.0f, LengthType::SCREEN_PERCENT, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger*>(mapHandler->getMap().getSceneSound("globalSound").getSoundTrigger());
