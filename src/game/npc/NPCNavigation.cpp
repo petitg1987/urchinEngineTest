@@ -9,7 +9,7 @@ NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler& mapHandle
     aiCharacter = std::make_shared<AICharacter>(mass, speedInKmH, model->getTransform().getPosition());
     aiCharacterController = std::make_unique<AICharacterController>(aiCharacter, aiEnvironment);
     aiCharacterController->setupEventHandler(std::make_shared<NPCNavigationEventHandler>(model));
-    aiCharacterController->moveTo(Point3<float>(0.0f, 15.0f, 10.0f));
+    aiCharacterController->moveTo(Point3<float>(-5.0f, 15.0f, 5.0f));
 
     float characterRadius = std::max(model->getAABBox().getHalfSizes().X, model->getAABBox().getHalfSizes().Z);
     float characterHeight = model->getAABBox().getHalfSizes().Y * 2.0f;
