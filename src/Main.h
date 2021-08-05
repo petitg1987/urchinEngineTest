@@ -2,7 +2,7 @@
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
-#include <list>
+#include <vector>
 #include <map>
 
 #include <ScreenHandler.h>
@@ -54,6 +54,6 @@ class Main {
 
         bool propagatePressKeyEvent, propagateReleaseKeyEvent;
         std::map<int, urchin::Control::Key> inputKeyMap;
-        std::list<char32_t> charPressEvents;
-        std::list<int> keyPressEvents;
+        std::vector<unsigned int> charEvents;
+        std::vector<std::pair<int, bool>> keyEvents;
 };

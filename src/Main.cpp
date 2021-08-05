@@ -173,7 +173,7 @@ GLFWwindow* Main::createWindow(bool isWindowed) {
 void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
     Main* main = (Main*)glfwGetWindowUserPointer(window);
     if (main && main->windowController->isEventCallbackActive()) {
-        main->charPressEvents.push_back(unicodeCharacter);
+        main->charEvents.push_back(unicodeCharacter);
     }
 }
 
@@ -184,9 +184,9 @@ void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
             if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
             }
-            main->keyPressEvents.push_back(key);
+            main->keyEvents.emplace_back(key, true /* pressed */);
         } else if (action == GLFW_RELEASE) {
-            main->onKeyReleased(key);
+            main->keyEvents.emplace_back(key, false /* released */);
         }
     }
 }
@@ -228,19 +228,19 @@ void Main::handleInputEvents() {
     propagateReleaseKeyEvent = true;
     glfwPollEvents();
 
-    if (!charPressEvents.empty()) {
-        for (char32_t unicodeCharacter : charPressEvents) {
-            onChar(unicodeCharacter);
-        }
-        charPressEvents.clear();
+    for (unsigned int charUnicode : charEvents) {
+        onChar(charUnicode);
     }
+    charEvents.clear();
 
-    if (!keyPressEvents.empty()) {
-        for (int keyPress : keyPressEvents) {
-            onKeyPressed(keyPress);
+    for (std::pair<int, bool> keyEvent : keyEvents) {
+        if (keyEvent.second) {
+            onKeyPressed(keyEvent.first);
+        } else {
+            onKeyReleased(keyEvent.first);
         }
-        keyPressEvents.clear();
     }
+    keyEvents.clear();
 }
 
 void Main::onChar(char32_t unicodeCharacter) {
