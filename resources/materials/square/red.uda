@@ -1,0 +1,5 @@
+repeatTexture: "false"
+diffuse:
+  texture: "materials/square/diffuseRed.png"
+ambient:
+  factor: "0.4"
