@@ -371,7 +371,7 @@ scene:
         mesh:
           filename: "models/squareRedTrans.urchinMesh"
         transform:
-          position: "-10.800000 -0.700000 0.000000"
+          position: "-10.800000 -0.700000 2.600000"
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
@@ -392,7 +392,7 @@ scene:
         mesh:
           filename: "models/squareBlueTrans.urchinMesh"
         transform:
-          position: "-10.800000 -0.700000 -1.900000"
+          position: "-10.800000 -0.700000 0.600000"
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
@@ -413,7 +413,7 @@ scene:
         mesh:
           filename: "models/squareGreenTrans.urchinMesh"
         transform:
-          position: "-10.800000 -0.700000 -4.700000"
+          position: "-10.800000 -0.700000 -1.200000"
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
