@@ -366,6 +366,69 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
+    object (name=squareRed):
+      model:
+        mesh:
+          filename: "models/squareRedTrans.urchinMesh"
+        transform:
+          position: "-10.800000 -0.700000 0.000000"
+          orientation:
+            axis: "0.000000 1.000000 0.000000"
+            angle: "0.000000"
+          scale: "0.200000"
+      physics:
+        shape (type=BOX):
+          halfSize: "1.375739 1.375739 0.000001"
+        mass: "0.000000"
+        restitution: "0.200000"
+        friction: "0.500000"
+        rollingFriction: "0.000000"
+        linearDamping: "0.000000"
+        angularDamping: "0.000000"
+        linearFactor: "1.000000 1.000000 1.000000"
+        angularFactor: "1.000000 1.000000 1.000000"
+    object (name=squareBlue):
+      model:
+        mesh:
+          filename: "models/squareBlueTrans.urchinMesh"
+        transform:
+          position: "-10.800000 -0.700000 -1.900000"
+          orientation:
+            axis: "0.000000 1.000000 0.000000"
+            angle: "0.000000"
+          scale: "0.200000"
+      physics:
+        shape (type=BOX):
+          halfSize: "1.375739 1.375739 0.000001"
+        mass: "0.000000"
+        restitution: "0.200000"
+        friction: "0.500000"
+        rollingFriction: "0.000000"
+        linearDamping: "0.000000"
+        angularDamping: "0.000000"
+        linearFactor: "1.000000 1.000000 1.000000"
+        angularFactor: "1.000000 1.000000 1.000000"
+    object (name=squareGreen):
+      model:
+        mesh:
+          filename: "models/squareGreenTrans.urchinMesh"
+        transform:
+          position: "-10.800000 -0.700000 -4.700000"
+          orientation:
+            axis: "0.000000 1.000000 0.000000"
+            angle: "0.000000"
+          scale: "0.200000"
+      physics:
+        shape (type=BOX):
+          halfSize: "1.375739 1.375739 0.000001"
+        mass: "0.000000"
+        restitution: "0.200000"
+        friction: "0.500000"
+        rollingFriction: "0.000000"
+        linearDamping: "0.000000"
+        angularDamping: "0.000000"
+        linearFactor: "1.000000 1.000000 1.000000"
+        angularFactor: "1.000000 1.000000 1.000000"
   lights:
     light (name=omniLight;type=OMNIDIRECTIONAL):
       position: "4.400000 1.100000 0.000000"
