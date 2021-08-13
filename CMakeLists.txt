@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(urchinEngineTest)
 
-if (CMAKE_BUILD_TYPE MATCHES "Release")
+if (CMAKE_BUILD_TYPE MATCHES "Release" OR CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
     add_definitions(-DNDEBUG) #disable assert
 endif()
 
@@ -21,22 +21,18 @@ if(USE_ASAN MATCHES "true")
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-set(CMAKE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_CXX_STANDARD 17)
 
 #Urchin engine
 include_directories(../urchinEngine/common/src ../urchinEngine/3dEngine/src ../urchinEngine/physicsEngine/src ../urchinEngine/soundEngine/src ../urchinEngine/AIEngine/src ../urchinEngine/mapHandler/src)
-if (CMAKE_BUILD_TYPE MATCHES "Debug")
-    link_directories(../urchinEngine/.build/debug/common ../urchinEngine/.build/debug/3dEngine ../urchinEngine/.build/debug/physicsEngine ../urchinEngine/.build/debug/soundEngine ../urchinEngine/.build/debug/AIEngine ../urchinEngine/.build/debug/mapHandler)
-else()
-    link_directories(../urchinEngine/.build/release/common ../urchinEngine/.build/release/3dEngine ../urchinEngine/.build/release/physicsEngine ../urchinEngine/.build/release/soundEngine ../urchinEngine/.build/release/AIEngine ../urchinEngine/.build/release/mapHandler)
-endif()
 add_subdirectory(../urchinEngine urchinEngine)
 if (WIN32)
     file(REMOVE_RECURSE ${CMAKE_CURRENT_SOURCE_DIR}\\resources\\shaders\\)
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}\\..\\urchinEngine\\3dEngine\\resources\\shaders\\spirv\\ DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders)
     add_custom_target(syncShaders cd) #ignore
 else()
+    include_directories(BEFORE ${CMAKE_BINARY_DIR}/deps/curl/include)
+    link_directories (BEFORE ${CMAKE_BINARY_DIR}/deps/curl/lib)
     add_custom_target(syncShaders rsync -r ${CMAKE_CURRENT_SOURCE_DIR}/../urchinEngine/3dEngine/resources/shaders/spirv/* ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/)
 endif()
 
