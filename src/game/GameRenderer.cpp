@@ -97,7 +97,7 @@ void GameRenderer::initialize() {
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger*>(mapHandler->getMap().getSceneSound("globalSound").getSoundTrigger());
-    manualTrigger->play();
+    manualTrigger->playNew();
 
     //initialize and start process
     initializeCharacter();
@@ -270,11 +270,11 @@ void GameRenderer::onKeyPressed(Control::Key key) {
 
     //sound
     if (key == Control::Key::P) {
-        manualTrigger->pause();
+        manualTrigger->pauseAll();
     } else if (key == Control::Key::O) {
-        manualTrigger->stop();
+        manualTrigger->stopAll();
     } else if (key == Control::Key::M) {
-        manualTrigger->play();
+        manualTrigger->playNew();
     }
 }
 
