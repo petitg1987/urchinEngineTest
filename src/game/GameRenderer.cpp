@@ -326,7 +326,7 @@ void GameRenderer::refresh() {
 
     //character
     characterController->setVelocity(getWalkVelocity());
-    characterController->setOrientation(camera->getOrientation());
+    characterController->setOrientation(camera->getView());
     characterController->update(dt);
     float characterCenterToEyeDistance = 0.75f;
     camera->moveTo(physicsCharacter->getTransform().getPosition() + Point3<float>(0.0f, characterCenterToEyeDistance, 0.0f));
