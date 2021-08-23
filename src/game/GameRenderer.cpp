@@ -229,15 +229,17 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         rayDirectionEyeSpace.setValues(rayDirectionEyeSpace.X, rayDirectionEyeSpace.Y, -1.0f, 0.0f);
         Vector3<float> rayDirectionWorldSpace = (camera->getViewMatrix().inverse() * rayDirectionEyeSpace).xyz().normalize();
 
-        Point3<float> rayStart = camera->getPosition().translate(rayDirectionWorldSpace*1.00f);
-        Point3<float> rayEnd = rayStart.translate(rayDirectionWorldSpace*100.0f);
+        Point3<float> rayStart = camera->getPosition().translate(rayDirectionWorldSpace * 1.00f);
+        Point3<float> rayEnd = rayStart.translate(rayDirectionWorldSpace * 100.0f);
         std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(Ray<float>(rayStart, rayEnd));
 
         deleteGeometryModels(rayModels);
 
-        LineSegment3D<float> gunRay(rayStart, rayEnd);
-        auto gunRayModel = std::make_shared<LinesModel>(gunRay);
-        gunRayModel->setLineWidth(3.0f);
+        Vector3<float> gunRayVector = rayStart.vector(rayEnd);
+        Point3<float> gunRayCenter = rayStart.translate(gunRayVector * 0.5f);
+        Quaternion<float> gunRayOrientation = Quaternion<float>::rotationFromTo(Vector3<float>(1.0f, 0.0f, 0.0f), gunRayVector.normalize()).normalize();
+        auto gunRayModel = std::make_shared<CylinderModel>(Cylinder<float>(0.01f, gunRayVector.length(), CylinderShape<float>::CYLINDER_X, gunRayCenter, gunRayOrientation), 5);
+        gunRayModel->setPolygonMode(PolygonMode::FILL);
         rayModels.push_back(gunRayModel);
         gameRenderer3d->getGeometryContainer().addGeometry(std::move(gunRayModel));
 
@@ -247,12 +249,12 @@ void GameRenderer::onKeyPressed(Control::Key key) {
 
         if (rayTestResult->hasHit()) {
             const auto& nearestResult = rayTestResult->getNearestResult();
-            auto hitPointModel = std::make_shared<PointsModel>(nearestResult.getHitPointOnObject2());
-            hitPointModel->setPointSize(25.0f);
-            hitPointModel->setColor(1.0f, 0.0f, 0.0f);
+            auto hitSphereModel = std::make_shared<SphereModel>(Sphere<float>(0.08f, nearestResult.getHitPointOnObject2()), 10);
+            hitSphereModel->setPolygonMode(PolygonMode::FILL);
+            hitSphereModel->setColor(1.0f, 0.0f, 0.0f);
 
-            rayModels.push_back(hitPointModel);
-            gameRenderer3d->getGeometryContainer().addGeometry(std::move(hitPointModel));
+            rayModels.push_back(hitSphereModel);
+            gameRenderer3d->getGeometryContainer().addGeometry(std::move(hitSphereModel));
         }
     }
 

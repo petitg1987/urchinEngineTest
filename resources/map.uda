@@ -496,9 +496,9 @@ scene:
     soundElement (name=spatialSound):
       sound (category=MUSIC;type=SPATIAL):
         filename: "sounds/positionTrigger.ogg"
+        initialVolume: "1.000000"
         position: "-6.800000 -0.500000 -0.500000"
         inaudibleDistance: "5.000000"
-        initialVolume: "1.000000"
       soundTrigger (type=SHAPE):
         soundShape (type=SPHERE):
           radius: "5.000000"
