@@ -348,7 +348,6 @@ void GameRenderer::refresh() {
                 adjustedPathPoints.emplace_back(Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
             }
             auto linesModel = std::make_shared<LinesModel>(adjustedPathPoints);
-            linesModel->setLineWidth(5.0f);
             linesModel->setColor(0.0f, 1.0f, 1.0f);
             pathModels.push_back(linesModel);
             gameRenderer3d->getGeometryContainer().addGeometry(std::move(linesModel));
