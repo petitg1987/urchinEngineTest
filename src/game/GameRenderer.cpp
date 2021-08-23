@@ -334,23 +334,21 @@ void GameRenderer::refresh() {
     camera->moveTo(physicsCharacter->getTransform().getPosition() + Point3<float>(0.0f, characterCenterToEyeDistance, 0.0f));
 
     //path
-    if (DEBUG_DISPLAY_PATH) {
+    if (DEBUG_DISPLAY_PATH && npcNavigation->getPathRequest() && npcNavigation->getPathRequest()->isPathReady()) {
         deleteGeometryModels(pathModels);
-        std::vector<PathPoint> pathPoints;
-        if (npcNavigation->getPathRequest()) {
-            pathPoints = npcNavigation->getPathRequest()->getPath();
-        }
-
-        if (pathPoints.size() >= 2) {
-            std::vector<Point3<float>> adjustedPathPoints;
-            adjustedPathPoints.reserve(pathPoints.size());
+        std::vector<PathPoint> pathPoints = npcNavigation->getPathRequest()->getPath();
+        if (!pathPoints.empty()) {
+            std::vector<Sphere<float>> pathSpheres;
+            pathSpheres.reserve(pathPoints.size());
             for (auto& pathPoint : pathPoints) {
-                adjustedPathPoints.emplace_back(Point3<float>(pathPoint.getPoint().X, pathPoint.getPoint().Y + 0.02f, pathPoint.getPoint().Z));
+                pathSpheres.emplace_back(0.15f, pathPoint.getPoint());
             }
-            auto linesModel = std::make_shared<LinesModel>(adjustedPathPoints);
-            linesModel->setColor(0.0f, 1.0f, 1.0f);
-            pathModels.push_back(linesModel);
-            gameRenderer3d->getGeometryContainer().addGeometry(std::move(linesModel));
+
+            auto sphereModel = std::make_shared<SphereModel>(pathSpheres, 7);
+            sphereModel->setColor(0.0f, 1.0f, 1.0f);
+            sphereModel->setPolygonMode(PolygonMode::FILL);
+            pathModels.push_back(sphereModel);
+            gameRenderer3d->getGeometryContainer().addGeometry(sphereModel);
         }
     }
 
