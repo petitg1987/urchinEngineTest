@@ -1,7 +1,6 @@
-repeatTexture: "true"
+repeatTextures: "true"
 diffuse:
   texture: "materials/ground/diffuse.tga"
 normal:
   texture: "materials/ground/normal.tga"
-ambient:
-  factor: "0.4"
+ambientFactor: "0.4"

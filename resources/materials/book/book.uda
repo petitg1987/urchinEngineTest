@@ -1,5 +1,4 @@
-repeatTexture: "false"
+repeatTextures: "false"
 diffuse:
   texture: "materials/book/diffuse.tga"
-ambient:
-  factor: "0.4"
+ambientFactor: "0.4"

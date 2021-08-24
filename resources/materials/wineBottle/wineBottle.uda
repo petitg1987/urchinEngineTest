@@ -1,5 +1,4 @@
-repeatTexture: "true"
+repeatTextures: "true"
 diffuse:
   texture: "materials/wineBottle/diffuse.tga"
-ambient:
-  factor: "0.4"
+ambientFactor: "0.4"
