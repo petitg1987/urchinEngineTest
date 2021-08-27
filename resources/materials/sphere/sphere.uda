@@ -1,4 +1,5 @@
 repeatTextures: "false"
 diffuse:
   texture: "materials/sphere/diffuse.tga"
+emissiveFactor: "5.0"
 ambientFactor: "0.4"
