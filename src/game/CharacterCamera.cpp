@@ -1,8 +1,8 @@
 #include <game/CharacterCamera.h>
 using namespace urchin;
 
-CharacterCamera::CharacterCamera(const WindowController& windowController, float angle, float nearPlane, float farPlane) :
-        Camera(angle, nearPlane, farPlane),
+CharacterCamera::CharacterCamera(const WindowController& windowController, float horizontalFovAngle, float nearPlane, float farPlane) :
+        Camera(horizontalFovAngle, nearPlane, farPlane),
         windowController(windowController) {
     useMouseToMoveCamera(true);
 }
