@@ -429,12 +429,33 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=laser):
+    object (name=laserRed):
       model:
         mesh:
-          filename: "models/laser.urchinMesh"
+          filename: "models/laserRed.urchinMesh"
         transform:
           position: "-15.248570 -0.900000 6.847930"
+          orientation:
+            axis: "0.000000 -1.000000 0.000000"
+            angle: "1.570796"
+          scale: "1.000000"
+      physics:
+        shape (type=BOX):
+          halfSize: "0.018867 0.018867 1.010718"
+        mass: "0.000000"
+        restitution: "0.200000"
+        friction: "0.500000"
+        rollingFriction: "0.000000"
+        linearDamping: "0.000000"
+        angularDamping: "0.000000"
+        linearFactor: "1.000000 1.000000 1.000000"
+        angularFactor: "1.000000 1.000000 1.000000"
+    object (name=laserGreen):
+      model:
+        mesh:
+          filename: "models/laserGreen.urchinMesh"
+        transform:
+          position: "-16.248569 -0.900000 6.847930"
           orientation:
             axis: "0.000000 -1.000000 0.000000"
             angle: "1.570796"

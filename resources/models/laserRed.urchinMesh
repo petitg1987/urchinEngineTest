@@ -6,7 +6,7 @@ joints {
 }
 
 mesh {
-	material "materials/laser/laser.uda"
+	material "materials/laser/laserRed.uda"
 
 	numVerts 192
 	vert 0 0 ( 1.000000 0.500000 ) ( 0 1 )
