@@ -1,5 +1,5 @@
 repeatTextures: "false"
 diffuse:
   color: "0.4 1.0 0.4 1.0"
-emissiveFactor: "3.5"
+emissiveFactor: "2.5"
 ambientFactor: "0.4"
