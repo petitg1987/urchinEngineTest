@@ -4,7 +4,7 @@ scene:
   objects:
     object (name=ground):
       model:
-        mesh:
+        meshes:
           filename: "models/ground.urchinMesh"
         transform:
           position: "1.400000 -4.250000 100.000000"
@@ -34,7 +34,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=table):
       model:
-        mesh:
+        meshes:
           filename: "models/table.urchinMesh"
         transform:
           position: "-3.500000 -1.850000 0.000000"
@@ -55,7 +55,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=bench):
       model:
-        mesh:
+        meshes:
           filename: "models/bench.urchinMesh"
         transform:
           position: "-3.900000 -2.280000 2.300000"
@@ -76,7 +76,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=book):
       model:
-        mesh:
+        meshes:
           filename: "models/book.urchinMesh"
         transform:
           position: "-2.300000 -0.930000 0.000000"
@@ -97,7 +97,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=wine):
       model:
-        mesh:
+        meshes:
           filename: "models/wineBottle.urchinMesh"
         transform:
           position: "-5.100000 -0.710000 0.000000"
@@ -118,7 +118,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=sphere1):
       model:
-        mesh:
+        meshes:
           filename: "models/sphere.urchinMesh"
         transform:
           position: "0.000000 0.800000 5.000000"
@@ -139,7 +139,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=sphere2):
       model:
-        mesh:
+        meshes:
           filename: "models/sphere.urchinMesh"
         transform:
           position: "0.250000 4.000000 5.000000"
@@ -160,7 +160,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=sphere3):
       model:
-        mesh:
+        meshes:
           filename: "models/sphere.urchinMesh"
         transform:
           position: "0.450000 4.800000 5.300000"
@@ -181,7 +181,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=cube1):
       model:
-        mesh:
+        meshes:
           filename: "models/cube.urchinMesh"
         transform:
           position: "0.450000 -2.000000 5.300000"
@@ -210,7 +210,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=cube2):
       model:
-        mesh:
+        meshes:
           filename: "models/cube.urchinMesh"
         transform:
           position: "0.450000 -1.000000 5.300000"
@@ -231,7 +231,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=cylinder):
       model:
-        mesh:
+        meshes:
           filename: "models/cylinder.urchinMesh"
         transform:
           position: "-0.450000 -1.000000 5.300000"
@@ -254,7 +254,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=capsule):
       model:
-        mesh:
+        meshes:
           filename: "models/capsule.urchinMesh"
         transform:
           position: "-2.450000 1.000000 5.300000"
@@ -277,7 +277,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=sphereBox):
       model:
-        mesh:
+        meshes:
           filename: "models/sphereBox.urchinMesh"
         transform:
           position: "3.100000 83.699997 0.000000"
@@ -314,7 +314,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=cone):
       model:
-        mesh:
+        meshes:
           filename: "models/cone.urchinMesh"
         transform:
           position: "7.700000 0.200000 -6.800000"
@@ -337,7 +337,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=character):
       model:
-        mesh:
+        meshes:
           filename: "models/character.urchinMesh"
         transform:
           position: "8.500000 9.600000 -7.300000"
@@ -347,7 +347,7 @@ scene:
           scale: "1.000000"
     object (name=characterAnimate):
       model:
-        mesh:
+        meshes:
           filename: "models/characterAnimate.urchinMesh"
         transform:
           position: "-10.800000 -1.900000 1.100000"
@@ -368,7 +368,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=squareRed):
       model:
-        mesh:
+        meshes:
           filename: "models/squareRedTrans.urchinMesh"
         transform:
           position: "-10.800000 -0.700000 2.600000"
@@ -389,7 +389,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=squareBlue):
       model:
-        mesh:
+        meshes:
           filename: "models/squareBlueTrans.urchinMesh"
         transform:
           position: "-10.800000 -0.700000 0.600000"
@@ -410,7 +410,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=squareGreen):
       model:
-        mesh:
+        meshes:
           filename: "models/squareGreenTrans.urchinMesh"
         transform:
           position: "-10.800000 -0.700000 -1.200000"
@@ -431,7 +431,7 @@ scene:
         angularFactor: "1.000000 1.000000 1.000000"
     object (name=laserRed):
       model:
-        mesh:
+        meshes:
           filename: "models/laserRed.urchinMesh"
         transform:
           position: "-15.248570 0.200000 6.847930"
@@ -442,7 +442,7 @@ scene:
         produceShadow: "false"
     object (name=laserGreen):
       model:
-        mesh:
+        meshes:
           filename: "models/laserGreen.urchinMesh"
         transform:
           position: "-16.248569 0.200000 6.847930"
