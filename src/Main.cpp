@@ -65,6 +65,9 @@ void Main::execute(int argc, char *argv[]) {
             _exit(1);
         } else {
             clearResources(window);
+            if (Logger::instance().hasFailure()) {
+                _exit(1);
+            }
             Logger::instance().purge();
         }
     } catch (std::exception& e) {
