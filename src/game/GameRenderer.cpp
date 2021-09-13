@@ -59,8 +59,8 @@ void GameRenderer::initialize() {
     mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), getScreenHandler()->getSoundEnvironment(), aiEnvironment.get());
     LoadMapCallback nullLoadMapCallback;
     mapHandler->loadMapFromFile("map.uda", nullLoadMapCallback);
-    mapHandler->getMap().getSceneObject("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
-    mapHandler->getMap().getSceneObject("characterAnimate").getModel()->animate("move");
+    mapHandler->getMap().getSceneModel("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
+    mapHandler->getMap().getSceneModel("characterAnimate").getModel()->animate("move");
 
     //UI
     gameUIRenderer = &getScreenHandler()->getScene()->newUIRenderer(false);
@@ -401,10 +401,10 @@ Vector3<float> GameRenderer::getWalkVelocity() const {
 RigidBody* GameRenderer::getRandomInactiveBody() {
     std::vector<RigidBody *> bodies;
 
-    const auto& sceneObjects = mapHandler->getMap().getSceneObjects();
-    for (auto& sceneObject : sceneObjects) {
-        if (sceneObject->getRigidBody() && !sceneObject->getRigidBody()->isStatic() && !sceneObject->getRigidBody()->isActive()) {
-            bodies.push_back(sceneObject->getRigidBody());
+    const auto& sceneModels = mapHandler->getMap().getSceneModels();
+    for (auto& sceneModel : sceneModels) {
+        if (sceneModel->getRigidBody() && !sceneModel->getRigidBody()->isStatic() && !sceneModel->getRigidBody()->isActive()) {
+            bodies.push_back(sceneModel->getRigidBody());
         }
     }
 

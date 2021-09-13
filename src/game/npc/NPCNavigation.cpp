@@ -4,7 +4,7 @@
 using namespace urchin;
 
 NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler& mapHandler, AIEnvironment& aiEnvironment, PhysicsWorld& physicsWorld) {
-    model = mapHandler.getMap().getSceneObject("character").getModel();
+    model = mapHandler.getMap().getSceneModel("character").getModel();
 
     aiCharacter = std::make_shared<AICharacter>(mass, speedInKmH, model->getTransform().getPosition());
     aiCharacterController = std::make_unique<AICharacterController>(aiCharacter, aiEnvironment);

@@ -1,8 +1,8 @@
 config:
   relativeWorkingDirectory: "./"
 scene:
-  objects:
-    object (name=ground):
+  models:
+    model (name=ground):
       model:
         meshes:
           filename: "models/ground.urchinMesh"
@@ -32,7 +32,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=table):
+    model (name=table):
       model:
         meshes:
           filename: "models/table.urchinMesh"
@@ -53,7 +53,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=bench):
+    model (name=bench):
       model:
         meshes:
           filename: "models/bench.urchinMesh"
@@ -74,7 +74,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=book):
+    model (name=book):
       model:
         meshes:
           filename: "models/book.urchinMesh"
@@ -95,7 +95,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=wine):
+    model (name=wine):
       model:
         meshes:
           filename: "models/wineBottle.urchinMesh"
@@ -116,7 +116,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=sphere1):
+    model (name=sphere1):
       model:
         meshes:
           filename: "models/sphere.urchinMesh"
@@ -137,7 +137,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=sphere2):
+    model (name=sphere2):
       model:
         meshes:
           filename: "models/sphere.urchinMesh"
@@ -158,7 +158,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=sphere3):
+    model (name=sphere3):
       model:
         meshes:
           filename: "models/sphere.urchinMesh"
@@ -179,7 +179,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=cube1):
+    model (name=cube1):
       model:
         meshes:
           filename: "models/cube.urchinMesh"
@@ -208,7 +208,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=cube2):
+    model (name=cube2):
       model:
         meshes:
           filename: "models/cube.urchinMesh"
@@ -229,7 +229,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=cylinder):
+    model (name=cylinder):
       model:
         meshes:
           filename: "models/cylinder.urchinMesh"
@@ -252,7 +252,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=capsule):
+    model (name=capsule):
       model:
         meshes:
           filename: "models/capsule.urchinMesh"
@@ -275,7 +275,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=sphereBox):
+    model (name=sphereBox):
       model:
         meshes:
           filename: "models/sphereBox.urchinMesh"
@@ -312,7 +312,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=cone):
+    model (name=cone):
       model:
         meshes:
           filename: "models/cone.urchinMesh"
@@ -335,7 +335,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=character):
+    model (name=character):
       model:
         meshes:
           filename: "models/character.urchinMesh"
@@ -345,7 +345,7 @@ scene:
             axis: "1.000000 0.000000 -0.000000"
             angle: "4.712389"
           scale: "1.000000"
-    object (name=characterAnimate):
+    model (name=characterAnimate):
       model:
         meshes:
           filename: "models/characterAnimate.urchinMesh"
@@ -366,7 +366,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=squareRed):
+    model (name=squareRed):
       model:
         meshes:
           filename: "models/squareRedTrans.urchinMesh"
@@ -387,7 +387,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=squareBlue):
+    model (name=squareBlue):
       model:
         meshes:
           filename: "models/squareBlueTrans.urchinMesh"
@@ -408,7 +408,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=squareGreen):
+    model (name=squareGreen):
       model:
         meshes:
           filename: "models/squareGreenTrans.urchinMesh"
@@ -429,7 +429,7 @@ scene:
         angularDamping: "0.000000"
         linearFactor: "1.000000 1.000000 1.000000"
         angularFactor: "1.000000 1.000000 1.000000"
-    object (name=laserRed):
+    model (name=laserRed):
       model:
         meshes:
           filename: "models/laserRed.urchinMesh"
@@ -440,7 +440,7 @@ scene:
             angle: "1.570796"
           scale: "3.000000"
         produceShadow: "false"
-    object (name=laserGreen):
+    model (name=laserGreen):
       model:
         meshes:
           filename: "models/laserGreen.urchinMesh"
