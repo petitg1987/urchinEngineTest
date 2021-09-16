@@ -112,7 +112,7 @@ void GameRenderer::initialize() {
 
 void GameRenderer::initializeCharacter() {
     Point3<float> characterPosition(-5.0, 0.0, 15.0);
-    PhysicsTransform transform(characterPosition, Quaternion<float>(Vector3<float>(0.0, 1.0, 0.0), 0.0));
+    PhysicsTransform transform(characterPosition, Quaternion<float>::rotationY(0.0f));
     float characterRadius = 0.25f;
     float characterSize = 1.80f;
     auto characterShape = std::make_unique<const CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), CapsuleShape<float>::CAPSULE_Y);
