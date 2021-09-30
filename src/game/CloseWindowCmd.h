@@ -6,7 +6,7 @@ class CloseWindowCmd : public urchin::EventListener {
     public:
         explicit CloseWindowCmd(urchin::Window&);
 
-        void onMouseLeftClickRelease(urchin::Widget*) override;
+        bool onMouseLeftClickRelease(urchin::Widget*) override;
 
     private:
         urchin::Window& window;
