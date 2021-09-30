@@ -18,8 +18,8 @@ urchinEngineTest.exe
 profiler.log
 
 #Recovery files
-resources/models/SOURCES/*.blend1
-resources/models/SOURCES/*.blend2
-resources/models/SOURCES/*.blend3
-resources/models/SOURCES/*.blend4
-resources/models/SOURCES/*.blend5
+resources/models/_source/*.blend1
+resources/models/_source/*.blend2
+resources/models/_source/*.blend3
+resources/models/_source/*.blend4
+resources/models/_source/*.blend5
