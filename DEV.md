@@ -13,7 +13,7 @@
   ```
 
 ## Windows
-* *To be define...*
+* *To define...*
 
 # CLion configuration
 ## Build configuration
