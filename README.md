@@ -1,10 +1,8 @@
-# UrchinEngineTest
-## Description
-Test application using Urchin engine
+<h2 align="center">Urchin Engine Test</h2>
 
-## Build
-## Linux:
+# Description
+Test application using Urchin Engine
+
+# Build
 * See environment setup: [here](./DEV.md)
-* Launch urchin engine test: `./urchinEngineTest`
-## Windows:
-* N/A
+* Build with CLion
