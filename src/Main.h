@@ -21,7 +21,6 @@ class Main {
         void initializeInputKeyMap();
 
         static std::string retrieveResourcesDirectory(char *[]);
-        static std::string retrieveSaveDirectory(char *[]);
 
         static GLFWwindow *createWindow(bool);
 

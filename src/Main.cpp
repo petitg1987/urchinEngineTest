@@ -35,13 +35,14 @@ void Main::execute(int argc, char *argv[]) {
         }
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
+        FileSystem::instance().setupResourcesDirectory(retrieveResourcesDirectory(argv));
+        ConfigService::instance().loadProperties("engine.properties");
+        UISkinService::instance().setSkin("ui/skinDefinition.uda");
+
         window = createWindow(isWindowed);
         windowController = std::make_unique<WindowController>(window, isDebugModeOn);
-        std::string resourcesDirectory = retrieveResourcesDirectory(argv);
-        std::string saveDirectory = retrieveSaveDirectory(argv);
 
         screenHandler = std::make_unique<ScreenHandler>(*windowController);
-        screenHandler->initialize(resourcesDirectory);
 
         glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
@@ -148,10 +149,6 @@ void Main::initializeInputKeyMap() {
 
 std::string Main::retrieveResourcesDirectory(char *argv[]) {
     return FileUtil::getDirectory(std::string(argv[0])) + "resources/";
-}
-
-std::string Main::retrieveSaveDirectory(char *argv[]) {
-    return FileUtil::getDirectory(std::string(argv[0])) + "save/";
 }
 
 GLFWwindow* Main::createWindow(bool isWindowed) {

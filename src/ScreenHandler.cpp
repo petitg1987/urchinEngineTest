@@ -7,22 +7,6 @@ ScreenHandler::ScreenHandler(WindowController& windowController) :
         windowController(windowController),
         mouseX(0),
         mouseY(0) {
-
-}
-
-ScreenHandler::~ScreenHandler() {
-    gameRenderer.reset(nullptr);
-    scene.reset(nullptr);
-    soundEnvironment.reset(nullptr);
-
-    SingletonContainer::destroyAllSingletons();
-}
-
-void ScreenHandler::initialize(const std::string& resourcesDirectory) {
-    FileSystem::instance().setupResourcesDirectory(resourcesDirectory);
-    ConfigService::instance().loadProperties("engine.properties");
-    UISkinService::instance().setSkin("ui/skinDefinition.uda");
-
     auto surfaceCreator = getWindowController().newSurfaceCreator();
     auto framebufferSizeRetriever = getWindowController().newFramebufferSizeRetriever();
     scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
@@ -31,6 +15,14 @@ void ScreenHandler::initialize(const std::string& resourcesDirectory) {
 
     gameRenderer = std::make_unique<GameRenderer>(this);
     gameRenderer->active(true);
+}
+
+ScreenHandler::~ScreenHandler() {
+    gameRenderer.reset(nullptr);
+    scene.reset(nullptr);
+    soundEnvironment.reset(nullptr);
+
+    SingletonContainer::destroyAllSingletons();
 }
 
 void ScreenHandler::paint() {

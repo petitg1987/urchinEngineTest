@@ -12,7 +12,6 @@ class ScreenHandler {
         explicit ScreenHandler(WindowController&);
         ~ScreenHandler();
 
-        void initialize(const std::string&);
         void paint();
         void resize();
         void onKeyPressed(urchin::Control::Key);
