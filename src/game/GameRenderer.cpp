@@ -93,7 +93,7 @@ void GameRenderer::initialize() {
     Sequence::createTranslatable(myWindow2.get(), Position(10, 4, LengthType::PIXEL), Size(70.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
     CheckBox::create(myWindow2.get(), Position(10.0f, 20.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
     std::vector<std::string> sliderValues {"1", "2", "3"};
-    Slider::create(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(8.0f, LengthType::SCREEN_PERCENT, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
+    Slider::create(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger*>(mapHandler->getMap().getSceneSound("globalSound").getSoundTrigger());

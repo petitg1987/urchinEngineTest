@@ -156,7 +156,7 @@ GLFWwindow* Main::createWindow(bool isWindowed) {
     const char* windowTitle = "Urchin Engine Test";
 
     if (isWindowed) {
-        window = glfwCreateWindow(1600, 900, windowTitle, nullptr, nullptr);
+        window = glfwCreateWindow(2560, 1440, windowTitle, nullptr, nullptr);
     } else {
         GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
