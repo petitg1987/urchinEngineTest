@@ -95,6 +95,13 @@ void GameRenderer::initialize() {
     std::vector<std::string> sliderValues {"1", "2", "3"};
     Slider::create(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
+    //UI 3d
+    //TODO review
+    std::unique_ptr<UIRenderer> myUi3dRenderer = getScreenHandler()->getScene()->newUI3dRenderer();
+    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+    myUi3dRenderer->addWidget(my3dWindow);
+    gameRenderer3d->get3dUiContainer().addUi(std::move(myUi3dRenderer));
+
     //sound
     manualTrigger = dynamic_cast<ManualTrigger*>(mapHandler->getMap().getSceneSound("globalSound").getSoundTrigger());
     manualTrigger->playNew();
