@@ -96,8 +96,10 @@ void GameRenderer::initialize() {
     Slider::create(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //UI 3d
-    //TODO review
+    //TODO [FOR_LATER] review
     std::unique_ptr<UIRenderer> myUi3dRenderer = getScreenHandler()->getScene()->newUI3dRenderer();
+    Transform<float> transform(Point3<float>(), Quaternion<float>::rotationZ(0.17f), 1.0f);
+    myUi3dRenderer->setTransform(transform);
     auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
     myUi3dRenderer->addWidget(my3dWindow);
     gameRenderer3d->get3dUiContainer().addUi(std::move(myUi3dRenderer));
