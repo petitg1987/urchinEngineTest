@@ -453,7 +453,7 @@ scene:
         produceShadow: "false"
   lights:
     light (name=omniLight;type=OMNIDIRECTIONAL):
-      position: "4.400000 1.100000 0.000000"
+      position: "4.400000 1.100000 2.300000"
       exponentialAttenuation: "0.250000"
       ambientColor: "0.500000 0.000000 0.000000"
       produceShadow: "false"
