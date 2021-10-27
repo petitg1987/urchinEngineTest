@@ -97,12 +97,11 @@ void GameRenderer::initialize() {
 
     //UI 3d
     //TODO [FOR_LATER] review
-    std::unique_ptr<UIRenderer> myUi3dRenderer = getScreenHandler()->getScene()->newUI3dRenderer();
-    Transform<float> transform(Point3<float>(), Quaternion<float>::rotationZ(0.17f), 1.0f);
-    myUi3dRenderer->setTransform(transform);
-    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
-    myUi3dRenderer->addWidget(my3dWindow);
-    gameRenderer3d->get3dUiContainer().addUi(std::move(myUi3dRenderer));
+    Transform<float> transform(Point3<float>(), Quaternion<float>(), 1.0f);
+    UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform);
+    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::PIXEL), Size(20, 20, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+    Text::create(my3dWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin", "Just a test");
+    myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
     manualTrigger = dynamic_cast<ManualTrigger*>(mapHandler->getMap().getSceneSound("globalSound").getSoundTrigger());
@@ -124,7 +123,7 @@ void GameRenderer::initializeCharacter() {
     PhysicsTransform transform(characterPosition, Quaternion<float>::rotationY(0.0f));
     float characterRadius = 0.25f;
     float characterSize = 1.80f;
-    auto characterShape = std::make_unique<const CollisionCapsuleShape>(characterRadius, characterSize-(2.0f*characterRadius), CapsuleShape<float>::CAPSULE_Y);
+    auto characterShape = std::make_unique<const CollisionCapsuleShape>(characterRadius, characterSize - (2.0f * characterRadius), CapsuleShape<float>::CAPSULE_Y);
 
     physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, std::move(characterShape), transform);
     characterControllerConfig = CharacterControllerConfig();
