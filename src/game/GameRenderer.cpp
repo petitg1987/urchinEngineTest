@@ -97,9 +97,9 @@ void GameRenderer::initialize() {
 
     //UI 3d
     //TODO [FOR_LATER] review
-    Transform<float> transform(Point3<float>(), Quaternion<float>::rotationX(0.0f), 0.005f);
+    Transform<float> transform(Point3<float>(), Quaternion<float>::rotationX(0.0f), 1.0f);
     UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform);
-    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::PIXEL), Size(25, 20, LengthType::SCREEN_PERCENT), "defaultSkin", "window.commands.title");
+    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::SCREEN_PERCENT), Size(25, 20, LengthType::SCREEN_PERCENT), "defaultSkin", "window.commands.title");
     Text::create(my3dWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin", "Just a test");
     myUi3dRenderer.addWidget(my3dWindow);
 
