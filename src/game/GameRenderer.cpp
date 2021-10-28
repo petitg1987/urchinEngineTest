@@ -68,38 +68,38 @@ void GameRenderer::initialize() {
     fpsText = Text::create(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    auto myWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
-    gameUIRenderer->addWidget(myWindow);
-    Text::create(myWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin",
-                      "> Z/Q/S/D: Move character\n"
-                      "> Space: Jump\n"
-                      "> E: Edit mode (on/off)\n"
-                      "> F: Apply force on dynamic bodies\n"
-                      "> G: Launch ray test\n"
-                      "> C: Pause, play physics\n"
-                      "> PgUp/PgDn: Move light\n"
-                      "> A: Anti aliasing (on/off)\n"
-                      "> H: HBAO (on/off)\n"
-                      "> W: Shadow (on/off)\n"
-                      "> P/M/O: Pause, play, stop sound\n"
-                      "> Esc: Quit");
-    TextBox::create(myWindow.get(), Position(0.0f, 192.0f, LengthType::PIXEL), Size(264.0f, 20.0f, LengthType::PIXEL), "defaultSkin");
-    auto myButton = Button::create(myWindow.get(), Position(0.0f, 215.0f, LengthType::PIXEL), Size(264.0f, 27.0f, LengthType::PIXEL), "defaultSkin", "button.close");
-    myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myWindow));
-
-    auto myWindow2 = Window::create(nullptr, Position(320.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
-    gameUIRenderer->addWidget(myWindow2);
-    std::vector<std::string> sequenceValues = {"sequence.one", "sequence.two", "sequence.three"};
-    Sequence::createTranslatable(myWindow2.get(), Position(10, 4, LengthType::PIXEL), Size(70.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
-    CheckBox::create(myWindow2.get(), Position(10.0f, 20.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
-    std::vector<std::string> sliderValues {"1", "2", "3"};
-    Slider::create(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
+//    auto myWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+//    gameUIRenderer->addWidget(myWindow);
+//    Text::create(myWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin",
+//                      "> Z/Q/S/D: Move character\n"
+//                      "> Space: Jump\n"
+//                      "> E: Edit mode (on/off)\n"
+//                      "> F: Apply force on dynamic bodies\n"
+//                      "> G: Launch ray test\n"
+//                      "> C: Pause, play physics\n"
+//                      "> PgUp/PgDn: Move light\n"
+//                      "> A: Anti aliasing (on/off)\n"
+//                      "> H: HBAO (on/off)\n"
+//                      "> W: Shadow (on/off)\n"
+//                      "> P/M/O: Pause, play, stop sound\n"
+//                      "> Esc: Quit");
+//    TextBox::create(myWindow.get(), Position(0.0f, 192.0f, LengthType::PIXEL), Size(264.0f, 20.0f, LengthType::PIXEL), "defaultSkin");
+//    auto myButton = Button::create(myWindow.get(), Position(0.0f, 215.0f, LengthType::PIXEL), Size(264.0f, 27.0f, LengthType::PIXEL), "defaultSkin", "button.close");
+//    myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myWindow));
+//
+//    auto myWindow2 = Window::create(nullptr, Position(320.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
+//    gameUIRenderer->addWidget(myWindow2);
+//    std::vector<std::string> sequenceValues = {"sequence.one", "sequence.two", "sequence.three"};
+//    Sequence::createTranslatable(myWindow2.get(), Position(10, 4, LengthType::PIXEL), Size(70.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
+//    CheckBox::create(myWindow2.get(), Position(10.0f, 20.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
+//    std::vector<std::string> sliderValues {"1", "2", "3"};
+//    Slider::create(myWindow2.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //UI 3d
     //TODO [FOR_LATER] review
-    Transform<float> transform(Point3<float>(), Quaternion<float>::rotationX(-0.17f), 1.0f);
+    Transform<float> transform(Point3<float>(), Quaternion<float>::rotationX(0.0f), 0.005f);
     UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform);
-    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::PIXEL), Size(20, 20, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::PIXEL), Size(25, 20, LengthType::SCREEN_PERCENT), "defaultSkin", "window.commands.title");
     Text::create(my3dWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin", "Just a test");
     myUi3dRenderer.addWidget(my3dWindow);
 
