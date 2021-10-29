@@ -2,7 +2,7 @@ text (skin=defaultSkin):
   font: "ui/fonts/font.ttf"
   color: "1.0 1.0 1.0"
   height:
-    value: "16.0"
+    value: "25.0"
     type: "pixel"
 
 text (skin=default3DSkin):
@@ -26,20 +26,20 @@ button (skin=defaultSkin):
     image: "ui/widget/button/default.tga"
     part (zone=top): "2"
     part (zone=bottom): "2"
-    part (zone=left): "1"
-    part (zone=right): "1"
+    part (zone=left): "2"
+    part (zone=right): "2"
   skin (type=focus):
     image: "ui/widget/button/focus.tga"
     part (zone=top): "2"
     part (zone=bottom): "2"
-    part (zone=left): "1"
-    part (zone=right): "1"
+    part (zone=left): "2"
+    part (zone=right): "2"
   skin (type=click):
     image: "ui/widget/button/click.tga"
     part (zone=top): "2"
     part (zone=bottom): "2"
-    part (zone=left): "1"
-    part (zone=right): "1"
+    part (zone=left): "2"
+    part (zone=right): "2"
   textSkin: "defaultSkin"
 
 textBox (skin=defaultSkin):

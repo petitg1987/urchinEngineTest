@@ -68,9 +68,9 @@ void GameRenderer::initialize() {
     fpsText = Text::create(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    auto myFirstWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(270, 270, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+    auto myFirstWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(350, 405, LengthType::PIXEL), "defaultSkin", "window.commands.title");
     gameUIRenderer->addWidget(myFirstWindow);
-    Text::create(myFirstWindow.get(), Position(0, 4, LengthType::PIXEL), "defaultSkin",
+    Text::create(myFirstWindow.get(), Position(0, 8, LengthType::PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
                       "> Space: Jump\n"
                       "> E: Edit mode (on/off)\n"
@@ -83,23 +83,24 @@ void GameRenderer::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::create(myFirstWindow.get(), Position(0.0f, 192.0f, LengthType::PIXEL), Size(264.0f, 20.0f, LengthType::PIXEL), "defaultSkin");
-    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 215.0f, LengthType::PIXEL), Size(264.0f, 27.0f, LengthType::PIXEL), "defaultSkin", "button.close");
+    TextBox::create(myFirstWindow.get(), Position(0.0f, 305.0f, LengthType::PIXEL), Size(340.0f, 30.0f, LengthType::PIXEL), "defaultSkin");
+    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 340.0f, LengthType::PIXEL), Size(340.0f, 35.0f, LengthType::PIXEL), "defaultSkin", "button.close");
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myFirstWindow));
 
-    auto mySecondWindow = Window::create(nullptr, Position(320.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
+    auto mySecondWindow = Window::create(nullptr, Position(420.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(mySecondWindow);
     std::vector<std::string> sequenceValues = {"sequence.one", "sequence.two", "sequence.three"};
-    Sequence::createTranslatable(mySecondWindow.get(), Position(10, 4, LengthType::PIXEL), Size(70.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
-    CheckBox::create(mySecondWindow.get(), Position(10.0f, 20.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
+    Sequence::createTranslatable(mySecondWindow.get(), Position(10.0f, 4.0f, LengthType::PIXEL), Size(120.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
+    CheckBox::create(mySecondWindow.get(), Position(10.0f, 30.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
     std::vector<std::string> sliderValues {"1", "2", "3"};
-    Slider::create(mySecondWindow.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
+    Slider::create(mySecondWindow.get(), Position(10.0f, 64.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //UI 3d
     Transform<float> transform(Point3<float>(5.0f, -1.0f, 0.0f), Quaternion<float>::rotationY(-0.80f), 1.0f);
     UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform, Point2<unsigned int>(1000, 666), Point2<float>(1.5f, 1.0f), 0.4f);
-    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::SCREEN_PERCENT), Size(100, 100, LengthType::SCREEN_PERCENT), "defaultSkin", "");
-    Text::create(my3dWindow.get(), Position(10, 4, LengthType::SCREEN_PERCENT), "default3DSkin", "UI 3d test");
+    auto my3dWindow = Window::create(nullptr, Position(0.0f, 0.0f, LengthType::SCREEN_PERCENT), Size(100, 100, LengthType::SCREEN_PERCENT), "defaultSkin", "");
+    Text::create(my3dWindow.get(), Position(10.0f, 4.0f, LengthType::SCREEN_PERCENT), "default3DSkin", "UI 3d test");
+    CheckBox::create(my3dWindow.get(), Position(10.0f, 20.0f, LengthType::SCREEN_PERCENT), Size(5.32f, 8.0f, LengthType::SCREEN_PERCENT), "defaultSkin");
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
