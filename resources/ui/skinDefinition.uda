@@ -5,6 +5,13 @@ text (skin=defaultSkin):
     value: "16.0"
     type: "pixel"
 
+text (skin=default3DSkin):
+  font: "ui/fonts/font.ttf"
+  color: "1.0 1.0 1.0"
+  height:
+    value: "16.0"
+    type: "screenPercent"
+
 window (skin=defaultSkin):
   skin:
     image: "ui/widget/window/window.tga"

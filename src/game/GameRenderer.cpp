@@ -96,10 +96,10 @@ void GameRenderer::initialize() {
     Slider::create(mySecondWindow.get(), Position(10.0f, 44.0f, LengthType::PIXEL), Size(70.0f, LengthType::PIXEL, 16.0f, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //UI 3d
-    Transform<float> transform(Point3<float>(0.0f, -1.0f, 0.0f), Quaternion<float>::rotationX(0.17f), 1.0f);
+    Transform<float> transform(Point3<float>(0.0f, -1.0f, 0.0f), Quaternion<float>::rotationX(-0.17f), 1.0f);
     UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform, Point2<unsigned int>(1000, 666), Point2<float>(1.5f, 1.0f));
-    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::SCREEN_PERCENT), Size(100, 100, LengthType::SCREEN_PERCENT), "defaultSkin", "window.commands.title");
-    Text::create(my3dWindow.get(), Position(0, 4, LengthType::SCREEN_PERCENT), "defaultSkin", "UI 3d test");
+    auto my3dWindow = Window::create(nullptr, Position(0, 0, LengthType::SCREEN_PERCENT), Size(100, 100, LengthType::SCREEN_PERCENT), "defaultSkin", "");
+    Text::create(my3dWindow.get(), Position(0, 4, LengthType::SCREEN_PERCENT), "default3DSkin", "UI 3d test");
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
