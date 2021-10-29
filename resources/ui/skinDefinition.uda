@@ -78,3 +78,8 @@ slider (skin=defaultSkin):
   imageLine: "ui/widget/slider/line.tga"
   imageCursor: "ui/widget/slider/cursor.tga"
   valuesTextSkin: "defaultSkin"
+
+slider (skin=default3DSkin):
+  imageLine: "ui/widget/slider/line.tga"
+  imageCursor: "ui/widget/slider/cursor.tga"
+  valuesTextSkin: "default3DSkin"
