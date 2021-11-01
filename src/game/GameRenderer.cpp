@@ -101,8 +101,8 @@ void GameRenderer::initialize() {
     auto my3dWindow = Window::create(nullptr, Position(0.0f, 0.0f, LengthType::SCREEN_PERCENT), Size(100, 100, LengthType::SCREEN_PERCENT), "defaultSkin", "");
     Text::create(my3dWindow.get(), Position(10.0f, 4.0f, LengthType::SCREEN_PERCENT), "default3DSkin", "UI 3d test");
     CheckBox::create(my3dWindow.get(), Position(10.0f, 20.0f, LengthType::SCREEN_PERCENT), Size(5.32f, 8.0f, LengthType::SCREEN_PERCENT), "defaultSkin");
-    std::vector<std::string> slider3dValues {"1D", "2D", "3D"};
-    Slider::create(my3dWindow.get(), Position(10.0f, 36.0f, LengthType::SCREEN_PERCENT), Size(50.0f, 8.0f, LengthType::SCREEN_PERCENT), "default3DSkin", slider3dValues);
+    std::vector<std::string> slider3dValues {"1...", "2...", "3...", "4...", "5...", "6...", "7..."};
+    Slider::create(my3dWindow.get(), Position(10.0f, 36.0f, LengthType::SCREEN_PERCENT), Size(50.0f, 16.0f, LengthType::SCREEN_PERCENT), "default3DSkin", slider3dValues);
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
