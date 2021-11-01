@@ -235,7 +235,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         float clipSpaceX = (2.0f * (float)getScreenHandler()->getMouseX()) / ((float)getScreenHandler()->getScene()->getSceneWidth()) - 1.0f;
         float clipSpaceY = 1.0f - (2.0f * (float)getScreenHandler()->getMouseY()) / ((float)getScreenHandler()->getScene()->getSceneHeight());
         Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
-        Vector4<float> rayDirectionEyeSpace = camera->getProjectionMatrix().inverse() * rayDirectionClipSpace;
+        Vector4<float> rayDirectionEyeSpace = camera->getProjectionInverseMatrix() * rayDirectionClipSpace;
         rayDirectionEyeSpace.setValues(rayDirectionEyeSpace.X, rayDirectionEyeSpace.Y, -1.0f, 0.0f);
         Vector3<float> rayDirectionWorldSpace = (camera->getViewMatrix().inverse() * rayDirectionEyeSpace).xyz().normalize();
 
