@@ -60,7 +60,7 @@ void GameRenderer::initialize() {
     LoadMapCallback nullLoadMapCallback;
     mapHandler->loadMapFromFile("map.uda", nullLoadMapCallback);
     mapHandler->getMap().getSceneModel("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
-    mapHandler->getMap().getSceneModel("characterAnimate").getModel()->animate("move");
+    mapHandler->getMap().getSceneModel("characterAnimate").getModel()->animate("move", true);
 
     //UI
     gameUIRenderer = &getScreenHandler()->getScene()->newUIRenderer(false);
