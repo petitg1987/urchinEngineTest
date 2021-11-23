@@ -352,8 +352,8 @@ scene:
         transform:
           position: "-10.800000 -1.900000 1.100000"
           orientation:
-            axis: "1.000000 0.000000 -0.000000"
-            angle: "3.141593"
+            axis: "0.000000 1.000000 0.000000"
+            angle: "0.000000"
           scale: "1.000000"
       physics:
         shape (type=BOX):
