@@ -17,7 +17,7 @@ if(USE_ASAN MATCHES "true")
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 #Urchin engine
 include_directories(../urchinEngine/common/src ../urchinEngine/3dEngine/src ../urchinEngine/physicsEngine/src ../urchinEngine/soundEngine/src ../urchinEngine/AIEngine/src ../urchinEngine/mapHandler/src)
