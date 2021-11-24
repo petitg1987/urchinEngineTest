@@ -71,7 +71,7 @@ void Main::execute(int argc, char *argv[]) {
             }
             Logger::instance().purge();
         }
-    } catch (std::exception& e) {
+    } catch (const std::exception& e) {
         crashReporter->onException(e);
         clearResources(window);
         _exit(1);
@@ -171,14 +171,14 @@ GLFWwindow* Main::createWindow(bool isWindowed) {
 }
 
 void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
-    Main* main = (Main*)glfwGetWindowUserPointer(window);
+    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main && main->windowController->isEventCallbackActive()) {
         main->charEvents.push_back(unicodeCharacter);
     }
 }
 
 void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
-    Main* main = (Main*)glfwGetWindowUserPointer(window);
+    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main && main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS || action == GLFW_REPEAT) {
             if (key == GLFW_KEY_ESCAPE) {
@@ -192,7 +192,7 @@ void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
 }
 
 void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
-    Main* main = (Main*)glfwGetWindowUserPointer(window);
+    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main && main->windowController->isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             main->onMouseButtonPressed(button);
@@ -203,21 +203,21 @@ void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
 }
 
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
-    Main* main = (Main*)glfwGetWindowUserPointer(window);
+    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main && main->windowController->isEventCallbackActive()) {
         main->onMouseMove((int)x, (int)y);
     }
 }
 
 void Main::scrollCallback(GLFWwindow* window, double, double offsetY) {
-    Main* main = (Main*)glfwGetWindowUserPointer(window);
+    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main && main->windowController->isEventCallbackActive()) {
         main->onScroll(offsetY);
     }
 }
 
 void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
-    Main* main = (Main*)glfwGetWindowUserPointer(window);
+    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main) {
         main->screenHandler->resize();
     }
@@ -233,11 +233,11 @@ void Main::handleInputEvents() {
     }
     charEvents.clear();
 
-    for (std::pair<int, bool> keyEvent : keyEvents) {
-        if (keyEvent.second) {
-            onKeyPressed(keyEvent.first);
+    for (auto [key, isKeyPressed] : keyEvents) {
+        if (isKeyPressed) {
+            onKeyPressed(key);
         } else {
-            onKeyReleased(keyEvent.first);
+            onKeyReleased(key);
         }
     }
     keyEvents.clear();
@@ -318,14 +318,14 @@ void Main::onMouseButtonReleased(int button) {
     }
 }
 
-void Main::onMouseMove(double x, double y) {
+void Main::onMouseMove(double x, double y) const {
     //engine
     if (x != 0 || y != 0) {
         screenHandler->onMouseMove(x, y);
     }
 }
 
-void Main::onScroll(double offsetY) {
+void Main::onScroll(double offsetY) const {
     //engine
     if (offsetY != 0) {
         screenHandler->onScroll(offsetY);
@@ -373,7 +373,7 @@ Control::Key Main::toInputKey(int key) {
     return Control::Key::UNKNOWN_KEY;
 }
 
-bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) {
+bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) const {
     for (int i = 1; i < argc;++i) {
         if (std::string(argv[i]).find(argName) != std::string::npos) {
             return true;

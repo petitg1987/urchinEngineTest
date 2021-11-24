@@ -38,11 +38,11 @@ class Main {
         void onKeyReleased(int);
         void onMouseButtonPressed(int);
         void onMouseButtonReleased(int);
-        void onMouseMove(double, double);
-        void onScroll(double);
+        void onMouseMove(double, double) const;
+        void onScroll(double) const;
         urchin::Control::Key toInputKey(int);
 
-        static bool argumentsContains(const std::string&, int, char *[]);
+        bool argumentsContains(const std::string&, int, char *[]) const;
 
         void clearResources(GLFWwindow*&);
 
@@ -51,7 +51,8 @@ class Main {
         std::unique_ptr<ScreenHandler> screenHandler;
         std::unique_ptr<WindowController> windowController;
 
-        bool propagatePressKeyEvent, propagateReleaseKeyEvent;
+        bool propagatePressKeyEvent;
+        bool propagateReleaseKeyEvent;
         std::map<int, urchin::Control::Key> inputKeyMap;
         std::vector<unsigned int> charEvents;
         std::vector<std::pair<int, bool>> keyEvents;
