@@ -8,15 +8,15 @@ Screen::Screen(ScreenHandler* screenHandler) :
 }
 
 void Screen::onKeyPressed(Control::Key) {
-
+    //can be overridden
 }
 
 void Screen::onKeyReleased(Control::Key) {
-
+    //can be overridden
 }
 
 void Screen::refresh() {
-
+    //can be overridden
 }
 
 ScreenHandler* Screen::getScreenHandler() const {

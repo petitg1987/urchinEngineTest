@@ -3,7 +3,7 @@
 #include <ScreenHandler.h>
 using namespace urchin;
 
-NPCNavigation::NPCNavigation(float speedInKmH, float mass, MapHandler& mapHandler, AIEnvironment& aiEnvironment, PhysicsWorld& physicsWorld) {
+NPCNavigation::NPCNavigation(float speedInKmH, float mass, const MapHandler& mapHandler, AIEnvironment& aiEnvironment, PhysicsWorld& physicsWorld) {
     model = mapHandler.getMap().getSceneModel("character").getModel();
 
     aiCharacter = std::make_shared<AICharacter>(mass, speedInKmH, model->getTransform().getPosition());
@@ -23,7 +23,7 @@ std::shared_ptr<const PathRequest> NPCNavigation::getPathRequest() const {
     return aiCharacterController->getPathRequest();
 }
 
-void NPCNavigation::display(ScreenHandler* screenHandler) {
+void NPCNavigation::display(const ScreenHandler* screenHandler) {
     float dt = screenHandler->getScene()->getDeltaTime();
 
     //update values

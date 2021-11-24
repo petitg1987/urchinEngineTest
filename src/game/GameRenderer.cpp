@@ -142,14 +142,14 @@ void GameRenderer::uninitializeCharacter() {
 void GameRenderer::initializeWaterEvent() {
     underWaterEvent = std::make_unique<UnderWaterEvent>(getScreenHandler()->getSoundEnvironment());
 
-    Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
+    const Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
     water->addObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
     water->addObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 }
 
 void GameRenderer::uninitializeWaterEvent() {
     if (mapHandler) {
-        Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
+        const Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
         water->removeObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
         water->removeObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 
@@ -189,7 +189,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
     if (key == Control::Key::PAGE_UP) {
         angle += 0.1f;
         getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
-    }if (key == Control::Key::PAGE_DOWN) {
+    } else if (key == Control::Key::PAGE_DOWN) {
         angle -= 0.1f;
         getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     }
@@ -350,7 +350,7 @@ void GameRenderer::refresh() {
         if (!pathPoints.empty()) {
             std::vector<Sphere<float>> pathSpheres;
             pathSpheres.reserve(pathPoints.size());
-            for (auto& pathPoint : pathPoints) {
+            for (const auto& pathPoint : pathPoints) {
                 pathSpheres.emplace_back(0.15f, pathPoint.getPoint());
             }
 
@@ -376,7 +376,7 @@ void GameRenderer::refresh() {
 }
 
 SunLight* GameRenderer::getSunLight() {
-    SceneLight& sunLight = mapHandler->getMap().getSceneLight("sunLight");
+    const SceneLight& sunLight = mapHandler->getMap().getSceneLight("sunLight");
     return dynamic_cast<SunLight*>(sunLight.getLight());
 }
 

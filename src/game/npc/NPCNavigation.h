@@ -10,11 +10,11 @@ class ScreenHandler;
 
 class NPCNavigation {
     public:
-        NPCNavigation(float, float, urchin::MapHandler&, urchin::AIEnvironment&, urchin::PhysicsWorld&);
+        NPCNavigation(float, float, const urchin::MapHandler&, urchin::AIEnvironment&, urchin::PhysicsWorld&);
 
         std::shared_ptr<const urchin::PathRequest> getPathRequest() const;
 
-        void display(ScreenHandler *);
+        void display(const ScreenHandler *);
 
     private:
         urchin::Model *model;
