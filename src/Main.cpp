@@ -50,12 +50,13 @@ void Main::execute(int argc, char *argv[]) {
         glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
         context = createMainContext(window, isDebugModeOn);
+        game = std::make_unique<Game>(*context);
         context->getWindowController().cleanEvents(); //ignore events occurred during initialization phase
 
         while (!glfwWindowShouldClose(window)) {
             handleInputEvents();
 
-            context->getScreenSwitcher().refresh();
+            game->refresh();
             context->getScene().display();
         }
 
@@ -85,9 +86,7 @@ std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool is
 
     auto soundEnvironment = std::make_unique<SoundEnvironment>();
 
-    auto screenSwitcher = std::make_unique<ScreenSwitcher>();
-
-    return std::make_unique<MainContext>(std::move(scene), std::move(windowController), std::move(soundEnvironment), std::move(screenSwitcher));
+    return std::make_unique<MainContext>(std::move(scene), std::move(windowController), std::move(soundEnvironment));
 }
 
 void Main::glfwErrorCallback(int error, const char* description) {
@@ -279,7 +278,7 @@ void Main::onKeyPressed(int key) {
 
     //game
     if (propagatePressKeyEvent) {
-        context->getScreenSwitcher().onKeyPressed(toInputKey(key));
+        game->onKeyPressed(toInputKey(key));
     }
 }
 
@@ -299,7 +298,7 @@ void Main::onKeyReleased(int key) {
 
     //game
     if (propagateReleaseKeyEvent) {
-        context->getScreenSwitcher().onKeyReleased(toInputKey(key));
+        game->onKeyReleased(toInputKey(key));
     }
 }
 
@@ -313,7 +312,7 @@ void Main::onMouseButtonPressed(int button) {
 
     //game
     if (propagatePressKeyEvent) {
-        context->getScreenSwitcher().onKeyPressed(toInputKey(button));
+        game->onKeyPressed(toInputKey(button));
     }
 }
 
@@ -327,20 +326,14 @@ void Main::onMouseButtonReleased(int button) {
 
     //game
     if (propagateReleaseKeyEvent) {
-        context->getScreenSwitcher().onKeyReleased(toInputKey(button));
+        game->onKeyReleased(toInputKey(button));
     }
 }
 
 void Main::onMouseMove(double x, double y) const {
-    //engine
     if (x != 0 || y != 0) {
         //engine
-        bool propagateEvent = context->getScene().onMouseMove(x, y);
-
-        //game
-        if (propagateEvent) {
-            context->getScreenSwitcher().onMouseMove(x, y);
-        }
+        context->getScene().onMouseMove(x, y);
     }
 }
 
@@ -402,6 +395,7 @@ bool Main::argumentsContains(const std::string& argName, int argc, char *argv[])
 }
 
 void Main::clearResources(GLFWwindow*& window) {
+    game.reset(nullptr);
     context.reset(nullptr);
     SingletonContainer::destroyAllSingletons();
 

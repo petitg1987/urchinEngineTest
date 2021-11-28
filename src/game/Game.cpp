@@ -11,8 +11,7 @@ bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
 
 Game::Game(MainContext& context) :
-        AbstractScreen(context),
-        isInitialized(false),
+        context(context),
         editMode(false),
         memCheckMode(false),
         //3d
@@ -25,7 +24,11 @@ Game::Game(MainContext& context) :
         fpsText(nullptr),
         //sound
         manualTrigger(nullptr) {
+    initialize();
 
+    context.getWindowController().setMouseCursorVisible(false);
+    context.getScene().enableRenderer3d(gameRenderer3d);
+    context.getScene().enableUIRenderer(gameUIRenderer);
 }
 
 Game::~Game() {
@@ -39,12 +42,12 @@ Game::~Game() {
 
 void Game::initialize() {
     //3d
-    gameRenderer3d = &getContext().getScene().newRenderer3d(false);
+    gameRenderer3d = &context.getScene().newRenderer3d(false);
     gameRenderer3d->activateAntiAliasing(true);
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
     gameRenderer3d->getLightManager().setGlobalAmbientColor(Point3<float>(0.05f, 0.05f, 0.05f));
-    camera = std::make_shared<CharacterCamera>(getContext().getWindowController(), 90.0f, 0.1f, 300.0f);
+    camera = std::make_shared<CharacterCamera>(context.getWindowController(), 90.0f, 0.1f, 300.0f);
     gameRenderer3d->setCamera(camera);
 
     //physics
@@ -56,14 +59,14 @@ void Game::initialize() {
     navMeshDisplayer = std::make_unique<NavMeshDisplayer>(*aiEnvironment, *gameRenderer3d);
 
     //load map
-    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), &getContext().getSoundEnvironment(), aiEnvironment.get());
+    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), &context.getSoundEnvironment(), aiEnvironment.get());
     LoadMapCallback nullLoadMapCallback;
     mapHandler->loadMapFromFile("map.uda", nullLoadMapCallback);
     mapHandler->getMap().getSceneModel("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     mapHandler->getMap().getSceneModel("characterAnimate").getModel()->animate("move", true);
 
     //UI
-    gameUIRenderer = &getContext().getScene().newUIRenderer(false);
+    gameUIRenderer = &context.getScene().newUIRenderer(false);
 
     fpsText = Text::create(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
@@ -116,8 +119,6 @@ void Game::initialize() {
     physicsWorld->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 60.0f));
     aiEnvironment->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 4.0f));
     mapHandler->unpause();
-
-    isInitialized = true;
 }
 
 void Game::initializeCharacter() {
@@ -140,7 +141,7 @@ void Game::uninitializeCharacter() {
 }
 
 void Game::initializeWaterEvent() {
-    underWaterEvent = std::make_unique<UnderWaterEvent>(getContext().getSoundEnvironment());
+    underWaterEvent = std::make_unique<UnderWaterEvent>(context.getSoundEnvironment());
 
     const Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
     water->addObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
@@ -168,7 +169,7 @@ void Game::uninitializeNPC() {
 void Game::switchMode() {
     editMode = !editMode;
 
-    getContext().getWindowController().setMouseCursorVisible(editMode);
+    context.getWindowController().setMouseCursorVisible(editMode);
     camera->useMouseToMoveCamera(!editMode);
 }
 
@@ -232,7 +233,7 @@ void Game::onKeyPressed(Control::Key key) {
             physicsWorld->pause();
         }
     } else if (key == Control::Key::G) {
-        Point2<float> screenCenter((float)getContext().getScene().getSceneWidth() / 2.0f, (float)getContext().getScene().getSceneHeight() / 2.0f);
+        Point2<float> screenCenter((float)context.getScene().getSceneWidth() / 2.0f, (float)context.getScene().getSceneHeight() / 2.0f);
         Ray<float> ray = CameraSpaceService(*gameRenderer3d->getCamera()).screenPointToRay(screenCenter, 100.0f);
         std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(ray);
 
@@ -296,38 +297,18 @@ void Game::onKeyReleased(Control::Key key) {
     }
 }
 
-void Game::enable(bool bEnable) {
-    if (bEnable) {
-        if (!isInitialized) {
-            initialize();
-        }
-
-        getContext().getWindowController().setMouseCursorVisible(false);
-
-        getContext().getScene().enableRenderer3d(gameRenderer3d);
-        getContext().getScene().enableUIRenderer(gameUIRenderer);
-    } else {
-        getContext().getScene().enableRenderer3d(nullptr);
-        getContext().getScene().enableUIRenderer(nullptr);
-    }
-}
-
-bool Game::isEnabled() const {
-    return gameRenderer3d != nullptr && getContext().getScene().getActiveRenderer3d() == gameRenderer3d;
-}
-
 void Game::refresh() {
     //fps
-    float dt = getContext().getScene().getDeltaTime();
+    float dt = context.getScene().getDeltaTime();
     if (fpsText != nullptr) {
-        fpsText->updateText(std::to_string(getContext().getScene().getFpsForDisplay()) + " fps");
+        fpsText->updateText(std::to_string(context.getScene().getFpsForDisplay()) + " fps");
     }
 
     //map
     mapHandler->refreshMap();
 
     //NPC navigation
-    npcNavigation->display(getContext().getScene());
+    npcNavigation->display(context.getScene());
 
     //character
     characterController->setVelocity(getWalkVelocity());

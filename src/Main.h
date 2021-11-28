@@ -5,10 +5,10 @@
 #include <vector>
 #include <map>
 
-#include <ScreenSwitcher.h>
 #include <WindowController.h>
 #include <util/CrashReporter.h>
 #include <MainContext.h>
+#include <game/Game.h>
 
 int main(int, char *[]);
 
@@ -50,6 +50,7 @@ class Main {
 
         std::shared_ptr<CrashReporter> crashReporter;
         std::unique_ptr<MainContext> context;
+        std::unique_ptr<Game> game;
 
         bool propagatePressKeyEvent;
         bool propagateReleaseKeyEvent;

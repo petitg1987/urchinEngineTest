@@ -9,25 +9,21 @@
 #include <UrchinSoundEngine.h>
 #include <UrchinAIEngine.h>
 
-#include <AbstractScreen.h>
 #include <game/CharacterCamera.h>
 #include <game/UnderWaterEvent.h>
 #include <game/npc/NPCNavigation.h>
 
 class MainContext;
 
-class Game : public AbstractScreen {
+class Game {
     public:
         explicit Game(MainContext&);
-        ~Game() override;
+        ~Game();
 
-        void onKeyPressed(urchin::Control::Key) override;
-        void onKeyReleased(urchin::Control::Key) override;
+        void onKeyPressed(urchin::Control::Key);
+        void onKeyReleased(urchin::Control::Key);
 
-        void enable(bool) override;
-        bool isEnabled() const override;
-
-        void refresh() override;
+        void refresh();
 
     private:
         void initialize();
@@ -49,7 +45,7 @@ class Game : public AbstractScreen {
         urchin::Vector3<float> getWalkVelocity() const;
         urchin::RigidBody *getRandomInactiveBody();
 
-        bool isInitialized;
+        MainContext& context;
         bool editMode;
         bool memCheckMode;
 
