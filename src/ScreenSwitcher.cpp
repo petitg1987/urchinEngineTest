@@ -1,45 +1,45 @@
 #include <memory>
 
-#include <ScreenHandler.h>
+#include <ScreenSwitcher.h>
 #include <MainContext.h>
 using namespace urchin;
 
-ScreenHandler::ScreenHandler() :
+ScreenSwitcher::ScreenSwitcher() :
         context(nullptr),
         currentScreen(nullptr) {
 
 }
 
-void ScreenHandler::initialize(MainContext& context) {
+void ScreenSwitcher::initialize(MainContext& context) {
     this->context = &context;
 
-    gameRenderer = std::make_unique<GameRenderer>(context);
+    game = std::make_unique<Game>(context);
 
-    switchToScreen(*gameRenderer);
+    switchToScreen(*game);
 }
 
-void ScreenHandler::paint() {
+void ScreenSwitcher::paint() {
     currentScreen->refresh();
     context->getScene().display();
 }
 
-void ScreenHandler::resize() {
+void ScreenSwitcher::resize() {
     context->getScene().onResize();
 }
 
-void ScreenHandler::onKeyPressed(Control::Key key) {
+void ScreenSwitcher::onKeyPressed(Control::Key key) {
     currentScreen->onKeyPressed(key);
 }
 
-void ScreenHandler::onKeyReleased(Control::Key key) {
+void ScreenSwitcher::onKeyReleased(Control::Key key) {
     currentScreen->onKeyReleased(key);
 }
 
-void ScreenHandler::onMouseMove(double x, double y) {
+void ScreenSwitcher::onMouseMove(double x, double y) {
     currentScreen->onMouseMove(x, y);
 }
 
-void ScreenHandler::switchToScreen(Screen& screen) {
+void ScreenSwitcher::switchToScreen(AbstractScreen& screen) {
     if (this->currentScreen != &screen) {
         if (this->currentScreen) {
             this->currentScreen->enable(false);

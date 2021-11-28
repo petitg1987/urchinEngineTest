@@ -5,13 +5,13 @@
 #include <UrchinSoundEngine.h>
 
 #include <WindowController.h>
-#include <game/GameRenderer.h>
+#include <game/Game.h>
 
 class MainContext;
 
-class ScreenHandler {
+class ScreenSwitcher {
     public:
-        ScreenHandler();
+        ScreenSwitcher();
 
         void initialize(MainContext&);
 
@@ -21,12 +21,12 @@ class ScreenHandler {
         void onKeyReleased(urchin::Control::Key);
         void onMouseMove(double, double);
 
-        void switchToScreen(Screen&);
+        void switchToScreen(AbstractScreen&);
 
     private:
         MainContext* context;
 
-        std::unique_ptr<Screen> gameRenderer;
+        std::unique_ptr<AbstractScreen> game;
 
-        Screen* currentScreen;
+        AbstractScreen* currentScreen;
 };

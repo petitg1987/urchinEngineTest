@@ -4,10 +4,10 @@
 
 class MainContext;
 
-class Screen {
+class AbstractScreen {
     public:
-        explicit Screen(MainContext&);
-        virtual ~Screen() = default;
+        explicit AbstractScreen(MainContext&);
+        virtual ~AbstractScreen() = default;
 
         virtual void onKeyPressed(urchin::Control::Key);
         virtual void onKeyReleased(urchin::Control::Key);

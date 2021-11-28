@@ -1,7 +1,7 @@
 #include <MainContext.h>
 
 MainContext::MainContext(std::unique_ptr<urchin::Scene> scene, std::unique_ptr<WindowController> windowController, std::unique_ptr<urchin::SoundEnvironment> soundEnvironment,
-                         std::unique_ptr<ScreenHandler> screenSwitcher) :
+                         std::unique_ptr<ScreenSwitcher> screenSwitcher) :
         scene(std::move(scene)),
         windowController(std::move(windowController)),
         soundEnvironment(std::move(soundEnvironment)),
@@ -21,6 +21,6 @@ urchin::SoundEnvironment& MainContext::getSoundEnvironment() const {
     return *soundEnvironment;
 }
 
-ScreenHandler& MainContext::getScreenSwitcher() const {
+ScreenSwitcher& MainContext::getScreenSwitcher() const {
     return *screenSwitcher;
 }

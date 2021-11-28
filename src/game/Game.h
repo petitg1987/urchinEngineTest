@@ -9,21 +9,20 @@
 #include <UrchinSoundEngine.h>
 #include <UrchinAIEngine.h>
 
-#include <Screen.h>
+#include <AbstractScreen.h>
 #include <game/CharacterCamera.h>
 #include <game/UnderWaterEvent.h>
 #include <game/npc/NPCNavigation.h>
 
 class MainContext;
 
-class GameRenderer : public Screen { //TODO rename into Game
+class Game : public AbstractScreen {
     public:
-        explicit GameRenderer(MainContext&);
-        ~GameRenderer() override;
+        explicit Game(MainContext&);
+        ~Game() override;
 
         void onKeyPressed(urchin::Control::Key) override;
         void onKeyReleased(urchin::Control::Key) override;
-        void onMouseMove(double, double) override;
 
         void enable(bool) override;
         bool isEnabled() const override;
@@ -53,7 +52,6 @@ class GameRenderer : public Screen { //TODO rename into Game
         bool isInitialized;
         bool editMode;
         bool memCheckMode;
-        double mouseX, mouseY;
 
         //3d
         urchin::Renderer3d* gameRenderer3d;

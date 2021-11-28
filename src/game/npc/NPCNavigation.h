@@ -6,7 +6,7 @@
 #include <UrchinPhysicsEngine.h>
 #include <UrchinAIEngine.h>
 
-class ScreenHandler;
+class ScreenSwitcher;
 
 class NPCNavigation {
     public:

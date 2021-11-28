@@ -1,6 +1,6 @@
 #include <random>
 
-#include <game/GameRenderer.h>
+#include <game/Game.h>
 #include <game/CloseWindowCmd.h>
 #include <MainContext.h>
 using namespace urchin;
@@ -10,13 +10,11 @@ bool DEBUG_DISPLAY_NAV_MESH = false;
 bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
 
-GameRenderer::GameRenderer(MainContext& context) :
-        Screen(context),
+Game::Game(MainContext& context) :
+        AbstractScreen(context),
         isInitialized(false),
         editMode(false),
         memCheckMode(false),
-        mouseX(0.0),
-        mouseY(0.0),
         //3d
         gameRenderer3d(nullptr),
         underWaterEvent(nullptr),
@@ -30,7 +28,7 @@ GameRenderer::GameRenderer(MainContext& context) :
 
 }
 
-GameRenderer::~GameRenderer() {
+Game::~Game() {
     uninitializeCharacter();
     uninitializeWaterEvent();
     uninitializeNPC();
@@ -39,7 +37,7 @@ GameRenderer::~GameRenderer() {
     deleteGeometryModels(pathModels);
 }
 
-void GameRenderer::initialize() {
+void Game::initialize() {
     //3d
     gameRenderer3d = &getContext().getScene().newRenderer3d(false);
     gameRenderer3d->activateAntiAliasing(true);
@@ -122,7 +120,7 @@ void GameRenderer::initialize() {
     isInitialized = true;
 }
 
-void GameRenderer::initializeCharacter() {
+void Game::initializeCharacter() {
     Point3<float> characterPosition(-5.0, 0.0, 15.0);
     PhysicsTransform transform(characterPosition, Quaternion<float>::rotationY(0.0f));
     float characterRadius = 0.25f;
@@ -136,12 +134,12 @@ void GameRenderer::initializeCharacter() {
     camera->rotate(transform.getOrientation());
 }
 
-void GameRenderer::uninitializeCharacter() {
+void Game::uninitializeCharacter() {
     characterController.reset(nullptr);
     physicsCharacter = std::shared_ptr<PhysicsCharacter>(nullptr);
 }
 
-void GameRenderer::initializeWaterEvent() {
+void Game::initializeWaterEvent() {
     underWaterEvent = std::make_unique<UnderWaterEvent>(getContext().getSoundEnvironment());
 
     const Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
@@ -149,7 +147,7 @@ void GameRenderer::initializeWaterEvent() {
     water->addObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 }
 
-void GameRenderer::uninitializeWaterEvent() {
+void Game::uninitializeWaterEvent() {
     if (mapHandler) {
         const Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
         water->removeObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
@@ -159,29 +157,29 @@ void GameRenderer::uninitializeWaterEvent() {
     }
 }
 
-void GameRenderer::initializeNPC() {
+void Game::initializeNPC() {
     npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, *mapHandler, *aiEnvironment, *physicsWorld);
 }
 
-void GameRenderer::uninitializeNPC() {
+void Game::uninitializeNPC() {
     npcNavigation.reset(nullptr);
 }
 
-void GameRenderer::switchMode() {
+void Game::switchMode() {
     editMode = !editMode;
 
     getContext().getWindowController().setMouseCursorVisible(editMode);
     camera->useMouseToMoveCamera(!editMode);
 }
 
-void GameRenderer::deleteGeometryModels(std::vector<std::shared_ptr<GeometryModel>>& models) const {
+void Game::deleteGeometryModels(std::vector<std::shared_ptr<GeometryModel>>& models) const {
     for (const auto& model : models) {
         gameRenderer3d->getGeometryContainer().removeGeometry(*model);
     }
     models.clear();
 }
 
-void GameRenderer::onKeyPressed(Control::Key key) {
+void Game::onKeyPressed(Control::Key key) {
     if (key == Control::Key::E) {
         switchMode();
     }
@@ -233,22 +231,15 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         } else {
             physicsWorld->pause();
         }
-    } else if (key == Control::Key::G) { //TODO use CameraSpaceService
-        float clipSpaceX = (2.0f * (float)mouseX) / ((float)getContext().getScene().getSceneWidth()) - 1.0f;
-        float clipSpaceY = 1.0f - (2.0f * (float)mouseY) / ((float)getContext().getScene().getSceneHeight());
-        Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
-        Vector4<float> rayDirectionEyeSpace = camera->getProjectionInverseMatrix() * rayDirectionClipSpace;
-        rayDirectionEyeSpace.setValues(rayDirectionEyeSpace.X, rayDirectionEyeSpace.Y, -1.0f, 0.0f);
-        Vector3<float> rayDirectionWorldSpace = (camera->getViewMatrix().inverse() * rayDirectionEyeSpace).xyz().normalize();
-
-        Point3<float> rayStart = camera->getPosition().translate(rayDirectionWorldSpace * 1.00f);
-        Point3<float> rayEnd = rayStart.translate(rayDirectionWorldSpace * 100.0f);
-        std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(Ray<float>(rayStart, rayEnd));
+    } else if (key == Control::Key::G) {
+        Point2<float> screenCenter((float)getContext().getScene().getSceneWidth() / 2.0f, (float)getContext().getScene().getSceneHeight() / 2.0f);
+        Ray<float> ray = CameraSpaceService(*gameRenderer3d->getCamera()).screenPointToRay(screenCenter, 100.0f);
+        std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(ray);
 
         deleteGeometryModels(rayModels);
 
-        Vector3<float> gunRayVector = rayStart.vector(rayEnd);
-        Point3<float> gunRayCenter = rayStart.translate(gunRayVector * 0.5f);
+        Vector3<float> gunRayVector = ray.getOrigin().vector(ray.computeTo());
+        Point3<float> gunRayCenter = ray.getOrigin().translate(gunRayVector * 0.5f);
         Quaternion<float> gunRayOrientation = Quaternion<float>::rotationFromTo(Vector3<float>(1.0f, 0.0f, 0.0f), gunRayVector.normalize()).normalize();
         auto gunRayModel = std::make_shared<CylinderModel>(Cylinder<float>(0.01f, gunRayVector.length(), CylinderShape<float>::CYLINDER_X, gunRayCenter, gunRayOrientation), 5);
         gunRayModel->setPolygonMode(PolygonMode::FILL);
@@ -292,7 +283,7 @@ void GameRenderer::onKeyPressed(Control::Key key) {
     }
 }
 
-void GameRenderer::onKeyReleased(Control::Key key) {
+void Game::onKeyReleased(Control::Key key) {
     //3d
     if (key == Control::Key::Q) {
         leftKeyPressed = false;
@@ -305,12 +296,7 @@ void GameRenderer::onKeyReleased(Control::Key key) {
     }
 }
 
-void GameRenderer::onMouseMove(double x, double y) {
-    this->mouseX = x;
-    this->mouseY = y;
-}
-
-void GameRenderer::enable(bool bEnable) {
+void Game::enable(bool bEnable) {
     if (bEnable) {
         if (!isInitialized) {
             initialize();
@@ -326,11 +312,11 @@ void GameRenderer::enable(bool bEnable) {
     }
 }
 
-bool GameRenderer::isEnabled() const {
+bool Game::isEnabled() const {
     return gameRenderer3d != nullptr && getContext().getScene().getActiveRenderer3d() == gameRenderer3d;
 }
 
-void GameRenderer::refresh() {
+void Game::refresh() {
     //fps
     float dt = getContext().getScene().getDeltaTime();
     if (fpsText != nullptr) {
@@ -382,12 +368,12 @@ void GameRenderer::refresh() {
     }
 }
 
-SunLight* GameRenderer::getSunLight() {
+SunLight* Game::getSunLight() {
     const SceneLight& sunLight = mapHandler->getMap().getSceneLight("sunLight");
     return dynamic_cast<SunLight*>(sunLight.getLight());
 }
 
-Vector3<float> GameRenderer::getWalkVelocity() const {
+Vector3<float> Game::getWalkVelocity() const {
     Vector3<float> viewVector = camera->getView();
     viewVector.Y = 0.0f; //don't move on Y axis
     Vector3<float> forwardDirection(0.0f, 0.0f, 0.0f);
@@ -415,7 +401,7 @@ Vector3<float> GameRenderer::getWalkVelocity() const {
     return (forwardDirection + lateralDirection).normalize() * speed;
 }
 
-RigidBody* GameRenderer::getRandomInactiveBody() {
+RigidBody* Game::getRandomInactiveBody() {
     std::vector<RigidBody *> bodies;
 
     const auto& sceneModels = mapHandler->getMap().getSceneModels();

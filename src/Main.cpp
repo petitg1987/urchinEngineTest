@@ -84,7 +84,7 @@ std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool is
 
     auto soundEnvironment = std::make_unique<SoundEnvironment>();
 
-    auto screenSwitcher = std::make_unique<ScreenHandler>();
+    auto screenSwitcher = std::make_unique<ScreenSwitcher>();
 
     return std::make_unique<MainContext>(std::move(scene), std::move(windowController), std::move(soundEnvironment), std::move(screenSwitcher));
 }

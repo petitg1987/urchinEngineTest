@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 
-#include <ScreenHandler.h>
+#include <ScreenSwitcher.h>
 #include <WindowController.h>
 #include <util/CrashReporter.h>
 #include <MainContext.h>
