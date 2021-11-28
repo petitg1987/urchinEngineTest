@@ -14,9 +14,8 @@ class ScreenSwitcher {
         ScreenSwitcher();
 
         void initialize(MainContext&);
+        void refresh();
 
-        void paint();
-        void resize();
         void onKeyPressed(urchin::Control::Key);
         void onKeyReleased(urchin::Control::Key);
         void onMouseMove(double, double);

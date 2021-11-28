@@ -18,13 +18,8 @@ void ScreenSwitcher::initialize(MainContext& context) {
     switchToScreen(*game);
 }
 
-void ScreenSwitcher::paint() {
+void ScreenSwitcher::refresh() {
     currentScreen->refresh();
-    context->getScene().display();
-}
-
-void ScreenSwitcher::resize() {
-    context->getScene().onResize();
 }
 
 void ScreenSwitcher::onKeyPressed(Control::Key key) {

@@ -55,7 +55,8 @@ void Main::execute(int argc, char *argv[]) {
         while (!glfwWindowShouldClose(window)) {
             handleInputEvents();
 
-            context->getScreenSwitcher().paint();
+            context->getScreenSwitcher().refresh();
+            context->getScene().display();
         }
 
         if (Logger::instance().hasFailure()) {
@@ -230,7 +231,8 @@ void Main::scrollCallback(GLFWwindow* window, double, double offsetY) {
 void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main) {
-        main->context->getScreenSwitcher().resize();
+        //engine
+        main->context->getScene().onResize();
     }
 }
 
