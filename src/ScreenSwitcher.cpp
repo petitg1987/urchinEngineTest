@@ -5,14 +5,11 @@
 using namespace urchin;
 
 ScreenSwitcher::ScreenSwitcher() :
-        context(nullptr),
         currentScreen(nullptr) {
 
 }
 
 void ScreenSwitcher::initialize(MainContext& context) {
-    this->context = &context;
-
     game = std::make_unique<Game>(context);
 
     switchToScreen(*game);

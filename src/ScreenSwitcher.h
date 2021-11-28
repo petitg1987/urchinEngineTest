@@ -23,8 +23,6 @@ class ScreenSwitcher {
         void switchToScreen(AbstractScreen&);
 
     private:
-        MainContext* context;
-
         std::unique_ptr<AbstractScreen> game;
 
         AbstractScreen* currentScreen;
