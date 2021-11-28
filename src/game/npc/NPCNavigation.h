@@ -14,7 +14,7 @@ class NPCNavigation {
 
         std::shared_ptr<const urchin::PathRequest> getPathRequest() const;
 
-        void display(const ScreenHandler *);
+        void display(const urchin::Scene& scene);
 
     private:
         urchin::Model *model;

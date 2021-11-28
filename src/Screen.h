@@ -2,24 +2,25 @@
 
 #include "UrchinCommon.h"
 
-class ScreenHandler;
+class MainContext;
 
 class Screen {
     public:
-        explicit Screen(ScreenHandler *);
+        explicit Screen(MainContext&);
         virtual ~Screen() = default;
 
         virtual void onKeyPressed(urchin::Control::Key);
         virtual void onKeyReleased(urchin::Control::Key);
+        virtual void onMouseMove(double, double);
 
-        virtual void active(bool) = 0;
-        virtual bool isActive() const = 0;
+        virtual void enable(bool) = 0;
+        virtual bool isEnabled() const = 0;
 
         virtual void refresh();
 
     protected:
-        ScreenHandler *getScreenHandler() const;
+        MainContext& getContext() const;
 
     private:
-        ScreenHandler* screenHandler;
+        MainContext& context;
 };

@@ -1,9 +1,8 @@
 #include <Screen.h>
-#include <ScreenHandler.h>
 using namespace urchin;
 
-Screen::Screen(ScreenHandler* screenHandler) :
-        screenHandler(screenHandler) {
+Screen::Screen(MainContext& context) :
+        context(context) {
 
 }
 
@@ -15,10 +14,14 @@ void Screen::onKeyReleased(Control::Key) {
     //can be overridden
 }
 
+void Screen::onMouseMove(double, double) {
+    //can be overridden
+}
+
 void Screen::refresh() {
     //can be overridden
 }
 
-ScreenHandler* Screen::getScreenHandler() const {
-    return screenHandler;
+MainContext& Screen::getContext() const {
+    return context;
 }

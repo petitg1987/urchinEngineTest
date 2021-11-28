@@ -1,85 +1,50 @@
 #include <memory>
 
 #include <ScreenHandler.h>
+#include <MainContext.h>
 using namespace urchin;
 
-ScreenHandler::ScreenHandler(WindowController& windowController) :
-        windowController(windowController),
-        mouseX(0),
-        mouseY(0) {
-    auto surfaceCreator = getWindowController().newSurfaceCreator();
-    auto framebufferSizeRetriever = getWindowController().newFramebufferSizeRetriever();
-    scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), std::move(surfaceCreator), std::move(framebufferSizeRetriever));
-    scene->updateVerticalSync(false);
-    soundEnvironment = std::make_unique<SoundEnvironment>();
+ScreenHandler::ScreenHandler() :
+        context(nullptr),
+        currentScreen(nullptr) {
 
-    gameRenderer = std::make_unique<GameRenderer>(this);
-    gameRenderer->active(true);
 }
 
-ScreenHandler::~ScreenHandler() {
-    gameRenderer.reset(nullptr);
-    scene.reset(nullptr);
-    soundEnvironment.reset(nullptr);
+void ScreenHandler::initialize(MainContext& context) {
+    this->context = &context;
 
-    SingletonContainer::destroyAllSingletons();
+    gameRenderer = std::make_unique<GameRenderer>(context);
+
+    switchToScreen(*gameRenderer);
 }
 
 void ScreenHandler::paint() {
-    //refresh scene
-    if (gameRenderer->isActive()) {
-        gameRenderer->refresh();
-    }
-
-    //display the scene
-    scene->display();
+    currentScreen->refresh();
+    context->getScene().display();
 }
 
 void ScreenHandler::resize() {
-    if (scene) {
-        scene->onResize();
-    }
+    context->getScene().onResize();
 }
 
 void ScreenHandler::onKeyPressed(Control::Key key) {
-    if (gameRenderer->isActive()) {
-        gameRenderer->onKeyPressed(key);
-    }
+    currentScreen->onKeyPressed(key);
 }
 
 void ScreenHandler::onKeyReleased(Control::Key key) {
-    if (gameRenderer->isActive()) {
-        gameRenderer->onKeyReleased(key);
+    currentScreen->onKeyReleased(key);
+}
+
+void ScreenHandler::onMouseMove(double x, double y) {
+    currentScreen->onMouseMove(x, y);
+}
+
+void ScreenHandler::switchToScreen(Screen& screen) {
+    if (this->currentScreen != &screen) {
+        if (this->currentScreen) {
+            this->currentScreen->enable(false);
+        }
+        this->currentScreen = &screen;
+        screen.enable(true);
     }
-}
-
-void ScreenHandler::onMouseMove(double mouseX, double mouseY) {
-    this->mouseX = mouseX;
-    this->mouseY = mouseY;
-
-    scene->onMouseMove(mouseX, mouseY);
-}
-
-void ScreenHandler::onScroll(double offsetY) {
-    scene->onScroll(offsetY);
-}
-
-double ScreenHandler::getMouseX() const {
-    return mouseX;
-}
-
-double ScreenHandler::getMouseY() const {
-    return mouseY;
-}
-
-WindowController& ScreenHandler::getWindowController() const {
-    return windowController;
-}
-
-Scene* ScreenHandler::getScene() const {
-    return scene.get();
-}
-
-SoundEnvironment* ScreenHandler::getSoundEnvironment() const {
-    return soundEnvironment.get();
 }

@@ -14,18 +14,19 @@
 #include <game/UnderWaterEvent.h>
 #include <game/npc/NPCNavigation.h>
 
-class ScreenHandler;
+class MainContext;
 
-class GameRenderer : public Screen {
+class GameRenderer : public Screen { //TODO rename into Game
     public:
-        explicit GameRenderer(ScreenHandler *);
+        explicit GameRenderer(MainContext&);
         ~GameRenderer() override;
 
         void onKeyPressed(urchin::Control::Key) override;
         void onKeyReleased(urchin::Control::Key) override;
+        void onMouseMove(double, double) override;
 
-        void active(bool) override;
-        bool isActive() const override;
+        void enable(bool) override;
+        bool isEnabled() const override;
 
         void refresh() override;
 
@@ -52,6 +53,7 @@ class GameRenderer : public Screen {
         bool isInitialized;
         bool editMode;
         bool memCheckMode;
+        double mouseX, mouseY;
 
         //3d
         urchin::Renderer3d* gameRenderer3d;

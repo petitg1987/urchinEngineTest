@@ -2,7 +2,7 @@
 
 #include <game/GameRenderer.h>
 #include <game/CloseWindowCmd.h>
-#include <ScreenHandler.h>
+#include <MainContext.h>
 using namespace urchin;
 
 //debug parameters
@@ -10,11 +10,13 @@ bool DEBUG_DISPLAY_NAV_MESH = false;
 bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
 
-GameRenderer::GameRenderer(ScreenHandler* screenHandler) :
-        Screen(screenHandler),
+GameRenderer::GameRenderer(MainContext& context) :
+        Screen(context),
         isInitialized(false),
         editMode(false),
         memCheckMode(false),
+        mouseX(0.0),
+        mouseY(0.0),
         //3d
         gameRenderer3d(nullptr),
         underWaterEvent(nullptr),
@@ -39,12 +41,12 @@ GameRenderer::~GameRenderer() {
 
 void GameRenderer::initialize() {
     //3d
-    gameRenderer3d = &getScreenHandler()->getScene()->newRenderer3d(false);
+    gameRenderer3d = &getContext().getScene().newRenderer3d(false);
     gameRenderer3d->activateAntiAliasing(true);
     gameRenderer3d->activateAmbientOcclusion(true);
     gameRenderer3d->activateShadow(true);
     gameRenderer3d->getLightManager().setGlobalAmbientColor(Point3<float>(0.05f, 0.05f, 0.05f));
-    camera = std::make_shared<CharacterCamera>(getScreenHandler()->getWindowController(), 90.0f, 0.1f, 300.0f);
+    camera = std::make_shared<CharacterCamera>(getContext().getWindowController(), 90.0f, 0.1f, 300.0f);
     gameRenderer3d->setCamera(camera);
 
     //physics
@@ -56,14 +58,14 @@ void GameRenderer::initialize() {
     navMeshDisplayer = std::make_unique<NavMeshDisplayer>(*aiEnvironment, *gameRenderer3d);
 
     //load map
-    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), getScreenHandler()->getSoundEnvironment(), aiEnvironment.get());
+    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), &getContext().getSoundEnvironment(), aiEnvironment.get());
     LoadMapCallback nullLoadMapCallback;
     mapHandler->loadMapFromFile("map.uda", nullLoadMapCallback);
     mapHandler->getMap().getSceneModel("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     mapHandler->getMap().getSceneModel("characterAnimate").getModel()->animate("move", true);
 
     //UI
-    gameUIRenderer = &getScreenHandler()->getScene()->newUIRenderer(false);
+    gameUIRenderer = &getContext().getScene().newUIRenderer(false);
 
     fpsText = Text::create(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
@@ -140,7 +142,7 @@ void GameRenderer::uninitializeCharacter() {
 }
 
 void GameRenderer::initializeWaterEvent() {
-    underWaterEvent = std::make_unique<UnderWaterEvent>(getScreenHandler()->getSoundEnvironment());
+    underWaterEvent = std::make_unique<UnderWaterEvent>(getContext().getSoundEnvironment());
 
     const Water* water = mapHandler->getMap().getSceneWater("ocean").getWater();
     water->addObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
@@ -168,7 +170,7 @@ void GameRenderer::uninitializeNPC() {
 void GameRenderer::switchMode() {
     editMode = !editMode;
 
-    getScreenHandler()->getWindowController().setMouseCursorVisible(editMode);
+    getContext().getWindowController().setMouseCursorVisible(editMode);
     camera->useMouseToMoveCamera(!editMode);
 }
 
@@ -231,9 +233,9 @@ void GameRenderer::onKeyPressed(Control::Key key) {
         } else {
             physicsWorld->pause();
         }
-    } else if (key == Control::Key::G) {
-        float clipSpaceX = (2.0f * (float)getScreenHandler()->getMouseX()) / ((float)getScreenHandler()->getScene()->getSceneWidth()) - 1.0f;
-        float clipSpaceY = 1.0f - (2.0f * (float)getScreenHandler()->getMouseY()) / ((float)getScreenHandler()->getScene()->getSceneHeight());
+    } else if (key == Control::Key::G) { //TODO use CameraSpaceService
+        float clipSpaceX = (2.0f * (float)mouseX) / ((float)getContext().getScene().getSceneWidth()) - 1.0f;
+        float clipSpaceY = 1.0f - (2.0f * (float)mouseY) / ((float)getContext().getScene().getSceneHeight());
         Vector4<float> rayDirectionClipSpace(clipSpaceX, clipSpaceY, -1.0f, 1.0f);
         Vector4<float> rayDirectionEyeSpace = camera->getProjectionInverseMatrix() * rayDirectionClipSpace;
         rayDirectionEyeSpace.setValues(rayDirectionEyeSpace.X, rayDirectionEyeSpace.Y, -1.0f, 0.0f);
@@ -303,38 +305,43 @@ void GameRenderer::onKeyReleased(Control::Key key) {
     }
 }
 
-void GameRenderer::active(bool active) {
-    if (active) {
+void GameRenderer::onMouseMove(double x, double y) {
+    this->mouseX = x;
+    this->mouseY = y;
+}
+
+void GameRenderer::enable(bool bEnable) {
+    if (bEnable) {
         if (!isInitialized) {
             initialize();
         }
 
-        getScreenHandler()->getWindowController().setMouseCursorVisible(false);
+        getContext().getWindowController().setMouseCursorVisible(false);
 
-        getScreenHandler()->getScene()->enableRenderer3d(gameRenderer3d);
-        getScreenHandler()->getScene()->enableUIRenderer(gameUIRenderer);
+        getContext().getScene().enableRenderer3d(gameRenderer3d);
+        getContext().getScene().enableUIRenderer(gameUIRenderer);
     } else {
-        getScreenHandler()->getScene()->enableRenderer3d(nullptr);
-        getScreenHandler()->getScene()->enableUIRenderer(nullptr);
+        getContext().getScene().enableRenderer3d(nullptr);
+        getContext().getScene().enableUIRenderer(nullptr);
     }
 }
 
-bool GameRenderer::isActive() const {
-    return gameRenderer3d != nullptr && getScreenHandler()->getScene()->getActiveRenderer3d() == gameRenderer3d;
+bool GameRenderer::isEnabled() const {
+    return gameRenderer3d != nullptr && getContext().getScene().getActiveRenderer3d() == gameRenderer3d;
 }
 
 void GameRenderer::refresh() {
     //fps
-    float dt = getScreenHandler()->getScene()->getDeltaTime();
+    float dt = getContext().getScene().getDeltaTime();
     if (fpsText != nullptr) {
-        fpsText->updateText(std::to_string(getScreenHandler()->getScene()->getFpsForDisplay()) + " fps");
+        fpsText->updateText(std::to_string(getContext().getScene().getFpsForDisplay()) + " fps");
     }
 
     //map
     mapHandler->refreshMap();
 
     //NPC navigation
-    npcNavigation->display(getScreenHandler());
+    npcNavigation->display(getContext().getScene());
 
     //character
     characterController->setVelocity(getWalkVelocity());

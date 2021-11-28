@@ -40,9 +40,6 @@ void Main::execute(int argc, char *argv[]) {
         UISkinService::instance().setSkin("ui/skinDefinition.uda");
 
         window = createWindow(isWindowed);
-        windowController = std::make_unique<WindowController>(window, isDebugModeOn);
-
-        screenHandler = std::make_unique<ScreenHandler>(*windowController);
 
         glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
@@ -52,12 +49,13 @@ void Main::execute(int argc, char *argv[]) {
         glfwSetScrollCallback(window, scrollCallback);
         glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
-        windowController->cleanEvents(); //ignore events occurred during initialization phase
+        context = createMainContext(window, isDebugModeOn);
+        context->getWindowController().cleanEvents(); //ignore events occurred during initialization phase
 
         while (!glfwWindowShouldClose(window)) {
             handleInputEvents();
 
-            screenHandler->paint();
+            context->getScreenSwitcher().paint();
         }
 
         if (Logger::instance().hasFailure()) {
@@ -76,6 +74,19 @@ void Main::execute(int argc, char *argv[]) {
         clearResources(window);
         _exit(1);
     }
+}
+
+std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool isDebugModeOn) const {
+    auto windowController = std::make_unique<WindowController>(window, isDebugModeOn);
+
+    auto scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), windowController->newSurfaceCreator(), windowController->newFramebufferSizeRetriever());
+    scene->updateVerticalSync(false);
+
+    auto soundEnvironment = std::make_unique<SoundEnvironment>();
+
+    auto screenSwitcher = std::make_unique<ScreenHandler>();
+
+    return std::make_unique<MainContext>(std::move(scene), std::move(windowController), std::move(soundEnvironment), std::move(screenSwitcher));
 }
 
 void Main::glfwErrorCallback(int error, const char* description) {
@@ -172,14 +183,14 @@ GLFWwindow* Main::createWindow(bool isWindowed) {
 
 void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->windowController->isEventCallbackActive()) {
+    if (main && main->context->getWindowController().isEventCallbackActive()) {
         main->charEvents.push_back(unicodeCharacter);
     }
 }
 
 void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->windowController->isEventCallbackActive()) {
+    if (main && main->context->getWindowController().isEventCallbackActive()) {
         if (action == GLFW_PRESS || action == GLFW_REPEAT) {
             if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -193,7 +204,7 @@ void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
 
 void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->windowController->isEventCallbackActive()) {
+    if (main && main->context->getWindowController().isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             main->onMouseButtonPressed(button);
         } else if (action == GLFW_RELEASE) {
@@ -204,14 +215,14 @@ void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
 
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->windowController->isEventCallbackActive()) {
+    if (main && main->context->getWindowController().isEventCallbackActive()) {
         main->onMouseMove((int)x, (int)y);
     }
 }
 
 void Main::scrollCallback(GLFWwindow* window, double, double offsetY) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->windowController->isEventCallbackActive()) {
+    if (main && main->context->getWindowController().isEventCallbackActive()) {
         main->onScroll(offsetY);
     }
 }
@@ -219,7 +230,7 @@ void Main::scrollCallback(GLFWwindow* window, double, double offsetY) {
 void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main) {
-        main->screenHandler->resize();
+        main->context->getScreenSwitcher().resize();
     }
 }
 
@@ -246,7 +257,7 @@ void Main::handleInputEvents() {
 void Main::onChar(char32_t unicodeCharacter) {
     //engine
     if (propagatePressKeyEvent) {
-        propagatePressKeyEvent = screenHandler->getScene()->onChar(unicodeCharacter);
+        propagatePressKeyEvent = context->getScene().onChar(unicodeCharacter);
     }
 }
 
@@ -254,19 +265,19 @@ void Main::onKeyPressed(int key) {
     //engine
     if (propagatePressKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress((unsigned int)InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress((unsigned int)InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress((unsigned int)InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyPress((unsigned int)InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::DELETE_KEY);
         }
     }
 
     //game
     if (propagatePressKeyEvent) {
-        screenHandler->onKeyPressed(toInputKey(key));
+        context->getScreenSwitcher().onKeyPressed(toInputKey(key));
     }
 }
 
@@ -274,61 +285,67 @@ void Main::onKeyReleased(int key) {
     //engine
     if (propagateReleaseKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease((unsigned int)InputDeviceKey::LEFT_ARROW);
+            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease((unsigned int)InputDeviceKey::RIGHT_ARROW);
+            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease((unsigned int)InputDeviceKey::BACKSPACE);
+            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = screenHandler->getScene()->onKeyRelease((unsigned int)InputDeviceKey::DELETE_KEY);
+            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::DELETE_KEY);
         }
     }
 
     //game
     if (propagateReleaseKeyEvent) {
-        screenHandler->onKeyReleased(toInputKey(key));
+        context->getScreenSwitcher().onKeyReleased(toInputKey(key));
     }
 }
 
 void Main::onMouseButtonPressed(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyPress((unsigned int)InputDeviceKey::MOUSE_LEFT);
+        propagateReleaseKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyPress((unsigned int)InputDeviceKey::MOUSE_RIGHT);
+        propagateReleaseKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::MOUSE_RIGHT);
     }
 
     //game
     if (propagatePressKeyEvent) {
-        screenHandler->onKeyPressed(toInputKey(button));
+        context->getScreenSwitcher().onKeyPressed(toInputKey(button));
     }
 }
 
 void Main::onMouseButtonReleased(int button) {
     //engine
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyRelease((unsigned int)InputDeviceKey::MOUSE_LEFT);
+        propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::MOUSE_LEFT);
     } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = screenHandler->getScene()->onKeyRelease((unsigned int)InputDeviceKey::MOUSE_RIGHT);
+        propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::MOUSE_RIGHT);
     }
 
     //game
     if (propagateReleaseKeyEvent) {
-        screenHandler->onKeyReleased(toInputKey(button));
+        context->getScreenSwitcher().onKeyReleased(toInputKey(button));
     }
 }
 
 void Main::onMouseMove(double x, double y) const {
     //engine
     if (x != 0 || y != 0) {
-        screenHandler->onMouseMove(x, y);
+        //engine
+        bool propagateEvent = context->getScene().onMouseMove(x, y);
+
+        //game
+        if (propagateEvent) {
+            context->getScreenSwitcher().onMouseMove(x, y);
+        }
     }
 }
 
 void Main::onScroll(double offsetY) const {
-    //engine
     if (offsetY != 0) {
-        screenHandler->onScroll(offsetY);
+        //engine
+        context->getScene().onScroll(offsetY);
     }
 }
 
@@ -383,7 +400,8 @@ bool Main::argumentsContains(const std::string& argName, int argc, char *argv[])
 }
 
 void Main::clearResources(GLFWwindow*& window) {
-    screenHandler.reset(nullptr);
+    context.reset(nullptr);
+    SingletonContainer::destroyAllSingletons();
 
     if (window != nullptr) {
         glfwDestroyWindow(window);

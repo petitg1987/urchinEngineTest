@@ -8,6 +8,7 @@
 #include <ScreenHandler.h>
 #include <WindowController.h>
 #include <util/CrashReporter.h>
+#include <MainContext.h>
 
 int main(int, char *[]);
 
@@ -17,6 +18,7 @@ class Main {
         void execute(int, char *[]);
 
     private:
+        std::unique_ptr<MainContext> createMainContext(GLFWwindow*, bool) const;
         static void glfwErrorCallback(int, const char*);
         void initializeInputKeyMap();
 
@@ -47,9 +49,7 @@ class Main {
         void clearResources(GLFWwindow*&);
 
         std::shared_ptr<CrashReporter> crashReporter;
-
-        std::unique_ptr<ScreenHandler> screenHandler;
-        std::unique_ptr<WindowController> windowController;
+        std::unique_ptr<MainContext> context;
 
         bool propagatePressKeyEvent;
         bool propagateReleaseKeyEvent;

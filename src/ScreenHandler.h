@@ -7,31 +7,26 @@
 #include <WindowController.h>
 #include <game/GameRenderer.h>
 
+class MainContext;
+
 class ScreenHandler {
     public:
-        explicit ScreenHandler(WindowController&);
-        ~ScreenHandler();
+        ScreenHandler();
+
+        void initialize(MainContext&);
 
         void paint();
         void resize();
         void onKeyPressed(urchin::Control::Key);
         void onKeyReleased(urchin::Control::Key);
         void onMouseMove(double, double);
-        void onScroll(double);
 
-        double getMouseX() const;
-        double getMouseY() const;
-
-        WindowController& getWindowController() const;
-        urchin::Scene* getScene() const;
-        urchin::SoundEnvironment* getSoundEnvironment() const;
+        void switchToScreen(Screen&);
 
     private:
-        WindowController& windowController;
-        double mouseX, mouseY;
-
-        std::unique_ptr<urchin::Scene> scene;
-        std::unique_ptr<urchin::SoundEnvironment> soundEnvironment;
+        MainContext* context;
 
         std::unique_ptr<Screen> gameRenderer;
+
+        Screen* currentScreen;
 };
