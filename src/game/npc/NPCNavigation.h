@@ -6,8 +6,6 @@
 #include <UrchinPhysicsEngine.h>
 #include <UrchinAIEngine.h>
 
-class ScreenSwitcher;
-
 class NPCNavigation {
     public:
         NPCNavigation(float, float, const urchin::MapHandler&, urchin::AIEnvironment&, urchin::PhysicsWorld&);
