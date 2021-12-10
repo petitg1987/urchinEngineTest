@@ -55,3 +55,10 @@ else()
 endif()
 add_dependencies(urchinEngineTest syncShaders)
 target_link_libraries(urchinEngineTest -static-libstdc++ ${LINK_OPT} ${GLFW_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinNetworkEngine urchinAIEngine urchinMapHandler)
+target_precompile_headers(urchinEngineTest PRIVATE
+        ../urchinEngine/common/src/UrchinCommon.h
+        ../urchinEngine/3dEngine/src/Urchin3dEngine.h
+        ../urchinEngine/physicsEngine/src/UrchinPhysicsEngine.h
+        ../urchinEngine/soundEngine/src/UrchinSoundEngine.h
+        ../urchinEngine/AIEngine/src/UrchinAIEngine.h
+        ../urchinEngine/mapHandler/src/UrchinMapHandler.h)
