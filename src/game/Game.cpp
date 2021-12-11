@@ -59,11 +59,11 @@ void Game::initialize() {
     navMeshDisplayer = std::make_unique<NavMeshDisplayer>(*aiEnvironment, *gameRenderer3d);
 
     //load map
-    mapHandler = std::make_unique<MapHandler>(gameRenderer3d, physicsWorld.get(), &context.getSoundEnvironment(), aiEnvironment.get());
+    map = std::make_unique<Map>(gameRenderer3d, physicsWorld.get(), &context.getSoundEnvironment(), aiEnvironment.get());
     LoadMapCallback nullLoadMapCallback;
-    mapHandler->loadMapFromFile("map.uda", nullLoadMapCallback);
-    mapHandler->getMap().getObjectEntity("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
-    mapHandler->getMap().getObjectEntity("characterAnimate").getModel()->animate("move", true);
+    MapHandler().loadMapFromFile("map.uda", nullLoadMapCallback, map);
+    map->getObjectEntity("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
+    map->getObjectEntity("characterAnimate").getModel()->animate("move", true);
 
     //UI
     gameUIRenderer = &context.getScene().newUIRenderer(false);
@@ -109,7 +109,7 @@ void Game::initialize() {
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
-    manualTrigger = dynamic_cast<ManualTrigger*>(mapHandler->getMap().getSoundEntity("globalSound").getSoundTrigger());
+    manualTrigger = dynamic_cast<ManualTrigger*>(map->getSoundEntity("globalSound").getSoundTrigger());
     manualTrigger->playNew();
 
     //initialize and start process
@@ -118,7 +118,7 @@ void Game::initialize() {
     initializeNPC();
     physicsWorld->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 60.0f));
     aiEnvironment->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 4.0f));
-    mapHandler->unpause();
+    map->unpause();
 }
 
 void Game::initializeCharacter() {
@@ -143,14 +143,14 @@ void Game::uninitializeCharacter() {
 void Game::initializeWaterEvent() {
     underWaterEvent = std::make_unique<UnderWaterEvent>(context.getSoundEnvironment());
 
-    const Water* water = mapHandler->getMap().getWaterEntity("ocean").getWater();
+    const Water* water = map->getWaterEntity("ocean").getWater();
     water->addObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
     water->addObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 }
 
 void Game::uninitializeWaterEvent() {
-    if (mapHandler) {
-        const Water* water = mapHandler->getMap().getWaterEntity("ocean").getWater();
+    if (map) {
+        const Water* water = map->getWaterEntity("ocean").getWater();
         water->removeObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
         water->removeObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 
@@ -159,7 +159,7 @@ void Game::uninitializeWaterEvent() {
 }
 
 void Game::initializeNPC() {
-    npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, *mapHandler, *aiEnvironment, *physicsWorld);
+    npcNavigation = std::make_unique<NPCNavigation>(5.0f, 80.0f, *map, *aiEnvironment, *physicsWorld);
 }
 
 void Game::uninitializeNPC() {
@@ -305,7 +305,7 @@ void Game::refresh() {
     }
 
     //map
-    mapHandler->refreshMap();
+    map->refresh();
 
     //NPC navigation
     npcNavigation->display(context.getScene());
@@ -350,7 +350,7 @@ void Game::refresh() {
 }
 
 SunLight* Game::getSunLight() {
-    const LightEntity& sunLight = mapHandler->getMap().getLightEntity("sunLight");
+    const LightEntity& sunLight = map->getLightEntity("sunLight");
     return dynamic_cast<SunLight*>(sunLight.getLight());
 }
 
@@ -385,7 +385,7 @@ Vector3<float> Game::getWalkVelocity() const {
 RigidBody* Game::getRandomInactiveBody() {
     std::vector<RigidBody *> bodies;
 
-    const auto& sceneModels = mapHandler->getMap().getObjectEntities();
+    const auto& sceneModels = map->getObjectEntities();
     for (auto& sceneModel : sceneModels) {
         if (sceneModel->getRigidBody() && !sceneModel->getRigidBody()->isStatic() && !sceneModel->getRigidBody()->isActive()) {
             bodies.push_back(sceneModel->getRigidBody());

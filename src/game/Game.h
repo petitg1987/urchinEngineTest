@@ -68,8 +68,8 @@ class Game {
         std::vector<std::shared_ptr<urchin::GeometryModel>> pathModels;
         std::unique_ptr<urchin::NavMeshDisplayer> navMeshDisplayer;
 
-        //map handler
-        std::unique_ptr<urchin::MapHandler> mapHandler;
+        //map
+        std::unique_ptr<urchin::Map> map;
 
         //UI
         urchin::UIRenderer* gameUIRenderer;
