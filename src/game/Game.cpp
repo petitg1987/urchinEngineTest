@@ -52,7 +52,7 @@ void Game::initialize() {
 
     //physics
     physicsWorld = std::make_unique<PhysicsWorld>();
-    collisionPointsDisplayer = std::make_unique<CollisionPointDisplayer>(*physicsWorld, gameRenderer3d);
+    collisionPointsDisplayer = std::make_unique<CollisionPointDisplayer>(*physicsWorld, *gameRenderer3d);
 
     //AI
     aiEnvironment = std::make_unique<AIEnvironment>();
