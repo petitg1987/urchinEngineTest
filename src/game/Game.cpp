@@ -9,11 +9,11 @@ using namespace urchin;
 bool DEBUG_DISPLAY_NAV_MESH = false;
 bool DEBUG_DISPLAY_PATH = false;
 bool DEBUG_DISPLAY_COLLISION_POINTS = false;
+bool DEBUG_MEM_CHECK_MODE = false;
 
 Game::Game(MainContext& context) :
         context(context),
         editMode(false),
-        memCheckMode(false),
         //3d
         gameRenderer3d(nullptr),
         underWaterEvent(nullptr),
@@ -116,8 +116,8 @@ void Game::initialize() {
     initializeCharacter();
     initializeWaterEvent();
     initializeNPC();
-    physicsWorld->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 60.0f));
-    aiEnvironment->setUp(memCheckMode ? (1.0f / 2.0f) : (1.0f / 4.0f));
+    physicsWorld->setUp(DEBUG_MEM_CHECK_MODE ? (1.0f / 2.0f) : (1.0f / 60.0f));
+    aiEnvironment->setUp(DEBUG_MEM_CHECK_MODE ? (1.0f / 2.0f) : (1.0f / 4.0f));
     map->unpause();
 }
 
@@ -336,7 +336,7 @@ void Game::refresh() {
         }
     }
 
-    if (memCheckMode) {
+    if (DEBUG_MEM_CHECK_MODE) {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 

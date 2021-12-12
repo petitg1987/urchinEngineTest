@@ -47,7 +47,6 @@ class Game {
 
         MainContext& context;
         bool editMode;
-        bool memCheckMode;
 
         //3d
         urchin::Renderer3d* gameRenderer3d;
