@@ -20,7 +20,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_CXX_STANDARD 20)
 
 #Urchin engine
-include_directories(../urchinEngine/common/src ../urchinEngine/3dEngine/src ../urchinEngine/physicsEngine/src ../urchinEngine/soundEngine/src ../urchinEngine/AIEngine/src ../urchinEngine/mapHandler/src)
+include_directories(../urchinEngine/common/src ../urchinEngine/3dEngine/src ../urchinEngine/physicsEngine/src ../urchinEngine/soundEngine/src ../urchinEngine/aiEngine/src ../urchinEngine/aggregation/src)
 add_subdirectory(../urchinEngine urchinEngine)
 if (WIN32)
     file(REMOVE_RECURSE ${CMAKE_CURRENT_SOURCE_DIR}\\resources\\shaders\\)
@@ -54,11 +54,11 @@ else()
     add_executable(urchinEngineTest ${SOURCE_FILES})
 endif()
 add_dependencies(urchinEngineTest syncShaders)
-target_link_libraries(urchinEngineTest -static-libstdc++ ${LINK_OPT} ${GLFW_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinNetworkEngine urchinAIEngine urchinMapHandler)
+target_link_libraries(urchinEngineTest -static-libstdc++ ${LINK_OPT} ${GLFW_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinNetworkEngine urchinAIEngine urchinAggregation)
 target_precompile_headers(urchinEngineTest PRIVATE
         ../urchinEngine/common/src/UrchinCommon.h
         ../urchinEngine/3dEngine/src/Urchin3dEngine.h
         ../urchinEngine/physicsEngine/src/UrchinPhysicsEngine.h
         ../urchinEngine/soundEngine/src/UrchinSoundEngine.h
-        ../urchinEngine/AIEngine/src/UrchinAIEngine.h
-        ../urchinEngine/mapHandler/src/UrchinMapHandler.h)
+        ../urchinEngine/aiEngine/src/UrchinAIEngine.h
+        ../urchinEngine/aggregation/src/UrchinAggregation.h)

@@ -4,7 +4,7 @@
 #include <memory>
 #include <UrchinCommon.h>
 #include <Urchin3dEngine.h>
-#include <UrchinMapHandler.h>
+#include <UrchinAggregation.h>
 #include <UrchinPhysicsEngine.h>
 #include <UrchinSoundEngine.h>
 #include <UrchinAIEngine.h>
