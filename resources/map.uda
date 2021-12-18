@@ -11,7 +11,7 @@ scene:
           orientation:
             axis: "1.000000 0.000000 -0.000000"
             angle: "4.712389"
-          scale: "10.000000"
+          scale: "10.000000 10.000000 10.000000"
         produceShadow: "false"
       physics:
         shape (type=COMPOUND_SHAPE):
@@ -41,7 +41,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "1.000000"
+          scale: "1.000000 1.000000 1.000000"
       physics:
         shape (type=BOX):
           halfSize: "2.316176 0.860093 1.419574"
@@ -62,7 +62,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "1.000000"
+          scale: "1.000000 1.000000 1.000000"
       physics:
         shape (type=BOX):
           halfSize: "2.316176 0.460533 0.567316"
@@ -83,7 +83,7 @@ scene:
           orientation:
             axis: "0.748246 -0.469110 -0.469110"
             angle: "4.426348"
-          scale: "0.750000"
+          scale: "0.750000 0.750000 0.750000"
       physics:
         shape (type=BOX):
           halfSize: "0.235775 0.276482 0.050994"
@@ -104,7 +104,7 @@ scene:
           orientation:
             axis: "-1.000000 -0.000000 0.000000"
             angle: "1.570796"
-          scale: "0.800000"
+          scale: "0.800000 0.800000 0.800000"
       physics:
         shape (type=BOX):
           halfSize: "0.079496 0.079496 0.287061"
@@ -125,7 +125,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "0.250000"
+          scale: "0.250000 0.250000 0.250000"
       physics:
         shape (type=SPHERE):
           radius: "0.250000"
@@ -146,7 +146,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "0.400000"
+          scale: "0.400000 0.400000 0.400000"
       physics:
         shape (type=SPHERE):
           radius: "0.400000"
@@ -167,7 +167,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "0.250000"
+          scale: "0.250000 0.250000 0.250000"
       physics:
         shape (type=SPHERE):
           radius: "0.250000"
@@ -188,7 +188,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "1.000000"
+          scale: "1.000000 1.000000 1.000000"
       physics:
         shape (type=CONVEX_HULL):
           points:
@@ -217,7 +217,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "1.000000"
+          scale: "1.000000 1.000000 1.000000"
       physics:
         shape (type=BOX):
           halfSize: "0.375821 0.375821 0.375821"
@@ -238,7 +238,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "1.000000"
+          scale: "1.000000 1.000000 1.000000"
       physics:
         shape (type=CYLINDER):
           orientation: "Z"
@@ -261,7 +261,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "0.200000"
+          scale: "0.200000 0.200000 0.200000"
       physics:
         shape (type=CAPSULE):
           orientation: "Z"
@@ -284,7 +284,7 @@ scene:
           orientation:
             axis: "0.000000 0.000000 -1.000000"
             angle: "2.268928"
-          scale: "0.600000"
+          scale: "0.600000 0.600000 0.600000"
       physics:
         shape (type=COMPOUND_SHAPE):
           localizedShapes:
@@ -321,7 +321,7 @@ scene:
           orientation:
             axis: "-0.283757 -0.869055 -0.405247"
             angle: "2.048273"
-          scale: "0.800000"
+          scale: "0.800000 0.800000 0.800000"
       physics:
         shape (type=CONE):
           orientation: "ZPositive"
@@ -344,7 +344,7 @@ scene:
           orientation:
             axis: "1.000000 0.000000 -0.000000"
             angle: "4.712389"
-          scale: "1.000000"
+          scale: "1.000000 1.000000 1.000000"
     object (name=characterAnimate):
       model:
         meshes:
@@ -354,7 +354,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "1.000000"
+          scale: "1.000000 1.000000 1.000000"
       physics:
         shape (type=BOX):
           halfSize: "0.299826 0.862726 0.145000"
@@ -375,7 +375,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "0.200000"
+          scale: "0.200000 0.200000 0.200000"
       physics:
         shape (type=BOX):
           halfSize: "1.375739 1.375739 0.000001"
@@ -396,7 +396,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "0.200000"
+          scale: "0.200000 0.200000 0.200000"
       physics:
         shape (type=BOX):
           halfSize: "1.375739 1.375739 0.000001"
@@ -417,7 +417,7 @@ scene:
           orientation:
             axis: "0.000000 1.000000 0.000000"
             angle: "0.000000"
-          scale: "0.200000"
+          scale: "0.200000 0.200000 0.200000"
       physics:
         shape (type=BOX):
           halfSize: "1.375739 1.375739 0.000001"
@@ -438,7 +438,7 @@ scene:
           orientation:
             axis: "0.000000 -1.000000 0.000000"
             angle: "1.570796"
-          scale: "3.000000"
+          scale: "3.000000 3.000000 3.000000"
         produceShadow: "false"
     object (name=laserGreen):
       model:
@@ -449,7 +449,7 @@ scene:
           orientation:
             axis: "0.000000 -1.000000 0.000000"
             angle: "1.570796"
-          scale: "3.000000"
+          scale: "3.000000 3.000000 3.000000"
         produceShadow: "false"
   lights:
     light (name=omniLight;type=OMNIDIRECTIONAL):
