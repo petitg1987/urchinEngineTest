@@ -11,7 +11,7 @@ scene:
           orientation:
             axis: "1.000000 0.000000 -0.000000"
             angle: "4.712389"
-          scale: "10.000000 10.000000 10.000000"
+          scale: "10.000000 10.000000 1.000000"
         produceShadow: "false"
       physics:
         shape (type=COMPOUND_SHAPE):
