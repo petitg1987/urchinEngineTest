@@ -5,10 +5,8 @@
 #Target build
 .build/
 
-#Very large resources
-resources/materials/**/*.xcf
-resources/materials/**/*.tga
-resources/materials/**/*.png
+#Large resources
+# - None
 
 #Binary
 core

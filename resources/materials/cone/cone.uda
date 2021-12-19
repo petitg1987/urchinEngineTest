@@ -1,4 +1,4 @@
 repeatTextures: "false"
 diffuse:
-  texture: "materials/cone/diffuse.tga"
+  texture: "materials/cone/diffuse.png"
 ambientFactor: "0.4"

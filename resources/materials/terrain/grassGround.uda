@@ -1,4 +1,4 @@
 repeatTextures: "true"
 diffuse:
-  texture: "materials/terrain/grassGroundDiffuse.tga"
+  texture: "materials/terrain/grassGroundDiffuse.png"
 ambientFactor: "0.4"

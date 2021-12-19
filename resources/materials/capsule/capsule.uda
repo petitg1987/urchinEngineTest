@@ -1,4 +1,4 @@
 repeatTextures: "false"
 diffuse:
-  texture: "materials/capsule/diffuse.tga"
+  texture: "materials/capsule/diffuse.png"
 ambientFactor: "0.4"
