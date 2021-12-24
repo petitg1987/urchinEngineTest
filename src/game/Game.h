@@ -42,7 +42,7 @@ class Game {
 
         urchin::SunLight *getSunLight();
 
-        urchin::Vector3<float> computeCharacterVelocity() const;
+        void updateCharacterMovement(float) const;
         urchin::RigidBody *getRandomInactiveBody();
 
         MainContext& context;

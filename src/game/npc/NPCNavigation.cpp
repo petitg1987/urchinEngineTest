@@ -15,7 +15,10 @@ NPCNavigation::NPCNavigation(float speedInKmH, float mass, const Map& map, AIEnv
     auto characterShape = std::make_unique<const CollisionCapsuleShape>(characterRadius, characterHeight - (2.0f * characterRadius), CapsuleShape<float>::CAPSULE_Z);
     PhysicsTransform characterTransform(model->getTransform().getPosition(), model->getTransform().getOrientation());
     physicsCharacter = std::make_shared<PhysicsCharacter>("npcCharacter", mass, std::move(characterShape), characterTransform);
-    characterController = std::make_unique<CharacterController>(physicsCharacter, CharacterControllerConfig(), physicsWorld);
+    CharacterControllerConfig characterControllerConfig;
+    characterControllerConfig.setWalkSpeed(aiCharacter->retrieveMaxVelocityInMs());
+    characterControllerConfig.setRunSpeed(aiCharacter->retrieveMaxVelocityInMs());
+    characterController = std::make_unique<CharacterController>(physicsCharacter, characterControllerConfig, physicsWorld);
 }
 
 std::shared_ptr<const PathRequest> NPCNavigation::getPathRequest() const {
@@ -27,7 +30,7 @@ void NPCNavigation::display(const Scene& scene) {
 
     //update values
     aiCharacterController->update();
-    characterController->setVelocity(aiCharacter->getVelocity());
+    characterController->walk(aiCharacter->getVelocity());
     characterController->update(dt);
 
     //apply updated values

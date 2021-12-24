@@ -311,9 +311,7 @@ void Game::refresh() {
     npcNavigation->display(context.getScene());
 
     //character
-    characterController->setVelocity(computeCharacterVelocity());
-    characterController->setOrientation(camera->getView());
-    characterController->update(dt);
+    updateCharacterMovement(dt);
     float characterCenterToEyeDistance = 0.75f;
     camera->moveTo(physicsCharacter->getTransform().getPosition() + Point3<float>(0.0f, characterCenterToEyeDistance, 0.0f));
 
@@ -354,11 +352,9 @@ SunLight* Game::getSunLight() {
     return dynamic_cast<SunLight*>(sunLight.getLight());
 }
 
-Vector3<float> Game::computeCharacterVelocity() const {
+void Game::updateCharacterMovement(float dt) const {
+    //run/walk
     Vector3<float> viewVector = camera->getView();
-    viewVector.Y = 0.0f; //don't move on Y axis
-
-    //forward / backward direction
     Vector3<float> forwardDirection(0.0f, 0.0f, 0.0f);
     if (upKeyPressed && !downKeyPressed) {
         forwardDirection = viewVector.normalize();
@@ -366,7 +362,6 @@ Vector3<float> Game::computeCharacterVelocity() const {
         forwardDirection = -viewVector.normalize();
     }
 
-    //left / right direction
     Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
     Vector3<float> lateralDirection(0.0f, 0.0f, 0.0f);
     if (leftKeyPressed && !rightKeyPressed) {
@@ -375,11 +370,17 @@ Vector3<float> Game::computeCharacterVelocity() const {
         lateralDirection = lateralVector.normalize();
     }
 
-    float speed = characterControllerConfig.getMaxHorizontalSpeed();
-    if (underWaterEvent->isUnderWater()) {
-        speed *= 0.75f;
+    if (!underWaterEvent->isUnderWater()) {
+        characterController->run(forwardDirection + lateralDirection);
+    } else {
+        characterController->walk(forwardDirection + lateralDirection);
     }
-    return (forwardDirection + lateralDirection).normalize() * speed;
+
+    //orientation
+    characterController->setOrientation(camera->getView());
+
+    //update
+    characterController->update(dt);
 }
 
 RigidBody* Game::getRandomInactiveBody() {
