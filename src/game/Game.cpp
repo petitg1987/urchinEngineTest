@@ -311,7 +311,7 @@ void Game::refresh() {
     npcNavigation->display(context.getScene());
 
     //character
-    characterController->setVelocity(getWalkVelocity());
+    characterController->setVelocity(computeCharacterVelocity());
     characterController->setOrientation(camera->getView());
     characterController->update(dt);
     float characterCenterToEyeDistance = 0.75f;
@@ -354,20 +354,21 @@ SunLight* Game::getSunLight() {
     return dynamic_cast<SunLight*>(sunLight.getLight());
 }
 
-Vector3<float> Game::getWalkVelocity() const {
+Vector3<float> Game::computeCharacterVelocity() const {
     Vector3<float> viewVector = camera->getView();
     viewVector.Y = 0.0f; //don't move on Y axis
+
+    //forward / backward direction
     Vector3<float> forwardDirection(0.0f, 0.0f, 0.0f);
-
-    Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
-    Vector3<float> lateralDirection(0.0f, 0.0f, 0.0f);
-
     if (upKeyPressed && !downKeyPressed) {
         forwardDirection = viewVector.normalize();
     } else if (downKeyPressed && !upKeyPressed) {
         forwardDirection = -viewVector.normalize();
     }
 
+    //left / right direction
+    Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
+    Vector3<float> lateralDirection(0.0f, 0.0f, 0.0f);
     if (leftKeyPressed && !rightKeyPressed) {
         lateralDirection = -lateralVector.normalize();
     } else if (rightKeyPressed && !leftKeyPressed) {
@@ -378,7 +379,6 @@ Vector3<float> Game::getWalkVelocity() const {
     if (underWaterEvent->isUnderWater()) {
         speed *= 0.75f;
     }
-
     return (forwardDirection + lateralDirection).normalize() * speed;
 }
 
