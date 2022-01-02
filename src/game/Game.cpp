@@ -143,14 +143,14 @@ void Game::uninitializeCharacter() {
 void Game::initializeWaterEvent() {
     underWaterEvent = std::make_unique<UnderWaterEvent>(context.getSoundEnvironment());
 
-    const Water* water = map->getWaterEntity("ocean").getWater();
+    Water* water = map->getWaterEntity("ocean").getWater();
     water->addObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
     water->addObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 }
 
 void Game::uninitializeWaterEvent() {
     if (map) {
-        const Water* water = map->getWaterEntity("ocean").getWater();
+        Water* water = map->getWaterEntity("ocean").getWater();
         water->removeObserver(underWaterEvent.get(), Water::MOVE_UNDER_WATER);
         water->removeObserver(underWaterEvent.get(), Water::MOVE_ABOVE_WATER);
 
