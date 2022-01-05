@@ -109,7 +109,7 @@ void Game::initialize() {
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
-    manualTrigger = dynamic_cast<ManualTrigger*>(map->getSoundEntity("globalSound").getSoundTrigger());
+    manualTrigger = &map->getSoundEntity("globalSound").getSoundComponent()->getManualTrigger();
     manualTrigger->playNew();
 
     //initialize and start process
