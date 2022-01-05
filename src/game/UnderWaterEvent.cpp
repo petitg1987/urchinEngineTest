@@ -4,8 +4,13 @@
 using namespace urchin;
 
 UnderWaterEvent::UnderWaterEvent(SoundEnvironment& soundEnvironment) :
+        soundEnvironment(soundEnvironment),
         bIsUnderWater(false) {
     underWaterSound = SoundBuilder(soundEnvironment).newManualEffect("sounds/underWater.ogg", PlayBehavior::PLAY_LOOP);
+}
+
+UnderWaterEvent::~UnderWaterEvent() {
+    soundEnvironment.removeSoundComponent(*underWaterSound);
 }
 
 void UnderWaterEvent::notify(Observable* observable, int notificationType) {
@@ -13,11 +18,11 @@ void UnderWaterEvent::notify(Observable* observable, int notificationType) {
         switch (notificationType) {
             case Water::MOVE_UNDER_WATER:
                 bIsUnderWater = true;
-                underWaterSound->getTrigger().playNew();
+                underWaterSound->getManualTrigger().playNew();
                 break;
             case Water::MOVE_ABOVE_WATER:
                 bIsUnderWater = false;
-                underWaterSound->getTrigger().stopAll();
+                underWaterSound->getManualTrigger().stopAll();
                 break;
             default:
                 ;

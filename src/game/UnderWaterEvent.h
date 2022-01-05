@@ -6,12 +6,15 @@
 class UnderWaterEvent : public urchin::Observer {
     public:
         explicit UnderWaterEvent(urchin::SoundEnvironment&);
+        ~UnderWaterEvent();
 
         void notify(urchin::Observable*, int) override;
 
         bool isUnderWater() const;
 
     private:
+        urchin::SoundEnvironment& soundEnvironment;
+
         bool bIsUnderWater;
-        std::unique_ptr<urchin::ManualSound> underWaterSound;
+        std::shared_ptr<urchin::SoundComponent> underWaterSound;
 };
