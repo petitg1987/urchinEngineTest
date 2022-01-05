@@ -13,5 +13,5 @@ class UnderWaterEvent : public urchin::Observer {
 
     private:
         bool bIsUnderWater;
-        std::shared_ptr<urchin::ManualTrigger> underWaterSoundTrigger;
+        std::shared_ptr<urchin::ManualSound> underWaterSound;
 };
