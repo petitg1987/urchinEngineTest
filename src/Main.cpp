@@ -90,9 +90,11 @@ std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool is
 }
 
 void Main::glfwErrorCallback(int error, const char* description) {
-    if (error == GLFW_INVALID_VALUE && strcmp(description, "Invalid scancode") == 0) {
-        return; //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
-    } else if (error == GLFW_PLATFORM_ERROR && std::string(description).find("Iconification") != std::string::npos) {
+    std::string errorDescription = (description != nullptr) ? std::string(description) : "";
+    if (error == GLFW_INVALID_VALUE && errorDescription.find("Invalid scancode") != std::string::npos) {
+        //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
+        return; //full message: "Invalid scancode 0"
+    } else if (error == GLFW_PLATFORM_ERROR && errorDescription.find("Iconification") != std::string::npos) {
         Logger::instance().logInfo("Window iconification GLFW error ignored: " + std::string(description));
         return; //full message: "X11: Iconification of full screen windows requires a WM that supports EWMH full screen"
     }
