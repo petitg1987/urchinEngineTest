@@ -34,6 +34,7 @@ class WindowController {
         void setMouseCursorVisible(bool);
         bool isDebugModeOn() const;
         void moveMouse(double, double) const;
+        urchin::Point2<double> getMousePosition() const;
 
         void cleanEvents();
         bool isEventCallbackActive() const;

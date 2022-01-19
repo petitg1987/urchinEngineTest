@@ -4,6 +4,7 @@
 #include <cassert>
 
 #include <WindowController.h>
+using namespace urchin;
 
 GlfwSurfaceCreator::GlfwSurfaceCreator(GLFWwindow* window) :
         window(window) {
@@ -74,6 +75,14 @@ bool WindowController::isDebugModeOn() const {
 void WindowController::moveMouse(double mouseX, double mouseY) const {
     assert(isDebugModeOn());
     glfwSetCursorPos(window, mouseX, mouseY);
+}
+
+Point2<double> WindowController::getMousePosition() const {
+    assert(isDebugModeOn());
+    double mouseX = 0.0;
+    double mouseY = 0.0;
+    glfwGetCursorPos(window, &mouseX, &mouseY);
+    return Point2<double>(mouseX, mouseY);
 }
 
 void WindowController::cleanEvents() {
