@@ -197,9 +197,9 @@ void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
             if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
             }
-            main->keyEvents.emplace_back(key, true /* pressed */);
+            main->keyEvents.emplace_back(KeyEvent{key, true /* pressed */, action == GLFW_REPEAT});
         } else if (action == GLFW_RELEASE) {
-            main->keyEvents.emplace_back(key, false /* released */);
+            main->keyEvents.emplace_back(KeyEvent{key, false /* released */, false});
         }
     }
 }
@@ -247,11 +247,11 @@ void Main::handleInputEvents() {
     }
     charEvents.clear();
 
-    for (auto [key, isKeyPressed] : keyEvents) {
-        if (isKeyPressed) {
-            onKeyPressed(key);
+    for (const KeyEvent& keyEvent : keyEvents) {
+        if (keyEvent.isKeyPressed) {
+            onKeyPressed(keyEvent.key);
         } else {
-            onKeyReleased(key);
+            onKeyReleased(keyEvent.key);
         }
     }
     keyEvents.clear();
@@ -288,13 +288,13 @@ void Main::onKeyReleased(int key) {
     //engine
     if (propagateReleaseKeyEvent) {
         if (key == GLFW_KEY_LEFT) {
-            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::LEFT_ARROW);
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
-            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::RIGHT_ARROW);
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::RIGHT_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
-            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::BACKSPACE);
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
-            propagatePressKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::DELETE_KEY);
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::DELETE_KEY);
         }
     }
 

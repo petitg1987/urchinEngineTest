@@ -56,5 +56,10 @@ class Main {
         bool propagateReleaseKeyEvent;
         std::map<int, urchin::Control::Key> inputKeyMap;
         std::vector<unsigned int> charEvents;
-        std::vector<std::pair<int, bool>> keyEvents;
+        struct KeyEvent {
+            int key;
+            bool isKeyPressed;
+            bool isRepeatPress;
+        };
+        std::vector<KeyEvent> keyEvents;
 };
