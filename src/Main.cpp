@@ -3,9 +3,9 @@
 #include <Main.h>
 using namespace urchin;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     Main main;
-    main.execute(argc, argv);
+    main.execute(std::span<char*>{argv, (std::size_t)argc});
 
     return 0;
 }
@@ -16,7 +16,7 @@ Main::Main() :
     crashReporter = std::make_shared<CrashReporter>();
 }
 
-void Main::execute(int argc, char *argv[]) {
+void Main::execute(std::span<char*> args) {
     initializeInputKeyMap();
 
     Logger::setupCustomInstance(std::make_unique<FileLogger>("urchinEngineTest.log"));
@@ -25,8 +25,8 @@ void Main::execute(int argc, char *argv[]) {
     Logger::instance().logInfo("Application started");
     GLFWwindow* window = nullptr;
 
-    bool isWindowed = argumentsContains("--windowed", argc, argv);
-    bool isDebugModeOn = argumentsContains("--debug", argc, argv);
+    bool isWindowed = argumentsContains("--windowed", args);
+    bool isDebugModeOn = argumentsContains("--debug", args);
 
     try {
         glfwSetErrorCallback(glfwErrorCallback);
@@ -35,7 +35,7 @@ void Main::execute(int argc, char *argv[]) {
         }
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-        FileSystem::instance().setupResourcesDirectory(retrieveResourcesDirectory(argv));
+        FileSystem::instance().setupResourcesDirectory(retrieveResourcesDirectory(args[0]));
         ConfigService::instance().loadProperties("engine.properties");
         UISkinService::instance().setSkin("ui/skinDefinition.uda");
 
@@ -160,8 +160,8 @@ void Main::initializeInputKeyMap() {
     inputKeyMap[GLFW_MOUSE_BUTTON_8] = Control::Key::MOUSE_F5;
 }
 
-std::string Main::retrieveResourcesDirectory(char *argv[]) {
-    return FileUtil::getDirectory(std::string(argv[0])) + "resources/";
+std::string Main::retrieveResourcesDirectory(const char* firstArg) {
+    return FileUtil::getDirectory(std::string(firstArg)) + "resources/";
 }
 
 GLFWwindow* Main::createWindow(bool isWindowed) {
@@ -387,13 +387,8 @@ Control::Key Main::toInputKey(int key) {
     return Control::Key::UNKNOWN_KEY;
 }
 
-bool Main::argumentsContains(const std::string& argName, int argc, char *argv[]) const {
-    for (int i = 1; i < argc;++i) {
-        if (std::string(argv[i]).find(argName) != std::string::npos) {
-            return true;
-        }
-    }
-    return false;
+bool Main::argumentsContains(const std::string& argName, std::span<char*> args) const {
+    return std::ranges::any_of(args, [&](const char* arg) { return std::string(arg).find(argName) != std::string::npos; });
 }
 
 void Main::clearResources(GLFWwindow*& window) {

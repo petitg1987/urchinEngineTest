@@ -15,14 +15,14 @@ int main(int, char *[]);
 class Main {
     public:
         Main();
-        void execute(int, char *[]);
+        void execute(std::span<char*>);
 
     private:
         std::unique_ptr<MainContext> createMainContext(GLFWwindow*, bool) const;
         static void glfwErrorCallback(int, const char*);
         void initializeInputKeyMap();
 
-        static std::string retrieveResourcesDirectory(char *[]);
+        static std::string retrieveResourcesDirectory(const char*);
 
         static GLFWwindow *createWindow(bool);
 
@@ -44,7 +44,7 @@ class Main {
         void onScroll(double) const;
         urchin::Control::Key toInputKey(int);
 
-        bool argumentsContains(const std::string&, int, char *[]) const;
+        bool argumentsContains(const std::string&, std::span<char*>) const;
 
         void clearResources(GLFWwindow*&);
 
