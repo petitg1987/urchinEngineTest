@@ -61,7 +61,7 @@ void Game::initialize() {
     //load map
     map = std::make_unique<Map>(*gameRenderer3d, *physicsWorld, context.getSoundEnvironment(), *aiEnvironment);
     LoadMapCallback nullLoadMapCallback;
-    MapSaveService().loadMap("map.uda", nullLoadMapCallback, map);
+    MapSaveService().loadMap("map.uda", nullLoadMapCallback, *map);
     map->getObjectEntity("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     map->getObjectEntity("characterAnimate").getModel()->animate("move", true);
 
