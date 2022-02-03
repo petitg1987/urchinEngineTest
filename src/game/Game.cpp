@@ -63,7 +63,7 @@ void Game::initialize() {
     LoadMapCallback nullLoadMapCallback;
     MapSaveService().loadMap("map.uda", nullLoadMapCallback, *map);
     map->getObjectEntity("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
-    map->getObjectEntity("characterAnimate").getModel()->animate("move", true);
+    map->getObjectEntity("characterAnimate").getModel()->animate("move", AnimRepeat::INFINITE, AnimStart::AT_CURRENT_FRAME);
 
     //UI
     gameUIRenderer = &context.getScene().newUIRenderer(false);
