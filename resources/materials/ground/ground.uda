@@ -1,7 +1,6 @@
 repeatTextures: "true"
 uvScale:
-  uScale: "MESH_SCALE_X"
-  vScale: "MESH_SCALE_Y"
+  scaleType: "SCALE_ON_XY_FACES"
 diffuse:
   texture: "materials/ground/diffuse.png"
 normal:
