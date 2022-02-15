@@ -161,7 +161,7 @@ void Main::initializeInputKeyMap() {
 }
 
 std::string Main::retrieveResourcesDirectory(const char* firstArg) {
-    return std::string(FileUtil::getDirectory(std::string(firstArg))) + "resources/";
+    return FileUtil::getDirectory(std::string(firstArg)) + "resources/";
 }
 
 GLFWwindow* Main::createWindow(bool isWindowed) {
