@@ -6,7 +6,7 @@
 class UnderWaterEvent : public urchin::Observer {
     public:
         explicit UnderWaterEvent(urchin::SoundEnvironment&);
-        ~UnderWaterEvent();
+        ~UnderWaterEvent() override;
 
         void notify(urchin::Observable*, int) override;
 

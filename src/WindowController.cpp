@@ -24,7 +24,8 @@ GlfwFramebufferSizeRetriever::GlfwFramebufferSizeRetriever(GLFWwindow* window) :
 }
 
 void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& widthInPixel, unsigned int& heightInPixel) const {
-    int intWidthInPixel, intHeightInPixel;
+    int intWidthInPixel;
+    int intHeightInPixel;
     glfwGetFramebufferSize(window, &intWidthInPixel, &intHeightInPixel); //don't use glfwGetWindowSize which doesn't return size in pixel
 
     //window is probably minimized: wait for a valid width/height size

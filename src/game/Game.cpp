@@ -99,8 +99,8 @@ void Game::initialize() {
     Slider::create(mySecondWindow.get(), Position(10.0f, 64.0f, LengthType::PIXEL), Size(70.0f, 16.0, LengthType::PIXEL), "defaultSkin", sliderValues);
 
     //UI 3d
-    Transform<float> transform(Point3<float>(5.0f, -1.0f, 0.0f), Quaternion<float>::rotationY(-0.80f));
-    UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform, Point2<unsigned int>(1000, 666), Point2<float>(1.5f, 1.0f), 0.4f);
+    Transform transform(Point3<float>(5.0f, -1.0f, 0.0f), Quaternion<float>::rotationY(-0.80f));
+    UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform, Point2<int>(1000, 666), Point2<float>(1.5f, 1.0f), 0.4f);
     auto my3dWindow = Window::create(nullptr, Position(0.0f, 0.0f, LengthType::SCREEN_PERCENT), Size(100, 100, LengthType::SCREEN_PERCENT), "defaultSkin", "");
     Text::create(my3dWindow.get(), Position(10.0f, 4.0f, LengthType::SCREEN_PERCENT), "default3DSkin", "UI 3d test");
     CheckBox::create(my3dWindow.get(), Position(10.0f, 20.0f, LengthType::SCREEN_PERCENT), Size(5.32f, 8.0f, LengthType::SCREEN_PERCENT), "defaultSkin");
@@ -217,7 +217,7 @@ void Game::onKeyPressed(Control::Key key) {
     if (key == Control::Key::F) {
         auto seed = static_cast<std::default_random_engine::result_type>(std::chrono::system_clock::now().time_since_epoch().count());
         std::default_random_engine generator(seed);
-        std::uniform_int_distribution<> distribution(0, 10);
+        std::uniform_int_distribution distribution(0, 10);
 
         int xAxisForce = distribution(generator) - 5;
         int zAxisForce = distribution(generator) - 5;
@@ -233,7 +233,7 @@ void Game::onKeyPressed(Control::Key key) {
             physicsWorld->pause();
         }
     } else if (key == Control::Key::G) {
-        Point2<float> screenCenter((float)context.getScene().getSceneWidth() / 2.0f, (float)context.getScene().getSceneHeight() / 2.0f);
+        Point2 screenCenter((float)context.getScene().getSceneWidth() / 2.0f, (float)context.getScene().getSceneHeight() / 2.0f);
         Ray<float> ray = CameraSpaceService(*gameRenderer3d->getCamera()).screenPointToRay(screenCenter, 100.0f);
         std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(ray);
 
@@ -355,7 +355,7 @@ SunLight* Game::getSunLight() {
 void Game::updateCharacterMovement(float dt) const {
     //run/walk
     Vector3<float> viewVector = camera->getView();
-    Vector3<float> forwardDirection(0.0f, 0.0f, 0.0f);
+    Vector3 forwardDirection(0.0f, 0.0f, 0.0f);
     if (upKeyPressed && !downKeyPressed) {
         forwardDirection = viewVector.normalize();
     } else if (downKeyPressed && !upKeyPressed) {
@@ -363,7 +363,7 @@ void Game::updateCharacterMovement(float dt) const {
     }
 
     Vector3<float> lateralVector = viewVector.crossProduct(camera->getUp());
-    Vector3<float> lateralDirection(0.0f, 0.0f, 0.0f);
+    Vector3 lateralDirection(0.0f, 0.0f, 0.0f);
     if (leftKeyPressed && !rightKeyPressed) {
         lateralDirection = -lateralVector.normalize();
     } else if (rightKeyPressed && !leftKeyPressed) {
@@ -396,7 +396,7 @@ RigidBody* Game::getRandomInactiveBody() {
     if (!bodies.empty()) {
         auto seed = static_cast<std::default_random_engine::result_type>(std::chrono::system_clock::now().time_since_epoch().count());
         std::default_random_engine generator(seed);
-        std::uniform_int_distribution<> distribution(0, (int)bodies.size() - 1);
+        std::uniform_int_distribution distribution(0, (int)bodies.size() - 1);
         return bodies[static_cast<std::size_t>(distribution(generator))];
     }
 

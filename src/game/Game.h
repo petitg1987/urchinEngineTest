@@ -58,7 +58,10 @@ class Game {
         std::shared_ptr<urchin::PhysicsCharacter> physicsCharacter;
         urchin::CharacterControllerConfig characterControllerConfig;
         std::unique_ptr<urchin::CharacterController> characterController;
-        bool leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed;
+        bool leftKeyPressed;
+        bool rightKeyPressed;
+        bool upKeyPressed;
+        bool downKeyPressed;
         std::vector<std::shared_ptr<urchin::GeometryModel>> rayModels;
         std::unique_ptr<urchin::CollisionPointDisplayer> collisionPointsDisplayer;
 
