@@ -377,7 +377,7 @@ void Game::updateCharacterMovement(float dt) const {
     }
 
     //orientation
-    characterController->setOrientation(camera->getView());
+    characterController->updateOrientation(camera->getView());
 
     //update
     characterController->update(dt);

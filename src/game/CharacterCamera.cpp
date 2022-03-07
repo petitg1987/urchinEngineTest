@@ -7,7 +7,7 @@ CharacterCamera::CharacterCamera(const WindowController& windowController, float
     useMouseToMoveCamera(true);
 }
 
-void CharacterCamera::updateCameraView(float) {
+void CharacterCamera::refreshCameraView(float) {
     //nothing to do
 }
 

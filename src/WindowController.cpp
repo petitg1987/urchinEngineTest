@@ -65,6 +65,10 @@ void WindowController::setMouseCursorVisible(bool visible) {
     }
 }
 
+bool WindowController::isMouseCursorVisible() const {
+    return glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL;
+}
+
 bool WindowController::isDebugModeOn() const {
     //Manual mouse adjustment (ensure mouse is not going outside the window) is required in debug mode.
     //Indeed, the GLFW native mode to control camera (GLFW_CURSOR_DISABLED) does not display the cursor when a debug breakpoint is caught.
