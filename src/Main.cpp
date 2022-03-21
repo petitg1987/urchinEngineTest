@@ -60,13 +60,13 @@ void Main::execute(std::span<char*> args) {
             context->getScene().display();
         }
 
-        if (Logger::instance().hasFailure()) {
+        if (Logger::instance().hasWarningOrError()) {
             crashReporter->onLogContainFailure();
             clearResources(window);
             _exit(1);
         } else {
             clearResources(window);
-            if (Logger::instance().hasFailure()) {
+            if (Logger::instance().hasWarningOrError()) {
                 _exit(1);
             }
             Logger::instance().purge();
