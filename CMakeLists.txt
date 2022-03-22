@@ -25,11 +25,11 @@ add_subdirectory(../urchinEngine urchinEngine)
 if (WIN32)
     file(REMOVE_RECURSE ${CMAKE_CURRENT_SOURCE_DIR}\\resources\\shaders\\)
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}\\..\\urchinEngine\\3dEngine\\resources\\shaders\\spirv\\ DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders)
-    add_custom_target(syncShaders cd) #ignore
+    add_custom_target(syncShaders ALL cd) #ignore
 else()
     include_directories(BEFORE ${CMAKE_BINARY_DIR}/deps/curl/include)
     link_directories (BEFORE ${CMAKE_BINARY_DIR}/deps/curl/lib)
-    add_custom_target(syncShaders rsync -r ${CMAKE_CURRENT_SOURCE_DIR}/../urchinEngine/3dEngine/resources/shaders/spirv/ ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/)
+    add_custom_target(syncShaders ALL rsync -r ${CMAKE_CURRENT_SOURCE_DIR}/../urchinEngine/3dEngine/resources/shaders/spirv/ ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/)
 endif()
 
 #GLFW
