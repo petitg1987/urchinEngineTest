@@ -44,7 +44,7 @@ if (NOT WIN32)
     set(LINK_OPT -rdynamic) #rdynamic: necessary for SignalHandler to work correctly
 endif()
 
-add_definitions(-ffast-math -Wall -Wextra -Wpedantic -Wconversion -Werror)
+add_definitions(-fno-stack-protector -ffast-math -Wall -Wextra -Wpedantic -Wconversion -Werror)
 include_directories(src)
 
 file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
