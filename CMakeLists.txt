@@ -22,6 +22,7 @@ set(CMAKE_CXX_STANDARD 20)
 #Urchin engine
 include_directories(../urchinEngine/common/src ../urchinEngine/3dEngine/src ../urchinEngine/physicsEngine/src ../urchinEngine/soundEngine/src ../urchinEngine/aiEngine/src ../urchinEngine/aggregation/src)
 add_subdirectory(../urchinEngine urchinEngine)
+list(TRANSFORM URCHIN_HEADERS PREPEND ../urchinEngine/)
 if (WIN32)
     file(REMOVE_RECURSE ${CMAKE_CURRENT_SOURCE_DIR}\\resources\\shaders\\)
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}\\..\\urchinEngine\\3dEngine\\resources\\shaders\\spirv\\ DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders)
@@ -55,10 +56,4 @@ else()
 endif()
 add_dependencies(urchinEngineTest syncShaders)
 target_link_libraries(urchinEngineTest -static-libstdc++ ${LINK_OPT} ${GLFW_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinNetworkEngine urchinAIEngine urchinAggregation)
-target_precompile_headers(urchinEngineTest PRIVATE
-        ../urchinEngine/common/src/UrchinCommon.h
-        ../urchinEngine/3dEngine/src/Urchin3dEngine.h
-        ../urchinEngine/physicsEngine/src/UrchinPhysicsEngine.h
-        ../urchinEngine/soundEngine/src/UrchinSoundEngine.h
-        ../urchinEngine/aiEngine/src/UrchinAIEngine.h
-        ../urchinEngine/aggregation/src/UrchinAggregation.h)
+target_precompile_headers(urchinEngineTest PRIVATE ${URCHIN_HEADERS})
