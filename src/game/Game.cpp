@@ -59,7 +59,7 @@ void Game::initialize() {
     navMeshDisplayer = std::make_unique<NavMeshDisplayer>(*aiEnvironment, *gameRenderer3d);
 
     //load map
-    map = std::make_unique<Map>(*gameRenderer3d, *physicsWorld, context.getSoundEnvironment(), *aiEnvironment);
+    map = std::make_unique<Map>(gameRenderer3d, *physicsWorld, context.getSoundEnvironment(), *aiEnvironment);
     LoadMapCallback nullLoadMapCallback;
     MapSaveService().loadMap("map.uda", nullLoadMapCallback, *map);
     map->getObjectEntity("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim", AnimShadowImpact::ALTER);
