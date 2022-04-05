@@ -42,13 +42,9 @@ Game::~Game() {
 
 void Game::initialize() {
     //3d
-    gameRenderer3d = &context.getScene().newRenderer3d(false);
-    gameRenderer3d->activateAntiAliasing(true);
-    gameRenderer3d->activateAmbientOcclusion(true);
-    gameRenderer3d->activateShadow(true);
-    gameRenderer3d->getLightManager().setGlobalAmbientColor(Point3<float>(0.05f, 0.05f, 0.05f));
     camera = std::make_shared<CharacterCamera>(context.getWindowController(), 90.0f, 0.1f, 300.0f);
-    gameRenderer3d->setCamera(camera);
+    gameRenderer3d = &context.getScene().newRenderer3d(camera, VisualConfig(), false);
+    gameRenderer3d->getLightManager().setGlobalAmbientColor(Point3<float>(0.05f, 0.05f, 0.05f));
 
     //physics
     physicsWorld = std::make_unique<PhysicsWorld>();
@@ -234,7 +230,7 @@ void Game::onKeyPressed(Control::Key key) {
         }
     } else if (key == Control::Key::G) {
         Point2 screenCenter((float)context.getScene().getSceneWidth() / 2.0f, (float)context.getScene().getSceneHeight() / 2.0f);
-        Ray<float> ray = CameraSpaceService(*gameRenderer3d->getCamera()).screenPointToRay(screenCenter, 100.0f);
+        Ray<float> ray = CameraSpaceService(gameRenderer3d->getCamera()).screenPointToRay(screenCenter, 100.0f);
         std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(ray);
 
         deleteGeometryModels(rayModels);
