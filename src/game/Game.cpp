@@ -32,7 +32,7 @@ Game::Game(MainContext& context) :
 }
 
 Game::~Game() {
-    uninitializeCharacter();
+    characterController.reset(nullptr);
     uninitializeWaterEvent();
     uninitializeNPC();
 
@@ -124,16 +124,11 @@ void Game::initializeCharacter() {
     float characterSize = 1.80f;
     auto characterShape = std::make_unique<const CollisionCapsuleShape>(characterRadius, characterSize - (2.0f * characterRadius), CapsuleShape<float>::CAPSULE_Y);
 
-    physicsCharacter = std::make_shared<PhysicsCharacter>("playerCharacter", 80.0f, std::move(characterShape), transform);
+    auto physicsCharacter = std::make_unique<PhysicsCharacter>("playerCharacter", 80.0f, std::move(characterShape), transform);
     characterControllerConfig = CharacterControllerConfig();
-    characterController = std::make_unique<CharacterController>(physicsCharacter, characterControllerConfig, *physicsWorld);
+    characterController = std::make_unique<CharacterController>(std::move(physicsCharacter), characterControllerConfig, *physicsWorld);
 
     camera->rotate(transform.getOrientation());
-}
-
-void Game::uninitializeCharacter() {
-    characterController.reset(nullptr);
-    physicsCharacter = std::shared_ptr<PhysicsCharacter>(nullptr);
 }
 
 void Game::initializeWaterEvent() {
@@ -309,7 +304,7 @@ void Game::refresh() {
     //character
     updateCharacterMovement(dt);
     float characterCenterToEyeDistance = 0.75f;
-    camera->moveTo(physicsCharacter->getTransform().getPosition() + Point3<float>(0.0f, characterCenterToEyeDistance, 0.0f));
+    camera->moveTo(characterController->getPhysicsCharacter().getTransform().getPosition() + Point3<float>(0.0f, characterCenterToEyeDistance, 0.0f));
 
     //path
     if (DEBUG_DISPLAY_PATH && npcNavigation->getPathRequest() && npcNavigation->getPathRequest()->isPathReady()) {

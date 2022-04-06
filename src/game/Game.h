@@ -29,7 +29,6 @@ class Game {
         void initialize();
 
         void initializeCharacter();
-        void uninitializeCharacter();
 
         void initializeWaterEvent();
         void uninitializeWaterEvent();
@@ -55,7 +54,6 @@ class Game {
 
         //physics
         std::unique_ptr<urchin::PhysicsWorld> physicsWorld;
-        std::shared_ptr<urchin::PhysicsCharacter> physicsCharacter;
         urchin::CharacterControllerConfig characterControllerConfig;
         std::unique_ptr<urchin::CharacterController> characterController;
         bool leftKeyPressed;
