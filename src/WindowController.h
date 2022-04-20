@@ -33,7 +33,7 @@ class WindowController {
 
         void setMouseCursorVisible(bool);
         bool isMouseCursorVisible() const;
-        bool isDebugModeOn() const;
+        bool isDevModeOn() const;
         void moveMouse(double, double) const;
         urchin::Point2<double> getMousePosition() const;
 
@@ -46,7 +46,7 @@ class WindowController {
 
     private:
         GLFWwindow* window;
-        bool debugModeOn;
+        bool devModeOn;
         bool eventsCallbackActive;
 
 };

@@ -14,7 +14,7 @@ void CharacterCamera::refreshCameraView(float) {
 bool CharacterCamera::onMouseMove(double mouseX, double mouseY) {
     bool propagateEvent = Camera::onMouseMove(mouseX, mouseY);
 
-    if (windowController.isDebugModeOn() && isUseMouseToMoveCamera()) {
+    if (windowController.isDevModeOn() && isUseMouseToMoveCamera()) {
         windowController.moveMouse((double)getSceneWidth() / 2.0, (double)getSceneHeight() / 2.0);
 
         Point2<double> mousePosition = windowController.getMousePosition(); //mouse position previously set could differ from the one retrieved due to values with decimal

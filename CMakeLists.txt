@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 project(urchinEngineTest)
 
+if (CMAKE_BUILD_TYPE MATCHES "Debug")
+    add_definitions(-DAPP_DEBUG)
+endif()
+
 if(USE_O3 MATCHES "true")
     set(CMAKE_CXX_FLAGS "-O3")
 elseif(USE_O2 MATCHES "true")

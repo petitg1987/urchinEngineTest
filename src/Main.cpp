@@ -26,7 +26,7 @@ void Main::execute(std::span<char*> args) {
     GLFWwindow* window = nullptr;
 
     bool isWindowed = argumentsContains("--windowed", args);
-    bool isDebugModeOn = argumentsContains("--debug", args);
+    bool isDevModeOn = argumentsContains("--dev", args);
 
     try {
         glfwSetErrorCallback(glfwErrorCallback);
@@ -49,7 +49,7 @@ void Main::execute(std::span<char*> args) {
         glfwSetScrollCallback(window, scrollCallback);
         glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
-        context = createMainContext(window, isDebugModeOn);
+        context = createMainContext(window, isDevModeOn);
         game = std::make_unique<Game>(*context);
         context->getWindowController().cleanEvents(); //ignore events occurred during initialization phase
 
@@ -78,8 +78,8 @@ void Main::execute(std::span<char*> args) {
     }
 }
 
-std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool isDebugModeOn) const {
-    auto windowController = std::make_unique<WindowController>(window, isDebugModeOn);
+std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool isDevModeOn) const {
+    auto windowController = std::make_unique<WindowController>(window, isDevModeOn);
 
     auto scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), windowController->newSurfaceCreator(), windowController->newFramebufferSizeRetriever());
     scene->updateVerticalSync(false);

@@ -1,4 +1,4 @@
-#define GLFW_INCLUDE_VULKAN
+#include <vulkan/vulkan.h>
 #include <GLFW/glfw3.h>
 #include <stdexcept>
 #include <cassert>
@@ -38,9 +38,9 @@ void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& width
     heightInPixel = (unsigned int)intHeightInPixel;
 }
 
-WindowController::WindowController(GLFWwindow* window, bool isDebugModeOn) :
+WindowController::WindowController(GLFWwindow* window, bool devModeOn) :
         window(window),
-        debugModeOn(isDebugModeOn),
+        devModeOn(devModeOn),
         eventsCallbackActive(true) {
 
 }
@@ -48,7 +48,7 @@ WindowController::WindowController(GLFWwindow* window, bool isDebugModeOn) :
 void WindowController::setMouseCursorVisible(bool visible) {
     int cursorMode = GLFW_CURSOR_NORMAL;
     if (!visible) {
-        if (isDebugModeOn()) {
+        if (isDevModeOn()) {
             cursorMode = GLFW_CURSOR_HIDDEN;
         } else {
             cursorMode = GLFW_CURSOR_DISABLED;
@@ -69,24 +69,20 @@ bool WindowController::isMouseCursorVisible() const {
     return glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL;
 }
 
-bool WindowController::isDebugModeOn() const {
-    //Manual mouse adjustment (ensure mouse is not going outside the window) is required in debug mode.
-    //Indeed, the GLFW native mode to control camera (GLFW_CURSOR_DISABLED) does not display the cursor when a debug breakpoint is caught.
-    //Therefore, in debug mode, we hide the cursor (GLFW_CURSOR_HIDDEN) which automatically reappears when a debug breakpoint is caught.
-    //However, this debug method can not be used in production because it is not behaves the same way on different computers.
-    return debugModeOn;
+bool WindowController::isDevModeOn() const {
+    return devModeOn;
 }
 
 void WindowController::moveMouse(double mouseX, double mouseY) const {
     #ifdef APP_DEBUG
-        assert(isDebugModeOn() || glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL);
+        assert(isDevModeOn() || glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL);
     #endif
     glfwSetCursorPos(window, mouseX, mouseY);
 }
 
 Point2<double> WindowController::getMousePosition() const {
     #ifdef APP_DEBUG
-        assert(isDebugModeOn() || glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL);
+        assert(isDevModeOn() || glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL);
     #endif
     double mouseX = 0.0;
     double mouseY = 0.0;
