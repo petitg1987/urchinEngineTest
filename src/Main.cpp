@@ -60,7 +60,7 @@ void Main::execute(std::span<char*> args) {
             context->getScene().display();
         }
 
-        if (Logger::instance().hasWarningOrError()) {
+        if ( (isDevModeOn && Logger::instance().hasWarningOrError()) || (!isDevModeOn && Logger::instance().hasError()) ) {
             crashReporter->onLogContainFailure();
             clearResources(window);
             _exit(1);
