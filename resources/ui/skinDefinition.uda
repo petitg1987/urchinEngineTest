@@ -55,7 +55,7 @@ textBox (skin=defaultSkin):
     part (zone=bottom): "2"
     part (zone=left): "3"
     part (zone=right): "2"
-  textSkin: defaultSkin
+  textSkin: "defaultSkin"
 
 sequence (skin=defaultSkin):
   buttonsTextSkin: "defaultSkin"
