@@ -473,11 +473,11 @@ scene:
     light (name=omniLight;type=OMNIDIRECTIONAL):
       position: "4.400000 1.100000 2.300000"
       exponentialAttenuation: "0.250000"
-      ambientColor: "0.500000 0.000000 0.000000"
+      lightColor: "0.500000 0.000000 0.000000"
       produceShadow: "false"
     light (name=sunLight;type=SUN):
       direction: "-8.000000 -4.000000 -2.000000"
-      ambientColor: "0.800000 0.400000 0.400000"
+      lightColor: "0.800000 0.400000 0.400000"
       produceShadow: "true"
   terrains:
     terrain (name=terrain):
