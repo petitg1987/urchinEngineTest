@@ -1,5 +1,5 @@
 repeatTextures: "false"
-diffuse:
-  texture: "materials/sphere/diffuse.png"
+albedo:
+  texture: "materials/sphere/albedo.png"
 emissiveFactor: "2.5"
 ambientFactor: "0.4"

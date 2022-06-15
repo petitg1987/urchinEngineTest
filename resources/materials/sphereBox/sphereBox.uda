@@ -1,4 +1,4 @@
 repeatTextures: "false"
-diffuse:
-  texture: "materials/sphereBox/diffuse.png"
+albedo:
+  texture: "materials/sphereBox/albedo.png"
 ambientFactor: "0.4"

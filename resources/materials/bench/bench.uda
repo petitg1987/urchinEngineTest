@@ -1,4 +1,4 @@
 repeatTextures: "false"
-diffuse:
-  texture: "materials/bench/diffuse.png"
+albedo:
+  texture: "materials/bench/albedo.png"
 ambientFactor: "0.4"

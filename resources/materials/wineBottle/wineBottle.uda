@@ -1,4 +1,4 @@
 repeatTextures: "true"
-diffuse:
-  texture: "materials/wineBottle/diffuse.tga"
+albedo:
+  texture: "materials/wineBottle/albedo.tga"
 ambientFactor: "0.4"

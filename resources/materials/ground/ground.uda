@@ -1,8 +1,8 @@
 repeatTextures: "true"
 uvScale:
   scaleType: "SCALE_ON_XY_FACES"
-diffuse:
-  texture: "materials/ground/diffuse.png"
+albedo:
+  texture: "materials/ground/albedo.png"
 normal:
   texture: "materials/ground/normal.png"
 ambientFactor: "0.4"

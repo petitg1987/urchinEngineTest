@@ -1,4 +1,4 @@
 repeatTextures: "false"
-diffuse:
-  texture: "materials/characterAnimate/diffuse.tga"
+albedo:
+  texture: "materials/characterAnimate/albedo.tga"
 ambientFactor: "0.4"
