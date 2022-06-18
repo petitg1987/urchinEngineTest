@@ -31,6 +31,10 @@ class WindowController {
     public:
         WindowController(GLFWwindow *, bool);
 
+        static urchin::Point2<int> optimumWindowSize();
+
+        void updateWindowedMode(bool);
+
         void setMouseCursorVisible(bool);
         bool isMouseCursorVisible() const;
         bool isDevModeOn() const;

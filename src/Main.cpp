@@ -3,6 +3,9 @@
 #include <Main.h>
 using namespace urchin;
 
+//static
+bool Main::altLeftKeyPressed = false;
+
 int main(int argc, char* argv[]) {
     Main main;
     main.execute(std::span<char*>{argv, (std::size_t)argc});
@@ -169,7 +172,8 @@ GLFWwindow* Main::createWindow(bool isWindowed) {
     const char* windowTitle = "Urchin Engine Test";
 
     if (isWindowed) {
-        window = glfwCreateWindow(2560, 1440, windowTitle, nullptr, nullptr);
+        Point2<int> optimumWindowSize = WindowController::optimumWindowSize();
+        window = glfwCreateWindow(optimumWindowSize.X, optimumWindowSize.Y, windowTitle, nullptr, nullptr);
     } else {
         GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
@@ -193,6 +197,23 @@ void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
 void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
     if (main && main->context->getWindowController().isEventCallbackActive()) {
+
+        //handle Alt+Enter to switch between windowed/fullscreen mode
+        if (action == GLFW_PRESS) {
+            if (key == GLFW_KEY_LEFT_ALT) {
+                altLeftKeyPressed = true;
+            } else if (altLeftKeyPressed && key == GLFW_KEY_ENTER) {
+                bool isFullScreen = glfwGetWindowMonitor(window) != nullptr;
+                main->context->getWindowController().updateWindowedMode(isFullScreen);
+                return;
+            }
+        } else if (action == GLFW_RELEASE) {
+            if (key == GLFW_KEY_LEFT_ALT) {
+                altLeftKeyPressed = false;
+            }
+        }
+
+        //handle pressed/released keys
         if (action == GLFW_PRESS || action == GLFW_REPEAT) {
             if (key == GLFW_KEY_ESCAPE) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);

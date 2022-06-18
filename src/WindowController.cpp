@@ -45,6 +45,26 @@ WindowController::WindowController(GLFWwindow* window, bool devModeOn) :
 
 }
 
+Point2<int> WindowController::optimumWindowSize() {
+    return Point2<int>(2560, 1440);
+    //return Point2<int>(3440, 1440); //for wide screen test
+}
+
+void WindowController::updateWindowedMode(bool windowedModeEnabled) {
+    GLFWmonitor* monitor = glfwGetWindowMonitor(window);
+    bool isFullScreen = monitor != nullptr;
+    if (isFullScreen && windowedModeEnabled) {
+        Point2<int> optimumWindowSize = WindowController::optimumWindowSize();
+        glfwSetWindowMonitor(window, nullptr, 100, 100 /* do not put 0 because the title bar will be outside the screen on Windows */, optimumWindowSize.X, optimumWindowSize.Y, GLFW_DONT_CARE);
+        Logger::instance().logInfo("Switched to windowed mode");
+    } else if (!isFullScreen && !windowedModeEnabled) {
+        monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+        Logger::instance().logInfo("Switched to fullscreen mode");
+    }
+}
+
 void WindowController::setMouseCursorVisible(bool visible) {
     int cursorMode = GLFW_CURSOR_NORMAL;
     if (!visible) {

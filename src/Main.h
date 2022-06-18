@@ -62,4 +62,5 @@ class Main {
             bool isRepeatPress;
         };
         std::vector<KeyEvent> keyEvents;
+        static bool altLeftKeyPressed;
 };
