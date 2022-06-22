@@ -52,12 +52,15 @@ Point2<int> WindowController::optimumWindowSize() {
 
 void WindowController::updateWindowedMode(bool windowedModeEnabled) {
     bool isFullScreen = glfwGetWindowMonitor(window) != nullptr;
+    GLFWmonitor* monitor = getWindowMonitor();
     if (isFullScreen && windowedModeEnabled) {
+        int monitorX = 0;
+        int monitorY = 0;
+        glfwGetMonitorPos(monitor, &monitorX, &monitorY);
         Point2<int> optimumWindowSize = WindowController::optimumWindowSize();
-        glfwSetWindowMonitor(window, nullptr, 100, 100 /* do not put 0 because the title bar will be outside the screen on Windows */, optimumWindowSize.X, optimumWindowSize.Y, GLFW_DONT_CARE);
+        glfwSetWindowMonitor(window, nullptr, monitorX + 100, monitorY + 100 /* do not put 0 because the title bar will be outside the screen on Windows */, optimumWindowSize.X, optimumWindowSize.Y, GLFW_DONT_CARE);
         Logger::instance().logInfo("Switched to windowed mode");
     } else if (!isFullScreen && !windowedModeEnabled) {
-        GLFWmonitor* monitor = getWindowMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
         Logger::instance().logInfo("Switched to fullscreen mode");
