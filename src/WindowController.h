@@ -7,6 +7,7 @@
 #include <api/setup/spi/FramebufferSizeRetriever.h>
 
 class GLFWwindow;
+class GLFWmonitor;
 
 struct ExtensionList {
     uint32_t extensionCount = 0;
@@ -49,6 +50,8 @@ class WindowController {
         std::unique_ptr<GlfwFramebufferSizeRetriever> newFramebufferSizeRetriever() const;
 
     private:
+        GLFWmonitor* getWindowMonitor() const;
+
         GLFWwindow* window;
         bool devModeOn;
         bool eventsCallbackActive;

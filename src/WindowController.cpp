@@ -51,14 +51,13 @@ Point2<int> WindowController::optimumWindowSize() {
 }
 
 void WindowController::updateWindowedMode(bool windowedModeEnabled) {
-    GLFWmonitor* monitor = glfwGetWindowMonitor(window);
-    bool isFullScreen = monitor != nullptr;
+    bool isFullScreen = glfwGetWindowMonitor(window) != nullptr;
     if (isFullScreen && windowedModeEnabled) {
         Point2<int> optimumWindowSize = WindowController::optimumWindowSize();
         glfwSetWindowMonitor(window, nullptr, 100, 100 /* do not put 0 because the title bar will be outside the screen on Windows */, optimumWindowSize.X, optimumWindowSize.Y, GLFW_DONT_CARE);
         Logger::instance().logInfo("Switched to windowed mode");
     } else if (!isFullScreen && !windowedModeEnabled) {
-        monitor = glfwGetPrimaryMonitor();
+        GLFWmonitor* monitor = getWindowMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
         Logger::instance().logInfo("Switched to fullscreen mode");
@@ -134,3 +133,44 @@ std::unique_ptr<GlfwFramebufferSizeRetriever> WindowController::newFramebufferSi
     return std::make_unique<GlfwFramebufferSizeRetriever>(window);
 }
 
+/**
+ * Return the current monitor where is the window.
+ * Note: glfwGetWindowMonitor(), can not be used for two reasons:
+ *      1. Method is not working correctly: https://github.com/glfw/glfw/issues/2137
+ *      2. Method returns nullptr if window is not in fullscreen mode
+ */
+GLFWmonitor* WindowController::getWindowMonitor() const {
+    int bestOverlap = 0;
+    GLFWmonitor *bestMonitor = glfwGetPrimaryMonitor();
+
+    int windowPosX = 0;
+    int windowPosY = 0;
+    glfwGetWindowPos(window, &windowPosX, &windowPosY);
+    int windowSizeX = 0;
+    int windowSizeY = 0;
+    glfwGetWindowSize(window, &windowSizeX, &windowSizeY);
+
+    int numMonitor = 0;
+    GLFWmonitor** monitors = glfwGetMonitors(&numMonitor);
+
+    for (int monitorIndex = 0; monitorIndex < numMonitor; ++monitorIndex) {
+        const GLFWvidmode* mode = glfwGetVideoMode(monitors[monitorIndex]);
+        int modeWidth = mode->width;
+        int modeHeight = mode->height;
+
+        int monitorX = 0;
+        int monitorY = 0;
+        glfwGetMonitorPos(monitors[monitorIndex], &monitorX, &monitorY);
+
+        int overlap =
+                std::max(0, std::min(windowPosX + windowSizeX, monitorX + modeWidth) - std::max(windowPosX, monitorX)) *
+                std::max(0, std::min(windowPosY + windowSizeY, monitorY + modeHeight) - std::max(windowPosY, monitorY));
+
+        if (bestOverlap < overlap) {
+            bestOverlap = overlap;
+            bestMonitor = monitors[monitorIndex];
+        }
+    }
+
+    return bestMonitor;
+}
