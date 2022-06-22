@@ -166,7 +166,7 @@ GLFWmonitor* WindowController::getWindowMonitor() const {
                 std::max(0, std::min(windowPosX + windowSizeX, monitorX + modeWidth) - std::max(windowPosX, monitorX)) *
                 std::max(0, std::min(windowPosY + windowSizeY, monitorY + modeHeight) - std::max(windowPosY, monitorY));
 
-        if (bestOverlap < overlap) {
+        if (overlap > bestOverlap) {
             bestOverlap = overlap;
             bestMonitor = monitors[monitorIndex];
         }
