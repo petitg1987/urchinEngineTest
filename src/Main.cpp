@@ -292,10 +292,18 @@ void Main::onKeyPressed(int key) {
             propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
             propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::RIGHT_ARROW);
+        } else if (key == GLFW_KEY_UP) {
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::UP_ARROW);
+        } else if (key == GLFW_KEY_DOWN) {
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::DOWN_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
             propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
             propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::DELETE_KEY);
+        } else if (key == GLFW_KEY_ENTER) {
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::ENTER);
+        } else if (key == GLFW_KEY_KP_ENTER) {
+            propagatePressKeyEvent = context->getScene().onKeyPress((unsigned int)InputDeviceKey::NUM_PAD_ENTER);
         }
     }
 
@@ -312,10 +320,18 @@ void Main::onKeyReleased(int key) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::LEFT_ARROW);
         } else if (key == GLFW_KEY_RIGHT) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::RIGHT_ARROW);
+        } else if (key == GLFW_KEY_UP) {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::UP_ARROW);
+        } else if (key == GLFW_KEY_DOWN) {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::DOWN_ARROW);
         } else if (key == GLFW_KEY_BACKSPACE) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::BACKSPACE);
         } else if (key == GLFW_KEY_DELETE) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::DELETE_KEY);
+        } else if (key == GLFW_KEY_ENTER) {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::ENTER);
+        } else if (key == GLFW_KEY_KP_ENTER) {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease((unsigned int)InputDeviceKey::NUM_PAD_ENTER);
         }
     }
 
