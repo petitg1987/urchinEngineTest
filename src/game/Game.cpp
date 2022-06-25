@@ -67,7 +67,7 @@ void Game::initialize() {
     fpsText = Text::create(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    auto myFirstWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(350, 605, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+    auto myFirstWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(410, 705, LengthType::PIXEL), "defaultSkin", "window.commands.title");
     gameUIRenderer->addWidget(myFirstWindow);
     Text::create(myFirstWindow.get(), Position(0, 8, LengthType::PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
@@ -82,12 +82,12 @@ void Game::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::create(myFirstWindow.get(), Position(0.0f, 305.0f, LengthType::PIXEL), Size(340.0f, 30.0f, LengthType::PIXEL), "defaultSkin");
-    Textarea::create(myFirstWindow.get(), Position(0.0f, 340.0f, LengthType::PIXEL), Size(340.0f, 180.0f, LengthType::PIXEL), "defaultSkin");
-    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 530.0f, LengthType::PIXEL), Size(340.0f, 35.0f, LengthType::PIXEL), "defaultSkin", "button.close");
+    TextBox::create(myFirstWindow.get(), Position(0.0f, 405.0f, LengthType::PIXEL), Size(340.0f, 35.0f, LengthType::PIXEL), "defaultSkin");
+    Textarea::create(myFirstWindow.get(), Position(0.0f, 450.0f, LengthType::PIXEL), Size(340.0f, 180.0f, LengthType::PIXEL), "defaultSkin");
+    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, LengthType::PIXEL), Size(340.0f, 35.0f, LengthType::PIXEL), "defaultSkin", "button.close");
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myFirstWindow));
 
-    auto mySecondWindow = Window::create(nullptr, Position(420.0f, 30.0f, LengthType::PIXEL), Size(200.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
+    auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, LengthType::PIXEL), Size(250.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(mySecondWindow);
     std::vector<std::string> sequenceValues = {i18n("sequence.one"), i18n("sequence.two"), i18n("sequence.three")};
     Sequence::create(mySecondWindow.get(), Position(10.0f, 4.0f, LengthType::PIXEL), Size(120.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
