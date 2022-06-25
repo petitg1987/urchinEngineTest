@@ -82,9 +82,9 @@ void Game::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::create(myFirstWindow.get(), Position(0.0f, 405.0f, LengthType::PIXEL), Size(340.0f, 35.0f, LengthType::PIXEL), "defaultSkin");
-    Textarea::create(myFirstWindow.get(), Position(0.0f, 450.0f, LengthType::PIXEL), Size(340.0f, 180.0f, LengthType::PIXEL), "defaultSkin");
-    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, LengthType::PIXEL), Size(340.0f, 35.0f, LengthType::PIXEL), "defaultSkin", "button.close");
+    TextBox::create(myFirstWindow.get(), Position(0.0f, 405.0f, LengthType::PIXEL), Size(400.0f, 35.0f, LengthType::PIXEL), "defaultSkin");
+    Textarea::create(myFirstWindow.get(), Position(0.0f, 450.0f, LengthType::PIXEL), Size(400.0f, 180.0f, LengthType::PIXEL), "defaultSkin");
+    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, LengthType::PIXEL), Size(400.0f, 35.0f, LengthType::PIXEL), "defaultSkin", "button.close");
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myFirstWindow));
 
     auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, LengthType::PIXEL), Size(250.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
