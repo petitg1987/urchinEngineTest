@@ -71,6 +71,7 @@ textarea (skin=defaultSkin):
     part (zone=left): "3"
     part (zone=right): "2"
   textSkin: "defaultSkin"
+  scrollbarSkin: "defaultSkin"
 
 sequence (skin=defaultSkin):
   buttonsTextSkin: "defaultSkin"
