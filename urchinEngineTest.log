@@ -4036,3 +4036,712 @@
 [2022-06-27 19:54:52] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
 [2022-06-27 19:54:52] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
 [2022-06-27 19:54:52] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 20:02:07] [thread 0] (II) Application started
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: screen
+[2022-06-27 20:02:07] [thread 0] (II) Create Vulkan instance
+[2022-06-27 20:02:07] [thread 0] (II) Find Vulkan physical device
+[2022-06-27 20:02:07] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x557af43c1fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-27 20:02:07] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x557af43c1fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-27 20:02:07] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x557af43c1fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 20:02:07] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x557af43c1fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 20:02:07] [thread 0] (II) Create Vulkan logical device
+[2022-06-27 20:02:07] [thread 0] (II) Create audio device
+[2022-06-27 20:02:07] [thread 1] (II) Sound stream thread started
+[2022-06-27 20:02:07] [thread 0] (II) Audio device created
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: anti aliasing
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-27 20:02:07] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-27 20:02:07] [thread 0] (II) Load map: map.uda
+[2022-06-27 20:02:08] [thread 0] (II) Create render target: shadow map
+[2022-06-27 20:02:08] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-27 20:02:08] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-27 20:02:08] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 21:03:36] [thread 0] (II) Application started
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: screen
+[2022-06-27 21:03:36] [thread 0] (II) Create Vulkan instance
+[2022-06-27 21:03:36] [thread 0] (II) Find Vulkan physical device
+[2022-06-27 21:03:36] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x56388c371fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-27 21:03:36] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x56388c371fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-27 21:03:36] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x56388c371fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 21:03:36] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x56388c371fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 21:03:36] [thread 0] (II) Create Vulkan logical device
+[2022-06-27 21:03:36] [thread 0] (II) Create audio device
+[2022-06-27 21:03:36] [thread 1] (II) Sound stream thread started
+[2022-06-27 21:03:36] [thread 0] (II) Audio device created
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: anti aliasing
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-27 21:03:36] [thread 0] (II) Load map: map.uda
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: shadow map
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-27 21:03:36] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-27 21:03:37] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 22:03:14] [thread 0] (II) Application started
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: screen
+[2022-06-27 22:03:14] [thread 0] (II) Create Vulkan instance
+[2022-06-27 22:03:14] [thread 0] (II) Find Vulkan physical device
+[2022-06-27 22:03:14] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x563d4a785f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-27 22:03:14] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x563d4a785f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-27 22:03:14] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x563d4a785f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 22:03:14] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x563d4a785f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 22:03:14] [thread 0] (II) Create Vulkan logical device
+[2022-06-27 22:03:14] [thread 0] (II) Create audio device
+[2022-06-27 22:03:14] [thread 1] (II) Sound stream thread started
+[2022-06-27 22:03:14] [thread 0] (II) Audio device created
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: anti aliasing
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-27 22:03:14] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-27 22:03:14] [thread 0] (II) Load map: map.uda
+[2022-06-27 22:03:15] [thread 0] (II) Create render target: shadow map
+[2022-06-27 22:03:15] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-27 22:03:15] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-27 22:03:15] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 23:38:50] [thread 0] (II) Application started
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: screen
+[2022-06-27 23:38:51] [thread 0] (II) Create Vulkan instance
+[2022-06-27 23:38:51] [thread 0] (II) Find Vulkan physical device
+[2022-06-27 23:38:51] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x55af9a113f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-27 23:38:51] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x55af9a113f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-27 23:38:51] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55af9a113f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:38:51] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55af9a113f90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:38:51] [thread 0] (II) Create Vulkan logical device
+[2022-06-27 23:38:51] [thread 0] (II) Create audio device
+[2022-06-27 23:38:51] [thread 1] (II) Sound stream thread started
+[2022-06-27 23:38:51] [thread 0] (II) Audio device created
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: anti aliasing
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-27 23:38:51] [thread 0] (II) Load map: map.uda
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: shadow map
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-27 23:38:51] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-27 23:38:52] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 23:45:06] [thread 0] (II) Application started
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: screen
+[2022-06-27 23:45:06] [thread 0] (II) Create Vulkan instance
+[2022-06-27 23:45:06] [thread 0] (II) Find Vulkan physical device
+[2022-06-27 23:45:06] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x559c4164bf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-27 23:45:06] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x559c4164bf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-27 23:45:06] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x559c4164bf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:45:06] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x559c4164bf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:45:06] [thread 0] (II) Create Vulkan logical device
+[2022-06-27 23:45:06] [thread 0] (II) Create audio device
+[2022-06-27 23:45:06] [thread 1] (II) Sound stream thread started
+[2022-06-27 23:45:06] [thread 0] (II) Audio device created
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: anti aliasing
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-27 23:45:06] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-27 23:45:06] [thread 0] (II) Load map: map.uda
+[2022-06-27 23:45:07] [thread 0] (II) Create render target: shadow map
+[2022-06-27 23:45:07] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-27 23:45:07] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-27 23:45:08] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 23:46:49] [thread 0] (II) Application started
+[2022-06-27 23:46:54] [thread 0] (II) Create render target: screen
+[2022-06-27 23:46:54] [thread 0] (II) Create Vulkan instance
+[2022-06-27 23:46:55] [thread 0] (II) Find Vulkan physical device
+[2022-06-27 23:46:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x5555566bbfa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-27 23:46:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x5555566bbfa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-27 23:46:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbfa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:46:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbfa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:46:55] [thread 0] (II) Create Vulkan logical device
+[2022-06-27 23:46:55] [thread 1] (II) Sound stream thread started
+[2022-06-27 23:46:55] [thread 0] (II) Create audio device
+[2022-06-27 23:46:56] [thread 0] (II) Audio device created
+[2022-06-27 23:46:56] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-27 23:46:56] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-27 23:46:56] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-27 23:46:56] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-27 23:46:56] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: anti aliasing
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-27 23:46:57] [thread 0] (II) Load map: map.uda
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: shadow map
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-27 23:46:57] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-27 23:46:58] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 23:47:18] [thread 0] (II) Application started
+[2022-06-27 23:47:24] [thread 0] (II) Create render target: screen
+[2022-06-27 23:47:24] [thread 0] (II) Create Vulkan instance
+[2022-06-27 23:47:25] [thread 0] (II) Find Vulkan physical device
+[2022-06-27 23:47:25] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x5555566bbfb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-27 23:47:25] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x5555566bbfb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-27 23:47:25] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbfb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:47:25] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbfb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-27 23:47:25] [thread 0] (II) Create Vulkan logical device
+[2022-06-27 23:47:25] [thread 0] (II) Create audio device
+[2022-06-27 23:47:25] [thread 1] (II) Sound stream thread started
+[2022-06-27 23:47:27] [thread 0] (II) Audio device created
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: anti aliasing
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-27 23:47:27] [thread 0] (II) Load map: map.uda
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: shadow map
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-27 23:47:27] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-27 23:47:28] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-27 23:47:34] [thread 0] (WW) Maximum of iteration reached on character update (dt: 5.043202, remaining dt: 4.209869)
+[2022-06-27 23:47:34] [thread 2] (WW) Body npcCharacter is below the limit of -49.083267: 6.85612, -139.341, -5.55857
+[2022-06-27 23:47:34] [thread 2] (WW) Body npcCharacter_ccd is below the limit of -49.083267: 6.85612, -139.341, -5.55857
+[2022-06-27 23:47:34] [thread 0] (WW) Maximum of iteration reached on character update (dt: 5.043202, remaining dt: 4.209869)
+[2022-06-28 00:16:09] [thread 0] (II) Application started
+[2022-06-28 00:16:09] [thread 0] (II) Create render target: screen
+[2022-06-28 00:16:09] [thread 0] (II) Create Vulkan instance
+[2022-06-28 00:16:09] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 00:16:09] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x55fc241e6fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 00:16:09] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x55fc241e6fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 00:16:09] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55fc241e6fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 00:16:09] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55fc241e6fd0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 00:16:09] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 00:16:10] [thread 0] (II) Create audio device
+[2022-06-28 00:16:10] [thread 1] (II) Sound stream thread started
+[2022-06-28 00:16:10] [thread 0] (II) Audio device created
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 00:16:10] [thread 0] (II) Load map: map.uda
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: shadow map
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 00:16:10] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 00:16:11] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 00:16:17] [thread 0] (EE) Exception caught: Base text index 1 does not exist for text: 
+[2022-06-28 00:16:25] [thread 0] (II) Application started
+[2022-06-28 00:16:29] [thread 0] (II) Create render target: screen
+[2022-06-28 00:16:29] [thread 0] (II) Create Vulkan instance
+[2022-06-28 00:16:31] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 00:16:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 00:16:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 00:16:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 00:16:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 00:16:31] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 00:16:31] [thread 0] (II) Create audio device
+[2022-06-28 00:16:31] [thread 1] (II) Sound stream thread started
+[2022-06-28 00:16:32] [thread 0] (II) Audio device created
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 00:16:32] [thread 0] (II) Load map: map.uda
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: shadow map
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 00:16:32] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 00:16:33] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 09:18:25] [thread 0] (II) Application started
+[2022-06-28 09:18:30] [thread 0] (II) Create render target: screen
+[2022-06-28 09:18:30] [thread 0] (II) Create Vulkan instance
+[2022-06-28 09:18:31] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 09:18:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x5555566bbf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 09:18:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x5555566bbf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 09:18:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:18:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbf90, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:18:31] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 09:18:31] [thread 0] (II) Create audio device
+[2022-06-28 09:18:31] [thread 1] (II) Sound stream thread started
+[2022-06-28 09:18:32] [thread 0] (II) Audio device created
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 09:18:32] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 09:18:32] [thread 0] (II) Load map: map.uda
+[2022-06-28 09:18:33] [thread 0] (II) Create render target: shadow map
+[2022-06-28 09:18:33] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 09:18:33] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 09:18:33] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 09:26:35] [thread 0] (II) Application started
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: screen
+[2022-06-28 09:26:35] [thread 0] (II) Create Vulkan instance
+[2022-06-28 09:26:35] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 09:26:35] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x557576eceef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 09:26:35] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x557576eceef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 09:26:35] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x557576eceef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:26:35] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x557576eceef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:26:35] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 09:26:35] [thread 0] (II) Create audio device
+[2022-06-28 09:26:35] [thread 1] (II) Sound stream thread started
+[2022-06-28 09:26:35] [thread 0] (II) Audio device created
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 09:26:35] [thread 0] (II) Load map: map.uda
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: shadow map
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 09:26:35] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 09:26:36] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 09:26:55] [thread 0] (II) Application started
+[2022-06-28 09:26:55] [thread 0] (II) Create render target: screen
+[2022-06-28 09:26:55] [thread 0] (II) Create Vulkan instance
+[2022-06-28 09:26:55] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 09:26:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x563f68590fc0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 09:26:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x563f68590fc0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 09:26:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x563f68590fc0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:26:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x563f68590fc0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:26:55] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 09:26:55] [thread 0] (II) Create audio device
+[2022-06-28 09:26:55] [thread 1] (II) Sound stream thread started
+[2022-06-28 09:26:55] [thread 0] (II) Audio device created
+[2022-06-28 09:26:55] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 09:26:55] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 09:26:56] [thread 0] (II) Load map: map.uda
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: shadow map
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 09:26:56] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 09:26:57] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 09:27:04] [thread 0] (EE) Exception caught: Base text index 24 does not exist for text: ffffffmmmmmmmmmmmmmmmmm
+[2022-06-28 09:27:15] [thread 0] (II) Application started
+[2022-06-28 09:27:19] [thread 0] (II) Create render target: screen
+[2022-06-28 09:27:19] [thread 0] (II) Create Vulkan instance
+[2022-06-28 09:27:20] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 09:27:20] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 09:27:20] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 09:27:20] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:27:20] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:27:20] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 09:27:20] [thread 0] (II) Create audio device
+[2022-06-28 09:27:20] [thread 1] (II) Sound stream thread started
+[2022-06-28 09:27:21] [thread 0] (II) Audio device created
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 09:27:21] [thread 0] (II) Load map: map.uda
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: shadow map
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 09:27:21] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 09:27:22] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 09:46:22] [thread 0] (II) Application started
+[2022-06-28 09:46:27] [thread 0] (II) Create render target: screen
+[2022-06-28 09:46:27] [thread 0] (II) Create Vulkan instance
+[2022-06-28 09:46:28] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 09:46:28] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x5555566bbf10, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 09:46:28] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x5555566bbf10, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 09:46:28] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbf10, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:46:28] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x5555566bbf10, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 09:46:28] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 09:46:28] [thread 0] (II) Create audio device
+[2022-06-28 09:46:28] [thread 1] (II) Sound stream thread started
+[2022-06-28 09:46:29] [thread 0] (II) Audio device created
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 09:46:29] [thread 0] (II) Load map: map.uda
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: shadow map
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 09:46:29] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 09:46:30] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 10:02:46] [thread 0] (II) Application started
+[2022-06-28 10:02:46] [thread 0] (II) Create render target: screen
+[2022-06-28 10:02:46] [thread 0] (II) Create Vulkan instance
+[2022-06-28 10:02:46] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 10:02:46] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x55ca824e0f30, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 10:02:46] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x55ca824e0f30, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 10:02:46] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55ca824e0f30, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:02:46] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55ca824e0f30, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:02:46] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 10:02:47] [thread 0] (II) Create audio device
+[2022-06-28 10:02:47] [thread 1] (II) Sound stream thread started
+[2022-06-28 10:02:47] [thread 0] (II) Audio device created
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 10:02:47] [thread 0] (II) Load map: map.uda
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: shadow map
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 10:02:47] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 10:02:48] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 10:04:55] [thread 0] (II) Application started
+[2022-06-28 10:04:55] [thread 0] (II) Create render target: screen
+[2022-06-28 10:04:55] [thread 0] (II) Create Vulkan instance
+[2022-06-28 10:04:55] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 10:04:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x557e44db8fa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 10:04:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x557e44db8fa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 10:04:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x557e44db8fa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:04:55] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x557e44db8fa0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:04:55] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 10:04:56] [thread 0] (II) Create audio device
+[2022-06-28 10:04:56] [thread 1] (II) Sound stream thread started
+[2022-06-28 10:04:56] [thread 0] (II) Audio device created
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 10:04:56] [thread 0] (II) Load map: map.uda
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: shadow map
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 10:04:56] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 10:04:57] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 10:05:31] [thread 0] (II) Application started
+[2022-06-28 10:05:31] [thread 0] (II) Create render target: screen
+[2022-06-28 10:05:31] [thread 0] (II) Create Vulkan instance
+[2022-06-28 10:05:31] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 10:05:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x558087e37fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 10:05:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x558087e37fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 10:05:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x558087e37fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:05:31] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x558087e37fb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:05:31] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 10:05:31] [thread 0] (II) Create audio device
+[2022-06-28 10:05:31] [thread 1] (II) Sound stream thread started
+[2022-06-28 10:05:32] [thread 0] (II) Audio device created
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 10:05:32] [thread 0] (II) Load map: map.uda
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: shadow map
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 10:05:32] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 10:05:33] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 10:05:44] [thread 0] (II) Application started
+[2022-06-28 10:05:44] [thread 0] (II) Create render target: screen
+[2022-06-28 10:05:44] [thread 0] (II) Create Vulkan instance
+[2022-06-28 10:05:44] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 10:05:44] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x55b58bf1afb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 10:05:44] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x55b58bf1afb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 10:05:44] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55b58bf1afb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:05:44] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x55b58bf1afb0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:05:44] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 10:05:45] [thread 0] (II) Create audio device
+[2022-06-28 10:05:45] [thread 1] (II) Sound stream thread started
+[2022-06-28 10:05:45] [thread 0] (II) Audio device created
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 10:05:45] [thread 0] (II) Load map: map.uda
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: shadow map
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 10:05:45] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 10:05:46] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2022-06-28 10:06:00] [thread 0] (II) Application started
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: screen
+[2022-06-28 10:06:00] [thread 0] (II) Create Vulkan instance
+[2022-06-28 10:06:00] [thread 0] (II) Find Vulkan physical device
+[2022-06-28 10:06:00] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211 ] Object 0: handle = 0x558c50271ef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x11fe03f4 | vkGetPhysicalDeviceSurfaceCapabilitiesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211)
+[2022-06-28 10:06:00] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211 ] Object 0: handle = 0x558c50271ef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x706bf88b | vkGetPhysicalDeviceSurfaceFormatsKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211)
+[2022-06-28 10:06:00] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x558c50271ef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:06:00] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211 ] Object 0: handle = 0x558c50271ef0, type = VK_OBJECT_TYPE_PHYSICAL_DEVICE; | MessageID = 0x504cc285 | vkGetPhysicalDeviceSurfacePresentModesKHR(): surface is not supported by the physicalDevice. The Vulkan spec states: surface must be supported by physicalDevice, as reported by vkGetPhysicalDeviceSurfaceSupportKHR or an equivalent platform-specific mechanism (https://vulkan.lunarg.com/doc/view/1.3.216.0/linux/1.3-extensions/vkspec.html#VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211)
+[2022-06-28 10:06:00] [thread 0] (II) Create Vulkan logical device
+[2022-06-28 10:06:00] [thread 0] (II) Create audio device
+[2022-06-28 10:06:00] [thread 1] (II) Sound stream thread started
+[2022-06-28 10:06:00] [thread 0] (II) Audio device created
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: deferred rendering - first pass
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: deferred rendering - second pass
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: ambient occlusion
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: transparent - accum/reveal
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: anti aliasing
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - pre filter
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - down sample 0
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - down sample 1
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - down sample 2
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - down sample 3
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - down sample 4
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - down sample 5
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - up sample 0
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - up sample 1
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - up sample 2
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - up sample 3
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - up sample 4
+[2022-06-28 10:06:00] [thread 0] (II) Create render target: bloom - up sample 5
+[2022-06-28 10:06:00] [thread 0] (II) Load map: map.uda
+[2022-06-28 10:06:01] [thread 0] (II) Create render target: shadow map
+[2022-06-28 10:06:01] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2022-06-28 10:06:01] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2022-06-28 10:06:01] [thread 2] (II) Physics thread started with time step of 0.016667 sec
