@@ -45,13 +45,13 @@ button (skin=defaultSkin):
 textBox (skin=defaultSkin):
   skin (type=default):
     image: "ui/widget/textbox/default.tga"
-    part (zone=top): "8"
+    part (zone=top): "2"
     part (zone=bottom): "2"
     part (zone=left): "3"
     part (zone=right): "2"
   skin (type=focus):
     image: "ui/widget/textbox/focus.tga"
-    part (zone=top): "8"
+    part (zone=top): "2"
     part (zone=bottom): "2"
     part (zone=left): "3"
     part (zone=right): "2"
