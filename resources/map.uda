@@ -7,515 +7,497 @@ scene:
         meshes:
           filename: "models/ground.urchinMesh"
         transform:
-          position: "1.400000 -4.250000 100.000000"
+          position: "1.4 -4.25 100"
           orientation:
-            axis: "1.000000 0.000000 -0.000000"
+            axis: "1 0 -0"
             angle: "4.712389"
-          scale: "10.000000 10.000000 1.000000"
-        shadowClass: "RECEIVER_ONLY"
+          scale: "10 10 1"
+        shadowBehavior: "RECEIVER_ONLY"
       physics:
         shape (type=COMPOUND_SHAPE):
           localizedShapes:
             localizedShape:
               transform:
-                position: "0.000000 0.000000 -0.050000"
+                position: "0 0 -0.05"
                 orientation:
-                  axis: "0.000000 1.000000 0.000000"
-                  angle: "0.000000"
+                  axis: "0 1 0"
+                  angle: "0"
               shape (type=BOX):
-                halfSize: "68.786934 68.786942 0.050000"
-        mass: "0.000000"
-        restitution: "0.000000"
-        friction: "0.200000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+                halfSize: "68.786934 68.786942 0.05"
+        mass: "0"
+        restitution: "0"
+        friction: "0.2"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=table):
       model:
         meshes:
           filename: "models/table.urchinMesh"
         transform:
-          position: "-3.500000 -1.850000 0.000000"
+          position: "-3.5 -1.85 0"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "1.000000 1.000000 1.000000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
       physics:
         shape (type=BOX):
           halfSize: "2.316176 0.860093 1.419574"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=bench):
       model:
         meshes:
           filename: "models/bench.urchinMesh"
         transform:
-          position: "-3.900000 -2.280000 2.300000"
+          position: "-3.9 -2.28 2.3"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "1.000000 1.000000 1.000000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
       physics:
         shape (type=BOX):
           halfSize: "2.316176 0.460533 0.567316"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=book):
       model:
         meshes:
           filename: "models/book.urchinMesh"
         transform:
-          position: "-2.300000 -0.930000 0.000000"
+          position: "-2.3 -0.93 0"
           orientation:
-            axis: "0.748246 -0.469110 -0.469110"
+            axis: "0.748246 -0.46911 -0.46911"
             angle: "4.426348"
-          scale: "0.750000 0.750000 0.750000"
-        shadowClass: "RECEIVER_AND_CASTER"
+          scale: "0.75 0.75 0.75"
       physics:
         shape (type=BOX):
           halfSize: "0.235775 0.276482 0.050994"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=wine):
       model:
         meshes:
           filename: "models/wineBottle.urchinMesh"
         transform:
-          position: "-5.100000 -0.710000 0.000000"
+          position: "-5.1 -0.71 0"
           orientation:
-            axis: "-1.000000 -0.000000 0.000000"
+            axis: "-1 -0 0"
             angle: "1.570796"
-          scale: "0.800000 0.800000 0.800000"
-        shadowClass: "RECEIVER_AND_CASTER"
+          scale: "0.8 0.8 0.8"
       physics:
         shape (type=BOX):
           halfSize: "0.079496 0.079496 0.287061"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=sphere1):
       model:
         meshes:
           filename: "models/sphere.urchinMesh"
         transform:
-          position: "0.000000 0.800000 5.000000"
+          position: "0 0.8 5"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "0.250000 0.250000 0.250000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "0.25 0.25 0.25"
       physics:
         shape (type=SPHERE):
-          radius: "0.250000"
-        mass: "100.000000"
-        restitution: "0.000000"
-        friction: "0.500000"
-        rollingFriction: "0.200000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+          radius: "0.25"
+        mass: "100"
+        restitution: "0"
+        friction: "0.5"
+        rollingFriction: "0.2"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=sphere2):
       model:
         meshes:
           filename: "models/sphere.urchinMesh"
         transform:
-          position: "0.250000 4.000000 5.000000"
+          position: "0.25 4 5"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "0.400000 0.400000 0.400000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "0.4 0.4 0.4"
       physics:
         shape (type=SPHERE):
-          radius: "0.400000"
-        mass: "25.000000"
-        restitution: "0.000000"
-        friction: "0.500000"
-        rollingFriction: "0.200000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+          radius: "0.4"
+        mass: "25"
+        restitution: "0"
+        friction: "0.5"
+        rollingFriction: "0.2"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=sphere3):
       model:
         meshes:
           filename: "models/sphere.urchinMesh"
         transform:
-          position: "0.450000 4.800000 5.300000"
+          position: "0.45 4.8 5.3"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "0.250000 0.250000 0.250000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "0.25 0.25 0.25"
       physics:
         shape (type=SPHERE):
-          radius: "0.250000"
-        mass: "10.000000"
-        restitution: "0.000000"
-        friction: "0.500000"
-        rollingFriction: "0.200000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+          radius: "0.25"
+        mass: "10"
+        restitution: "0"
+        friction: "0.5"
+        rollingFriction: "0.2"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=cube1):
       model:
         meshes:
           filename: "models/cube.urchinMesh"
         transform:
-          position: "0.450000 -2.000000 5.300000"
+          position: "0.45 -2 5.3"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "1.000000 1.000000 1.000000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
       physics:
         shape (type=CONVEX_HULL):
           points:
-            point: "0.375820 0.375820 0.375821"
-            point: "0.375820 -0.375821 0.375821"
+            point: "0.37582 0.37582 0.375821"
+            point: "0.37582 -0.375821 0.375821"
             point: "-0.375821 -0.375821 0.375821"
-            point: "0.375820 0.375820 -0.375821"
-            point: "-0.375821 0.375820 0.375821"
-            point: "0.375820 -0.375821 -0.375821"
+            point: "0.37582 0.37582 -0.375821"
+            point: "-0.375821 0.37582 0.375821"
+            point: "0.37582 -0.375821 -0.375821"
             point: "-0.375821 -0.375821 -0.375821"
-            point: "-0.375821 0.375820 -0.375821"
-        mass: "10.000000"
-        restitution: "0.000000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+            point: "-0.375821 0.37582 -0.375821"
+        mass: "10"
+        restitution: "0"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=cube2):
       model:
         meshes:
           filename: "models/cube.urchinMesh"
         transform:
-          position: "0.450000 -1.000000 5.300000"
+          position: "0.45 -1 5.3"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "1.000000 1.000000 1.000000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
       physics:
         shape (type=BOX):
           halfSize: "0.375821 0.375821 0.375821"
-        mass: "10.000000"
-        restitution: "0.000000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "10"
+        restitution: "0"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=cylinder):
       model:
         meshes:
           filename: "models/cylinder.urchinMesh"
         transform:
-          position: "-0.450000 -1.000000 5.300000"
+          position: "-0.45 -1 5.3"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "1.000000 1.000000 1.000000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
       physics:
         shape (type=CYLINDER):
           orientation: "Z"
-          radius: "0.344670"
-          height: "0.939320"
-        mass: "20.000000"
-        restitution: "0.000000"
-        friction: "0.200000"
-        rollingFriction: "0.400000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+          radius: "0.34467"
+          height: "0.93932"
+        mass: "20"
+        restitution: "0"
+        friction: "0.2"
+        rollingFriction: "0.4"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=capsule):
       model:
         meshes:
           filename: "models/capsule.urchinMesh"
         transform:
-          position: "-2.450000 1.000000 5.300000"
+          position: "-2.45 1 5.3"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "0.200000 0.200000 0.200000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "0.2 0.2 0.2"
       physics:
         shape (type=CAPSULE):
           orientation: "Z"
-          radius: "0.200260"
-          cylinderHeight: "0.698650"
-        mass: "3.000000"
-        restitution: "0.500000"
-        friction: "0.200000"
-        rollingFriction: "0.400000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+          radius: "0.20026"
+          cylinderHeight: "0.69865"
+        mass: "3"
+        restitution: "0.5"
+        friction: "0.2"
+        rollingFriction: "0.4"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=sphereBox):
       model:
         meshes:
           filename: "models/sphereBox.urchinMesh"
         transform:
-          position: "3.100000 83.699997 0.000000"
+          position: "3.1 83.699997 0"
           orientation:
-            axis: "0.000000 0.000000 -1.000000"
+            axis: "0 0 -1"
             angle: "2.268928"
-          scale: "0.600000 0.600000 0.600000"
-        shadowClass: "RECEIVER_AND_CASTER"
+          scale: "0.6 0.6 0.6"
       physics:
         shape (type=COMPOUND_SHAPE):
           localizedShapes:
             localizedShape:
               transform:
-                position: "0.600000 -0.065710 0.402860"
+                position: "0.6 -0.06571 0.40286"
                 orientation:
-                  axis: "0.000000 1.000000 0.000000"
-                  angle: "0.000000"
+                  axis: "0 1 0"
+                  angle: "0"
               shape (type=BOX):
-                halfSize: "0.431170 0.419460 0.416260"
+                halfSize: "0.43117 0.41946 0.41626"
             localizedShape:
               transform:
-                position: "-0.428570 0.000000 -0.257140"
+                position: "-0.42857 0 -0.25714"
                 orientation:
-                  axis: "0.000000 1.000000 0.000000"
-                  angle: "0.000000"
+                  axis: "0 1 0"
+                  angle: "0"
               shape (type=SPHERE):
-                radius: "0.602600"
-        mass: "25.000000"
-        restitution: "0.000000"
-        friction: "0.200000"
-        rollingFriction: "0.200000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+                radius: "0.6026"
+        mass: "25"
+        restitution: "0"
+        friction: "0.2"
+        rollingFriction: "0.2"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=cone):
       model:
         meshes:
           filename: "models/cone.urchinMesh"
         transform:
-          position: "7.700000 0.200000 -6.800000"
+          position: "7.7 0.2 -6.8"
           orientation:
             axis: "-0.283757 -0.869055 -0.405247"
             angle: "2.048273"
-          scale: "0.800000 0.800000 0.800000"
-        shadowClass: "RECEIVER_AND_CASTER"
+          scale: "0.8 0.8 0.8"
       physics:
         shape (type=CONE):
           orientation: "ZPositive"
-          radius: "0.800000"
-          height: "1.600000"
-        mass: "10.000000"
-        restitution: "0.000000"
-        friction: "1.000000"
-        rollingFriction: "1.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+          radius: "0.8"
+          height: "1.6"
+        mass: "10"
+        restitution: "0"
+        friction: "1"
+        rollingFriction: "1"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=character):
       model:
         meshes:
           filename: "models/character.urchinMesh"
         transform:
-          position: "8.500000 9.600000 -7.300000"
+          position: "8.5 9.6 -7.3"
           orientation:
-            axis: "1.000000 0.000000 -0.000000"
+            axis: "1 0 -0"
             angle: "4.712389"
-          scale: "1.000000 1.000000 1.000000"
-        shadowClass: "RECEIVER_AND_CASTER"
+          scale: "1 1 1"
     object (name=characterAnimate):
       model:
         meshes:
           filename: "models/characterAnimate.urchinMesh"
         transform:
-          position: "-10.800000 -1.900000 1.100000"
+          position: "-10.8 -1.9 1.1"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "1.000000 1.000000 1.000000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
       physics:
         shape (type=BOX):
-          halfSize: "0.299826 0.862726 0.145000"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+          halfSize: "0.299826 0.862726 0.145"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=squareRed):
       model:
         meshes:
           filename: "models/squareRedTrans.urchinMesh"
         transform:
-          position: "-10.800000 -0.700000 2.600000"
+          position: "-10.8 -0.7 2.6"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "0.200000 0.200000 0.200000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "0.2 0.2 0.2"
       physics:
         shape (type=BOX):
           halfSize: "1.375739 1.375739 0.000001"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=squareBlue):
       model:
         meshes:
           filename: "models/squareBlueTrans.urchinMesh"
         transform:
-          position: "-10.800000 -0.700000 0.600000"
+          position: "-10.8 -0.7 0.6"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "0.200000 0.200000 0.200000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "0.2 0.2 0.2"
       physics:
         shape (type=BOX):
           halfSize: "1.375739 1.375739 0.000001"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=squareGreen):
       model:
         meshes:
           filename: "models/squareGreenTrans.urchinMesh"
         transform:
-          position: "-10.800000 -0.700000 -1.200000"
+          position: "-10.8 -0.7 -1.2"
           orientation:
-            axis: "0.000000 1.000000 0.000000"
-            angle: "0.000000"
-          scale: "0.200000 0.200000 0.200000"
-        shadowClass: "RECEIVER_AND_CASTER"
+            axis: "0 1 0"
+            angle: "0"
+          scale: "0.2 0.2 0.2"
       physics:
         shape (type=BOX):
           halfSize: "1.375739 1.375739 0.000001"
-        mass: "0.000000"
-        restitution: "0.200000"
-        friction: "0.500000"
-        rollingFriction: "0.000000"
-        linearDamping: "0.000000"
-        angularDamping: "0.000000"
-        linearFactor: "1.000000 1.000000 1.000000"
-        angularFactor: "1.000000 1.000000 1.000000"
+        mass: "0"
+        restitution: "0.2"
+        friction: "0.5"
+        rollingFriction: "0"
+        linearDamping: "0"
+        angularDamping: "0"
+        linearFactor: "1 1 1"
+        angularFactor: "1 1 1"
     object (name=laserRed):
       model:
         meshes:
           filename: "models/laserRed.urchinMesh"
         transform:
-          position: "-15.248570 0.200000 6.847930"
+          position: "-15.24857 0.2 6.84793"
           orientation:
-            axis: "0.000000 -1.000000 0.000000"
+            axis: "0 -1 0"
             angle: "1.570796"
-          scale: "3.000000 3.000000 3.000000"
-        shadowClass: "NONE"
+          scale: "3 3 3"
+        shadowBehavior: "NONE"
     object (name=laserGreen):
       model:
         meshes:
           filename: "models/laserGreen.urchinMesh"
         transform:
-          position: "-16.248569 0.200000 6.847930"
+          position: "-16.248569 0.2 6.84793"
           orientation:
-            axis: "0.000000 -1.000000 0.000000"
+            axis: "0 -1 0"
             angle: "1.570796"
-          scale: "3.000000 3.000000 3.000000"
-        shadowClass: "NONE"
+          scale: "3 3 3"
+        shadowBehavior: "NONE"
   lights:
     light (name=omniLight;type=OMNIDIRECTIONAL):
-      position: "4.400000 1.100000 2.300000"
-      exponentialAttenuation: "0.250000"
-      lightColor: "0.500000 0.000000 0.000000"
+      position: "4.4 1.1 2.3"
+      exponentialAttenuation: "0.25"
+      lightColor: "0.5 0 0"
       produceShadow: "false"
     light (name=sunLight;type=SUN):
-      direction: "-8.000000 -4.000000 -2.000000"
-      lightColor: "0.800000 0.400000 0.400000"
+      direction: "-8 -4 -2"
+      lightColor: "0.8 0.4 0.4"
       produceShadow: "true"
   terrains:
     terrain (name=terrain):
       mesh:
         heightFilename: "terrain/terrainHeight.tga"
-        xzScale: "0.400000"
-        yScale: "0.050000"
+        xzScale: "0.4"
+        yScale: "0.05"
       material:
         maskMapFilename:
-        sRepeat: "60.000000"
-        tRepeat: "60.000000"
+        sRepeat: "60"
+        tRepeat: "60"
         materialFilenames:
           materialFilename (index=0): "materials/terrain/grassGround.uda"
-      position: "0.000000 -10.330000 -8.400000"
-      ambient: "0.300000"
+      position: "0 -10.33 -8.4"
+      ambient: "0.3"
       grass:
         grassTextureFilename: "terrain/grass.png"
         grassMaskFilename:
         numGrassInTex: "1"
-        grassHeight: "0.550000"
-        grassLength: "1.000000"
-        grassQuantity: "1.300000"
-        windDirection: "1.000000 0.000000 0.000000"
-        windStrength: "0.500000"
+        grassHeight: "0.55"
+        grassLength: "1"
+        grassQuantity: "1.3"
+        windDirection: "1 0 0"
+        windStrength: "0.5"
   waters:
     water (name=ocean):
-      centerPosition: "0.000000 -7.400000 0.000000"
-      xSize: "2500.000000"
-      zSize: "2500.000000"
-      waterColor: "0.080000 0.220000 0.290000"
+      centerPosition: "0 -7.4 0"
+      xSize: "2500"
+      zSize: "2500"
+      waterColor: "0.08 0.22 0.29"
       normalFilename: "water/waterNormal.png"
       dudvMapFilename: "water/waterDudvMap.png"
-      waveSpeed: "0.070000"
-      waveStrength: "0.030000"
-      sRepeat: "150.000000"
-      tRepeat: "150.000000"
-      density: "0.350000"
-      gradient: "1.000000"
+      waveSpeed: "0.07"
+      waveStrength: "0.03"
+      sRepeat: "150"
+      tRepeat: "150"
+      density: "0.35"
+      gradient: "1"
   sky:
     skybox:
       textures:
@@ -525,29 +507,29 @@ scene:
         filename: "skybox/YP.tga"
         filename: "skybox/ZN.tga"
         filename: "skybox/ZP.tga"
-      offsetY: "-1.000000"
+      offsetY: "-1"
   soundElements:
     soundElement (name=globalSound):
       sound (category=MUSIC;type=GLOBAL):
         filename: "sounds/ambient.ogg"
-        initialVolume: "1.000000"
+        initialVolume: "1"
       soundTrigger (type=MANUAL):
         playBehavior: "PLAY_LOOP"
     soundElement (name=spatialSound):
       sound (category=MUSIC;type=SPATIAL):
         filename: "sounds/positionTrigger.ogg"
-        initialVolume: "1.000000"
-        position: "-6.800000 -0.500000 -0.500000"
-        inaudibleDistance: "5.000000"
+        initialVolume: "1"
+        position: "-6.8 -0.5 -0.5"
+        inaudibleDistance: "5"
       soundTrigger (type=SHAPE):
         soundShape (type=SPHERE):
-          radius: "5.000000"
-          position: "-6.800000 -0.500000 0.000000"
-          margin: "0.000000"
+          radius: "5"
+          position: "-6.8 -0.5 0"
+          margin: "0"
         playBehavior: "PLAY_LOOP"
   aiElements:
     navMeshAgent:
-      agentHeight: "1.900000"
-      agentRadius: "0.250000"
+      agentHeight: "1.9"
+      agentRadius: "0.25"
       maxSlopeInRadian: "0.785398"
-      jumpDistance: "1.000000"
+      jumpDistance: "1"
