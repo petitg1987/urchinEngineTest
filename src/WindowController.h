@@ -3,8 +3,8 @@
 #include <vector>
 #include <memory>
 
-#include <api/setup/spi/SurfaceCreator.h>
-#include <api/setup/spi/FramebufferSizeRetriever.h>
+#include <graphics/api/vulkan/setup/spi/SurfaceCreator.h>
+#include <graphics/api/vulkan/setup/spi/FramebufferSizeRetriever.h>
 
 class GLFWwindow;
 class GLFWmonitor;
