@@ -3,8 +3,8 @@
 #include <vector>
 #include <memory>
 
-#include <graphics/api/vulkan/setup/spi/SurfaceCreator.h>
-#include <graphics/api/vulkan/setup/spi/FramebufferSizeRetriever.h>
+#include <graphics/setup/SurfaceCreator.h>
+#include <graphics/setup/FramebufferSizeRetriever.h>
 
 class GLFWwindow;
 class GLFWmonitor;
@@ -16,16 +16,16 @@ struct ExtensionList {
 
 struct GlfwSurfaceCreator : public urchin::SurfaceCreator {
     explicit GlfwSurfaceCreator(GLFWwindow*);
-    VkSurfaceKHR createSurface(VkInstance instance) override;
+    void* createSurface(void*) override;
 
-    GLFWwindow *window;
+    GLFWwindow* window;
 };
 
 struct GlfwFramebufferSizeRetriever : public urchin::FramebufferSizeRetriever {
     explicit GlfwFramebufferSizeRetriever(GLFWwindow*);
     void getFramebufferSizeInPixel(unsigned int&, unsigned int&) const override;
 
-    GLFWwindow *window;
+    GLFWwindow* window;
 };
 
 class WindowController {

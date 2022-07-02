@@ -10,9 +10,9 @@ GlfwSurfaceCreator::GlfwSurfaceCreator(GLFWwindow* window) :
         window(window) {
 }
 
-VkSurfaceKHR GlfwSurfaceCreator::createSurface(VkInstance instance) {
+void* GlfwSurfaceCreator::createSurface(void* instance) {
     VkSurfaceKHR surface = nullptr;
-    VkResult result = glfwCreateWindowSurface(instance, window, nullptr, &surface);
+    VkResult result = glfwCreateWindowSurface(static_cast<VkInstance>(instance), window, nullptr, &surface);
     if (result != VK_SUCCESS) {
         throw std::runtime_error("Failed to create window surface with error code: " + std::to_string(result));
     }
