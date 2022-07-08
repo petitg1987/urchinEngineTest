@@ -295,6 +295,8 @@ void Main::onKeyPressed(int key) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::C);
         } else if (charKey && charKey[0] == 'v') {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::V);
+        } else if (charKey && charKey[0] == 'x') {
+            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::X);
         } else if (key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::CTRL);
         } else if (key == GLFW_KEY_LEFT) {
@@ -330,6 +332,8 @@ void Main::onKeyReleased(int key) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::C);
         } else if (charKey && charKey[0] == 'v') {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::V);
+        } else if (charKey && charKey[0] == 'x') {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::X);
         } else if (key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::CTRL);
         } else if (key == GLFW_KEY_LEFT) {
