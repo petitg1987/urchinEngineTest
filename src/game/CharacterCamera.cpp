@@ -7,10 +7,6 @@ CharacterCamera::CharacterCamera(const WindowController& windowController, float
     useMouseToMoveCamera(true);
 }
 
-void CharacterCamera::refreshCameraView(float) {
-    //nothing to do
-}
-
 bool CharacterCamera::onMouseMove(double mouseX, double mouseY) {
     bool propagateEvent = Camera::onMouseMove(mouseX, mouseY);
 

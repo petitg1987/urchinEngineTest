@@ -10,8 +10,6 @@ class CharacterCamera : public urchin::Camera {
         CharacterCamera(const WindowController&, float, float, float);
         ~CharacterCamera() override = default;
 
-        void refreshCameraView(float) override;
-
         bool onMouseMove(double, double) override;
 
     private:
