@@ -288,11 +288,12 @@ void Main::onChar(char32_t unicodeCharacter) {
 void Main::onKeyPressed(int key) {
     //engine
     if (propagatePressKeyEvent) {
-        if (key == GLFW_KEY_A) {
+        const char* charKey = glfwGetKeyName(key, 0);
+        if (charKey && charKey[0] == 'a') {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::A);
-        } else if (key == GLFW_KEY_C) {
+        } else if (charKey && charKey[0] == 'c') {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::C);
-        } else if (key == GLFW_KEY_V) {
+        } else if (charKey && charKey[0] == 'v') {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::V);
         } else if (key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::CTRL);
@@ -322,12 +323,13 @@ void Main::onKeyPressed(int key) {
 void Main::onKeyReleased(int key) {
     //engine
     if (propagateReleaseKeyEvent) {
-        if (key == GLFW_KEY_A) {
-            propagatePressKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::A);
-        } else if (key == GLFW_KEY_C) {
-            propagatePressKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::C);
-        } else if (key == GLFW_KEY_V) {
-            propagatePressKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::V);
+        const char* charKey = glfwGetKeyName(key, 0);
+        if (charKey && charKey[0] == 'a') {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::A);
+        } else if (charKey && charKey[0] == 'c') {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::C);
+        } else if (charKey && charKey[0] == 'v') {
+            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::V);
         } else if (key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::CTRL);
         } else if (key == GLFW_KEY_LEFT) {
