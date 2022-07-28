@@ -83,10 +83,7 @@ void Main::execute(std::span<char*> args) {
 
 std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool isDevModeOn) const {
     auto windowController = std::make_unique<WindowController>(window, isDevModeOn);
-
-    auto scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), windowController->newSurfaceCreator(), windowController->newFramebufferSizeRetriever());
-    scene->updateVerticalSync(false);
-
+    auto scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), windowController->newSurfaceCreator(), windowController->newFramebufferSizeRetriever(), false);
     auto soundEnvironment = std::make_unique<SoundEnvironment>();
 
     return std::make_unique<MainContext>(std::move(scene), std::move(windowController), std::move(soundEnvironment));
