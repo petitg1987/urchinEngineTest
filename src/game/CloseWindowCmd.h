@@ -2,7 +2,7 @@
 
 #include <Urchin3dEngine.h>
 
-class CloseWindowCmd : public urchin::EventListener {
+class CloseWindowCmd final : public urchin::EventListener {
     public:
         explicit CloseWindowCmd(urchin::Window&);
 

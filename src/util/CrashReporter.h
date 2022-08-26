@@ -4,7 +4,7 @@
 
 #include <UrchinCommon.h>
 
-class CrashReporter : public urchin::SignalReceptor {
+class CrashReporter final : public urchin::SignalReceptor {
     public:
         ~CrashReporter() override = default;
 

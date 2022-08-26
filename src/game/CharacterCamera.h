@@ -5,7 +5,7 @@
 
 #include <WindowController.h>
 
-class CharacterCamera : public urchin::Camera {
+class CharacterCamera final : public urchin::Camera {
     public:
         CharacterCamera(const WindowController&, float, float, float);
         ~CharacterCamera() override = default;

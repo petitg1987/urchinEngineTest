@@ -3,7 +3,7 @@
 #include <UrchinCommon.h>
 #include <UrchinSoundEngine.h>
 
-class UnderWaterEvent : public urchin::Observer {
+class UnderWaterEvent final : public urchin::Observer {
     public:
         explicit UnderWaterEvent(urchin::SoundEnvironment&);
         ~UnderWaterEvent() override;

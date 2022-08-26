@@ -2,7 +2,7 @@
 
 #include <UrchinAIEngine.h>
 
-class NPCNavigationEventHandler : public urchin::AICharacterEventHandler {
+class NPCNavigationEventHandler final : public urchin::AICharacterEventHandler {
     public:
         void startMoving() override;
         void stopMoving() override;

@@ -14,14 +14,14 @@ struct ExtensionList {
     const char** extensions = nullptr;
 };
 
-struct GlfwSurfaceCreator : public urchin::SurfaceCreator {
+struct GlfwSurfaceCreator final : public urchin::SurfaceCreator {
     explicit GlfwSurfaceCreator(GLFWwindow*);
     void* createSurface(void*) override;
 
     GLFWwindow* window;
 };
 
-struct GlfwFramebufferSizeRetriever : public urchin::FramebufferSizeRetriever {
+struct GlfwFramebufferSizeRetriever final : public urchin::FramebufferSizeRetriever {
     explicit GlfwFramebufferSizeRetriever(GLFWwindow*);
     void getFramebufferSizeInPixel(unsigned int&, unsigned int&) const override;
 
