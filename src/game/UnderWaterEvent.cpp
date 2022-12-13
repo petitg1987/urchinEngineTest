@@ -6,7 +6,7 @@ using namespace urchin;
 UnderWaterEvent::UnderWaterEvent(SoundEnvironment& soundEnvironment) :
         soundEnvironment(soundEnvironment),
         bIsUnderWater(false) {
-    underWaterSound = SoundBuilder(soundEnvironment).newManualEffect("sounds/underWater.ogg", PlayBehavior::PLAY_LOOP);
+    underWaterSound = soundEnvironment.getSoundBuilder().newManualEffect("sounds/underWater.ogg", PlayBehavior::PLAY_LOOP);
 }
 
 UnderWaterEvent::~UnderWaterEvent() {
