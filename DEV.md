@@ -5,8 +5,8 @@
   ```
   sudo apt install libegl1-mesa-dev libffi-dev libwayland-bin libwayland-dev libxrandr-dev x11proto-randr-dev libxinerama-dev libxcursor-dev libxi-dev
   rm /tmp/glfw3/ -rf && mkdir -p /tmp/glfw3/ && cd /tmp/glfw3/
-  wget -P /tmp/glfw3/ https://github.com/glfw/glfw/releases/download/3.3.4/glfw-3.3.4.zip
-  unzip glfw-3.3.4.zip && cd /tmp/glfw3/glfw-3.3.4
+  wget -P /tmp/glfw3/ https://github.com/glfw/glfw/releases/download/3.3.8/glfw-3.3.8.zip
+  unzip glfw-3.3.8.zip && cd /tmp/glfw3/glfw-3.3.8
   cmake -DBUILD_SHARED_LIBS=OFF .
   make
   sudo make install
