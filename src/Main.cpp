@@ -97,6 +97,13 @@ void Main::glfwErrorCallback(int error, const char* description) {
     } else if (error == GLFW_PLATFORM_ERROR && errorDescription.find("Iconification") != std::string::npos) {
         Logger::instance().logInfo("Window iconification GLFW error ignored: " + std::string(description));
         return; //full message: "X11: Iconification of full screen windows requires a WM that supports EWMH full screen"
+    } else if (error == GLFW_PLATFORM_ERROR && errorDescription.find("window icon") != std::string::npos) {
+        Logger::instance().logInfo("Setting window icon GLFW error ignored: " + std::string(description));
+        return; //full message: "Wayland: The platform does not support setting the window icon"
+    } else if (error == GLFW_FORMAT_UNAVAILABLE && errorDescription.find("clipboard") != std::string::npos) {
+        Logger::instance().logInfo("Impossible to copy from clipboard: " + std::string(description));
+        //occur when clipboard is empty on Windows
+        return; //full message: "Win32: Failed to convert clipboard to string: Élément introuvable"
     }
     Logger::instance().logWarning("GLFW error (code: " + std::to_string(error) + "): " + description);
 }
