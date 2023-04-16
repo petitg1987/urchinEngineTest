@@ -457,10 +457,12 @@ scene:
       exponentialAttenuation: "0.25"
       lightColor: "0.5 0 0"
       produceShadow: "false"
+      pbrEnabled: "true"
     light (name=sunLight;type=SUN):
       direction: "-8 -4 -2"
       lightColor: "0.8 0.4 0.4"
       produceShadow: "true"
+      pbrEnabled: "true"
   terrains:
     terrain (name=terrain):
       mesh:
