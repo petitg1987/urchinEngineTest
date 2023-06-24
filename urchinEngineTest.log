@@ -1,0 +1,106 @@
+[2023-06-24 16:19:46] [thread 0] (II) Application started
+[2023-06-24 16:19:46] [thread 0] (II) Create render target: screen
+[2023-06-24 16:19:46] [thread 0] (II) Create Vulkan instance with window required extensions: VK_KHR_surface,VK_KHR_xcb_surface
+[2023-06-24 16:19:46] [thread 0] (II) Find Vulkan physical device
+[2023-06-24 16:19:46] [thread 0] (II) Create Vulkan logical device
+[2023-06-24 16:19:46] [thread 1] (II) Sound stream thread started
+[2023-06-24 16:19:46] [thread 0] (II) Create audio device
+[2023-06-24 16:19:46] [thread 0] (II) Audio device created
+[2023-06-24 16:19:46] [thread 0] (II) Create render target: deferred rendering - first pass
+[2023-06-24 16:19:46] [thread 0] (II) Create render target: deferred rendering - second pass
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: ambient occlusion
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: transparent
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: anti aliasing
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - pre filter
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - down sample 0
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - down sample 1
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - down sample 2
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - down sample 3
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - down sample 4
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - down sample 5
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - up sample 0
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - up sample 1
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - up sample 2
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - up sample 3
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - up sample 4
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: bloom - up sample 5
+[2023-06-24 16:19:47] [thread 0] (II) Load map: map.uda
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: shadow map
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2023-06-24 16:19:47] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2023-06-24 16:19:47] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2023-06-24 16:25:13] [thread 0] (II) Application started
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: screen
+[2023-06-24 16:25:13] [thread 0] (II) Create Vulkan instance with window required extensions: VK_KHR_surface,VK_KHR_xcb_surface
+[2023-06-24 16:25:13] [thread 0] (II) Find Vulkan physical device
+[2023-06-24 16:25:13] [thread 0] (II) Create Vulkan logical device
+[2023-06-24 16:25:13] [thread 0] (II) Create audio device
+[2023-06-24 16:25:13] [thread 1] (II) Sound stream thread started
+[2023-06-24 16:25:13] [thread 0] (II) Audio device created
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: deferred rendering - first pass
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: deferred rendering - second pass
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: ambient occlusion
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: transparent
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: anti aliasing
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - pre filter
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - down sample 0
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - down sample 1
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - down sample 2
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - down sample 3
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - down sample 4
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - down sample 5
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - up sample 0
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - up sample 1
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - up sample 2
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - up sample 3
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - up sample 4
+[2023-06-24 16:25:13] [thread 0] (II) Create render target: bloom - up sample 5
+[2023-06-24 16:25:13] [thread 0] (II) Load map: map.uda
+[2023-06-24 16:25:14] [thread 0] (II) Create render target: shadow map
+[2023-06-24 16:25:14] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2023-06-24 16:25:14] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2023-06-24 16:25:15] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2023-06-24 16:27:06] [thread 0] (II) Application started
+[2023-06-24 16:27:08] [thread 0] (II) Create render target: screen
+[2023-06-24 16:27:08] [thread 0] (II) Create Vulkan instance with window required extensions: VK_KHR_surface,VK_KHR_xcb_surface
+[2023-06-24 16:27:08] [thread 0] (II) Find Vulkan physical device
+[2023-06-24 16:27:08] [thread 0] (II) Create Vulkan logical device
+[2023-06-24 16:27:08] [thread 0] (II) Create audio device
+[2023-06-24 16:27:08] [thread 1] (II) Sound stream thread started
+[2023-06-24 16:27:08] [thread 0] (II) Audio device created
+[2023-06-24 16:27:08] [thread 0] (II) Create render target: deferred rendering - first pass
+[2023-06-24 16:27:08] [thread 0] (II) Create render target: deferred rendering - second pass
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: ambient occlusion
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: ambient occlusion - vertical bilateral blur filter
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: ambient occlusion - horizontal bilateral blur filter
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: transparent
+[2023-06-24 16:27:09] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-VkFramebufferCreateInfo-pAttachments-00880 ] Object 0: handle = 0xe7713700000000ae, name = [RENDER_PASS] transparent, type = VK_OBJECT_TYPE_RENDER_PASS; | MessageID = 0x1ac50d08 | vkCreateFramebuffer(): VkFramebufferCreateInfo attachment #0 has format of VK_FORMAT_R16G16B16A16_SFLOAT that does not match the format of VK_FORMAT_D32_SFLOAT used by the corresponding attachment for VkRenderPass 0xe7713700000000ae[[RENDER_PASS] transparent]. The Vulkan spec states: If flags does not include VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT, each element of pAttachments must have been created with a VkFormat value that matches the VkFormat specified by the corresponding VkAttachmentDescription in renderPass (https://vulkan.lunarg.com/doc/view/1.3.250.0/linux/1.3-extensions/vkspec.html#VUID-VkFramebufferCreateInfo-pAttachments-00880)
+[2023-06-24 16:27:09] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-VkFramebufferCreateInfo-pAttachments-02633 ] Object 0: handle = 0x555557a62e90, type = VK_OBJECT_TYPE_DEVICE; | MessageID = 0xd6fda304 | vkCreateFramebuffer:  Framebuffer Attachment (0) conflicts with the image's IMAGE_USAGE flags (VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT). The Vulkan spec states: If flags does not include VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT, each element of pAttachments that is used as a depth/stencil attachment by renderPass must have been created with a usage value including VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT (https://vulkan.lunarg.com/doc/view/1.3.250.0/linux/1.3-extensions/vkspec.html#VUID-VkFramebufferCreateInfo-pAttachments-02633)
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: anti aliasing
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - pre filter
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - down sample 0
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - down sample 1
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - down sample 2
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - down sample 3
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - down sample 4
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - down sample 5
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - up sample 0
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - up sample 1
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - up sample 2
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - up sample 3
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - up sample 4
+[2023-06-24 16:27:09] [thread 0] (II) Create render target: bloom - up sample 5
+[2023-06-24 16:27:09] [thread 0] (II) Load map: map.uda
+[2023-06-24 16:27:10] [thread 0] (II) Create render target: shadow map
+[2023-06-24 16:27:10] [thread 0] (II) Create render target: shadow map - vertical gaussian blur filter
+[2023-06-24 16:27:10] [thread 0] (II) Create render target: shadow map - horizontal gaussian blur filter
+[2023-06-24 16:27:13] [thread 2] (II) Physics thread started with time step of 0.016667 sec
+[2023-06-24 16:27:13] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkCmdBeginRenderPass-initialLayout-01758 ] Object 0: handle = 0xe7713700000000ae, name = [RENDER_PASS] transparent, type = VK_OBJECT_TYPE_RENDER_PASS; Object 1: handle = 0x10da6e00000000af, type = VK_OBJECT_TYPE_FRAMEBUFFER; Object 2: handle = 0x9638f80000000036, type = VK_OBJECT_TYPE_IMAGE_VIEW; Object 3: handle = 0x2b424a0000000034, name = [IMAGE] illuminated scene, type = VK_OBJECT_TYPE_IMAGE; | MessageID = 0x4c23393e | vkCmdBeginRenderPass(): Layout/usage mismatch for attachment 0 in VkRenderPass 0xe7713700000000ae[[RENDER_PASS] transparent] - the initial layout is VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL but the image attached to VkFramebuffer 0x10da6e00000000af[] via VkImageView 0x9638f80000000036[] was not created with VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT. Image usage: VK_IMAGE_USAGE_TRANSFER_SRC_BIT|VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT. The Vulkan spec states: If any of the initialLayout or finalLayout member of the VkAttachmentDescription structures or the layout member of the VkAttachmentReference structures specified when creating the render pass specified in the renderPass member of pRenderPassBegin is VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL, VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, or VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then the corresponding attachment image view of the framebuffer specified in the framebuffer member of pRenderPassBegin must have been created with a usage value including VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT (https://vulkan.lunarg.com/doc/view/1.3.250.0/linux/1.3-extensions/vkspec.html#VUID-vkCmdBeginRenderPass-initialLayout-01758)
+[2023-06-24 16:27:13] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkCmdBeginRenderPass-initialLayout-01758 ] Object 0: handle = 0xe7713700000000ae, name = [RENDER_PASS] transparent, type = VK_OBJECT_TYPE_RENDER_PASS; Object 1: handle = 0x10da6e00000000af, type = VK_OBJECT_TYPE_FRAMEBUFFER; Object 2: handle = 0x9638f80000000036, type = VK_OBJECT_TYPE_IMAGE_VIEW; Object 3: handle = 0x2b424a0000000034, name = [IMAGE] illuminated scene, type = VK_OBJECT_TYPE_IMAGE; | MessageID = 0x4c23393e | vkCmdBeginRenderPass(): Layout/usage mismatch for attachment 0 in VkRenderPass 0xe7713700000000ae[[RENDER_PASS] transparent] - the final layout is VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL but the image attached to VkFramebuffer 0x10da6e00000000af[] via VkImageView 0x9638f80000000036[] was not created with VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT. Image usage: VK_IMAGE_USAGE_TRANSFER_SRC_BIT|VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT. The Vulkan spec states: If any of the initialLayout or finalLayout member of the VkAttachmentDescription structures or the layout member of the VkAttachmentReference structures specified when creating the render pass specified in the renderPass member of pRenderPassBegin is VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL, VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, or VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then the corresponding attachment image view of the framebuffer specified in the framebuffer member of pRenderPassBegin must have been created with a usage value including VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT (https://vulkan.lunarg.com/doc/view/1.3.250.0/linux/1.3-extensions/vkspec.html#VUID-vkCmdBeginRenderPass-initialLayout-01758)
+[2023-06-24 16:27:13] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ VUID-vkCmdBeginRenderPass-initialLayout-01758 ] Object 0: handle = 0xe7713700000000ae, name = [RENDER_PASS] transparent, type = VK_OBJECT_TYPE_RENDER_PASS; Object 1: handle = 0x10da6e00000000af, type = VK_OBJECT_TYPE_FRAMEBUFFER; Object 2: handle = 0x9638f80000000036, type = VK_OBJECT_TYPE_IMAGE_VIEW; Object 3: handle = 0x2b424a0000000034, name = [IMAGE] illuminated scene, type = VK_OBJECT_TYPE_IMAGE; | MessageID = 0x4c23393e | vkCmdBeginRenderPass(): Layout/usage mismatch for attachment 0 in VkRenderPass 0xe7713700000000ae[[RENDER_PASS] transparent] - the depth stencil attachment layout is VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL but the image attached to VkFramebuffer 0x10da6e00000000af[] via VkImageView 0x9638f80000000036[] was not created with VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT. Image usage: VK_IMAGE_USAGE_TRANSFER_SRC_BIT|VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT. The Vulkan spec states: If any of the initialLayout or finalLayout member of the VkAttachmentDescription structures or the layout member of the VkAttachmentReference structures specified when creating the render pass specified in the renderPass member of pRenderPassBegin is VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL, VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, or VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then the corresponding attachment image view of the framebuffer specified in the framebuffer member of pRenderPassBegin must have been created with a usage value including VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT (https://vulkan.lunarg.com/doc/view/1.3.250.0/linux/1.3-extensions/vkspec.html#VUID-vkCmdBeginRenderPass-initialLayout-01758)
+[2023-06-24 16:27:13] [thread 0] (EE) Vulkan validation layer error: Validation Error: [ UNASSIGNED-CoreValidation-DrawState-InvalidImageLayout ] Object 0: handle = 0x5555582596d0, name = [CMD] transparent_0, type = VK_OBJECT_TYPE_COMMAND_BUFFER; | MessageID = 0x4dae5635 | vkQueueSubmit(): pSubmits[0].pCommandBuffers[0] command buffer VkCommandBuffer 0x5555582596d0[[CMD] transparent_0] expects VkImage 0x2b424a0000000034[[IMAGE] illuminated scene] (subresource: aspectMask 0x1 array layer 0, mip level 0) to be in layout VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL--instead, current layout is VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL.
+[2023-06-24 16:27:13] [thread 0] (EE) Vulkan validation layer error: Validation Warning: [ UNASSIGNED-BestPractices-Error-Result ] Object 0: handle = 0x5555569e2d80, type = VK_OBJECT_TYPE_INSTANCE; | MessageID = 0x5f379b89 | vkQueueWaitIdle(): Returned error VK_ERROR_DEVICE_LOST.
