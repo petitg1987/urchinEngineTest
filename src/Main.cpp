@@ -41,10 +41,8 @@ void Main::execute(std::span<char*> args) {
         FileSystem::instance().setupResourcesDirectory(retrieveResourcesDirectory(args[0]));
         ConfigService::instance().loadProperties("engine.properties");
         UISkinService::instance().setSkin("ui/skinDefinition.uda");
-        window = createWindow(isWindowed);
 
-        context = createMainContext(window, isDevModeOn);
-        game = std::make_unique<Game>(*context);
+        window = createWindow(isWindowed);
 
         glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
@@ -54,7 +52,10 @@ void Main::execute(std::span<char*> args) {
         glfwSetScrollCallback(window, scrollCallback);
         glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
+        context = createMainContext(window, isDevModeOn);
+        game = std::make_unique<Game>(*context);
         context->getWindowController().cleanEvents(); //ignore events occurred during initialization phase
+
         while (!glfwWindowShouldClose(window)) {
             handleInputEvents();
 
@@ -192,14 +193,14 @@ GLFWwindow* Main::createWindow(bool isWindowed) {
 
 void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context->getWindowController().isEventCallbackActive()) {
+    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
         main->charEvents.push_back(unicodeCharacter);
     }
 }
 
 void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context->getWindowController().isEventCallbackActive()) {
+    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
 
         //handle Alt+Enter to switch between windowed/fullscreen mode
         if (action == GLFW_PRESS) {
@@ -230,7 +231,7 @@ void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
 
 void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context->getWindowController().isEventCallbackActive()) {
+    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
         if (action == GLFW_PRESS) {
             main->onMouseButtonPressed(button);
         } else if (action == GLFW_RELEASE) {
@@ -241,21 +242,21 @@ void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
 
 void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context->getWindowController().isEventCallbackActive()) {
+    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
         main->onMouseMove((int)x, (int)y);
     }
 }
 
 void Main::scrollCallback(GLFWwindow* window, double, double offsetY) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context->getWindowController().isEventCallbackActive()) {
+    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
         main->onScroll(offsetY);
     }
 }
 
 void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
     auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main) {
+    if (main && main->context) {
         //engine
         main->context->getScene().onResize();
     }
