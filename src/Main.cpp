@@ -41,8 +41,10 @@ void Main::execute(std::span<char*> args) {
         FileSystem::instance().setupResourcesDirectory(retrieveResourcesDirectory(args[0]));
         ConfigService::instance().loadProperties("engine.properties");
         UISkinService::instance().setSkin("ui/skinDefinition.uda");
-
         window = createWindow(isWindowed);
+
+        context = createMainContext(window, isDevModeOn);
+        game = std::make_unique<Game>(*context);
 
         glfwSetWindowUserPointer(window, (void*)this);
         glfwSetCharCallback(window, charCallback);
@@ -52,10 +54,7 @@ void Main::execute(std::span<char*> args) {
         glfwSetScrollCallback(window, scrollCallback);
         glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
-        context = createMainContext(window, isDevModeOn);
-        game = std::make_unique<Game>(*context);
         context->getWindowController().cleanEvents(); //ignore events occurred during initialization phase
-
         while (!glfwWindowShouldClose(window)) {
             handleInputEvents();
 
