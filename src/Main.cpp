@@ -186,48 +186,56 @@ void Main::handleInputEvents(SDL_Window* window) {
 
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0) {
+        events.emplace_back(e);
+    }
+    for (std::size_t i = 0; i < events.size(); ++i) {
+        if (events[i].type == SDL_KEYDOWN && i + 1 < events.size() && events[i + 1].type == SDL_TEXTINPUT) {
+            std::swap(events[i], events[i + 1]); //text input must be treated before key down to handle correctly the event propagation flag
+        }
+
         //handle Alt+Enter to switch between windowed/fullscreen mode
-        if (e.type == SDL_KEYDOWN) {
-            if (e.key.keysym.sym == SDLK_LALT) {
+        if (events[i].type == SDL_KEYDOWN) {
+            if (events[i].key.keysym.sym == SDLK_LALT) {
                 altLeftKeyPressed = true;
-            } else if (altLeftKeyPressed && e.key.keysym.sym == SDLK_RETURN) {
+            } else if (altLeftKeyPressed && events[i].key.keysym.sym == SDLK_RETURN) {
                 bool isFullScreen = (SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN;
                 context->getWindowController().updateWindowedMode(isFullScreen);
                 context->getScene().onResize(); //manually resize because the windowed mode change does not always trigger the resize
                 return;
             }
-        } else if (e.type == SDL_KEYUP) {
-            if (e.key.keysym.sym == SDLK_LALT) {
+        } else if (events[i].type == SDL_KEYUP) {
+            if (events[i].key.keysym.sym == SDLK_LALT) {
                 altLeftKeyPressed = false;
             }
         }
 
-        if (e.type == SDL_MOUSEMOTION) {
-            onMouseMove(e.motion.x, e.motion.y, e.motion.xrel, e.motion.yrel);
-        } else if (e.type == SDL_MOUSEBUTTONDOWN) {
-            onMouseButtonPressed(e.button.button);
-        } else if (e.type == SDL_MOUSEBUTTONUP) {
-            onMouseButtonReleased(e.button.button);
-        } else if (e.type == SDL_MOUSEWHEEL) {
-            onScroll(e.wheel.preciseY);
-        } else if (e.type == SDL_KEYDOWN) {
-            onKeyPressed(e.key.keysym.sym, e.key.repeat != 0);
-        } else if (e.type == SDL_KEYUP) {
-            onKeyReleased(e.key.keysym.sym);
-        } else if (e.type == SDL_TEXTINPUT) {
+        if (events[i].type == SDL_MOUSEMOTION) {
+            onMouseMove(events[i].motion.x, events[i].motion.y, events[i].motion.xrel, events[i].motion.yrel);
+        } else if (events[i].type == SDL_MOUSEBUTTONDOWN) {
+            onMouseButtonPressed(events[i].button.button);
+        } else if (events[i].type == SDL_MOUSEBUTTONUP) {
+            onMouseButtonReleased(events[i].button.button);
+        } else if (events[i].type == SDL_MOUSEWHEEL) {
+            onScroll(events[i].wheel.preciseY);
+        } else if (events[i].type == SDL_KEYDOWN) {
+            onKeyPressed(events[i].key.keysym.sym, events[i].key.repeat != 0);
+        } else if (events[i].type == SDL_KEYUP) {
+            onKeyReleased(events[i].key.keysym.sym);
+        } else if (events[i].type == SDL_TEXTINPUT) {
             static std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
-            std::u32string u32text = converter.from_bytes(e.text.text);
+            std::u32string u32text = converter.from_bytes(events[i].text.text);
             for (char32_t unicode: u32text) {
                 onChar(unicode);
             }
-        } else if (e.type == SDL_WINDOWEVENT) {
-            if (e.window.event == SDL_WINDOWEVENT_RESIZED || e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+        } else if (events[i].type == SDL_WINDOWEVENT) {
+            if (events[i].window.event == SDL_WINDOWEVENT_RESIZED || events[i].window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
                 context->getScene().onResize();
             }
-        } else if (e.type == SDL_QUIT) {
+        } else if (events[i].type == SDL_QUIT) {
             context->exit();
         }
     }
+    events.clear();
 }
 
 void Main::onChar(char32_t unicodeCharacter) {

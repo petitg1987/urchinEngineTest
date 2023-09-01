@@ -48,5 +48,6 @@ class Main {
         bool propagatePressKeyEvent;
         bool propagateReleaseKeyEvent;
         std::map<int, urchin::Control::Key> inputKeyMap;
+        std::vector<SDL_Event> events;
         bool altLeftKeyPressed;
 };
