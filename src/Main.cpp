@@ -201,7 +201,7 @@ void Main::handleInputEvents(SDL_Window* window) {
                 bool isFullScreen = (SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN;
                 context->getWindowController().updateWindowedMode(isFullScreen);
                 context->getScene().onResize(); //manually resize because the windowed mode change does not always trigger the resize
-                return;
+                continue;
             }
         } else if (events[i].type == SDL_KEYUP) {
             if (events[i].key.keysym.sym == SDLK_LALT) {
