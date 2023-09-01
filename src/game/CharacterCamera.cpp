@@ -7,8 +7,8 @@ CharacterCamera::CharacterCamera(const WindowController& windowController, float
     useMouseToMoveCamera(true);
 }
 
-bool CharacterCamera::onMouseMove(double mouseX, double mouseY) {
-    bool propagateEvent = Camera::onMouseMove(mouseX, mouseY);
+bool CharacterCamera::onMouseMove(double deltaMouseX, double deltaMouseY) {
+    bool propagateEvent = Camera::onMouseMove(deltaMouseX, deltaMouseY);
 
     if (windowController.isDevModeOn() && isUseMouseToMoveCamera()) {
         windowController.moveMouse((double)getSceneWidth() / 2.0, (double)getSceneHeight() / 2.0);
