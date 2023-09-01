@@ -14,7 +14,8 @@ int main(int argc, char* argv[]) {
 
 Main::Main() :
         propagatePressKeyEvent(true),
-        propagateReleaseKeyEvent(true) {
+        propagateReleaseKeyEvent(true),
+        altLeftKeyPressed(false) {
     crashReporter = std::make_shared<CrashReporter>();
 }
 
@@ -186,7 +187,6 @@ void Main::handleInputEvents(SDL_Window* window) {
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0) {
         //handle Alt+Enter to switch between windowed/fullscreen mode
-        static bool altLeftKeyPressed = false;
         if (e.type == SDL_KEYDOWN) {
             if (e.key.keysym.sym == SDLK_LALT) {
                 altLeftKeyPressed = true;
