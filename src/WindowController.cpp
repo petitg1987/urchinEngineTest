@@ -1,47 +1,41 @@
-#include <vulkan/vulkan.h>
-#include <GLFW/glfw3.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_vulkan.h>
 #include <stdexcept>
-#include <cassert>
 
 #include <WindowController.h>
 using namespace urchin;
 
-GlfwSurfaceCreator::GlfwSurfaceCreator(GLFWwindow* window) :
+SdlSurfaceCreator::SdlSurfaceCreator(SDL_Window* window) :
         window(window) {
 }
 
-void* GlfwSurfaceCreator::createSurface(void* instance) {
+void* SdlSurfaceCreator::createSurface(void* instance) {
     VkSurfaceKHR surface = nullptr;
-    VkResult result = glfwCreateWindowSurface(static_cast<VkInstance>(instance), window, nullptr, &surface);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to create window surface with error code: " + std::to_string(result));
+    SDL_bool result = SDL_Vulkan_CreateSurface(window, static_cast<VkInstance>(instance), &surface);
+    if (result != SDL_TRUE) {
+        throw std::runtime_error("Failed to create window surface with error code: " + std::string(SDL_GetError()));
     }
     return surface;
 }
 
-GlfwFramebufferSizeRetriever::GlfwFramebufferSizeRetriever(GLFWwindow* window) :
+SdlFramebufferSizeRetriever::SdlFramebufferSizeRetriever(SDL_Window* window) :
         window(window) {
 }
 
-void GlfwFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& widthInPixel, unsigned int& heightInPixel) const {
+void SdlFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& widthInPixel, unsigned int& heightInPixel) const {
     int intWidthInPixel;
     int intHeightInPixel;
-    glfwGetFramebufferSize(window, &intWidthInPixel, &intHeightInPixel); //don't use glfwGetWindowSize which doesn't return size in pixel
-
-    //window is probably minimized: wait for a valid width/height size
-    while (intWidthInPixel == 0 || intHeightInPixel == 0) {
-        glfwGetFramebufferSize(window, &intWidthInPixel, &intHeightInPixel);
-        glfwWaitEvents();
-    }
+    SDL_Vulkan_GetDrawableSize(window, &intWidthInPixel, &intHeightInPixel); //don't use SDL_GetWindowSize which doesn't return size in pixel
 
     widthInPixel = (unsigned int)intWidthInPixel;
     heightInPixel = (unsigned int)intHeightInPixel;
 }
 
-WindowController::WindowController(GLFWwindow* window, bool devModeOn) :
+WindowController::WindowController(SDL_Window* window, bool devModeOn) :
         window(window),
         devModeOn(devModeOn),
-        eventsCallbackActive(true) {
+        eventsCallbackActive(true),
+        lastVisibleMouseCoord(Point2<double>(0.0, 0.0)) {
 
 }
 
@@ -51,70 +45,79 @@ Point2<int> WindowController::optimumWindowSize() {
 }
 
 void WindowController::updateWindowedMode(bool windowedModeEnabled) {
-    bool isFullScreen = glfwGetWindowMonitor(window) != nullptr;
-    GLFWmonitor* monitor = getWindowMonitor();
+    bool isFullScreen = (SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN;
     if (isFullScreen && windowedModeEnabled) {
-        int monitorX = 0;
-        int monitorY = 0;
-        glfwGetMonitorPos(monitor, &monitorX, &monitorY);
-        Point2<int> optimumWindowSize = WindowController::optimumWindowSize();
-        glfwSetWindowMonitor(window, nullptr, monitorX + 100, monitorY + 100 /* do not put 0 because the title bar will be outside the screen on Windows */, optimumWindowSize.X, optimumWindowSize.Y, GLFW_DONT_CARE);
-        Logger::instance().logInfo("Switched to windowed mode");
+        if (SDL_SetWindowFullscreen(window, 0) != 0) {
+            Logger::instance().logError("Switch to windowed mode cause error: " + std::string(SDL_GetError()));
+        } else {
+            Point2<int> windowSize = optimumWindowSize();
+            SDL_SetWindowResizable(window, SDL_TRUE);
+            SDL_SetWindowSize(window, windowSize.X, windowSize.Y);
+            SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+            Logger::instance().logInfo("Switched to windowed mode");
+        }
     } else if (!isFullScreen && !windowedModeEnabled) {
-        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
-        Logger::instance().logInfo("Switched to fullscreen mode");
-    }
-}
-
-void WindowController::setMouseCursorVisible(bool visible) {
-    int cursorMode = GLFW_CURSOR_NORMAL;
-    if (!visible) {
-        if (isDevModeOn()) {
-            cursorMode = GLFW_CURSOR_HIDDEN;
+        if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN) != 0) {
+            Logger::instance().logError("Switch to fullscreen mode cause error: " + std::string(SDL_GetError()));
         } else {
-            cursorMode = GLFW_CURSOR_DISABLED;
+            Logger::instance().logInfo("Switched to fullscreen mode");
         }
+        SDL_SetWindowResizable(window, SDL_FALSE);
     }
-    glfwSetInputMode(window, GLFW_CURSOR, cursorMode);
-
-    if (glfwRawMouseMotionSupported()) {
-        if (!visible) {
-            glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
-        } else {
-            glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_FALSE);
-        }
-    }
-}
-
-bool WindowController::isMouseCursorVisible() const {
-    return glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL;
 }
 
 bool WindowController::isDevModeOn() const {
     return devModeOn;
 }
 
+void WindowController::setMouseCursorVisible(bool visible) {
+    bool resetMousePosition = false;
+    int showCursor = SDL_ENABLE;
+    SDL_bool relativeMouseMove = SDL_FALSE;
+
+    if (visible) {
+        resetMousePosition = !isMouseCursorVisible() && (lastVisibleMouseCoord.X != 0.0 || lastVisibleMouseCoord.Y != 0.0);
+    } else {
+        if (isDevModeOn()) {
+            showCursor = SDL_DISABLE;
+        } else {
+            relativeMouseMove = SDL_TRUE;
+        }
+
+        if (isMouseCursorVisible()) {
+            lastVisibleMouseCoord = getMousePosition();
+        }
+    }
+
+    SDL_ShowCursor(showCursor);
+    if (SDL_SetRelativeMouseMode(relativeMouseMove) != 0) {
+        Logger::instance().logError("Impossible to update relative mouse mode state: " + std::string(SDL_GetError()));
+    }
+    if (resetMousePosition) {
+        moveMouse(lastVisibleMouseCoord.X, lastVisibleMouseCoord.Y);
+    }
+}
+
+bool WindowController::isMouseCursorVisible() const {
+    return SDL_ShowCursor(SDL_QUERY) == SDL_ENABLE && SDL_GetRelativeMouseMode() == SDL_FALSE;
+}
+
 void WindowController::moveMouse(double mouseX, double mouseY) const {
-    #ifdef APP_DEBUG
-        assert(isDevModeOn() || glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL);
-    #endif
-    glfwSetCursorPos(window, mouseX, mouseY);
+    SDL_WarpMouseInWindow(window, MathFunction::roundToInt(mouseX), MathFunction::roundToInt(mouseY));
 }
 
 Point2<double> WindowController::getMousePosition() const {
-    #ifdef APP_DEBUG
-        assert(isDevModeOn() || glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL);
-    #endif
-    double mouseX = 0.0;
-    double mouseY = 0.0;
-    glfwGetCursorPos(window, &mouseX, &mouseY);
+    int mouseX = 0;
+    int mouseY = 0;
+    SDL_GetMouseState(&mouseX, &mouseY);
     return Point2<double>(mouseX, mouseY);
 }
 
 void WindowController::cleanEvents() {
-    eventsCallbackActive = false;
-    glfwPollEvents();
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        //cleaning events
+    }
     eventsCallbackActive = true;
 }
 
@@ -123,57 +126,27 @@ bool WindowController::isEventCallbackActive() const {
 }
 
 std::vector<std::string> WindowController::windowRequiredExtensions() {
-    ExtensionList extensionList;
-    extensionList.extensions = glfwGetRequiredInstanceExtensions(&extensionList.extensionCount);
-    return std::vector<std::string>(extensionList.extensions, extensionList.extensions + extensionList.extensionCount);
-}
+    unsigned int count = 0;
+    SDL_Vulkan_GetInstanceExtensions(window, &count, nullptr);
 
-std::unique_ptr<GlfwSurfaceCreator> WindowController::newSurfaceCreator() const {
-    return std::make_unique<GlfwSurfaceCreator>(window);
-}
+    const auto** pNames = new const char*[count];
+    SDL_Vulkan_GetInstanceExtensions(window, &count, pNames);
+    auto extensions = std::span(pNames, size_t(count));
 
-std::unique_ptr<GlfwFramebufferSizeRetriever> WindowController::newFramebufferSizeRetriever() const {
-    return std::make_unique<GlfwFramebufferSizeRetriever>(window);
-}
-
-/**
- * Return the current monitor where is the window.
- * Note: glfwGetWindowMonitor(), can not be used for two reasons:
- *      1. Method is not working correctly: https://github.com/glfw/glfw/issues/2137
- *      2. Method returns nullptr if window is not in fullscreen mode
- */
-GLFWmonitor* WindowController::getWindowMonitor() const {
-    int bestOverlap = 0;
-    GLFWmonitor *bestMonitor = glfwGetPrimaryMonitor();
-
-    int windowPosX = 0;
-    int windowPosY = 0;
-    glfwGetWindowPos(window, &windowPosX, &windowPosY);
-    int windowSizeX = 0;
-    int windowSizeY = 0;
-    glfwGetWindowSize(window, &windowSizeX, &windowSizeY);
-
-    int numMonitor = 0;
-    GLFWmonitor** monitors = glfwGetMonitors(&numMonitor);
-
-    for (int monitorIndex = 0; monitorIndex < numMonitor; ++monitorIndex) {
-        const GLFWvidmode* mode = glfwGetVideoMode(monitors[monitorIndex]);
-        int modeWidth = mode->width;
-        int modeHeight = mode->height;
-
-        int monitorX = 0;
-        int monitorY = 0;
-        glfwGetMonitorPos(monitors[monitorIndex], &monitorX, &monitorY);
-
-        int overlap =
-                std::max(0, std::min(windowPosX + windowSizeX, monitorX + modeWidth) - std::max(windowPosX, monitorX)) *
-                std::max(0, std::min(windowPosY + windowSizeY, monitorY + modeHeight) - std::max(windowPosY, monitorY));
-
-        if (overlap > bestOverlap) {
-            bestOverlap = overlap;
-            bestMonitor = monitors[monitorIndex];
-        }
+    std::vector<std::string> extensionNames;
+    extensionNames.reserve(extensions.size());
+    for (const auto& extension : extensions) {
+        extensionNames.emplace_back(extension);
     }
+    delete[] pNames;
 
-    return bestMonitor;
+    return extensionNames;
+}
+
+std::unique_ptr<SdlSurfaceCreator> WindowController::newSurfaceCreator() const {
+    return std::make_unique<SdlSurfaceCreator>(window);
+}
+
+std::unique_ptr<SdlFramebufferSizeRetriever> WindowController::newFramebufferSizeRetriever() const {
+    return std::make_unique<SdlFramebufferSizeRetriever>(window);
 }

@@ -1,10 +1,9 @@
-#include <unistd.h>
+#define SDL_MAIN_HANDLED
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_vulkan.h>
 
 #include <Main.h>
 using namespace urchin;
-
-//static
-bool Main::altLeftKeyPressed = false;
 
 int main(int argc, char* argv[]) {
     Main main;
@@ -26,38 +25,30 @@ void Main::execute(std::span<char*> args) {
     SignalHandler::instance().registerSignalReceptor(crashReporter);
 
     Logger::instance().logInfo("Application started");
-    GLFWwindow* window = nullptr;
+    SDL_Window* window = nullptr;
 
     bool isWindowed = argumentsContains("--windowed", args);
     bool isDevModeOn = argumentsContains("--dev", args);
 
     try {
-        glfwSetErrorCallback(glfwErrorCallback);
-        if (!glfwInit()) {
-            throw std::runtime_error("Impossible to initialize GLFW library");
+        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
+            throw std::runtime_error("Impossible to initialize SDL library: " + std::string(SDL_GetError()));
         }
-        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        if (SDL_Vulkan_LoadLibrary(nullptr) != 0) {
+            throw std::runtime_error("Impossible to load SDL Vulkan library: " + std::string(SDL_GetError()));
+        }
 
         FileSystem::instance().setupResourcesDirectory(retrieveResourcesDirectory(args[0]));
         ConfigService::instance().loadProperties("engine.properties");
         UISkinService::instance().setSkin("ui/skinDefinition.uda");
 
         window = createWindow(isWindowed);
-
-        glfwSetWindowUserPointer(window, (void*)this);
-        glfwSetCharCallback(window, charCallback);
-        glfwSetKeyCallback(window, keyCallback);
-        glfwSetMouseButtonCallback(window, mouseKeyCallback);
-        glfwSetCursorPosCallback(window, cursorPositionCallback);
-        glfwSetScrollCallback(window, scrollCallback);
-        glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
-
         context = createMainContext(window, isDevModeOn);
         game = std::make_unique<Game>(*context);
         context->getWindowController().cleanEvents(); //ignore events occurred during initialization phase
 
-        while (!glfwWindowShouldClose(window)) {
-            handleInputEvents();
+        while (!context->isExitRequired()) {
+            handleInputEvents(window);
 
             game->refresh();
             context->getScene().display();
@@ -81,205 +72,162 @@ void Main::execute(std::span<char*> args) {
     }
 }
 
-std::unique_ptr<MainContext> Main::createMainContext(GLFWwindow* window, bool isDevModeOn) const {
+std::unique_ptr<MainContext> Main::createMainContext(SDL_Window* window, bool isDevModeOn) const {
     auto windowController = std::make_unique<WindowController>(window, isDevModeOn);
-    auto scene = std::make_unique<Scene>(WindowController::windowRequiredExtensions(), windowController->newSurfaceCreator(), windowController->newFramebufferSizeRetriever(), false);
+    auto scene = std::make_unique<Scene>(windowController->windowRequiredExtensions(), windowController->newSurfaceCreator(), windowController->newFramebufferSizeRetriever(), false);
     auto soundEnvironment = std::make_unique<SoundEnvironment>();
 
     return std::make_unique<MainContext>(std::move(scene), std::move(windowController), std::move(soundEnvironment));
 }
 
-void Main::glfwErrorCallback(int error, const char* description) {
-    std::string errorDescription = (description != nullptr) ? std::string(description) : "";
-    if (error == GLFW_INVALID_VALUE && errorDescription.find("Invalid scancode") != std::string::npos) {
-        //see https://github.com/glfw/glfw/issues/1785 (also happens on some Windows laptops)
-        return; //full message: "Invalid scancode 0"
-    } else if (error == GLFW_PLATFORM_ERROR && errorDescription.find("Iconification") != std::string::npos) {
-        Logger::instance().logInfo("Window iconification GLFW error ignored: " + std::string(description));
-        return; //full message: "X11: Iconification of full screen windows requires a WM that supports EWMH full screen"
-    } else if (error == GLFW_PLATFORM_ERROR && errorDescription.find("window icon") != std::string::npos) {
-        Logger::instance().logInfo("Setting window icon GLFW error ignored: " + std::string(description));
-        return; //full message: "Wayland: The platform does not support setting the window icon"
-    } else if (error == GLFW_FORMAT_UNAVAILABLE && errorDescription.find("clipboard") != std::string::npos) {
-        Logger::instance().logInfo("Impossible to copy from clipboard: " + std::string(description));
-        //occur when clipboard is empty on Windows
-        return; //full message: "Win32: Failed to convert clipboard to string: Élément introuvable"
-    }
-    Logger::instance().logWarning("GLFW error (code: " + std::to_string(error) + "): " + description);
-}
-
 void Main::initializeInputKeyMap() {
     //keyboard
     for (int i = 0; i < 10; ++i) {
-        inputKeyMap[GLFW_KEY_0 + i] = static_cast<Control::Key>(Control::Key::K0 + i);
+        inputKeyMap[SDLK_0 + i] = static_cast<Control::Key>(Control::Key::K0 + i);
     }
-    for (int i = 0; i < 12; ++i) {
-        inputKeyMap[GLFW_KEY_F1 + i] = static_cast<Control::Key>(Control::Key::F1 + i);
-    }
-    for (int i = 0; i < 10; ++i) {
-        inputKeyMap[GLFW_KEY_KP_0 + i] = static_cast<Control::Key>(Control::Key::NUM_PAD_0 + i);
-    }
-    inputKeyMap[GLFW_KEY_KP_DECIMAL] = Control::Key::NUM_PAD_DECIMAL;
-    inputKeyMap[GLFW_KEY_KP_DIVIDE] = Control::Key::NUM_PAD_DIVIDE;
-    inputKeyMap[GLFW_KEY_KP_MULTIPLY] = Control::Key::NUM_PAD_MULTIPLY;
-    inputKeyMap[GLFW_KEY_KP_SUBTRACT] = Control::Key::NUM_PAD_SUBTRACT;
-    inputKeyMap[GLFW_KEY_KP_ADD] = Control::Key::NUM_PAD_ADD;
-    inputKeyMap[GLFW_KEY_KP_ENTER] = Control::Key::NUM_PAD_ENTER;
-    inputKeyMap[GLFW_KEY_KP_EQUAL] = Control::Key::NUM_PAD_EQUAL;
-    inputKeyMap[GLFW_KEY_ESCAPE] = Control::Key::ESCAPE;
-    inputKeyMap[GLFW_KEY_SPACE] = Control::Key::SPACE;
-    inputKeyMap[GLFW_KEY_LEFT_CONTROL] = Control::Key::CTRL_LEFT;
-    inputKeyMap[GLFW_KEY_RIGHT_CONTROL] = Control::Key::CTRL_RIGHT;
-    inputKeyMap[GLFW_KEY_LEFT_ALT] = Control::Key::ALT_LEFT;
-    inputKeyMap[GLFW_KEY_RIGHT_ALT] = Control::Key::ALT_RIGHT;
-    inputKeyMap[GLFW_KEY_LEFT_SHIFT] = Control::Key::SHIFT_LEFT;
-    inputKeyMap[GLFW_KEY_RIGHT_SHIFT] = Control::Key::SHIFT_RIGHT;
-    inputKeyMap[GLFW_KEY_LEFT_SUPER] = Control::Key::SUPER_LEFT;
-    inputKeyMap[GLFW_KEY_RIGHT_SUPER] = Control::Key::SUPER_RIGHT;
-    inputKeyMap[GLFW_KEY_MENU] = Control::Key::MENU;
-    inputKeyMap[GLFW_KEY_LEFT] = Control::Key::ARROW_LEFT;
-    inputKeyMap[GLFW_KEY_RIGHT] = Control::Key::ARROW_RIGHT;
-    inputKeyMap[GLFW_KEY_UP] = Control::Key::ARROW_UP;
-    inputKeyMap[GLFW_KEY_DOWN] = Control::Key::ARROW_DOWN;
-    inputKeyMap[GLFW_KEY_ENTER] = Control::Key::ENTER;
-    inputKeyMap[GLFW_KEY_TAB] = Control::Key::TAB;
-    inputKeyMap[GLFW_KEY_BACKSPACE] = Control::Key::BACKSPACE;
-    inputKeyMap[GLFW_KEY_INSERT] = Control::Key::INSERT;
-    inputKeyMap[GLFW_KEY_DELETE] = Control::Key::DEL;
-    inputKeyMap[GLFW_KEY_HOME] = Control::Key::HOME;
-    inputKeyMap[GLFW_KEY_END] = Control::Key::END;
-    inputKeyMap[GLFW_KEY_PAGE_UP] = Control::Key::PAGE_UP;
-    inputKeyMap[GLFW_KEY_PAGE_DOWN] = Control::Key::PAGE_DOWN;
-    inputKeyMap[GLFW_KEY_CAPS_LOCK] = Control::Key::CAPS_LOCK;
-    inputKeyMap[GLFW_KEY_SCROLL_LOCK] = Control::Key::SCROLL_LOCK;
-    inputKeyMap[GLFW_KEY_NUM_LOCK] = Control::Key::NUM_LOCK;
-    inputKeyMap[GLFW_KEY_PRINT_SCREEN] = Control::Key::PRINT_SCREEN;
-    inputKeyMap[GLFW_KEY_PAUSE] = Control::Key::PAUSE;
+    inputKeyMap[SDLK_F1] = Control::Key::F1;
+    inputKeyMap[SDLK_F2] = Control::Key::F2;
+    inputKeyMap[SDLK_F3] = Control::Key::F3;
+    inputKeyMap[SDLK_F4] = Control::Key::F4;
+    inputKeyMap[SDLK_F5] = Control::Key::F5;
+    inputKeyMap[SDLK_F6] = Control::Key::F6;
+    inputKeyMap[SDLK_F7] = Control::Key::F7;
+    inputKeyMap[SDLK_F8] = Control::Key::F8;
+    inputKeyMap[SDLK_F9] = Control::Key::F9;
+    inputKeyMap[SDLK_F10] = Control::Key::F10;
+    inputKeyMap[SDLK_F11] = Control::Key::F11;
+    inputKeyMap[SDLK_F12] = Control::Key::F12;
+    inputKeyMap[SDLK_KP_0] = Control::Key::NUM_PAD_0;
+    inputKeyMap[SDLK_KP_1] = Control::Key::NUM_PAD_1;
+    inputKeyMap[SDLK_KP_2] = Control::Key::NUM_PAD_2;
+    inputKeyMap[SDLK_KP_3] = Control::Key::NUM_PAD_3;
+    inputKeyMap[SDLK_KP_4] = Control::Key::NUM_PAD_4;
+    inputKeyMap[SDLK_KP_5] = Control::Key::NUM_PAD_5;
+    inputKeyMap[SDLK_KP_6] = Control::Key::NUM_PAD_6;
+    inputKeyMap[SDLK_KP_7] = Control::Key::NUM_PAD_7;
+    inputKeyMap[SDLK_KP_8] = Control::Key::NUM_PAD_8;
+    inputKeyMap[SDLK_KP_9] = Control::Key::NUM_PAD_9;
+    inputKeyMap[SDLK_KP_DECIMAL] = Control::Key::NUM_PAD_DECIMAL;
+    inputKeyMap[SDLK_KP_DIVIDE] = Control::Key::NUM_PAD_DIVIDE;
+    inputKeyMap[SDLK_KP_MULTIPLY] = Control::Key::NUM_PAD_MULTIPLY;
+    inputKeyMap[SDLK_KP_MINUS] = Control::Key::NUM_PAD_SUBTRACT;
+    inputKeyMap[SDLK_KP_PLUS] = Control::Key::NUM_PAD_ADD;
+    inputKeyMap[SDLK_KP_ENTER] = Control::Key::NUM_PAD_ENTER;
+    inputKeyMap[SDLK_KP_EQUALS] = Control::Key::NUM_PAD_EQUAL;
+    inputKeyMap[SDLK_ESCAPE] = Control::Key::ESCAPE;
+    inputKeyMap[SDLK_SPACE] = Control::Key::SPACE;
+    inputKeyMap[SDLK_LCTRL] = Control::Key::CTRL_LEFT;
+    inputKeyMap[SDLK_RCTRL] = Control::Key::CTRL_RIGHT;
+    inputKeyMap[SDLK_LALT] = Control::Key::ALT_LEFT;
+    inputKeyMap[SDLK_RALT] = Control::Key::ALT_RIGHT;
+    inputKeyMap[SDLK_LSHIFT] = Control::Key::SHIFT_LEFT;
+    inputKeyMap[SDLK_RSHIFT] = Control::Key::SHIFT_RIGHT;
+    inputKeyMap[SDLK_LGUI] = Control::Key::SUPER_LEFT;
+    inputKeyMap[SDLK_RGUI] = Control::Key::SUPER_RIGHT;
+    inputKeyMap[SDLK_MENU] = Control::Key::MENU;
+    inputKeyMap[SDLK_LEFT] = Control::Key::ARROW_LEFT;
+    inputKeyMap[SDLK_RIGHT] = Control::Key::ARROW_RIGHT;
+    inputKeyMap[SDLK_UP] = Control::Key::ARROW_UP;
+    inputKeyMap[SDLK_DOWN] = Control::Key::ARROW_DOWN;
+    inputKeyMap[SDLK_RETURN] = Control::Key::ENTER;
+    inputKeyMap[SDLK_TAB] = Control::Key::TAB;
+    inputKeyMap[SDLK_BACKSPACE] = Control::Key::BACKSPACE;
+    inputKeyMap[SDLK_INSERT] = Control::Key::INSERT;
+    inputKeyMap[SDLK_DELETE] = Control::Key::DEL;
+    inputKeyMap[SDLK_HOME] = Control::Key::HOME;
+    inputKeyMap[SDLK_END] = Control::Key::END;
+    inputKeyMap[SDLK_PAGEUP] = Control::Key::PAGE_UP;
+    inputKeyMap[SDLK_PAGEDOWN] = Control::Key::PAGE_DOWN;
+    inputKeyMap[SDLK_CAPSLOCK] = Control::Key::CAPS_LOCK;
+    inputKeyMap[SDLK_SCROLLLOCK] = Control::Key::SCROLL_LOCK;
+    inputKeyMap[SDLK_NUMLOCKCLEAR] = Control::Key::NUM_LOCK;
+    inputKeyMap[SDLK_PRINTSCREEN] = Control::Key::PRINT_SCREEN;
+    inputKeyMap[SDLK_PAUSE] = Control::Key::PAUSE;
 
     //mouse
-    inputKeyMap[GLFW_MOUSE_BUTTON_LEFT] = Control::Key::LMB;
-    inputKeyMap[GLFW_MOUSE_BUTTON_RIGHT] = Control::Key::RMB;
-    inputKeyMap[GLFW_MOUSE_BUTTON_MIDDLE] = Control::Key::MMB;
-    inputKeyMap[GLFW_MOUSE_BUTTON_4] = Control::Key::MOUSE_F1;
-    inputKeyMap[GLFW_MOUSE_BUTTON_5] = Control::Key::MOUSE_F2;
-    inputKeyMap[GLFW_MOUSE_BUTTON_6] = Control::Key::MOUSE_F3;
-    inputKeyMap[GLFW_MOUSE_BUTTON_7] = Control::Key::MOUSE_F4;
-    inputKeyMap[GLFW_MOUSE_BUTTON_8] = Control::Key::MOUSE_F5;
+    inputKeyMap[SDL_BUTTON_LEFT] = Control::Key::LMB;
+    inputKeyMap[SDL_BUTTON_RIGHT] = Control::Key::RMB;
+    inputKeyMap[SDL_BUTTON_MIDDLE] = Control::Key::MMB;
+    inputKeyMap[SDL_BUTTON_X1] = Control::Key::MOUSE_F1;
+    inputKeyMap[SDL_BUTTON_X2] = Control::Key::MOUSE_F2;
 }
 
 std::string Main::retrieveResourcesDirectory(const char* firstArg) {
     return FileUtil::getDirectory(std::string_view(firstArg)) + "resources/";
 }
 
-GLFWwindow* Main::createWindow(bool isWindowed) {
-    GLFWwindow *window;
-    const char* windowTitle = "Urchin Engine Test";
-
+SDL_Window* Main::createWindow(bool isWindowed) {
+    Point2<int> windowSize;
+    Uint32 flags;
     if (isWindowed) {
-        Point2<int> optimumWindowSize = WindowController::optimumWindowSize();
-        window = glfwCreateWindow(optimumWindowSize.X, optimumWindowSize.Y, windowTitle, nullptr, nullptr);
+        windowSize = WindowController::optimumWindowSize();
+        flags = SDL_WINDOW_VULKAN | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE;
     } else {
-        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-        window = glfwCreateWindow(mode->width, mode->height, windowTitle, monitor, nullptr);
+        SDL_DisplayMode desktopDisplayMode;
+        if (SDL_GetDesktopDisplayMode(0, &desktopDisplayMode) != 0) {
+            throw std::runtime_error("Impossible to get SDL current display mode: " + std::string(SDL_GetError()));
+        }
+        windowSize = Point2<int>(desktopDisplayMode.w, desktopDisplayMode.h);
+        flags = SDL_WINDOW_VULKAN | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_FULLSCREEN;
     }
 
+    SDL_Window* window = SDL_CreateWindow("Urchin Engine Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowSize.X, windowSize.Y, flags);
     if (!window) {
-        throw std::runtime_error("Impossible to create the GLFW window");
+        throw std::runtime_error("Impossible to create the SDL window");
     }
 
     return window;
 }
 
-void Main::charCallback(GLFWwindow* window, unsigned int unicodeCharacter) {
-    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
-        main->charEvents.push_back(unicodeCharacter);
-    }
-}
+void Main::handleInputEvents(SDL_Window* window) {
+    propagatePressKeyEvent = true;
+    propagateReleaseKeyEvent = true;
 
-void Main::keyCallback(GLFWwindow* window, int key, int, int action, int) {
-    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
-
+    SDL_Event e;
+    while (SDL_PollEvent(&e) != 0) {
         //handle Alt+Enter to switch between windowed/fullscreen mode
-        if (action == GLFW_PRESS) {
-            if (key == GLFW_KEY_LEFT_ALT) {
+        static bool altLeftKeyPressed = false;
+        if (e.type == SDL_KEYDOWN) {
+            if (e.key.keysym.sym == SDLK_LALT) {
                 altLeftKeyPressed = true;
-            } else if (altLeftKeyPressed && key == GLFW_KEY_ENTER) {
-                bool isFullScreen = glfwGetWindowMonitor(window) != nullptr;
-                main->context->getWindowController().updateWindowedMode(isFullScreen);
+            } else if (altLeftKeyPressed && e.key.keysym.sym == SDLK_RETURN) {
+                bool isFullScreen = (SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN) == SDL_WINDOW_FULLSCREEN;
+                context->getWindowController().updateWindowedMode(isFullScreen);
+                context->getScene().onResize(); //manually resize because the windowed mode change does not always trigger the resize
                 return;
             }
-        } else if (action == GLFW_RELEASE) {
-            if (key == GLFW_KEY_LEFT_ALT) {
+        } else if (e.type == SDL_KEYUP) {
+            if (e.key.keysym.sym == SDLK_LALT) {
                 altLeftKeyPressed = false;
             }
         }
 
-        //handle pressed/released keys
-        if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-            if (key == GLFW_KEY_ESCAPE) {
-                glfwSetWindowShouldClose(window, GLFW_TRUE);
+        if (e.type == SDL_MOUSEMOTION) {
+            onMouseMove(e.motion.x, e.motion.y, e.motion.xrel, e.motion.yrel);
+        } else if (e.type == SDL_MOUSEBUTTONDOWN) {
+            onMouseButtonPressed(e.button.button);
+        } else if (e.type == SDL_MOUSEBUTTONUP) {
+            onMouseButtonReleased(e.button.button);
+        } else if (e.type == SDL_MOUSEWHEEL) {
+            onScroll(e.wheel.preciseY);
+        } else if (e.type == SDL_KEYDOWN) {
+            onKeyPressed(e.key.keysym.sym, e.key.repeat != 0);
+        } else if (e.type == SDL_KEYUP) {
+            onKeyReleased(e.key.keysym.sym);
+        } else if (e.type == SDL_TEXTINPUT) {
+            static std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
+            std::u32string u32text = converter.from_bytes(e.text.text);
+            for (char32_t unicode: u32text) {
+                onChar(unicode);
             }
-            main->keyEvents.emplace_back(KeyEvent{key, true /* pressed */, action == GLFW_REPEAT});
-        } else if (action == GLFW_RELEASE) {
-            main->keyEvents.emplace_back(KeyEvent{key, false /* released */, false});
+        } else if (e.type == SDL_WINDOWEVENT) {
+            if (e.window.event == SDL_WINDOWEVENT_RESIZED || e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+                context->getScene().onResize();
+            }
+        } else if (e.type == SDL_QUIT) {
+            context->exit();
         }
     }
-}
-
-void Main::mouseKeyCallback(GLFWwindow* window, int button, int action, int) {
-    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
-        if (action == GLFW_PRESS) {
-            main->onMouseButtonPressed(button);
-        } else if (action == GLFW_RELEASE) {
-            main->onMouseButtonReleased(button);
-        }
-    }
-}
-
-void Main::cursorPositionCallback(GLFWwindow* window, double x, double y) {
-    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
-        main->onMouseMove((int)x, (int)y);
-    }
-}
-
-void Main::scrollCallback(GLFWwindow* window, double, double offsetY) {
-    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context && main->context->getWindowController().isEventCallbackActive()) {
-        main->onScroll(offsetY);
-    }
-}
-
-void Main::framebufferSizeCallback(GLFWwindow* window, int, int) {
-    auto main = static_cast<Main*>(glfwGetWindowUserPointer(window));
-    if (main && main->context) {
-        //engine
-        main->context->getScene().onResize();
-    }
-}
-
-void Main::handleInputEvents() {
-    propagatePressKeyEvent = true;
-    propagateReleaseKeyEvent = true;
-    glfwPollEvents();
-
-    for (unsigned int charUnicode : charEvents) {
-        onChar(charUnicode);
-    }
-    charEvents.clear();
-
-    for (const KeyEvent& keyEvent : keyEvents) {
-        if (keyEvent.isKeyPressed) {
-            onKeyPressed(keyEvent.key);
-        } else {
-            onKeyReleased(keyEvent.key);
-        }
-    }
-    keyEvents.clear();
 }
 
 void Main::onChar(char32_t unicodeCharacter) {
@@ -289,86 +237,87 @@ void Main::onChar(char32_t unicodeCharacter) {
     }
 }
 
-void Main::onKeyPressed(int key) {
+void Main::onKeyPressed(int keyCode, bool isRepeatPress) {
     //engine
     if (propagatePressKeyEvent) {
-        const char* charKey = glfwGetKeyName(key, 0);
-        if (charKey && charKey[0] == 'a') {
+        if (keyCode == SDLK_a) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::A);
-        } else if (charKey && charKey[0] == 'c') {
+        } else if (keyCode == SDLK_c) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::C);
-        } else if (charKey && charKey[0] == 'v') {
+        } else if (keyCode == SDLK_v) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::V);
-        } else if (charKey && charKey[0] == 'x') {
+        } else if (keyCode == SDLK_x) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::X);
-        } else if (key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL) {
+        } else if (keyCode == SDLK_LCTRL || keyCode == SDLK_RCTRL) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::CTRL);
-        } else if (key == GLFW_KEY_LEFT) {
+        } else if (keyCode == SDLK_LEFT) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::LEFT_ARROW);
-        } else if (key == GLFW_KEY_RIGHT) {
+        } else if (keyCode == SDLK_RIGHT) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::RIGHT_ARROW);
-        } else if (key == GLFW_KEY_UP) {
+        } else if (keyCode == SDLK_UP) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::UP_ARROW);
-        } else if (key == GLFW_KEY_DOWN) {
+        } else if (keyCode == SDLK_DOWN) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::DOWN_ARROW);
-        } else if (key == GLFW_KEY_BACKSPACE) {
+        } else if (keyCode == SDLK_BACKSPACE) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::BACKSPACE);
-        } else if (key == GLFW_KEY_DELETE) {
+        } else if (keyCode == SDLK_DELETE) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::DELETE_KEY);
-        } else if (key == GLFW_KEY_ENTER || key == GLFW_KEY_KP_ENTER) {
+        } else if (keyCode == SDLK_RETURN || keyCode == SDLK_KP_ENTER) {
             propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::ENTER);
         }
     }
 
     //game
-    if (propagatePressKeyEvent) {
-        game->onKeyPressed(toInputKey(key));
+    if (propagatePressKeyEvent && !isRepeatPress) {
+        if (keyCode == SDLK_ESCAPE) {
+            context->exit();
+        }
+        game->onKeyPressed(toInputKey(keyCode));
     }
 }
 
-void Main::onKeyReleased(int key) {
+void Main::onKeyReleased(int keyCode) {
     //engine
     if (propagateReleaseKeyEvent) {
-        const char* charKey = glfwGetKeyName(key, 0);
-        if (charKey && charKey[0] == 'a') {
+        if (keyCode == SDLK_a) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::A);
-        } else if (charKey && charKey[0] == 'c') {
+        } else if (keyCode == SDLK_c) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::C);
-        } else if (charKey && charKey[0] == 'v') {
+        } else if (keyCode == SDLK_v) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::V);
-        } else if (charKey && charKey[0] == 'x') {
+        } else if (keyCode == SDLK_x) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::X);
-        } else if (key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL) {
+        } else if (keyCode == SDLK_LCTRL || keyCode == SDLK_RCTRL) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::CTRL);
-        } else if (key == GLFW_KEY_LEFT) {
+        } else if (keyCode == SDLK_LEFT) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::LEFT_ARROW);
-        } else if (key == GLFW_KEY_RIGHT) {
+        } else if (keyCode == SDLK_RIGHT) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::RIGHT_ARROW);
-        } else if (key == GLFW_KEY_UP) {
+        } else if (keyCode == SDLK_UP) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::UP_ARROW);
-        } else if (key == GLFW_KEY_DOWN) {
+        } else if (keyCode == SDLK_DOWN) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::DOWN_ARROW);
-        } else if (key == GLFW_KEY_BACKSPACE) {
+        } else if (keyCode == SDLK_BACKSPACE) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::BACKSPACE);
-        } else if (key == GLFW_KEY_DELETE) {
+        } else if (keyCode == SDLK_DELETE) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::DELETE_KEY);
-        } else if (key == GLFW_KEY_ENTER || key == GLFW_KEY_KP_ENTER) {
+        } else if (keyCode == SDLK_RETURN || keyCode == SDLK_KP_ENTER) {
             propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::ENTER);
         }
     }
 
     //game
     if (propagateReleaseKeyEvent) {
-        game->onKeyReleased(toInputKey(key));
+        game->onKeyReleased(toInputKey(keyCode));
     }
 }
 
 void Main::onMouseButtonPressed(int button) {
     //engine
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = context->getScene().onKeyPress(InputDeviceKey::MOUSE_LEFT);
-    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = context->getScene().onKeyPress(InputDeviceKey::MOUSE_RIGHT);
+    if (button == SDL_BUTTON_LEFT) {
+        propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::MOUSE_LEFT);
+    } else if (button == SDL_BUTTON_RIGHT) {
+        propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::MOUSE_RIGHT);
     }
 
     //game
@@ -379,9 +328,9 @@ void Main::onMouseButtonPressed(int button) {
 
 void Main::onMouseButtonReleased(int button) {
     //engine
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+    if (button == SDL_BUTTON_LEFT) {
         propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::MOUSE_LEFT);
-    } else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+    } else if (button == SDL_BUTTON_RIGHT) {
         propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
     }
 
@@ -391,10 +340,10 @@ void Main::onMouseButtonReleased(int button) {
     }
 }
 
-void Main::onMouseMove(double x, double y) const {
+void Main::onMouseMove(double x, double y, double deltaX, double deltaY) const {
     if (x != 0 || y != 0) {
         //engine
-        context->getScene().onMouseMove(x, y);
+        context->getScene().onMouseMove(x, y, deltaX, deltaY);
     }
 }
 
@@ -405,42 +354,39 @@ void Main::onScroll(double offsetY) const {
     }
 }
 
-Control::Key Main::toInputKey(int key) {
-    auto itFind = inputKeyMap.find(key);
+Control::Key Main::toInputKey(int keyCode) {
+    auto itFind = inputKeyMap.find(keyCode);
     if (itFind != inputKeyMap.end()) {
         return itFind->second;
     }
 
-    const char* charKey = glfwGetKeyName(key, 0);
-    if (charKey) {
-        if (charKey[0] >= 'a' && charKey[0] <= 'z') {
-            int keyShift = charKey[0] - 'a';
-            return static_cast<Control::Key>(Control::Key::A + keyShift);
-        } else if (charKey[0] == '=') {
-            return Control::Key::EQUAL;
-        } else if (charKey[0] == ':') {
-            return Control::Key::COLON;
-        } else if (charKey[0] == ';') {
-            return Control::Key::SEMICOLON;
-        } else if (charKey[0] == ',') {
-            return Control::Key::COMMA;
-        } else if (charKey[0] == '-') {
-            return Control::Key::MINUS;
-        } else if (charKey[0] == '/') { //for QWERTY keyboards
-            return Control::Key::SLASH;
-        } else if (charKey[0] == '\\') { //for QWERTY keyboards
-            return Control::Key::BACKSLASH;
-        } else if (charKey[0] == '\'') { //for QWERTY keyboards
-            return Control::Key::APOSTROPHE;
-        } else if (charKey[0] == '[') { //for QWERTY keyboards
-            return Control::Key::LEFT_BRACKET;
-        } else if (charKey[0] == ']') { //for QWERTY keyboards
-            return Control::Key::RIGHT_BRACKET;
-        } else if (charKey[0] == '.') { //for QWERTY keyboards
-            return Control::Key::PERIOD;
-        } else if (charKey[0] == '`') { //for QWERTY keyboards
-            return Control::Key::GRAVE_ACCENT;
-        }
+    if (keyCode >= 'a' && keyCode <= 'z') {
+        int keyShift = keyCode - 'a';
+        return static_cast<Control::Key>(Control::Key::A + keyShift);
+    } else if (keyCode == '=') {
+        return Control::Key::EQUAL;
+    } else if (keyCode == ':') {
+        return Control::Key::COLON;
+    } else if (keyCode == ';') {
+        return Control::Key::SEMICOLON;
+    } else if (keyCode == ',') {
+        return Control::Key::COMMA;
+    } else if (keyCode == '-') {
+        return Control::Key::MINUS;
+    } else if (keyCode == '/') { //for QWERTY keyboards
+        return Control::Key::SLASH;
+    } else if (keyCode == '\\') { //for QWERTY keyboards
+        return Control::Key::BACKSLASH;
+    } else if (keyCode == '\'') { //for QWERTY keyboards
+        return Control::Key::APOSTROPHE;
+    } else if (keyCode == '[') { //for QWERTY keyboards
+        return Control::Key::LEFT_BRACKET;
+    } else if (keyCode == ']') { //for QWERTY keyboards
+        return Control::Key::RIGHT_BRACKET;
+    } else if (keyCode == '.') { //for QWERTY keyboards
+        return Control::Key::PERIOD;
+    } else if (keyCode == '`') { //for QWERTY keyboards
+        return Control::Key::GRAVE_ACCENT;
     }
 
     return Control::Key::UNKNOWN_KEY;
@@ -450,14 +396,15 @@ bool Main::argumentsContains(const std::string& argName, std::span<char*> args) 
     return std::ranges::any_of(args, [&](const char* arg) { return std::string(arg).find(argName) != std::string::npos; });
 }
 
-void Main::clearResources(GLFWwindow*& window) {
+void Main::clearResources(SDL_Window*& window) {
     game.reset(nullptr);
     context.reset(nullptr);
     SingletonContainer::destroyAllSingletons();
 
+    SDL_Vulkan_UnloadLibrary();
     if (window != nullptr) {
-        glfwDestroyWindow(window);
+        SDL_DestroyWindow(window);
         window = nullptr;
     }
-    glfwTerminate();
+    SDL_Quit();
 }

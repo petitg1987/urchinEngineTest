@@ -37,12 +37,12 @@ else()
     add_custom_target(syncShaders ALL rsync -r ${CMAKE_CURRENT_SOURCE_DIR}/../urchinEngine/3dEngine/resources/shaders/spirv/ ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/ DEPENDS urchin3dEngine)
 endif()
 
-#GLFW
+#SDL
 if (WIN32)
-    SET(GLFW_LIB glfw3 gdi32 winmm)
+    SET(SDL_LIB libSDL2.a gdi32 winmm setupapi imm32 version)
 else()
     SET(X11_LIB X11) #not static because X11 can use libraries not mentioned in its dependencies
-    SET(GLFW_LIB glfw3.a ${X11_LIB})
+    SET(SDL_LIB libSDL2.a ${X11_LIB})
 endif()
 
 if (NOT WIN32)
@@ -59,5 +59,5 @@ else()
     add_executable(urchinEngineTest ${SOURCE_FILES})
 endif()
 add_dependencies(urchinEngineTest syncShaders)
-target_link_libraries(urchinEngineTest -static-libstdc++ ${LINK_OPT} ${GLFW_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinNetworkEngine urchinAIEngine urchinAggregation)
+target_link_libraries(urchinEngineTest -static-libstdc++ ${LINK_OPT} ${SDL_LIB} urchinCommon urchin3dEngine urchinPhysicsEngine urchinSoundEngine urchinNetworkEngine urchinAIEngine urchinAggregation)
 target_precompile_headers(urchinEngineTest PRIVATE ${URCHIN_HEADERS})

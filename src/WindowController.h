@@ -6,54 +6,46 @@
 #include <graphics/setup/SurfaceCreator.h>
 #include <graphics/setup/FramebufferSizeRetriever.h>
 
-class GLFWwindow;
-class GLFWmonitor;
+class SDL_Window;
 
-struct ExtensionList {
-    uint32_t extensionCount = 0;
-    const char** extensions = nullptr;
-};
-
-struct GlfwSurfaceCreator final : public urchin::SurfaceCreator {
-    explicit GlfwSurfaceCreator(GLFWwindow*);
+struct SdlSurfaceCreator final : public urchin::SurfaceCreator {
+    explicit SdlSurfaceCreator(SDL_Window*);
     void* createSurface(void*) override;
 
-    GLFWwindow* window;
+    SDL_Window* window;
 };
 
-struct GlfwFramebufferSizeRetriever final : public urchin::FramebufferSizeRetriever {
-    explicit GlfwFramebufferSizeRetriever(GLFWwindow*);
+struct SdlFramebufferSizeRetriever final : public urchin::FramebufferSizeRetriever {
+    explicit SdlFramebufferSizeRetriever(SDL_Window*);
     void getFramebufferSizeInPixel(unsigned int&, unsigned int&) const override;
 
-    GLFWwindow* window;
+    SDL_Window* window;
 };
 
 class WindowController {
     public:
-        WindowController(GLFWwindow *, bool);
+        WindowController(SDL_Window*, bool);
 
         static urchin::Point2<int> optimumWindowSize();
 
         void updateWindowedMode(bool);
 
+        bool isDevModeOn() const;
         void setMouseCursorVisible(bool);
         bool isMouseCursorVisible() const;
-        bool isDevModeOn() const;
         void moveMouse(double, double) const;
         urchin::Point2<double> getMousePosition() const;
 
         void cleanEvents();
         bool isEventCallbackActive() const;
 
-        static std::vector<std::string> windowRequiredExtensions();
-        std::unique_ptr<GlfwSurfaceCreator> newSurfaceCreator() const;
-        std::unique_ptr<GlfwFramebufferSizeRetriever> newFramebufferSizeRetriever() const;
+        std::vector<std::string> windowRequiredExtensions();
+        std::unique_ptr<SdlSurfaceCreator> newSurfaceCreator() const;
+        std::unique_ptr<SdlFramebufferSizeRetriever> newFramebufferSizeRetriever() const;
 
     private:
-        GLFWmonitor* getWindowMonitor() const;
-
-        GLFWwindow* window;
+        SDL_Window* window;
         bool devModeOn;
         bool eventsCallbackActive;
-
+        urchin::Point2<double> lastVisibleMouseCoord;
 };
