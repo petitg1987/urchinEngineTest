@@ -23,12 +23,19 @@ SdlFramebufferSizeRetriever::SdlFramebufferSizeRetriever(SDL_Window* window) :
 }
 
 void SdlFramebufferSizeRetriever::getFramebufferSizeInPixel(unsigned int& widthInPixel, unsigned int& heightInPixel) const {
-    int intWidthInPixel;
-    int intHeightInPixel;
-    SDL_Vulkan_GetDrawableSize(window, &intWidthInPixel, &intHeightInPixel); //don't use SDL_GetWindowSize which doesn't return size in pixel
+    widthInPixel = 0;
+    heightInPixel = 0;
 
-    widthInPixel = (unsigned int)intWidthInPixel;
-    heightInPixel = (unsigned int)intHeightInPixel;
+    //When the window is minimized or Alt+Tabbed: "SDL_Vulkan_GetDrawableSize" return a valid size (2560x1440) but "VkSurfaceCapabilitiesKHR#currentExtent" contains a zero size (0x0)
+    //Therefore, we return an invalid size here to avoid creating a swap chain with a wrong image extend
+    bool isMinimized = (SDL_GetWindowFlags(window) & SDL_WINDOW_MINIMIZED) == SDL_WINDOW_MINIMIZED;
+    if (!isMinimized) {
+        int widthInPixelInt = 0;
+        int heightInPixelInt = 0;
+        SDL_Vulkan_GetDrawableSize(window, &widthInPixelInt, &heightInPixelInt); //don't use SDL_GetWindowSize which doesn't return size in pixel
+        widthInPixel = widthInPixelInt > 1 ? (unsigned int)widthInPixelInt : 0;
+        heightInPixel = heightInPixelInt > 1 ? (unsigned int)heightInPixelInt : 0;
+    }
 }
 
 WindowController::WindowController(SDL_Window* window, bool devModeOn) :

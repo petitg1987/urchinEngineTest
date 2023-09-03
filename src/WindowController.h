@@ -8,18 +8,22 @@
 
 class SDL_Window;
 
-struct SdlSurfaceCreator final : public urchin::SurfaceCreator {
-    explicit SdlSurfaceCreator(SDL_Window*);
-    void* createSurface(void*) override;
+class SdlSurfaceCreator final : public urchin::SurfaceCreator {
+    public:
+        explicit SdlSurfaceCreator(SDL_Window*);
+        void* createSurface(void*) override;
 
-    SDL_Window* window;
+    private:
+        SDL_Window* window;
 };
 
-struct SdlFramebufferSizeRetriever final : public urchin::FramebufferSizeRetriever {
-    explicit SdlFramebufferSizeRetriever(SDL_Window*);
-    void getFramebufferSizeInPixel(unsigned int&, unsigned int&) const override;
+class SdlFramebufferSizeRetriever final : public urchin::FramebufferSizeRetriever {
+    public:
+        explicit SdlFramebufferSizeRetriever(SDL_Window*);
+        void getFramebufferSizeInPixel(unsigned int&, unsigned int&) const override;
 
-    SDL_Window* window;
+    private:
+        SDL_Window* window;
 };
 
 class WindowController {
