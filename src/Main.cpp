@@ -108,7 +108,7 @@ void Main::initializeInputKeyMap() {
     inputKeyMap[SDLK_KP_7] = Control::Key::NUM_PAD_7;
     inputKeyMap[SDLK_KP_8] = Control::Key::NUM_PAD_8;
     inputKeyMap[SDLK_KP_9] = Control::Key::NUM_PAD_9;
-    inputKeyMap[SDLK_KP_DECIMAL] = Control::Key::NUM_PAD_DECIMAL;
+    inputKeyMap[SDLK_KP_PERIOD] = Control::Key::NUM_PAD_DECIMAL;
     inputKeyMap[SDLK_KP_DIVIDE] = Control::Key::NUM_PAD_DIVIDE;
     inputKeyMap[SDLK_KP_MULTIPLY] = Control::Key::NUM_PAD_MULTIPLY;
     inputKeyMap[SDLK_KP_MINUS] = Control::Key::NUM_PAD_SUBTRACT;
@@ -125,7 +125,7 @@ void Main::initializeInputKeyMap() {
     inputKeyMap[SDLK_RSHIFT] = Control::Key::SHIFT_RIGHT;
     inputKeyMap[SDLK_LGUI] = Control::Key::SUPER_LEFT;
     inputKeyMap[SDLK_RGUI] = Control::Key::SUPER_RIGHT;
-    inputKeyMap[SDLK_MENU] = Control::Key::MENU;
+    inputKeyMap[SDLK_APPLICATION] = Control::Key::MENU;
     inputKeyMap[SDLK_LEFT] = Control::Key::ARROW_LEFT;
     inputKeyMap[SDLK_RIGHT] = Control::Key::ARROW_RIGHT;
     inputKeyMap[SDLK_UP] = Control::Key::ARROW_UP;
