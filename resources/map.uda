@@ -456,13 +456,13 @@ scene:
       position: "4.4 1.1 2.3"
       exponentialAttenuation: "0.25"
       lightColor: "0.5 0 0"
-      produceShadow: "false"
       pbrEnabled: "true"
+      produceShadow: "false"
     light (name=sunLight;type=SUN):
       direction: "-8 -4 -2"
       lightColor: "0.8 0.4 0.4"
-      produceShadow: "true"
       pbrEnabled: "true"
+      produceShadow: "true"
   terrains:
     terrain (name=terrain):
       mesh:
