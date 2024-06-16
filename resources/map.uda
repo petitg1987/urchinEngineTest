@@ -482,7 +482,7 @@ scene:
         grassMaskFilename:
         numGrassInTex: "1"
         grassHeight: "0.55"
-        grassLength: "1"
+        grassWidth: "1"
         grassQuantity: "1.3"
         windDirection: "1 0 0"
         windStrength: "0.5"
