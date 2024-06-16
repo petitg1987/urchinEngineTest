@@ -7,7 +7,7 @@ scene:
         meshes:
           filename: "models/ground.urchinMesh"
         transform:
-          position: "1.4 -4.25 100"
+          position: "1.4 -4.25 92.800003"
           orientation:
             axis: "1 0 -0"
             angle: "4.712389"
