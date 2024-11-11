@@ -407,7 +407,6 @@ bool Main::argumentsContains(const std::string& argName, std::span<char*> args) 
 void Main::clearResources(SDL_Window*& window) {
     game.reset(nullptr);
     context.reset(nullptr);
-    SingletonContainer::destroyAllSingletons();
 
     SDL_Vulkan_UnloadLibrary();
     if (window != nullptr) {
