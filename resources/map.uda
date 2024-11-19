@@ -517,12 +517,12 @@ scene:
         initialVolume: "1"
       soundTrigger (type=MANUAL):
         playBehavior: "PLAY_LOOP"
-    soundElement (name=spatialSound):
-      sound (category=MUSIC;type=SPATIAL):
+    soundElement (name=localizableSound):
+      sound (category=MUSIC;type=LOCALIZABLE):
         filename: "sounds/positionTrigger.ogg"
         initialVolume: "1"
         position: "-6.8 -0.5 -0.5"
-        inaudibleDistance: "5"
+        radius: "5"
       soundTrigger (type=SHAPE):
         soundShape (type=SPHERE):
           radius: "5"
