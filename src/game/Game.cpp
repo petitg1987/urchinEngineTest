@@ -227,7 +227,8 @@ void Game::onKeyPressed(Control::Key key) {
     } else if (key == Control::Key::G) {
         Point2 screenCenter((float)context.getScene().getSceneWidth() / 2.0f, (float)context.getScene().getSceneHeight() / 2.0f);
         Ray<float> ray = CameraSpaceService(gameRenderer3d->getCamera()).screenPointToRay(screenCenter, 100.0f);
-        std::shared_ptr<const RayTestResult> rayTestResult = physicsWorld->rayTest(ray);
+        std::shared_ptr<RayTester> rayTester = RayTester::newRayTester();
+        physicsWorld->triggerRayTest(rayTester, ray);
 
         deleteGeometryModels(rayModels);
 
@@ -239,13 +240,13 @@ void Game::onKeyPressed(Control::Key key) {
         rayModels.push_back(gunRayModel);
         gameRenderer3d->getGeometryContainer().addGeometry(std::move(gunRayModel));
 
-        while (!rayTestResult->isResultReady()) {
+        while (!rayTester->isResultReady()) {
             std::this_thread::sleep_for(std::chrono::milliseconds(20));
         }
 
-        if (rayTestResult->hasHit()) {
-            const auto& nearestResult = rayTestResult->getNearestResult();
-            auto hitSphereModel = std::make_shared<SphereModel>(Sphere<float>(0.08f, nearestResult.getHitPointOnObject2()), 10);
+        std::optional<ContinuousCollisionResult<float>> nearestResult = rayTester->getNearestResult();
+        if (nearestResult.has_value()) {
+            auto hitSphereModel = std::make_shared<SphereModel>(Sphere<float>(0.08f, nearestResult->getHitPointOnObject2()), 10);
             hitSphereModel->setPolygonMode(PolygonMode::FILL);
             hitSphereModel->setColor(1.0f, 0.0f, 0.0f);
 
