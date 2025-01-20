@@ -44,7 +44,7 @@ void Game::initialize() {
     //3d
     camera = std::make_shared<CharacterCamera>(context.getWindowController(), 90.0f, 0.1f, 300.0f);
     gameRenderer3d = &context.getScene().newRenderer3d(camera, VisualConfig(), false);
-    gameRenderer3d->getLightManager().setGlobalAmbientColor(Point3<float>(0.05f, 0.05f, 0.05f));
+    gameRenderer3d->getLightManager().setGlobalAmbientColor(Point3(0.05f, 0.05f, 0.05f));
 
     //physics
     physicsWorld = std::make_unique<PhysicsWorld>();
@@ -64,12 +64,12 @@ void Game::initialize() {
     //UI
     gameUIRenderer = &context.getScene().newUIRenderer(false);
 
-    fpsText = Text::create(nullptr, Position(15, 4, LengthType::PIXEL), "defaultSkin", "? fps");
+    fpsText = Text::create(nullptr, Position(15, 4, PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    auto myFirstWindow = Window::create(nullptr, Position(30, 30, LengthType::PIXEL), Size(410, 705, LengthType::PIXEL), "defaultSkin", "window.commands.title");
+    auto myFirstWindow = Window::create(nullptr, Position(30, 30, PIXEL), Size(410, 705, PIXEL), "defaultSkin", "window.commands.title");
     gameUIRenderer->addWidget(myFirstWindow);
-    Text::create(myFirstWindow.get(), Position(0, 8, LengthType::PIXEL), "defaultSkin",
+    Text::create(myFirstWindow.get(), Position(0, 8, PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
                       "> Space: Jump\n"
                       "> E: Edit mode (on/off)\n"
@@ -82,27 +82,27 @@ void Game::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::create(myFirstWindow.get(), Position(0.0f, 405.0f, LengthType::PIXEL), Size(400.0f, 35.0f, LengthType::PIXEL), "defaultSkin");
-    Textarea::create(myFirstWindow.get(), Position(0.0f, 450.0f, LengthType::PIXEL), Size(400.0f, 180.0f, LengthType::PIXEL), "defaultSkin");
-    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, LengthType::PIXEL), Size(400.0f, 35.0f, LengthType::PIXEL), "defaultSkin", "button.close");
+    TextBox::create(myFirstWindow.get(), Position(0.0f, 405.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin");
+    Textarea::create(myFirstWindow.get(), Position(0.0f, 450.0f, PIXEL), Size(400.0f, 180.0f, PIXEL), "defaultSkin");
+    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin", "button.close");
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myFirstWindow));
 
-    auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, LengthType::PIXEL), Size(250.0f, 160.0f, LengthType::PIXEL), "defaultSkin", "window.second.title");
+    auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, PIXEL), Size(250.0f, 160.0f, PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(mySecondWindow);
     std::vector<std::string> sequenceValues = {i18n("sequence.one"), i18n("sequence.two"), i18n("sequence.three")};
-    Sequence::create(mySecondWindow.get(), Position(10.0f, 4.0f, LengthType::PIXEL), Size(120.0f, 16.0f, LengthType::PIXEL), "defaultSkin", sequenceValues);
-    CheckBox::create(mySecondWindow.get(), Position(10.0f, 30.0f, LengthType::PIXEL), Size(16.0f, 16.0f, LengthType::PIXEL), "defaultSkin");
+    Sequence::create(mySecondWindow.get(), Position(10.0f, 4.0f, PIXEL), Size(120.0f, 16.0f, PIXEL), "defaultSkin", sequenceValues);
+    CheckBox::create(mySecondWindow.get(), Position(10.0f, 30.0f, PIXEL), Size(16.0f, 16.0f, PIXEL), "defaultSkin");
     std::vector<std::string> sliderValues {"1", "2", "3"};
-    Slider::create(mySecondWindow.get(), Position(10.0f, 64.0f, LengthType::PIXEL), Size(70.0f, 16.0, LengthType::PIXEL), "defaultSkin", sliderValues);
+    Slider::create(mySecondWindow.get(), Position(10.0f, 64.0f, PIXEL), Size(70.0f, 16.0, PIXEL), "defaultSkin", sliderValues);
 
     //UI 3d
-    Transform transform(Point3<float>(5.0f, -1.0f, 0.0f), Quaternion<float>::rotationY(-0.80f));
-    UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform, Point2<int>(1000, 666), Point2<float>(1.5f, 1.0f), 0.4f);
-    auto my3dWindow = Window::create(nullptr, Position(0.0f, 0.0f, LengthType::SCREEN_PERCENT), Size(100, 100, LengthType::SCREEN_PERCENT), "defaultSkin", "");
-    Text::create(my3dWindow.get(), Position(10.0f, 4.0f, LengthType::SCREEN_PERCENT), "default3DSkin", "UI 3d test");
-    CheckBox::create(my3dWindow.get(), Position(10.0f, 20.0f, LengthType::SCREEN_PERCENT), Size(5.32f, 8.0f, LengthType::SCREEN_PERCENT), "defaultSkin");
+    Transform transform(Point3(5.0f, -1.0f, 0.0f), Quaternion<float>::rotationY(-0.80f));
+    UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform, Point2<int>(1000, 666), Point2(1.5f, 1.0f), 0.4f);
+    auto my3dWindow = Window::create(nullptr, Position(0.0f, 0.0f, SCREEN_PERCENT), Size(100, 100, SCREEN_PERCENT), "defaultSkin", "");
+    Text::create(my3dWindow.get(), Position(10.0f, 4.0f, SCREEN_PERCENT), "default3DSkin", "UI 3d test");
+    CheckBox::create(my3dWindow.get(), Position(10.0f, 20.0f, SCREEN_PERCENT), Size(5.32f, 8.0f, SCREEN_PERCENT), "defaultSkin");
     std::vector<std::string> slider3dValues {"1...", "2...", "3...", "4...", "5...", "6...", "7..."};
-    Slider::create(my3dWindow.get(), Position(10.0f, 36.0f, LengthType::SCREEN_PERCENT), Size(50.0f, 16.0f, LengthType::SCREEN_PERCENT), "default3DSkin", slider3dValues);
+    Slider::create(my3dWindow.get(), Position(10.0f, 36.0f, SCREEN_PERCENT), Size(50.0f, 16.0f, SCREEN_PERCENT), "default3DSkin", slider3dValues);
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
@@ -181,10 +181,10 @@ void Game::onKeyPressed(Control::Key key) {
     static float angle = 0.0f;
     if (key == Control::Key::PAGE_UP) {
         angle += 0.1f;
-        getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
+        getSunLight()->setDirection(Vector3(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     } else if (key == Control::Key::PAGE_DOWN) {
         angle -= 0.1f;
-        getSunLight()->setDirection(Vector3<float>(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
+        getSunLight()->setDirection(Vector3(-std::sin(angle) * -1600.0f - 800.0f, -400.0f, -std::cos(angle) * 300.0f + 100.0f));
     }
 
     static bool aliasingActive = true;
@@ -216,7 +216,7 @@ void Game::onKeyPressed(Control::Key key) {
         int yAxisForce = distribution(generator) + 5;
         RigidBody* body = getRandomInactiveBody();
         if (body != nullptr) {
-            body->applyCentralMomentum(Vector3<float>((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
+            body->applyCentralMomentum(Vector3((float)xAxisForce, body->getMass() * (float)yAxisForce, (float)zAxisForce));
         }
     } else if (key == Control::Key::C) {
         if (physicsWorld->isPaused()) {
@@ -234,8 +234,8 @@ void Game::onKeyPressed(Control::Key key) {
 
         Vector3<float> gunRayVector = ray.getOrigin().vector(ray.computeTo());
         Point3<float> gunRayCenter = ray.getOrigin().translate(gunRayVector * 0.5f);
-        Quaternion<float> gunRayOrientation = Quaternion<float>::rotationFromTo(Vector3<float>(1.0f, 0.0f, 0.0f), gunRayVector.normalize()).normalize();
-        auto gunRayModel = std::make_shared<CylinderModel>(Cylinder<float>(0.01f, gunRayVector.length(), CylinderShape<float>::CYLINDER_X, gunRayCenter, gunRayOrientation), 5);
+        Quaternion<float> gunRayOrientation = Quaternion<float>::rotationFromTo(Vector3(1.0f, 0.0f, 0.0f), gunRayVector.normalize()).normalize();
+        auto gunRayModel = std::make_shared<CylinderModel>(Cylinder(0.01f, gunRayVector.length(), CylinderShape<float>::CYLINDER_X, gunRayCenter, gunRayOrientation), 5);
         gunRayModel->setPolygonMode(PolygonMode::FILL);
         rayModels.push_back(gunRayModel);
         gameRenderer3d->getGeometryContainer().addGeometry(std::move(gunRayModel));
@@ -246,9 +246,9 @@ void Game::onKeyPressed(Control::Key key) {
 
         std::optional<ContinuousCollisionResult<float>> nearestResult = rayTester->getNearestResult();
         if (nearestResult.has_value()) {
-            auto hitSphereModel = std::make_shared<SphereModel>(Sphere<float>(0.08f, nearestResult->getHitPointOnObject2()), 10);
+            auto hitSphereModel = std::make_shared<SphereModel>(Sphere(0.08f, nearestResult->getHitPointOnObject2()), 10);
             hitSphereModel->setPolygonMode(PolygonMode::FILL);
-            hitSphereModel->setColor(1.0f, 0.0f, 0.0f);
+            hitSphereModel->setColor(Vector3(1.0f, 0.0f, 0.0f));
 
             rayModels.push_back(hitSphereModel);
             gameRenderer3d->getGeometryContainer().addGeometry(std::move(hitSphereModel));
@@ -306,7 +306,7 @@ void Game::refresh() {
     //character
     updateCharacterMovement(dt);
     float characterCenterToEyeDistance = 0.75f;
-    camera->moveTo(characterController->getPhysicsCharacter().getTransform().getPosition() + Point3<float>(0.0f, characterCenterToEyeDistance, 0.0f));
+    camera->moveTo(characterController->getPhysicsCharacter().getTransform().getPosition() + Point3(0.0f, characterCenterToEyeDistance, 0.0f));
 
     //path
     if (DEBUG_DISPLAY_PATH && npcNavigation->getPathRequest() && npcNavigation->getPathRequest()->isPathReady()) {
@@ -320,7 +320,7 @@ void Game::refresh() {
             }
 
             auto sphereModel = std::make_shared<SphereModel>(pathSpheres, 7);
-            sphereModel->setColor(0.0f, 1.0f, 1.0f);
+            sphereModel->setColor(Vector3(0.0f, 1.0f, 1.0f));
             sphereModel->setPolygonMode(PolygonMode::FILL);
             pathModels.push_back(sphereModel);
             gameRenderer3d->getGeometryContainer().addGeometry(sphereModel);
