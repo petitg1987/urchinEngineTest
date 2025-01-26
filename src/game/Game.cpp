@@ -84,7 +84,7 @@ void Game::initialize() {
                       "> Esc: Quit");
     TextBox::create(myFirstWindow.get(), Position(0.0f, 405.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin");
     Textarea::create(myFirstWindow.get(), Position(0.0f, 450.0f, PIXEL), Size(400.0f, 180.0f, PIXEL), "defaultSkin");
-    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin", "button.close");
+    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin", i18n("button.close"));
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myFirstWindow));
 
     auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, PIXEL), Size(250.0f, 160.0f, PIXEL), "defaultSkin", "window.second.title");
