@@ -10,7 +10,7 @@ UnderWaterEvent::UnderWaterEvent(SoundEnvironment& soundEnvironment) :
 }
 
 UnderWaterEvent::~UnderWaterEvent() {
-    soundEnvironment.removeSoundComponent(*underWaterSound);
+    soundEnvironment.removeSoundComponent(underWaterSound.get());
 }
 
 void UnderWaterEvent::notify(Observable* observable, int notificationType) {
