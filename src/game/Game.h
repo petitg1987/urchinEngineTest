@@ -39,7 +39,7 @@ class Game {
         void switchMode();
         void deleteGeometryModels(std::vector<std::shared_ptr<urchin::GeometryModel>>&) const;
 
-        urchin::SunLight *getSunLight();
+        urchin::SunLight *getSunLight() const;
 
         void updateCharacterMovement(float) const;
         urchin::RigidBody *getRandomInactiveBody();

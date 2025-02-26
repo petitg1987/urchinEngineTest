@@ -451,18 +451,75 @@ scene:
             angle: "1.570796"
           scale: "3 3 3"
         shadowBehavior: "NONE"
-  lights:
-    light (name=omniLight;type=OMNIDIRECTIONAL):
-      position: "4.4 1.1 2.3"
-      exponentialAttenuation: "0.25"
-      lightColor: "0.5 0 0"
-      pbrEnabled: "true"
-      produceShadow: "false"
-    light (name=sunLight;type=SUN):
-      direction: "-8 -4 -2"
-      lightColor: "0.8 0.4 0.4"
-      pbrEnabled: "true"
-      produceShadow: "true"
+    object (name=sunLight):
+      model:
+        meshes:
+          filename:
+        transform:
+          position: "0 0 0"
+          orientation:
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
+        shadowBehavior: "NONE"
+      light (type=SUN):
+        direction: "-8 -4 -2"
+        lightColor: "0.8 0.4 0.4"
+        pbrEnabled: "true"
+        produceShadow: "true"
+    object (name=omniLight):
+      model:
+        meshes:
+          filename:
+        transform:
+          position: "4.4 1.1 2.3"
+          orientation:
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
+        shadowBehavior: "NONE"
+      light (type=OMNIDIRECTIONAL):
+        position: "4.4 1.1 2.3"
+        exponentialAttenuation: "0.25"
+        lightColor: "0.5 0 0"
+        pbrEnabled: "true"
+        produceShadow: "false"
+    object (name=globalSound):
+      model:
+        meshes:
+          filename:
+        transform:
+          position: "0 0 0"
+          orientation:
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
+        shadowBehavior: "NONE"
+      soundComponent:
+        sound (category=MUSIC;type=GLOBAL):
+          filename: "sounds/ambient.ogg"
+          initialVolume: "1"
+        soundTrigger (type=MANUAL):
+          playBehavior: "PLAY_LOOP"
+    object (name=localizableSound):
+      model:
+        meshes:
+          filename:
+        transform:
+          position: "-6.8 -0.5 -0.5"
+          orientation:
+            axis: "0 1 0"
+            angle: "0"
+          scale: "1 1 1"
+        shadowBehavior: "NONE"
+      soundComponent:
+        sound (category=MUSIC;type=LOCALIZABLE):
+          filename: "sounds/positionTrigger.ogg"
+          initialVolume: "1"
+          position: "-6.8 -0.5 -0.5"
+          radius: "5"
+        soundTrigger (type=AUTO):
+          playBehavior: "PLAY_ONCE"
   terrains:
     terrain (name=terrain):
       mesh:
@@ -510,25 +567,6 @@ scene:
         filename: "skybox/ZN.tga"
         filename: "skybox/ZP.tga"
       offsetY: "-1"
-  soundElements:
-    soundElement (name=globalSound):
-      sound (category=MUSIC;type=GLOBAL):
-        filename: "sounds/ambient.ogg"
-        initialVolume: "1"
-      soundTrigger (type=MANUAL):
-        playBehavior: "PLAY_LOOP"
-    soundElement (name=localizableSound):
-      sound (category=MUSIC;type=LOCALIZABLE):
-        filename: "sounds/positionTrigger.ogg"
-        initialVolume: "1"
-        position: "-6.8 -0.5 -0.5"
-        radius: "5"
-      soundTrigger (type=SHAPE):
-        soundShape (type=SPHERE):
-          radius: "5"
-          position: "-6.8 -0.5 0"
-          margin: "0"
-        playBehavior: "PLAY_LOOP"
   aiElements:
     navMeshAgent:
       agentHeight: "1.9"

@@ -106,7 +106,7 @@ void Game::initialize() {
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
-    manualTrigger = &map->getSoundEntity("globalSound").getSoundComponent()->getManualTrigger();
+    manualTrigger = &map->getObjectEntity("globalSound").getSoundComponent()->getManualTrigger();
     manualTrigger->playNew();
 
     //initialize and start process
@@ -340,9 +340,9 @@ void Game::refresh() {
     }
 }
 
-SunLight* Game::getSunLight() {
-    const LightEntity& sunLight = map->getLightEntity("sunLight");
-    return dynamic_cast<SunLight*>(sunLight.getLight());
+SunLight* Game::getSunLight() const {
+    Light* sunLight = map->getObjectEntity("sunLight").getLight();
+    return dynamic_cast<SunLight*>(sunLight);
 }
 
 void Game::updateCharacterMovement(float dt) const {
