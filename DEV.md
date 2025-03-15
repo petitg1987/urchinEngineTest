@@ -23,19 +23,19 @@
     * Build type: `Debug`
     * CMake options: `-DUSE_O0=true`
     * Build directory: `.build/debug`
-    * Build options: `-j 10`
-  * Profile **DebugO0Asan**:
-    * Name: `DebugO0Asan`
+    * Build options: `-j 14`
+  * Profile **DebugO0Sanitizer**:
+    * Name: `DebugO0Sanitizer`
     * Build type: `Debug`
-    * CMake options: `-DUSE_O0=true -DUSE_ASAN=true`
-    * Build directory: `.build/debug-asan`
-    * Build options: `-j 10`    
+    * CMake options: `-DUSE_O0=true -DUSE_SANITIZER=true`
+    * Build directory: `.build/debug-sanitizer`
+    * Build options: `-j 14`    
   * Profile **DebugO3**:
     * Name: `DebugO3`
     * Build type: `Debug`
     * CMake options: `-DUSE_O3=true`
     * Build directory: `.build/debugO3`
-    * Build options: `-j 10`
+    * Build options: `-j 14`
 * Add CMake applications
   * Application **urchinEngineTest**:
     * Target/executable: `urchinEngineTest`

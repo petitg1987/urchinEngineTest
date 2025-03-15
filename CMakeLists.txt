@@ -15,9 +15,9 @@ elseif(USE_O0 MATCHES "true")
     set(CMAKE_CXX_FLAGS "-O0")
 endif()
 
-if(USE_ASAN MATCHES "true")
-    set(CMAKE_CXX_FLAGS -fsanitize=address)
-    set(CMAKE_LINKER_FLAGS -fsanitize=address)
+if(USE_SANITIZER MATCHES "true")
+    set(CMAKE_CXX_FLAGS -fsanitize=address,leak,undefined)
+    set(CMAKE_LINKER_FLAGS -fsanitize=address,leak,undefined)
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
