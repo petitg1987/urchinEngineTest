@@ -45,6 +45,3 @@
   * Application **urchinEngineTest (win, dev)**:
     * Target/executable: `urchinEngineTest`
     * Program arguments: `--windowed --dev`
-
-## Clang analyzer configuration
-* In File > Settings > Languages & Frameworks > C/C++ > Clangd > Clang Errors and Warnings: `-Wno-unused-variable,-Wno-infinite-recursion,-Werror=implicit-function-declaration,-Wno-shadow-field-in-constructor-modified,-Wno-shadow-ivar,-Wuninitialized,-Wunused-label,-Wunused-lambda-capture,-Wno-shadow`
