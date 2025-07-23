@@ -1,4 +1,4 @@
-#include <game/CharacterCamera.h>
+#include "game/CharacterCamera.h"
 using namespace urchin;
 
 CharacterCamera::CharacterCamera(const WindowController& windowController, float horizontalFovAngle, float nearPlane, float farPlane) :

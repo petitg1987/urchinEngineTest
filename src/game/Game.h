@@ -9,9 +9,9 @@
 #include <UrchinSoundEngine.h>
 #include <UrchinAIEngine.h>
 
-#include <game/CharacterCamera.h>
-#include <game/UnderWaterEvent.h>
-#include <game/npc/NPCNavigation.h>
+#include "game/CharacterCamera.h"
+#include "game/UnderWaterEvent.h"
+#include "game/npc/NPCNavigation.h"
 
 class MainContext;
 

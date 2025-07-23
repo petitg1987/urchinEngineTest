@@ -1,8 +1,8 @@
 #include <random>
 
-#include <game/Game.h>
-#include <game/CloseWindowCmd.h>
-#include <MainContext.h>
+#include "game/Game.h"
+#include "game/CloseWindowCmd.h"
+#include "MainContext.h"
 using namespace urchin;
 
 //debug parameters

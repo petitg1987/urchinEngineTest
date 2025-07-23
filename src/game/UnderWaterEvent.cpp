@@ -1,6 +1,6 @@
 #include <Urchin3dEngine.h>
 
-#include <game/UnderWaterEvent.h>
+#include "game/UnderWaterEvent.h"
 using namespace urchin;
 
 UnderWaterEvent::UnderWaterEvent(SoundEnvironment& soundEnvironment) :

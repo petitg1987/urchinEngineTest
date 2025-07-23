@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
 
-#include <Main.h>
+#include "Main.h"
 using namespace urchin;
 
 int main(int argc, char* argv[]) {

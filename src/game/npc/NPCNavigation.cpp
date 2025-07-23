@@ -1,5 +1,5 @@
-#include <game/npc/NPCNavigation.h>
-#include <game/npc/NPCNavigationEventHandler.h>
+#include "game/npc/NPCNavigation.h"
+#include "game/npc/NPCNavigationEventHandler.h"
 using namespace urchin;
 
 NPCNavigation::NPCNavigation(float speedInKmH, float mass, const Map& map, AIEnvironment& aiEnvironment, PhysicsWorld& physicsWorld) {

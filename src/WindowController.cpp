@@ -2,7 +2,7 @@
 #include <SDL2/SDL_vulkan.h>
 #include <stdexcept>
 
-#include <WindowController.h>
+#include "WindowController.h"
 using namespace urchin;
 
 SdlSurfaceCreator::SdlSurfaceCreator(SDL_Window* window) :

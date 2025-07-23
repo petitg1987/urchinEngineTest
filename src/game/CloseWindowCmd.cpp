@@ -1,4 +1,4 @@
-#include <game/CloseWindowCmd.h>
+#include "game/CloseWindowCmd.h"
 using namespace urchin;
 
 CloseWindowCmd::CloseWindowCmd(Window& window):

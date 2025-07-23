@@ -1,13 +1,12 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
 #include <vector>
 #include <map>
 
-#include <WindowController.h>
-#include <util/CrashReporter.h>
-#include <MainContext.h>
-#include <game/Game.h>
+#include "WindowController.h"
+#include "util/CrashReporter.h"
+#include "MainContext.h"
+#include "game/Game.h"
 
 class SDL_Window;
 

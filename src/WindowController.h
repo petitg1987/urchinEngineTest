@@ -3,8 +3,8 @@
 #include <vector>
 #include <memory>
 
-#include <graphics/setup/SurfaceCreator.h>
-#include <graphics/setup/FramebufferSizeRetriever.h>
+#include "graphics/setup/SurfaceCreator.h"
+#include "graphics/setup/FramebufferSizeRetriever.h"
 
 class SDL_Window;
 

@@ -1,4 +1,4 @@
-#include <MainContext.h>
+#include "MainContext.h"
 
 MainContext::MainContext(std::unique_ptr<urchin::Scene> scene, std::unique_ptr<WindowController> windowController, std::unique_ptr<urchin::SoundEnvironment> soundEnvironment) :
         exitRequired(false),

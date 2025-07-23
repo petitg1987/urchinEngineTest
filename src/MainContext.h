@@ -1,7 +1,9 @@
+#pragma once
+
 #include <Urchin3dEngine.h>
 #include <UrchinSoundEngine.h>
 
-#include <WindowController.h>
+#include "WindowController.h"
 
 class MainContext {
     public:

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <stdexcept>
-
 #include <UrchinCommon.h>
 
 class CrashReporter final : public urchin::SignalReceptor {

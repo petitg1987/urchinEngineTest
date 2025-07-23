@@ -1,9 +1,8 @@
 #pragma once
 
-#include <UrchinCommon.h>
 #include <Urchin3dEngine.h>
 
-#include <WindowController.h>
+#include "WindowController.h"
 
 class CharacterCamera final : public urchin::Camera {
     public:

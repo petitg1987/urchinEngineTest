@@ -1,4 +1,4 @@
-#include <game/npc/NPCNavigationEventHandler.h>
+#include "game/npc/NPCNavigationEventHandler.h"
 using namespace urchin;
 
 void NPCNavigationEventHandler::startMoving() {
