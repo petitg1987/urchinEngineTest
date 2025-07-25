@@ -526,6 +526,7 @@ scene:
         heightFilename: "terrain/terrainHeight.tga"
         xzScale: "0.4"
         yScale: "0.05"
+        flatMode: "false"
       material:
         maskMapFilename:
         sRepeat: "60"
