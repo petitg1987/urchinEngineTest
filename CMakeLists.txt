@@ -34,7 +34,7 @@ if (WIN32)
 else()
     include_directories(BEFORE ${CMAKE_BINARY_DIR}/deps/curl/include)
     link_directories (BEFORE ${CMAKE_BINARY_DIR}/deps/curl/lib)
-    add_custom_target(syncShaders ALL rsync -r ${CMAKE_CURRENT_SOURCE_DIR}/../urchinEngine/3dEngine/resources/shaders/spirv/ ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/ DEPENDS urchin3dEngine)
+    add_custom_target(syncShaders ALL rsync -r ${CMAKE_CURRENT_SOURCE_DIR}/../urchinEngine/3dEngine/resources/shaders/spirv/ ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/ --delete DEPENDS urchin3dEngine)
 endif()
 
 #SDL
