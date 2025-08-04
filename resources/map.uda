@@ -298,8 +298,9 @@ scene:
         exponentialAttenuation: "0.25"
         lightColor: "0.5 0 0"
         pbrEnabled: "true"
+        lightMask: "255"
         produceShadow: "false"
-        shadowStrength: "1.0"
+        shadowStrength: "1"
     object (name=sphere1):
       model:
         meshes:
@@ -478,8 +479,9 @@ scene:
         direction: "-8 -4 -2"
         lightColor: "0.8 0.4 0.4"
         pbrEnabled: "true"
+        lightMask: "255"
         produceShadow: "true"
-        shadowStrength: "1.0"
+        shadowStrength: "1"
     object (name=table):
       model:
         meshes:
