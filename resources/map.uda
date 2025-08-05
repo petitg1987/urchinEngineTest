@@ -488,7 +488,7 @@ scene:
         direction: "-8 -4 -2"
         lightColor: "0.8 0.4 0.4"
         pbrEnabled: "true"
-        lightMask: "255"
+        lightMask: "1"
         produceShadow: "true"
         shadowStrength: "1"
     object (name=table):
