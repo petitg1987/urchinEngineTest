@@ -1,5 +1,14 @@
 config:
   relativeWorkingDirectory: "./"
+lightMaskNames:
+  name:
+  name:
+  name:
+  name:
+  name:
+  name:
+  name:
+  name:
 scene:
   objects:
     object (name=bench):
