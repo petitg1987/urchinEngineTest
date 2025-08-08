@@ -6,6 +6,7 @@ joints {
 }
 
 mesh {
+	name "noName"
 	material "materials/square/green.uda"
 
 	numVerts 4

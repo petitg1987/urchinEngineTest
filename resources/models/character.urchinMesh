@@ -6,6 +6,7 @@ joints {
 }
 
 mesh {
+	name "noName"
 	material "materials/character/character.uda"
 
 	numVerts 530

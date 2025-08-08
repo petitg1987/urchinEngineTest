@@ -6,6 +6,7 @@ joints {
 }
 
 mesh {
+	name "noName"
 	material "materials/bench/bench.uda"
 
 	numVerts 168
