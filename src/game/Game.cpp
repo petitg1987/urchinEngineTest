@@ -58,8 +58,8 @@ void Game::initialize() {
     map = std::make_unique<Map>(gameRenderer3d, physicsWorld.get(), &context.getSoundEnvironment(), aiEnvironment.get());
     LoadMapCallback nullLoadMapCallback;
     MapSaveService().loadMap("map.uda", nullLoadMapCallback, *map);
-    map->getObjectEntity("characterAnimate").getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
-    map->getObjectEntity("characterAnimate").getModel()->animate("move", AnimRepeat::INFINITE, AnimStart::AT_CURRENT_FRAME);
+    map->getObjectEntity("characterAnimate", {}).getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
+    map->getObjectEntity("characterAnimate", {}).getModel()->animate("move", AnimRepeat::INFINITE, AnimStart::AT_CURRENT_FRAME);
 
     //UI
     gameUIRenderer = &context.getScene().newUIRenderer(false);
@@ -106,7 +106,7 @@ void Game::initialize() {
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
-    manualTrigger = &map->getObjectEntity("globalSound").getSoundComponent()->getManualTrigger();
+    manualTrigger = &map->getObjectEntity("globalSound", {}).getSoundComponent()->getManualTrigger();
     manualTrigger->playNew();
 
     //initialize and start process
@@ -341,7 +341,7 @@ void Game::refresh() {
 }
 
 SunLight* Game::getSunLight() const {
-    Light* sunLight = map->getObjectEntity("sunLight").getLight();
+    Light* sunLight = map->getObjectEntity("sunLight", {}).getLight();
     return dynamic_cast<SunLight*>(sunLight);
 }
 
