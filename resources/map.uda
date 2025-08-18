@@ -304,7 +304,8 @@ scene:
         shadowBehavior: "NONE"
       light (type=OMNIDIRECTIONAL):
         position: "4.4 1.1 2.3"
-        exponentialAttenuation: "0.25"
+        scopeRadius: "16.7988"
+        falloffExponent: "2.71828"
         lightColor: "0.5 0 0"
         pbrEnabled: "true"
         lightMask: "255"
