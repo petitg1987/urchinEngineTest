@@ -61,6 +61,12 @@ void Game::initialize() {
     map->getObjectEntity("characterAnimate", {}).getModel()->loadAnimation("move", "models/characterAnimate.urchinAnim");
     map->getObjectEntity("characterAnimate", {}).getModel()->animate("move", AnimRepeat::INFINITE, AnimStart::AT_CURRENT_FRAME);
 
+    //terrain grass
+    std::unique_ptr<Model> model = Model::fromMeshesFile("models/bench.urchinMesh");
+    model->setScale(Vector3(10.0f, 10.0f, 10.0f));
+    auto terrainObjectSpawner = std::make_unique<TerrainObjectSpawner>(std::move(model));
+    map->getTerrainEntity("terrain").getTerrain()->addObjectSpawner(std::move(terrainObjectSpawner));
+
     //UI
     gameUIRenderer = &context.getScene().newUIRenderer(false);
 
