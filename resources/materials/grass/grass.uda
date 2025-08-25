@@ -1,0 +1,4 @@
+repeatTextures: "false"
+albedo:
+  texture: "materials/grass/albedo.png"
+ambientFactor: "0.4"
