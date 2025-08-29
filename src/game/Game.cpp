@@ -63,7 +63,7 @@ void Game::initialize() {
 
     //terrain grass
     std::unique_ptr<Model> model = Model::fromMeshesFile("models/grass.urchinMesh");
-    model->setScale(Vector3(10.0f, 10.0f, 10.0f));
+    model->setScale(Vector3(1.0f, 1.0f, 1.0f));
     auto terrainObjectSpawner = std::make_unique<TerrainObjectSpawner>(std::move(model));
     map->getTerrainEntity("terrain").getTerrain()->addObjectSpawner(std::move(terrainObjectSpawner));
 
