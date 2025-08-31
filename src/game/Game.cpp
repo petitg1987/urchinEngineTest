@@ -62,8 +62,9 @@ void Game::initialize() {
     map->getObjectEntity("characterAnimate", {}).getModel()->animate("move", AnimRepeat::INFINITE, AnimStart::AT_CURRENT_FRAME);
 
     //terrain grass
+    float scale = 0.5f;
     std::unique_ptr<Model> model = Model::fromMeshesFile("models/grass.urchinMesh");
-    model->setScale(Vector3(1.0f, 1.0f, 1.0f));
+    model->setScale(Vector3(scale, scale, scale));
     auto terrainObjectSpawner = std::make_unique<TerrainObjectSpawner>(std::move(model));
     map->getTerrainEntity("terrain").getTerrain()->addObjectSpawner(std::move(terrainObjectSpawner));
 
