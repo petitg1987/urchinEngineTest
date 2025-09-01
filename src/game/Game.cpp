@@ -68,7 +68,7 @@ void Game::initialize() {
     auto terrainObjectSpawner = std::make_unique<TerrainObjectSpawner>(std::move(model));
     terrainObjectSpawner->setObjectsPerUnit(1.5f);
     terrainObjectSpawner->setObjectsHeightShift(0.35f);
-    terrainObjectSpawner->setBaseDisplayDistance(10.0f);
+    terrainObjectSpawner->setBaseDisplayDistance(25.0f);
     map->getTerrainEntity("terrain").getTerrain()->addObjectSpawner(std::move(terrainObjectSpawner));
 
     //UI
