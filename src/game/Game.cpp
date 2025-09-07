@@ -22,6 +22,7 @@ Game::Game(MainContext& context) :
         //UI
         gameUIRenderer(nullptr),
         fpsText(nullptr),
+        metricsUtil(context.getScene()),
         //sound
         manualTrigger(nullptr) {
     initialize();
@@ -125,6 +126,7 @@ void Game::initialize() {
     initializeNPC();
     physicsWorld->setUp(DEBUG_MEM_CHECK_MODE ? (1.0f / 2.0f) : (1.0f / 60.0f));
     aiEnvironment->setUp(DEBUG_MEM_CHECK_MODE ? (1.0f / 2.0f) : (1.0f / 4.0f));
+    metricsUtil.setupPhysicsWorld(physicsWorld.get());
     map->unpause();
 }
 
@@ -302,9 +304,8 @@ void Game::onKeyReleased(Control::Key key) {
 
 void Game::refresh() {
     //fps
-    float dt = context.getScene().getDeltaTime();
-    if (fpsText != nullptr) {
-        fpsText->updateText(std::to_string(context.getScene().getFpsForDisplay()) + " fps");
+    if (metricsUtil.refresh()) {
+        fpsText->updateText(std::to_string(MathFunction::roundToInt(1000.0f / metricsUtil.getGraphicsDtMs())) + " fps");
     }
 
     //map
@@ -314,7 +315,7 @@ void Game::refresh() {
     npcNavigation->display(context.getScene());
 
     //character
-    updateCharacterMovement(dt);
+    updateCharacterMovement(context.getScene().getDeltaTimeInSec());
     float characterCenterToEyeDistance = 0.75f;
     camera->moveTo(characterController->getPhysicsCharacter().getTransform().getPosition() + Point3(0.0f, characterCenterToEyeDistance, 0.0f));
 
@@ -325,7 +326,7 @@ void Game::refresh() {
         if (!pathPoints.empty()) {
             std::vector<Sphere<float>> pathSpheres;
             pathSpheres.reserve(pathPoints.size());
-            for (const auto& pathPoint : pathPoints) {
+            for (const PathPoint& pathPoint : pathPoints) {
                 pathSpheres.emplace_back(0.15f, pathPoint.getPoint());
             }
 

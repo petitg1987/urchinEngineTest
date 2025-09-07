@@ -26,7 +26,7 @@ std::shared_ptr<const PathRequest> NPCNavigation::getPathRequest() const {
 }
 
 void NPCNavigation::display(const Scene& scene) {
-    float dt = scene.getDeltaTime();
+    float dt = scene.getDeltaTimeInSec();
 
     //update values
     aiCharacterController->update();

@@ -74,6 +74,7 @@ class Game {
         //UI
         urchin::UIRenderer* gameUIRenderer;
         std::shared_ptr<urchin::Text> fpsText;
+        urchin::MetricsDisplayUtil metricsUtil;
 
         //sound
         urchin::ManualTrigger* manualTrigger;
