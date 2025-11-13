@@ -78,7 +78,7 @@ void Game::initialize() {
     fpsText = Text::create(nullptr, Position(15, 4, PIXEL), "defaultSkin", "? fps");
     gameUIRenderer->addWidget(fpsText);
 
-    auto myFirstWindow = Window::create(nullptr, Position(30, 30, PIXEL), Size(410, 705, PIXEL), "defaultSkin", "window.commands.title");
+    auto myFirstWindow = Window::create(nullptr, Position(30, 30, PIXEL), Size(410, 805, PIXEL), "defaultSkin", "window.commands.title");
     gameUIRenderer->addWidget(myFirstWindow);
     Text::create(myFirstWindow.get(), Position(0, 8, PIXEL), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
@@ -93,9 +93,9 @@ void Game::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::create(myFirstWindow.get(), Position(0.0f, 405.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin");
-    Textarea::create(myFirstWindow.get(), Position(0.0f, 450.0f, PIXEL), Size(400.0f, 180.0f, PIXEL), "defaultSkin");
-    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 640.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin", i18n("button.close"));
+    TextBox::create(myFirstWindow.get(), Position(0.0f, 505.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin");
+    Textarea::create(myFirstWindow.get(), Position(0.0f, 550.0f, PIXEL), Size(400.0f, 180.0f, PIXEL), "defaultSkin");
+    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 740.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin", i18n("button.close"));
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myFirstWindow));
 
     auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, PIXEL), Size(250.0f, 160.0f, PIXEL), "defaultSkin", "window.second.title");
@@ -387,7 +387,7 @@ void Game::updateCharacterMovement(float dt) const {
     characterController->update(dt);
 }
 
-RigidBody* Game::getRandomInactiveBody() {
+RigidBody* Game::getRandomInactiveBody() const {
     std::vector<RigidBody *> bodies;
 
     const auto& sceneModels = map->getObjectEntities();

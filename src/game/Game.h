@@ -42,7 +42,7 @@ class Game {
         urchin::SunLight *getSunLight() const;
 
         void updateCharacterMovement(float) const;
-        urchin::RigidBody *getRandomInactiveBody();
+        urchin::RigidBody *getRandomInactiveBody() const;
 
         MainContext& context;
         bool editMode;
