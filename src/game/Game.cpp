@@ -100,7 +100,7 @@ void Game::initialize() {
 
     auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, PIXEL), Size(250.0f, 160.0f, PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(mySecondWindow);
-    std::vector<std::string> sequenceValues = {i18n("sequence.one"), i18n("sequence.two"), i18n("sequence.three")};
+    std::vector sequenceValues = {i18n("sequence.one"), i18n("sequence.two"), i18n("sequence.three")};
     Sequence::create(mySecondWindow.get(), Position(10.0f, 4.0f, PIXEL), Size(120.0f, 16.0f, PIXEL), "defaultSkin", sequenceValues);
     CheckBox::create(mySecondWindow.get(), Position(10.0f, 30.0f, PIXEL), Size(16.0f, 16.0f, PIXEL), "defaultSkin");
     std::vector<std::string> sliderValues {"1", "2", "3"};
