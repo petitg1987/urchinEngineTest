@@ -80,7 +80,7 @@ void Game::initialize() {
 
     auto myFirstWindow = Window::create(nullptr, Position(30, 30, PIXEL), Size(410, 805, PIXEL), "defaultSkin", "window.commands.title");
     gameUIRenderer->addWidget(myFirstWindow);
-    Text::create(myFirstWindow.get(), Position(0, 8, PIXEL), "defaultSkin",
+    Text::create(myFirstWindow.get(), Position(0, 8, PIXEL, PARENT_CONTENT_LEFT_TOP), "defaultSkin",
                       "> Z/Q/S/D: Move character\n"
                       "> Space: Jump\n"
                       "> E: Edit mode (on/off)\n"
@@ -93,27 +93,27 @@ void Game::initialize() {
                       "> W: Shadow (on/off)\n"
                       "> P/M/O: Pause, play, stop sound\n"
                       "> Esc: Quit");
-    TextBox::create(myFirstWindow.get(), Position(0.0f, 505.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin");
-    Textarea::create(myFirstWindow.get(), Position(0.0f, 550.0f, PIXEL), Size(400.0f, 180.0f, PIXEL), "defaultSkin");
-    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 740.0f, PIXEL), Size(400.0f, 35.0f, PIXEL), "defaultSkin", i18n("button.close"));
+    TextBox::create(myFirstWindow.get(), Position(0.0f, 505.0f, PIXEL, PARENT_CONTENT_LEFT_TOP), Size(400.0f, 35.0f, PIXEL), "defaultSkin");
+    Textarea::create(myFirstWindow.get(), Position(0.0f, 550.0f, PIXEL, PARENT_CONTENT_LEFT_TOP), Size(400.0f, 180.0f, PIXEL), "defaultSkin");
+    auto myButton = Button::create(myFirstWindow.get(), Position(0.0f, 740.0f, PIXEL, PARENT_CONTENT_LEFT_TOP), Size(400.0f, 35.0f, PIXEL), "defaultSkin", i18n("button.close"));
     myButton->addEventListener(std::make_unique<CloseWindowCmd>(*myFirstWindow));
 
     auto mySecondWindow = Window::create(nullptr, Position(500.0f, 30.0f, PIXEL), Size(250.0f, 160.0f, PIXEL), "defaultSkin", "window.second.title");
     gameUIRenderer->addWidget(mySecondWindow);
     std::vector sequenceValues = {i18n("sequence.one"), i18n("sequence.two"), i18n("sequence.three")};
-    Sequence::create(mySecondWindow.get(), Position(10.0f, 4.0f, PIXEL), Size(120.0f, 16.0f, PIXEL), "defaultSkin", sequenceValues);
-    CheckBox::create(mySecondWindow.get(), Position(10.0f, 30.0f, PIXEL), Size(16.0f, 16.0f, PIXEL), "defaultSkin");
+    Sequence::create(mySecondWindow.get(), Position(10.0f, 4.0f, PIXEL, PARENT_CONTENT_LEFT_TOP), Size(120.0f, 16.0f, PIXEL), "defaultSkin", sequenceValues);
+    CheckBox::create(mySecondWindow.get(), Position(10.0f, 30.0f, PIXEL, PARENT_CONTENT_LEFT_TOP), Size(16.0f, 16.0f, PIXEL), "defaultSkin");
     std::vector<std::string> sliderValues {"1", "2", "3"};
-    Slider::create(mySecondWindow.get(), Position(10.0f, 64.0f, PIXEL), Size(70.0f, 16.0, PIXEL), "defaultSkin", sliderValues);
+    Slider::create(mySecondWindow.get(), Position(10.0f, 64.0f, PIXEL, PARENT_CONTENT_LEFT_TOP), Size(70.0f, 16.0, PIXEL), "defaultSkin", sliderValues);
 
     //UI 3d
     Transform transform(Point3(5.0f, -1.0f, 0.0f), Quaternion<float>::rotationY(-0.80f));
     UIRenderer& myUi3dRenderer = gameRenderer3d->get3dUiContainer().newUI3dRenderer(transform, Point2<int>(1000, 666), Point2(1.5f, 1.0f), 0.4f);
     auto my3dWindow = Window::create(nullptr, Position(0.0f, 0.0f, SCREEN_PERCENT), Size(100, 100, SCREEN_PERCENT), "defaultSkin", "");
-    Text::create(my3dWindow.get(), Position(10.0f, 4.0f, SCREEN_PERCENT), "default3DSkin", "UI 3d test");
-    CheckBox::create(my3dWindow.get(), Position(10.0f, 20.0f, SCREEN_PERCENT), Size(5.32f, 8.0f, SCREEN_PERCENT), "defaultSkin");
+    Text::create(my3dWindow.get(), Position(10.0f, 4.0f, SCREEN_PERCENT, PARENT_CONTENT_LEFT_TOP), "default3DSkin", "UI 3d test");
+    CheckBox::create(my3dWindow.get(), Position(10.0f, 20.0f, SCREEN_PERCENT, PARENT_CONTENT_LEFT_TOP), Size(5.32f, 8.0f, SCREEN_PERCENT), "defaultSkin");
     std::vector<std::string> slider3dValues {"1...", "2...", "3...", "4...", "5...", "6...", "7..."};
-    Slider::create(my3dWindow.get(), Position(10.0f, 36.0f, SCREEN_PERCENT), Size(50.0f, 16.0f, SCREEN_PERCENT), "default3DSkin", slider3dValues);
+    Slider::create(my3dWindow.get(), Position(10.0f, 36.0f, SCREEN_PERCENT, PARENT_CONTENT_LEFT_TOP), Size(50.0f, 16.0f, SCREEN_PERCENT), "default3DSkin", slider3dValues);
     myUi3dRenderer.addWidget(my3dWindow);
 
     //sound
