@@ -246,33 +246,11 @@ void Main::onChar(char32_t unicodeCharacter) {
 }
 
 void Main::onKeyPressed(int keyCode, bool isRepeatPress) {
+    Control::Key key = toInputKey(keyCode);
+
     //engine
     if (propagatePressKeyEvent) {
-        if (keyCode == SDLK_a) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::A);
-        } else if (keyCode == SDLK_c) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::C);
-        } else if (keyCode == SDLK_v) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::V);
-        } else if (keyCode == SDLK_x) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::X);
-        } else if (keyCode == SDLK_LCTRL || keyCode == SDLK_RCTRL) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::CTRL);
-        } else if (keyCode == SDLK_LEFT) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::LEFT_ARROW);
-        } else if (keyCode == SDLK_RIGHT) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::RIGHT_ARROW);
-        } else if (keyCode == SDLK_UP) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::UP_ARROW);
-        } else if (keyCode == SDLK_DOWN) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::DOWN_ARROW);
-        } else if (keyCode == SDLK_BACKSPACE) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::BACKSPACE);
-        } else if (keyCode == SDLK_DELETE) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::DELETE_KEY);
-        } else if (keyCode == SDLK_RETURN || keyCode == SDLK_KP_ENTER) {
-            propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::ENTER);
-        }
+        propagatePressKeyEvent = context->getScene().onKeyPress(key);
     }
 
     //game
@@ -280,71 +258,45 @@ void Main::onKeyPressed(int keyCode, bool isRepeatPress) {
         if (keyCode == SDLK_ESCAPE) {
             context->exit();
         }
-        game->onKeyPressed(toInputKey(keyCode));
+        game->onKeyPressed(key);
     }
 }
 
 void Main::onKeyReleased(int keyCode) {
+    Control::Key key = toInputKey(keyCode);
+
     //engine
     if (propagateReleaseKeyEvent) {
-        if (keyCode == SDLK_a) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::A);
-        } else if (keyCode == SDLK_c) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::C);
-        } else if (keyCode == SDLK_v) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::V);
-        } else if (keyCode == SDLK_x) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::X);
-        } else if (keyCode == SDLK_LCTRL || keyCode == SDLK_RCTRL) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::CTRL);
-        } else if (keyCode == SDLK_LEFT) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::LEFT_ARROW);
-        } else if (keyCode == SDLK_RIGHT) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::RIGHT_ARROW);
-        } else if (keyCode == SDLK_UP) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::UP_ARROW);
-        } else if (keyCode == SDLK_DOWN) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::DOWN_ARROW);
-        } else if (keyCode == SDLK_BACKSPACE) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::BACKSPACE);
-        } else if (keyCode == SDLK_DELETE) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::DELETE_KEY);
-        } else if (keyCode == SDLK_RETURN || keyCode == SDLK_KP_ENTER) {
-            propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::ENTER);
-        }
+        propagateReleaseKeyEvent = context->getScene().onKeyRelease(key);
     }
 
     //game
     if (propagateReleaseKeyEvent) {
-        game->onKeyReleased(toInputKey(keyCode));
+        game->onKeyReleased(key);
     }
 }
 
 void Main::onMouseButtonPressed(int button) {
+    Control::Key key = toInputKey(button);
+
     //engine
-    if (button == SDL_BUTTON_LEFT) {
-        propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::MOUSE_LEFT);
-    } else if (button == SDL_BUTTON_RIGHT) {
-        propagatePressKeyEvent = context->getScene().onKeyPress(InputDeviceKey::MOUSE_RIGHT);
-    }
+    propagatePressKeyEvent = context->getScene().onKeyPress(key);
 
     //game
     if (propagatePressKeyEvent) {
-        game->onKeyPressed(toInputKey(button));
+        game->onKeyPressed(key);
     }
 }
 
 void Main::onMouseButtonReleased(int button) {
+    Control::Key key = toInputKey(button);
+
     //engine
-    if (button == SDL_BUTTON_LEFT) {
-        propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::MOUSE_LEFT);
-    } else if (button == SDL_BUTTON_RIGHT) {
-        propagateReleaseKeyEvent = context->getScene().onKeyRelease(InputDeviceKey::MOUSE_RIGHT);
-    }
+    propagateReleaseKeyEvent = context->getScene().onKeyRelease(key);
 
     //game
     if (propagateReleaseKeyEvent) {
-        game->onKeyReleased(toInputKey(button));
+        game->onKeyReleased(key);
     }
 }
 
