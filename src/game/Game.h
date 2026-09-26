@@ -20,8 +20,8 @@ class Game {
         explicit Game(MainContext&);
         ~Game();
 
-        void onKeyPressed(urchin::Control::Key);
-        void onKeyReleased(urchin::Control::Key);
+        void onKeyPressed(urchin::InputKey);
+        void onKeyReleased(urchin::InputKey);
 
         void refresh();
 

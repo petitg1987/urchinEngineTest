@@ -84,73 +84,73 @@ std::unique_ptr<MainContext> Main::createMainContext(SDL_Window* window, bool is
 void Main::initializeInputKeyMap() {
     //keyboard
     for (int i = 0; i < 10; ++i) {
-        inputKeyMap[SDLK_0 + i] = static_cast<Control::Key>(Control::Key::K0 + i);
+        inputKeyMap[SDLK_0 + i] = static_cast<InputKey>(static_cast<int>(InputKey::K0) + i);
     }
-    inputKeyMap[SDLK_F1] = Control::Key::F1;
-    inputKeyMap[SDLK_F2] = Control::Key::F2;
-    inputKeyMap[SDLK_F3] = Control::Key::F3;
-    inputKeyMap[SDLK_F4] = Control::Key::F4;
-    inputKeyMap[SDLK_F5] = Control::Key::F5;
-    inputKeyMap[SDLK_F6] = Control::Key::F6;
-    inputKeyMap[SDLK_F7] = Control::Key::F7;
-    inputKeyMap[SDLK_F8] = Control::Key::F8;
-    inputKeyMap[SDLK_F9] = Control::Key::F9;
-    inputKeyMap[SDLK_F10] = Control::Key::F10;
-    inputKeyMap[SDLK_F11] = Control::Key::F11;
-    inputKeyMap[SDLK_F12] = Control::Key::F12;
-    inputKeyMap[SDLK_KP_0] = Control::Key::NUM_PAD_0;
-    inputKeyMap[SDLK_KP_1] = Control::Key::NUM_PAD_1;
-    inputKeyMap[SDLK_KP_2] = Control::Key::NUM_PAD_2;
-    inputKeyMap[SDLK_KP_3] = Control::Key::NUM_PAD_3;
-    inputKeyMap[SDLK_KP_4] = Control::Key::NUM_PAD_4;
-    inputKeyMap[SDLK_KP_5] = Control::Key::NUM_PAD_5;
-    inputKeyMap[SDLK_KP_6] = Control::Key::NUM_PAD_6;
-    inputKeyMap[SDLK_KP_7] = Control::Key::NUM_PAD_7;
-    inputKeyMap[SDLK_KP_8] = Control::Key::NUM_PAD_8;
-    inputKeyMap[SDLK_KP_9] = Control::Key::NUM_PAD_9;
-    inputKeyMap[SDLK_KP_PERIOD] = Control::Key::NUM_PAD_DECIMAL;
-    inputKeyMap[SDLK_KP_DIVIDE] = Control::Key::NUM_PAD_DIVIDE;
-    inputKeyMap[SDLK_KP_MULTIPLY] = Control::Key::NUM_PAD_MULTIPLY;
-    inputKeyMap[SDLK_KP_MINUS] = Control::Key::NUM_PAD_SUBTRACT;
-    inputKeyMap[SDLK_KP_PLUS] = Control::Key::NUM_PAD_ADD;
-    inputKeyMap[SDLK_KP_ENTER] = Control::Key::NUM_PAD_ENTER;
-    inputKeyMap[SDLK_KP_EQUALS] = Control::Key::NUM_PAD_EQUAL;
-    inputKeyMap[SDLK_ESCAPE] = Control::Key::ESCAPE;
-    inputKeyMap[SDLK_SPACE] = Control::Key::SPACE;
-    inputKeyMap[SDLK_LCTRL] = Control::Key::CTRL_LEFT;
-    inputKeyMap[SDLK_RCTRL] = Control::Key::CTRL_RIGHT;
-    inputKeyMap[SDLK_LALT] = Control::Key::ALT_LEFT;
-    inputKeyMap[SDLK_RALT] = Control::Key::ALT_RIGHT;
-    inputKeyMap[SDLK_LSHIFT] = Control::Key::SHIFT_LEFT;
-    inputKeyMap[SDLK_RSHIFT] = Control::Key::SHIFT_RIGHT;
-    inputKeyMap[SDLK_LGUI] = Control::Key::SUPER_LEFT;
-    inputKeyMap[SDLK_RGUI] = Control::Key::SUPER_RIGHT;
-    inputKeyMap[SDLK_APPLICATION] = Control::Key::MENU;
-    inputKeyMap[SDLK_LEFT] = Control::Key::ARROW_LEFT;
-    inputKeyMap[SDLK_RIGHT] = Control::Key::ARROW_RIGHT;
-    inputKeyMap[SDLK_UP] = Control::Key::ARROW_UP;
-    inputKeyMap[SDLK_DOWN] = Control::Key::ARROW_DOWN;
-    inputKeyMap[SDLK_RETURN] = Control::Key::ENTER;
-    inputKeyMap[SDLK_TAB] = Control::Key::TAB;
-    inputKeyMap[SDLK_BACKSPACE] = Control::Key::BACKSPACE;
-    inputKeyMap[SDLK_INSERT] = Control::Key::INSERT;
-    inputKeyMap[SDLK_DELETE] = Control::Key::DEL;
-    inputKeyMap[SDLK_HOME] = Control::Key::HOME;
-    inputKeyMap[SDLK_END] = Control::Key::END;
-    inputKeyMap[SDLK_PAGEUP] = Control::Key::PAGE_UP;
-    inputKeyMap[SDLK_PAGEDOWN] = Control::Key::PAGE_DOWN;
-    inputKeyMap[SDLK_CAPSLOCK] = Control::Key::CAPS_LOCK;
-    inputKeyMap[SDLK_SCROLLLOCK] = Control::Key::SCROLL_LOCK;
-    inputKeyMap[SDLK_NUMLOCKCLEAR] = Control::Key::NUM_LOCK;
-    inputKeyMap[SDLK_PRINTSCREEN] = Control::Key::PRINT_SCREEN;
-    inputKeyMap[SDLK_PAUSE] = Control::Key::PAUSE;
+    inputKeyMap[SDLK_F1] = InputKey::F1;
+    inputKeyMap[SDLK_F2] = InputKey::F2;
+    inputKeyMap[SDLK_F3] = InputKey::F3;
+    inputKeyMap[SDLK_F4] = InputKey::F4;
+    inputKeyMap[SDLK_F5] = InputKey::F5;
+    inputKeyMap[SDLK_F6] = InputKey::F6;
+    inputKeyMap[SDLK_F7] = InputKey::F7;
+    inputKeyMap[SDLK_F8] = InputKey::F8;
+    inputKeyMap[SDLK_F9] = InputKey::F9;
+    inputKeyMap[SDLK_F10] = InputKey::F10;
+    inputKeyMap[SDLK_F11] = InputKey::F11;
+    inputKeyMap[SDLK_F12] = InputKey::F12;
+    inputKeyMap[SDLK_KP_0] = InputKey::NUM_PAD_0;
+    inputKeyMap[SDLK_KP_1] = InputKey::NUM_PAD_1;
+    inputKeyMap[SDLK_KP_2] = InputKey::NUM_PAD_2;
+    inputKeyMap[SDLK_KP_3] = InputKey::NUM_PAD_3;
+    inputKeyMap[SDLK_KP_4] = InputKey::NUM_PAD_4;
+    inputKeyMap[SDLK_KP_5] = InputKey::NUM_PAD_5;
+    inputKeyMap[SDLK_KP_6] = InputKey::NUM_PAD_6;
+    inputKeyMap[SDLK_KP_7] = InputKey::NUM_PAD_7;
+    inputKeyMap[SDLK_KP_8] = InputKey::NUM_PAD_8;
+    inputKeyMap[SDLK_KP_9] = InputKey::NUM_PAD_9;
+    inputKeyMap[SDLK_KP_PERIOD] = InputKey::NUM_PAD_DECIMAL;
+    inputKeyMap[SDLK_KP_DIVIDE] = InputKey::NUM_PAD_DIVIDE;
+    inputKeyMap[SDLK_KP_MULTIPLY] = InputKey::NUM_PAD_MULTIPLY;
+    inputKeyMap[SDLK_KP_MINUS] = InputKey::NUM_PAD_SUBTRACT;
+    inputKeyMap[SDLK_KP_PLUS] = InputKey::NUM_PAD_ADD;
+    inputKeyMap[SDLK_KP_ENTER] = InputKey::NUM_PAD_ENTER;
+    inputKeyMap[SDLK_KP_EQUALS] = InputKey::NUM_PAD_EQUAL;
+    inputKeyMap[SDLK_ESCAPE] = InputKey::ESCAPE;
+    inputKeyMap[SDLK_SPACE] = InputKey::SPACE;
+    inputKeyMap[SDLK_LCTRL] = InputKey::CTRL_LEFT;
+    inputKeyMap[SDLK_RCTRL] = InputKey::CTRL_RIGHT;
+    inputKeyMap[SDLK_LALT] = InputKey::ALT_LEFT;
+    inputKeyMap[SDLK_RALT] = InputKey::ALT_RIGHT;
+    inputKeyMap[SDLK_LSHIFT] = InputKey::SHIFT_LEFT;
+    inputKeyMap[SDLK_RSHIFT] = InputKey::SHIFT_RIGHT;
+    inputKeyMap[SDLK_LGUI] = InputKey::SUPER_LEFT;
+    inputKeyMap[SDLK_RGUI] = InputKey::SUPER_RIGHT;
+    inputKeyMap[SDLK_APPLICATION] = InputKey::MENU;
+    inputKeyMap[SDLK_LEFT] = InputKey::ARROW_LEFT;
+    inputKeyMap[SDLK_RIGHT] = InputKey::ARROW_RIGHT;
+    inputKeyMap[SDLK_UP] = InputKey::ARROW_UP;
+    inputKeyMap[SDLK_DOWN] = InputKey::ARROW_DOWN;
+    inputKeyMap[SDLK_RETURN] = InputKey::ENTER;
+    inputKeyMap[SDLK_TAB] = InputKey::TAB;
+    inputKeyMap[SDLK_BACKSPACE] = InputKey::BACKSPACE;
+    inputKeyMap[SDLK_INSERT] = InputKey::INSERT;
+    inputKeyMap[SDLK_DELETE] = InputKey::DEL;
+    inputKeyMap[SDLK_HOME] = InputKey::HOME;
+    inputKeyMap[SDLK_END] = InputKey::END;
+    inputKeyMap[SDLK_PAGEUP] = InputKey::PAGE_UP;
+    inputKeyMap[SDLK_PAGEDOWN] = InputKey::PAGE_DOWN;
+    inputKeyMap[SDLK_CAPSLOCK] = InputKey::CAPS_LOCK;
+    inputKeyMap[SDLK_SCROLLLOCK] = InputKey::SCROLL_LOCK;
+    inputKeyMap[SDLK_NUMLOCKCLEAR] = InputKey::NUM_LOCK;
+    inputKeyMap[SDLK_PRINTSCREEN] = InputKey::PRINT_SCREEN;
+    inputKeyMap[SDLK_PAUSE] = InputKey::PAUSE;
 
     //mouse
-    inputKeyMap[SDL_BUTTON_LEFT] = Control::Key::LMB;
-    inputKeyMap[SDL_BUTTON_RIGHT] = Control::Key::RMB;
-    inputKeyMap[SDL_BUTTON_MIDDLE] = Control::Key::MMB;
-    inputKeyMap[SDL_BUTTON_X1] = Control::Key::MOUSE_F1;
-    inputKeyMap[SDL_BUTTON_X2] = Control::Key::MOUSE_F2;
+    inputKeyMap[SDL_BUTTON_LEFT] = InputKey::LMB;
+    inputKeyMap[SDL_BUTTON_RIGHT] = InputKey::RMB;
+    inputKeyMap[SDL_BUTTON_MIDDLE] = InputKey::MMB;
+    inputKeyMap[SDL_BUTTON_X1] = InputKey::MOUSE_F1;
+    inputKeyMap[SDL_BUTTON_X2] = InputKey::MOUSE_F2;
 }
 
 std::string Main::retrieveResourcesDirectory(const char* firstArg) {
@@ -246,7 +246,7 @@ void Main::onChar(char32_t unicodeCharacter) {
 }
 
 void Main::onKeyPressed(int keyCode, bool isRepeatPress) {
-    Control::Key key = toInputKey(keyCode);
+    InputKey key = toInputKey(keyCode);
 
     //engine
     if (propagatePressKeyEvent) {
@@ -263,7 +263,7 @@ void Main::onKeyPressed(int keyCode, bool isRepeatPress) {
 }
 
 void Main::onKeyReleased(int keyCode) {
-    Control::Key key = toInputKey(keyCode);
+    InputKey key = toInputKey(keyCode);
 
     //engine
     if (propagateReleaseKeyEvent) {
@@ -277,7 +277,7 @@ void Main::onKeyReleased(int keyCode) {
 }
 
 void Main::onMouseButtonPressed(int button) {
-    Control::Key key = toInputKey(button);
+    InputKey key = toInputKey(button);
 
     //engine
     propagatePressKeyEvent = context->getScene().onKeyPress(key);
@@ -289,7 +289,7 @@ void Main::onMouseButtonPressed(int button) {
 }
 
 void Main::onMouseButtonReleased(int button) {
-    Control::Key key = toInputKey(button);
+    InputKey key = toInputKey(button);
 
     //engine
     propagateReleaseKeyEvent = context->getScene().onKeyRelease(key);
@@ -314,7 +314,7 @@ void Main::onScroll(double offsetY) const {
     }
 }
 
-Control::Key Main::toInputKey(int keyCode) {
+InputKey Main::toInputKey(int keyCode) {
     auto itFind = inputKeyMap.find(keyCode);
     if (itFind != inputKeyMap.end()) {
         return itFind->second;
@@ -322,34 +322,34 @@ Control::Key Main::toInputKey(int keyCode) {
 
     if (keyCode >= 'a' && keyCode <= 'z') {
         int keyShift = keyCode - 'a';
-        return static_cast<Control::Key>(Control::Key::A + keyShift);
+        return static_cast<InputKey>(static_cast<int>(InputKey::A) + keyShift);
     } else if (keyCode == '=') {
-        return Control::Key::EQUAL;
+        return InputKey::EQUAL;
     } else if (keyCode == ':') {
-        return Control::Key::COLON;
+        return InputKey::COLON;
     } else if (keyCode == ';') {
-        return Control::Key::SEMICOLON;
+        return InputKey::SEMICOLON;
     } else if (keyCode == ',') {
-        return Control::Key::COMMA;
+        return InputKey::COMMA;
     } else if (keyCode == '-') {
-        return Control::Key::MINUS;
+        return InputKey::MINUS;
     } else if (keyCode == '/') { //for QWERTY keyboards
-        return Control::Key::SLASH;
+        return InputKey::SLASH;
     } else if (keyCode == '\\') { //for QWERTY keyboards
-        return Control::Key::BACKSLASH;
+        return InputKey::BACKSLASH;
     } else if (keyCode == '\'') { //for QWERTY keyboards
-        return Control::Key::APOSTROPHE;
+        return InputKey::APOSTROPHE;
     } else if (keyCode == '[') { //for QWERTY keyboards
-        return Control::Key::LEFT_BRACKET;
+        return InputKey::LEFT_BRACKET;
     } else if (keyCode == ']') { //for QWERTY keyboards
-        return Control::Key::RIGHT_BRACKET;
+        return InputKey::RIGHT_BRACKET;
     } else if (keyCode == '.') { //for QWERTY keyboards
-        return Control::Key::PERIOD;
+        return InputKey::PERIOD;
     } else if (keyCode == '`') { //for QWERTY keyboards
-        return Control::Key::GRAVE_ACCENT;
+        return InputKey::GRAVE_ACCENT;
     }
 
-    return Control::Key::UNKNOWN_KEY;
+    return InputKey::UNKNOWN_KEY;
 }
 
 bool Main::argumentsContains(const std::string& argName, std::span<char*> args) const {

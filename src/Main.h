@@ -34,7 +34,7 @@ class Main {
         void onMouseButtonReleased(int);
         void onMouseMove(double, double, double, double) const;
         void onScroll(double) const;
-        urchin::Control::Key toInputKey(int);
+        urchin::InputKey toInputKey(int);
 
         bool argumentsContains(const std::string&, std::span<char*>) const;
 
@@ -46,7 +46,7 @@ class Main {
 
         bool propagatePressKeyEvent;
         bool propagateReleaseKeyEvent;
-        std::map<int, urchin::Control::Key> inputKeyMap;
+        std::map<int, urchin::InputKey> inputKeyMap;
         std::vector<SDL_Event> events;
         bool altLeftKeyPressed;
 };
