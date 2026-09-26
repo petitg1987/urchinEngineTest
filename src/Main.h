@@ -27,7 +27,7 @@ class Main {
 
         void handleInputEvents(SDL_Window*);
 
-        void onChar(char32_t);
+        bool onChar(char32_t) const;
         void onKeyPressed(int, bool);
         void onKeyReleased(int);
         void onMouseButtonPressed(int);
@@ -44,8 +44,6 @@ class Main {
         std::unique_ptr<MainContext> context;
         std::unique_ptr<Game> game;
 
-        bool propagatePressKeyEvent;
-        bool propagateReleaseKeyEvent;
         std::map<int, urchin::InputKey> inputKeyMap;
         std::vector<SDL_Event> events;
         bool altLeftKeyPressed;

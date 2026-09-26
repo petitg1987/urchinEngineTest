@@ -13,8 +13,6 @@ int main(int argc, char* argv[]) {
 }
 
 Main::Main() :
-        propagatePressKeyEvent(true),
-        propagateReleaseKeyEvent(true),
         altLeftKeyPressed(false) {
     crashReporter = std::make_shared<CrashReporter>();
 }
@@ -181,16 +179,14 @@ SDL_Window* Main::createWindow(bool isWindowed) {
 }
 
 void Main::handleInputEvents(SDL_Window* window) {
-    propagatePressKeyEvent = true;
-    propagateReleaseKeyEvent = true;
-
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0) {
         events.emplace_back(e);
     }
+    bool keyPressConsumedByTextInput = false;
     for (std::size_t i = 0; i < events.size(); ++i) {
         if (events[i].type == SDL_KEYDOWN && i + 1 < events.size() && events[i + 1].type == SDL_TEXTINPUT) {
-            std::swap(events[i], events[i + 1]); //text input must be treated before key down to handle correctly the event propagation flag
+            std::swap(events[i], events[i + 1]); //text input must be treated before key down: when the text input is consumed, the key down is not propagated
         }
 
         //handle Alt+Enter to switch between windowed/fullscreen mode
@@ -218,15 +214,21 @@ void Main::handleInputEvents(SDL_Window* window) {
         } else if (events[i].type == SDL_MOUSEWHEEL) {
             onScroll(events[i].wheel.preciseY);
         } else if (events[i].type == SDL_KEYDOWN) {
-            onKeyPressed(events[i].key.keysym.sym, events[i].key.repeat != 0);
+            if (!keyPressConsumedByTextInput) {
+                onKeyPressed(events[i].key.keysym.sym, events[i].key.repeat != 0);
+            }
+            keyPressConsumedByTextInput = false;
         } else if (events[i].type == SDL_KEYUP) {
             onKeyReleased(events[i].key.keysym.sym);
         } else if (events[i].type == SDL_TEXTINPUT) {
             static std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
             std::u32string u32text = converter.from_bytes(events[i].text.text);
+            bool propagateTextInput = true;
             for (char32_t unicode: u32text) {
-                onChar(unicode);
+                propagateTextInput &= onChar(unicode);
             }
+            bool isFollowedByKeyDown = i + 1 < events.size() && events[i + 1].type == SDL_KEYDOWN;
+            keyPressConsumedByTextInput = !propagateTextInput && isFollowedByKeyDown;
         } else if (events[i].type == SDL_WINDOWEVENT) {
             if (events[i].window.event == SDL_WINDOWEVENT_RESIZED || events[i].window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
                 context->getScene().onResize();
@@ -238,23 +240,19 @@ void Main::handleInputEvents(SDL_Window* window) {
     events.clear();
 }
 
-void Main::onChar(char32_t unicodeCharacter) {
+bool Main::onChar(char32_t unicodeCharacter) const {
     //engine
-    if (propagatePressKeyEvent) {
-        propagatePressKeyEvent = context->getScene().onChar(unicodeCharacter);
-    }
+    return context->getScene().onChar(unicodeCharacter);
 }
 
 void Main::onKeyPressed(int keyCode, bool isRepeatPress) {
     InputKey key = toInputKey(keyCode);
 
     //engine
-    if (propagatePressKeyEvent) {
-        propagatePressKeyEvent = context->getScene().onKeyPress(key);
-    }
+    bool propagateEvent = context->getScene().onKeyPress(key);
 
     //game
-    if (propagatePressKeyEvent && !isRepeatPress) {
+    if (propagateEvent && !isRepeatPress) {
         if (keyCode == SDLK_ESCAPE) {
             context->exit();
         }
@@ -266,12 +264,10 @@ void Main::onKeyReleased(int keyCode) {
     InputKey key = toInputKey(keyCode);
 
     //engine
-    if (propagateReleaseKeyEvent) {
-        propagateReleaseKeyEvent = context->getScene().onKeyRelease(key);
-    }
+    bool propagateEvent = context->getScene().onKeyRelease(key);
 
     //game
-    if (propagateReleaseKeyEvent) {
+    if (propagateEvent) {
         game->onKeyReleased(key);
     }
 }
@@ -280,10 +276,10 @@ void Main::onMouseButtonPressed(int button) {
     InputKey key = toInputKey(button);
 
     //engine
-    propagatePressKeyEvent = context->getScene().onKeyPress(key);
+    bool propagateEvent = context->getScene().onKeyPress(key);
 
     //game
-    if (propagatePressKeyEvent) {
+    if (propagateEvent) {
         game->onKeyPressed(key);
     }
 }
@@ -292,10 +288,10 @@ void Main::onMouseButtonReleased(int button) {
     InputKey key = toInputKey(button);
 
     //engine
-    propagateReleaseKeyEvent = context->getScene().onKeyRelease(key);
+    bool propagateEvent = context->getScene().onKeyRelease(key);
 
     //game
-    if (propagateReleaseKeyEvent) {
+    if (propagateEvent) {
         game->onKeyReleased(key);
     }
 }
