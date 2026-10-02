@@ -1,3 +1,4 @@
+#include <cstring>
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
@@ -221,11 +222,14 @@ void Main::handleInputEvents(SDL_Window* window) {
         } else if (events[i].type == SDL_KEYUP) {
             onKeyReleased(events[i].key.keysym.sym);
         } else if (events[i].type == SDL_TEXTINPUT) {
-            static std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
-            std::u32string u32text = converter.from_bytes(events[i].text.text);
             bool propagateTextInput = true;
-            for (char32_t unicode: u32text) {
-                propagateTextInput &= onChar(unicode);
+            std::size_t textLength = std::strlen(events[i].text.text);
+            if (textLength > 0) {
+                const char* textIt = &events[i].text.text[0];
+                const char* textEndIt = events[i].text.text + textLength;
+                while (textIt != textEndIt) {
+                    propagateTextInput &= onChar(StringUtil::readNextCodepoint(textIt, textEndIt));
+                }
             }
             bool isFollowedByKeyDown = i + 1 < events.size() && events[i + 1].type == SDL_KEYDOWN;
             keyPressConsumedByTextInput = !propagateTextInput && isFollowedByKeyDown;
