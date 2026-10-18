@@ -16,8 +16,8 @@ NPCNavigation::NPCNavigation(float speedInKmH, float mass, const Map& map, AIEnv
     PhysicsTransform characterTransform(model->getTransform().getPosition(), model->getTransform().getOrientation());
     auto physicsCharacter = std::make_unique<PhysicsCharacter>("npcCharacter", mass, std::move(characterShape), characterTransform);
     CharacterControllerConfig characterControllerConfig;
-    characterControllerConfig.setWalkSpeed(aiCharacterController->getAICharacter().retrieveMaxVelocityInMs());
-    characterControllerConfig.setRunSpeed(aiCharacterController->getAICharacter().retrieveMaxVelocityInMs());
+    characterControllerConfig.setMaxWalkSpeed(aiCharacterController->getAICharacter().retrieveMaxVelocityInMs());
+    characterControllerConfig.setMaxRunSpeed(aiCharacterController->getAICharacter().retrieveMaxVelocityInMs());
     characterController = std::make_unique<CharacterController>(std::move(physicsCharacter), characterControllerConfig, physicsWorld);
 }
 

@@ -374,10 +374,13 @@ void Game::updateCharacterMovement(float dt) const {
         lateralDirection = lateralVector.normalize();
     }
 
+    Vector3<float> moveDirection = forwardDirection + lateralDirection;
+    moveDirection.Y = 0.0f;
+    moveDirection = moveDirection.normalize();
     if (!underWaterEvent->isUnderWater()) {
-        characterController->run(forwardDirection + lateralDirection);
+        characterController->run(moveDirection * characterController->getConfig().getMaxRunSpeed());
     } else {
-        characterController->walk(forwardDirection + lateralDirection);
+        characterController->walk(moveDirection * characterController->getConfig().getMaxWalkSpeed());
     }
 
     //orientation
