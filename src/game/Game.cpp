@@ -174,7 +174,7 @@ void Game::switchMode() {
     editMode = !editMode;
 
     context.getWindowController().setMouseCursorVisible(editMode);
-    camera->useMouseToMoveCamera(!editMode);
+    camera->allowInputDeviceToMoveCamera(!editMode);
 }
 
 void Game::deleteGeometryModels(std::vector<std::shared_ptr<GeometryModel>>& models) const {
