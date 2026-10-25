@@ -54,7 +54,10 @@ include_directories(src)
 
 file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
 if (WIN32)
-    add_executable(urchinEngineTest WIN32 ${SOURCE_FILES})
+    add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/manifest.o
+                        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/windres/app.manifest
+                        COMMAND windres ${CMAKE_CURRENT_SOURCE_DIR}/windres/appManifestWinResource.rc -O coff -o ${CMAKE_CURRENT_BINARY_DIR}/manifest.o)
+    add_executable(urchinEngineTest WIN32 ${SOURCE_FILES} ${CMAKE_CURRENT_BINARY_DIR}/manifest.o)
 else()
     add_executable(urchinEngineTest ${SOURCE_FILES})
 endif()
