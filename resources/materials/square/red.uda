@@ -2,3 +2,4 @@ repeatTextures: "false"
 albedo:
   color: "1.0 0.0 0.0 0.5"
 ambientFactor: "0.4"
+cullFace: "false"

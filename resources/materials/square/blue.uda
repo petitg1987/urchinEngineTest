@@ -2,3 +2,4 @@ repeatTextures: "false"
 albedo:
   texture: "materials/square/albedoBlue.png"
 ambientFactor: "0.4"
+cullFace: "false"
